@@ -108,8 +108,14 @@
 						<!-- About -->
 						<article id="contact">
 							<h2 class="major">Contact Info</h2>
-							<img src="image.jpg" alt="" style="width: 300px; height: auto;" />
+							
+							<!-- Center and Style the Image -->
+							<div class="image-container">
+								<img src="image.jpg" alt="Profile Picture" />
+							</div>
+							
 							<p>Feel free to reach out to me through any of the following channels:</p>
+							
 							<ul>
 								<!-- LinkedIn -->
 								<li><a href="https://www.linkedin.com/in/aditya-meenakshisundaram-41b04222a/">LinkedIn</a></li>
@@ -127,6 +133,23 @@
 								<li><a href="mailto:adityameenakshisundaram@gmail.com">Email</a></li>
 							</ul>
 						</article>
+						
+						<style>
+						/* Center and style the image */
+						.image-container {
+							display: flex;
+							justify-content: center; /* Centers horizontally */
+							margin-bottom: 1rem; /* Adds spacing below the image */
+						}
+						
+						.image-container img {
+							width: 200px; /* Adjust the size of the image */
+							height: auto; /* Maintain aspect ratio */
+							border-radius: 50%; /* Makes the image circular */
+							object-fit: cover; /* Ensures proper cropping if needed */
+						}
+						</style>
+						
 						
 						
 
