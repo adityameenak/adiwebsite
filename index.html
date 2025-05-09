@@ -6,6 +6,15 @@
   <title>Aditya Meenakshisundaram | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary: #1f2937;
+      --accent: #2563eb;
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --text: #374151;
+      --soft: #9ca3af;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -14,170 +23,195 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f7f9fc, #e3e8ee);
-      color: #1f2a38;
-      line-height: 1.6;
+      background-color: var(--bg);
+      color: var(--text);
     }
 
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-    }
-
-    header img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    header h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #1a1a1a;
-    }
-
-    header p {
-      font-size: 1rem;
-      color: #4b5563;
-    }
-
-    nav {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #374151;
-      font-weight: 600;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-      transition: border 0.2s;
-    }
-
-    nav a:hover {
-      border-color: #1f2a38;
-    }
-
-    section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 30px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1f2a38;
-      border-bottom: 2px solid #e5e7eb;
-      margin-bottom: 20px;
-      padding-bottom: 5px;
-    }
-
-    h3 {
-      margin-top: 20px;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    ul {
-      margin: 10px 0 20px 20px;
-    }
-
-    a {
-      color: #1f2a38;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #6b7280;
+    .container {
+      max-width: 1100px;
+      margin: auto;
       padding: 40px 20px;
     }
 
-    .section-dark {
-      background-color: #f1f5f9;
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+      gap: 40px;
+    }
+
+    .hero img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .hero-text p {
+      font-size: 1.05rem;
+      margin-top: 10px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Cards */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--accent);
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* Skills */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      background: #e0e7ff;
+      color: #1e40af;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* Contact */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+    }
+
+    footer a {
+      color: #93c5fd;
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <img src="headshot.jpg" alt="Aditya Meenakshisundaram headshot" />
-  <h1>Aditya Meenakshisundaram</h1>
-  <p>Honors Chemical Engineering Student | Texas A&M University</p>
-  <p><a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a> | 832-260-6465</p>
-</header>
+  <div class="container">
+    <!-- HERO -->
+    <div class="hero">
+      <img src="headshot.jpg" alt="Aditya Meenakshisundaram" />
+      <div class="hero-text">
+        <h1>Aditya Meenakshisundaram</h1>
+        <p>I’m a sophomore honors chemical engineering student at Texas A&M University, also pursuing a minor in business. I'm passionate about semiconductor technologies and energy sustainability, and I aim to explore the intersection of computational engineering, materials science, and energy systems to drive innovation in next-generation semiconductor solutions.</p>
+      </div>
+    </div>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#experience">Experience</a>
-  <a href="#leadership">Leadership</a>
-  <a href="#skills">Skills</a>
-  <a href="#contact">Contact</a>
-</nav>
+    <!-- EXPERIENCE -->
+    <div class="section">
+      <h2 class="section-title">Experience & Research</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Undergraduate Researcher – Texas A&M</h3>
+          <p>Optimized the MixAlco Process for biomass conversion, boosting succinic acid yield by 7.3%. Hands-on experience with anaerobic fermentation, GC, and MATLAB.</p>
+        </div>
+        <div class="card">
+          <h3>Research Assistant – Univ. of Houston</h3>
+          <p>Applied CRISPR and ZFN technologies to gene-editing workflows. Reduced reagent waste and improved data processing pipelines using MATLAB and Python.</p>
+        </div>
+      </div>
+    </div>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>My name is Aditya Meenakshisundaram, and I’m a sophomore honors chemical engineering student at Texas A&M University, also pursuing a minor in business. I’m passionate about semiconductor technologies and energy sustainability, and I aim to explore the intersection of computational engineering, materials science, and energy systems. My goal is to drive innovation in next-generation semiconductor solutions that are both high-performance and energy-efficient.</p>
-</section>
+    <!-- SKILLS -->
+    <div class="section" style="margin-top: 50px;">
+      <h2 class="section-title">Technical Stack</h2>
+      <div class="badges">
+        <div class="badge">MATLAB</div>
+        <div class="badge">Python</div>
+        <div class="badge">R</div>
+        <div class="badge">HTML</div>
+        <div class="badge">Gas Chromatography</div>
+        <div class="badge">Spectrophotometry</div>
+        <div class="badge">Excel</div>
+        <div class="badge">CRISPR</div>
+        <div class="badge">ZFN</div>
+        <div class="badge">Titrations</div>
+      </div>
+    </div>
 
-<section id="experience" class="section-dark">
-  <h2>Experience</h2>
-  <h3>Undergraduate Researcher – Texas A&M</h3>
-  <p><em>Jan 2025 – Present</em></p>
-  <ul>
-    <li>Researching biomass conversion into carboxylate salts and succinic acid.</li>
-    <li>Improved succinic acid yield by 7.3% via process optimization.</li>
-    <li>Proficient with gas chromatography, spectrophotometry, and MATLAB data analysis.</li>
-  </ul>
+    <!-- LEADERSHIP -->
+    <div class="section" style="margin-top: 50px;">
+      <h2 class="section-title">Leadership Highlights</h2>
+      <div class="card-grid">
+        <div class="card">
+          <h3>AIChE, Texas A&M</h3>
+          <p>Engaged in professional development and industry events focused on sustainable process engineering.</p>
+        </div>
+        <div class="card">
+          <h3>Alpha Kappa Psi</h3>
+          <p>Participated in business case competitions and leadership workshops as part of the national business fraternity.</p>
+        </div>
+        <div class="card">
+          <h3>Vice Captain – Swim Team</h3>
+          <p>Led 32 teammates, qualified for Regionals in 100 Breaststroke; champion in multiple district events.</p>
+        </div>
+        <div class="card">
+          <h3>Model UN – Secretary General</h3>
+          <p>Directed team logistics, trained delegates, and received multiple Outstanding and Best Delegate awards.</p>
+        </div>
+      </div>
+    </div>
 
-  <h3>Research Assistant – University of Houston</h3>
-  <p><em>June 2023 – Aug 2023</em></p>
-  <ul>
-    <li>Applied CRISPR and ZFN gene-editing protocols in live samples.</li>
-    <li>Reduced reagent waste through workflow optimizations.</li>
-    <li>Used MATLAB, Python, and R to validate and visualize results.</li>
-  </ul>
-</section>
+  </div>
 
-<section id="leadership">
-  <h2>Leadership & Activities</h2>
-  <ul>
-    <li><strong>AIChE, Texas A&M:</strong> Member, professional development and industry events.</li>
-    <li><strong>Alpha Kappa Psi:</strong> Participated in business case competitions and leadership training.</li>
-    <li><strong>Vice Captain, Varsity Swim Team:</strong> Led team of 32; District Champion & Regional Qualifier.</li>
-    <li><strong>Model UN:</strong> Secretary General; led conferences and received multiple awards.</li>
-  </ul>
-</section>
-
-<section id="skills" class="section-dark">
-  <h2>Skills & Certifications</h2>
-  <ul>
-    <li><strong>Technical:</strong> MATLAB, Excel, Python, R, HTML, CRISPR gene-editing, Gas Chromatography</li>
-    <li><strong>Lab Skills:</strong> Spectrophotometry, Anaerobic Fermentation, Titrations</li>
-    <li><strong>Certifications:</strong> AWS Cloud Practitioner, Excel Essentials, Matlab Essentials</li>
-    <li><strong>Soft Skills:</strong> Team Leadership, Scientific Communication, Data Analysis</li>
-  </ul>
-</section>
-
-<section id="contact">
-  <h2>Contact</h2>
-  <p><strong>Email:</strong> <a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a></p>
-  <p><strong>Phone:</strong> 832-260-6465</p>
-  <p><strong>Location:</strong> College Station, TX</p>
-</section>
-
-<footer>
-  &copy; 2025 Aditya Meenakshisundaram &nbsp;|&nbsp; Portfolio Site
-</footer>
+  <!-- FOOTER -->
+  <footer>
+    <p>📍 College Station, TX | <a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a> | 832-260-6465</p>
+    <p>© 2025 Aditya Meenakshisundaram</p>
+  </footer>
 
 </body>
 </html>
