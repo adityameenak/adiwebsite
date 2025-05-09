@@ -3,84 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aditya Meenakshisundaram | Chemical Engineer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>Aditya Meenakshisundaram | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-    body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      color: #222;
+      padding: 0;
     }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f7f9fc, #e3e8ee);
+      color: #1f2a38;
+      line-height: 1.6;
+    }
+
     header {
       text-align: center;
       padding: 60px 20px 40px;
-      background: transparent;
     }
+
     header img {
-      width: 160px;
-      height: 160px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
-      border: 4px solid #fff;
       object-fit: cover;
       margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
+
     header h1 {
-      font-size: 2.5rem;
-      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1a1a1a;
     }
+
     header p {
-      font-size: 1.1rem;
-      margin: 5px 0;
-      color: #333;
+      font-size: 1rem;
+      color: #4b5563;
     }
+
     nav {
       text-align: center;
-      margin-bottom: 40px;
+      margin: 30px 0;
     }
+
     nav a {
-      margin: 0 12px;
+      margin: 0 15px;
       text-decoration: none;
-      font-weight: 500;
-      color: #004b6b;
+      color: #374151;
+      font-weight: 600;
       padding-bottom: 4px;
       border-bottom: 2px solid transparent;
-      transition: 0.3s;
+      transition: border 0.2s;
     }
+
     nav a:hover {
-      border-color: #004b6b;
+      border-color: #1f2a38;
     }
+
     section {
       max-width: 900px;
-      margin: 20px auto;
-      padding: 25px;
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      backdrop-filter: blur(10px);
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.05);
     }
+
     h2 {
-      border-bottom: 2px solid #004b6b;
-      padding-bottom: 6px;
-      margin-top: 0;
-      color: #004b6b;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2a38;
+      border-bottom: 2px solid #e5e7eb;
+      margin-bottom: 20px;
+      padding-bottom: 5px;
     }
+
+    h3 {
+      margin-top: 20px;
+      font-weight: 600;
+      color: #374151;
+    }
+
     ul {
-      padding-left: 20px;
+      margin: 10px 0 20px 20px;
     }
+
     a {
-      color: #004b6b;
+      color: #1f2a38;
     }
+
     footer {
       text-align: center;
       font-size: 0.9rem;
-      padding: 30px;
-      color: #666;
+      color: #6b7280;
+      padding: 40px 20px;
+    }
+
+    .section-dark {
+      background-color: #f1f5f9;
     }
   </style>
 </head>
@@ -90,7 +113,7 @@
   <img src="headshot.jpg" alt="Aditya Meenakshisundaram headshot" />
   <h1>Aditya Meenakshisundaram</h1>
   <p>Honors Chemical Engineering Student | Texas A&M University</p>
-  <p>Email: <a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a> | 832-260-6465</p>
+  <p><a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a> | 832-260-6465</p>
 </header>
 
 <nav>
@@ -106,53 +129,54 @@
   <p>My name is Aditya Meenakshisundaram, and I’m a sophomore honors chemical engineering student at Texas A&M University, also pursuing a minor in business. I’m passionate about semiconductor technologies and energy sustainability, and I aim to explore the intersection of computational engineering, materials science, and energy systems. My goal is to drive innovation in next-generation semiconductor solutions that are both high-performance and energy-efficient.</p>
 </section>
 
-<section id="experience">
+<section id="experience" class="section-dark">
   <h2>Experience</h2>
-  <h3>Undergraduate Chemical Engineering Researcher – Texas A&M</h3>
+  <h3>Undergraduate Researcher – Texas A&M</h3>
   <p><em>Jan 2025 – Present</em></p>
   <ul>
     <li>Researching biomass conversion into carboxylate salts and succinic acid.</li>
     <li>Improved succinic acid yield by 7.3% via process optimization.</li>
-    <li>Hands-on with gas chromatography, spectrophotometry, and MATLAB analysis.</li>
+    <li>Proficient with gas chromatography, spectrophotometry, and MATLAB data analysis.</li>
   </ul>
 
-  <h3>Research Study Assistant – University of Houston</h3>
-  <p><em>June 2023 – August 2023</em></p>
+  <h3>Research Assistant – University of Houston</h3>
+  <p><em>June 2023 – Aug 2023</em></p>
   <ul>
-    <li>Worked with CRISPR-Cas9 and ZFN techniques for gene editing.</li>
-    <li>Reduced reagent waste through experimental optimization.</li>
-    <li>Used MATLAB, R, and Python for data validation and analysis.</li>
+    <li>Applied CRISPR and ZFN gene-editing protocols in live samples.</li>
+    <li>Reduced reagent waste through workflow optimizations.</li>
+    <li>Used MATLAB, Python, and R to validate and visualize results.</li>
   </ul>
 </section>
 
 <section id="leadership">
   <h2>Leadership & Activities</h2>
   <ul>
-    <li><strong>AIChE, Texas A&M:</strong> Active member in professional development events.</li>
-    <li><strong>Vice Captain, Varsity Swim Team:</strong> Led 32 teammates; District & Regional achievements.</li>
-    <li><strong>Model United Nations:</strong> Secretary General; organized conferences and won multiple awards.</li>
+    <li><strong>AIChE, Texas A&M:</strong> Member, professional development and industry events.</li>
+    <li><strong>Alpha Kappa Psi:</strong> Participated in business case competitions and leadership training.</li>
+    <li><strong>Vice Captain, Varsity Swim Team:</strong> Led team of 32; District Champion & Regional Qualifier.</li>
+    <li><strong>Model UN:</strong> Secretary General; led conferences and received multiple awards.</li>
   </ul>
 </section>
 
-<section id="skills">
+<section id="skills" class="section-dark">
   <h2>Skills & Certifications</h2>
   <ul>
-    <li><strong>Technical:</strong> MATLAB, Excel, Python, R, HTML, Gas Chromatography</li>
-    <li><strong>Lab:</strong> Spectrophotometry, Titrations, Fermentation, Troubleshooting</li>
+    <li><strong>Technical:</strong> MATLAB, Excel, Python, R, HTML, CRISPR gene-editing, Gas Chromatography</li>
+    <li><strong>Lab Skills:</strong> Spectrophotometry, Anaerobic Fermentation, Titrations</li>
     <li><strong>Certifications:</strong> AWS Cloud Practitioner, Excel Essentials, Matlab Essentials</li>
-    <li><strong>Soft Skills:</strong> Collaboration, Data Analysis, Problem Solving</li>
+    <li><strong>Soft Skills:</strong> Team Leadership, Scientific Communication, Data Analysis</li>
   </ul>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
-  <p>Email: <a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a></p>
-  <p>Phone: 832-260-6465</p>
-  <p>Location: College Station, Texas</p>
+  <p><strong>Email:</strong> <a href="mailto:adityameenakshisundaram@gmail.com">adityameenakshisundaram@gmail.com</a></p>
+  <p><strong>Phone:</strong> 832-260-6465</p>
+  <p><strong>Location:</strong> College Station, TX</p>
 </section>
 
 <footer>
-  © 2025 Aditya Meenakshisundaram | Built with HTML & ❤️
+  &copy; 2025 Aditya Meenakshisundaram &nbsp;|&nbsp; Portfolio Site
 </footer>
 
 </body>
