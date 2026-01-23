@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Adi",
   fullName: "Aditya Meenakshisundaram",
   title: "Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems.",
-  tagline: "GPA 3.86 • Houston, TX • Class of 2028",
+  tagline: "Houston, TX • Class of 2028",
   email: "adityameenakshisundaram@gmail.com",
   linkedin: "https://www.linkedin.com/in/adityameenakshi/",
   location: "Houston, Texas"
@@ -15,40 +15,40 @@ export const about = {
 export const experience = [
   {
     id: 1,
-    role: "Undergraduate Research Fellow",
+    role: "Samsung Semiconductor Undergraduate Fellow",
     company: "Samsung Austin Semiconductor",
     period: "Jan 2026 - Present",
     description: [
-      "Developing indium nanowire weave architectures designed to contain thermal runaway and protect adjacent cells in lithium-ion battery packs",
-      "Fabricating and iterating on nanowire samples, then characterizing thermal barrier performance under controlled heating conditions",
-      "Collaborating with mentors to refine processing parameters and evaluate safety outcomes across multiple design iterations",
-      "Awarded $10,000 merit-based fellowship supporting battery safety and advanced materials research"
+      "Researching indium nanowire weave architectures to contain thermal runaway and protect adjacent cells in lithium-ion batteries",
+      "Fabricating nanowire samples and characterizing thermal barrier performance under controlled heating conditions",
+      "Iterating on processing parameters with mentors to evaluate safety outcomes across design cycles",
+      "Awarded $10,000 merit-based fellowship for battery safety and advanced materials research"
     ],
     tags: ["Battery Safety", "Nanomaterials", "Thermal Management", "Materials Science"]
   },
   {
     id: 2,
-    role: "Undergraduate Researcher",
+    role: "Silicon Carbide (SiC) Researcher",
     company: "Green Group, Texas A&M",
     period: "Aug 2025 - Present",
     description: [
-      "Processing polycarbosilane precursor films and converting them to silicon carbide through controlled pyrolysis",
-      "Characterizing how temperature profiles and atmosphere conditions affect SiC film morphology and electrical conductivity",
-      "Supporting ongoing work on polymer-derived ceramics for high-temperature and thermal shielding applications"
+      "Processing polycarbosilane precursor films and converting them to silicon carbide via controlled pyrolysis",
+      "Characterizing how temperature and atmosphere conditions affect SiC film morphology and conductivity",
+      "Contributing to polymer-derived ceramics research for high-temperature applications"
     ],
     tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Thermal Processing"]
   },
   {
     id: 3,
-    role: "Undergraduate Researcher",
+    role: "Sustainable Energy Researcher",
     company: "Holtzapple Group, Texas A&M",
     period: "Jan 2025 - Jul 2025",
     description: [
-      "Ran fermentation experiments to optimize succinic acid yield from biomass feedstocks",
-      "Collected and analyzed samples using gas chromatography and UV-Vis spectroscopy",
-      "Built MATLAB models to compare experimental results against predicted process performance"
+      "Conducted fermentation experiments to optimize succinic acid yield from biomass feedstocks",
+      "Analyzed samples using gas chromatography and UV-Vis spectroscopy",
+      "Developed MATLAB models to compare experimental results against process predictions"
     ],
-    tags: ["Bioprocessing", "Fermentation", "Data Analysis"]
+    tags: ["Sustainable Energy", "Bioprocessing", "Data Analysis"]
   },
   {
     id: 4,

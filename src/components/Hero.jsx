@@ -1,6 +1,51 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+
+function TypewriterText({ text, delay = 0, onComplete }) {
+  const [displayedText, setDisplayedText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    // If reduced motion, show full text immediately
+    if (reducedMotion) {
+      setDisplayedText(text);
+      setShowCursor(false);
+      if (onComplete) onComplete();
+      return;
+    }
+
+    let currentIndex = 0;
+    const startDelay = setTimeout(() => {
+      const typeInterval = setInterval(() => {
+        if (currentIndex < text.length) {
+          setDisplayedText(text.slice(0, currentIndex + 1));
+          currentIndex++;
+        } else {
+          clearInterval(typeInterval);
+          // Hide cursor after typing completes
+          setTimeout(() => setShowCursor(false), 1000);
+          if (onComplete) onComplete();
+        }
+      }, 120); // Typing speed
+
+      return () => clearInterval(typeInterval);
+    }, delay);
+
+    return () => clearTimeout(startDelay);
+  }, [text, delay, reducedMotion, onComplete]);
+
+  return (
+    <span className="text-purple-600">
+      {displayedText}
+      {showCursor && (
+        <span className="animate-pulse text-purple-600 font-light">|</span>
+      )}
+    </span>
+  );
+}
 
 export default function Hero() {
   const reducedMotion = useReducedMotion();
@@ -11,7 +56,7 @@ export default function Hero() {
       opacity: 1,
       transition: {
         staggerChildren: reducedMotion ? 0 : 0.15,
-        delayChildren: 0.1,
+        delayChildren: reducedMotion ? 0 : 0.8, // Delay children until typewriter starts
       },
     },
   };
@@ -50,10 +95,12 @@ export default function Hero() {
           className="space-y-6"
         >
           <motion.h1
-            variants={itemVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
             className="text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 tracking-tight"
           >
-            Hi, I'm <span className="text-purple-600">{personalInfo.name}</span>.
+            Hi, I'm <TypewriterText text={personalInfo.name} delay={400} />.
           </motion.h1>
 
           <motion.p
@@ -99,7 +146,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
         >
           <svg
