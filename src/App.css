@@ -1,0 +1,45 @@
+main.container {
+    padding: 2rem 1rem;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.project-card {
+    background-color: var(--card-background);
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.project-card .card-body {
+    padding: 2rem;
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.tech-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--background-color);
+    border-radius: 20px;
+    color: var(--primary-color);
+}

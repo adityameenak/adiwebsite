@@ -1,249 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aditya Meenakshisundaram | Portfolio</title>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
+    <!-- SEO Meta Tags -->
+    <title>Aditya Meenakshisundaram | Chemical Engineering Student at Texas A&M</title>
+    <meta name="description" content="Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems. Samsung Semiconductor Fellow." />
+    <meta name="keywords" content="Chemical Engineering, Semiconductors, Materials Science, Texas A&M, Samsung Fellow, Silicon Carbide, Sustainable Energy" />
+    <meta name="author" content="Aditya Meenakshisundaram" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Aditya Meenakshisundaram | Chemical Engineering Student" />
+    <meta property="og:description" content="Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://adityameenakshi.com" />
 
-  <style>
-    :root {
-      --primary: #1f2937;
-      --accent: #2563eb;
-      --bg: #f9fafb;
-      --card-bg: #ffffff;
-      --text: #374151;
-      --soft: #9ca3af;
-    }
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aditya Meenakshisundaram | Chemical Engineering Student" />
+    <meta name="twitter:description" content="Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems." />
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 60px;
-      gap: 40px;
-    }
-
-    .hero img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    }
-
-    .hero-text { flex: 1; min-width: 280px; }
-    .hero-text h1 { font-size: 2.5rem; font-weight: 800; color: var(--primary); }
-    .hero-text p { font-size: 1.05rem; margin-top: 10px; line-height: 1.6; }
-
-    .hero-contact { margin-top: 15px; font-size: 0.95rem; color: var(--soft); }
-    .hero-contact a { color: var(--accent); margin: 0 8px; text-decoration: none; }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      color: var(--primary);
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: transform 0.2s;
-    }
-
-    .card:hover { transform: translateY(-5px); }
-
-    .card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--accent);
-    }
-
-    .card p { font-size: 0.95rem; line-height: 1.5; }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .badge {
-      background: #e0e7ff;
-      color: #1e40af;
-      padding: 6px 12px;
-      font-size: 0.85rem;
-      border-radius: 20px;
-      font-weight: 600;
-    }
-
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      background: var(--primary);
-      color: white;
-      text-align: center;
-    }
-
-    footer a { color: #93c5fd; text-decoration: none; }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
-
-    <!-- HERO -->
-    <div class="hero">
-      <img src="headshot.jpg" alt="Aditya Meenakshisundaram" />
-      <div class="hero-text">
-        <h1>Aditya Meenakshisundaram</h1>
-        <p>
-          I’m a sophomore honors chemical engineering student at Texas A&M University, also pursuing a minor in business. 
-          I’m passionate about solving real-world problems at the intersection of engineering, sustainability, and materials science. 
-          My work spans SiC materials research, bioenergy processes, and building computational tools for engineering analysis.
-        </p>
-
-        <div class="hero-contact">
-          <a href="mailto:adityameenakshisundaram@gmail.com">Email</a> |
-          <a href="tel:8322606465">832-260-6465</a> |
-          <a href="https://www.linkedin.com/in/adityameenakshi/" target="_blank">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- EXPERIENCE & RESEARCH -->
-    <div class="section">
-      <h2 class="section-title">Experience & Research</h2>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>Silicon Carbide (SiC) Researcher – Green Group</h3>
-          <p>
-            Investigating the pyrolysis of polycarbosilane (PCS) films to optimize polymer-to-SiC conversion and improve film conductivity. 
-            Characterizing SiC films through electrical and morphological measurements to correlate processing conditions with performance. 
-            Exploring rapid volumetric RF heating of SiC fibers to analyze ceramic conversion efficiency and potential thermal shielding applications.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Bioprocess Research Assistant – Holtzapple Group</h3>
-          <p>
-            Conducted research on the MixAlco biomass-to-energy process, with a focus on improving succinic acid yield through controlled experimentation and parameter optimization. 
-            Increased succinic acid yield by 7.3% while utilizing gas chromatography, UV-Vis spectroscopy, and MATLAB modeling to analyze and optimize bioprocess performance.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- PROJECTS -->
-    <div class="section" style="margin-top: 50px;">
-      <h2 class="section-title">Projects</h2>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>Sustainapath – Process Analytics Platform</h3>
-          <p>
-            Developed a Python-based platform that evaluates chemical processes on sustainability, cost, and time efficiency. 
-            Built custom scoring algorithms, automated reporting tools, greener alternative suggestions, and process flow diagram generation for performance optimization.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>SolarIQ – Solar Data Optimization</h3>
-          <p>
-            Created a solar energy modeling tool integrating NASA POWER irradiance and temperature datasets with thermodynamic efficiency models. 
-            Provides accurate performance estimates for real-world solar panel operation under varying environmental conditions.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- WRITING -->
-    <div class="section" style="margin-top: 50px;">
-      <h2 class="section-title">Writing & Podcasting</h2>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>Substack – Chemical Engineering for the Real World</h3>
-          <p>
-            I write about semiconductors, sustainable energy, and innovation in chemical engineering. 
-            My articles focus on making complex scientific topics accessible and relevant, reaching 400+ monthly readers across academia and industry.
-          </p>
-          <p><a href="https://adimeenak.substack.com/" target="_blank">Visit the blog →</a></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- LEADERSHIP -->
-    <div class="section" style="margin-top: 50px;">
-      <h2 class="section-title">Leadership Highlights</h2>
-
-      <div class="card-grid">
-        <div class="card">
-          <h3>AIChE – Texas A&M University</h3>
-          <p>
-            Sophomore Retreat External Deputy – coordinate recruiter outreach and serve as the liaison for bringing company representatives to the annual retreat.  
-            Professional Development Committee member – assist in hosting career events, workshops, and industry engagement initiatives for chemical engineering students.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- SKILLS -->
-    <div class="section" style="margin-top: 50px;">
-      <h2 class="section-title">Technical Skills</h2>
-
-      <div class="badges">
-        <div class="badge">MATLAB</div>
-        <div class="badge">Python</div>
-        <div class="badge">Gas Chromatography</div>
-        <div class="badge">UV-Vis Spectroscopy</div>
-        <div class="badge">Data Science</div>
-        <div class="badge">SQL</div>
-        <div class="badge">AWS Cloud Practitioner</div>
-        <div class="badge">Visual Basic</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>📍 College Station, TX | <a href="mailto:adityameenakshisundaram@gmail.com">Email</a> | <a href="tel:8322606465">832-260-6465</a></p>
-    <p>© 2025 Aditya Meenakshisundaram</p>
-  </footer>
-
-</body>
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#8b5cf6" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
