@@ -1,32 +1,44 @@
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
+import { LenisProvider } from './hooks/useLenis';
+import WordmarkLogo from './components/WordmarkLogo';
+import ProgressRail, { TopProgressBar } from './components/ProgressRail';
+import HeroChapter from './components/HeroChapter';
 import About from './components/About';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
+import ExperienceChapter from './components/ExperienceChapter';
+import ProjectsChapter from './components/ProjectsChapter';
 import Writing from './components/Writing';
-import Leadership from './components/Leadership';
 import Resume from './components/Resume';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import { ScrollProgress } from './components/motion';
+import FooterContact from './components/FooterContact';
 
+/**
+ * App - Main application component
+ *
+ * Premium Editorial Portfolio
+ * - Lenis smooth scroll
+ * - Fixed wordmark logo
+ * - Progress rail indicator
+ * - Scroll-driven section reveals
+ */
 function App() {
   return (
-    <div className="min-h-screen bg-white relative">
-      {/* Scroll progress indicator */}
-      <ScrollProgress />
+    <LenisProvider>
+      <div className="min-h-screen bg-white relative">
+        {/* Fixed elements */}
+        <WordmarkLogo />
+        <TopProgressBar />
+        <ProgressRail />
 
-      <Navigation />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Writing />
-      <Leadership />
-      <Resume />
-      <Contact />
-      <Footer />
-    </div>
+        {/* Main content */}
+        <main>
+          <HeroChapter />
+          <About />
+          <ExperienceChapter />
+          <ProjectsChapter />
+          <Writing />
+          <Resume />
+          <FooterContact />
+        </main>
+      </div>
+    </LenisProvider>
   );
 }
 

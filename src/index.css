@@ -1,21 +1,271 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Google Fonts Import - Editorial Typography System */
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
 @layer base {
+  /* Prevent Lenis horizontal scroll */
   html {
-    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
   }
 
   body {
-    @apply font-sans antialiased;
+    @apply font-sans antialiased text-neutral-900 bg-white;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-accent/20 text-neutral-900;
+  }
+
+  /* Focus states */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  a, button {
+    @apply transition-colors duration-200;
+  }
+
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight text-balance;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  /* Paragraphs */
+  p {
+    @apply text-neutral-600 leading-relaxed;
+  }
+
+  /* Links */
+  a {
+    @apply text-neutral-900 hover:text-accent transition-colors;
+  }
+
+  /* Images */
+  img {
+    @apply max-w-full h-auto;
   }
 }
 
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+@layer components {
+  /* Container */
+  .container-wide {
+    @apply mx-auto px-6 sm:px-8 lg:px-16 max-w-8xl;
+  }
+
+  .container-narrow {
+    @apply mx-auto px-6 sm:px-8 lg:px-16 max-w-5xl;
+  }
+
+  /* Section spacing */
+  .section-padding {
+    @apply py-20 sm:py-24 lg:py-32;
+  }
+
+  /* Editorial headline */
+  .headline-editorial {
+    @apply font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl
+           font-medium tracking-tight leading-none;
+  }
+
+  /* Wordmark styling */
+  .wordmark {
+    @apply font-display font-medium uppercase tracking-widest
+           text-neutral-900 hover:text-accent transition-colors duration-300;
+  }
+
+  /* Card base */
+  .card {
+    @apply bg-white rounded-xl border border-neutral-200/80
+           transition-all duration-300 ease-smooth;
+  }
+
+  .card-hover {
+    @apply hover:border-accent/30 hover:shadow-soft-lg hover:-translate-y-1;
+  }
+
+  /* Tag/pill styling */
+  .tag {
+    @apply inline-flex items-center px-2.5 py-1
+           text-xs font-medium rounded-md
+           bg-neutral-100 text-neutral-600
+           border border-neutral-200/60;
+  }
+
+  .tag-accent {
+    @apply bg-accent-subtle text-accent border-accent/20;
+  }
+
+  /* Button base */
+  .btn {
+    @apply inline-flex items-center justify-center
+           font-medium transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2
+           focus-visible:ring-accent focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn px-6 py-3 bg-accent text-white rounded-lg
+           hover:bg-accent-dark shadow-lg shadow-accent/25
+           active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply btn px-6 py-3 bg-white text-neutral-900 rounded-lg
+           border border-neutral-200 hover:border-accent
+           hover:text-accent active:scale-[0.98];
+  }
+
+  .btn-ghost {
+    @apply btn px-4 py-2 text-neutral-600 hover:text-neutral-900
+           hover:bg-neutral-100 rounded-lg;
+  }
+
+  /* Progress rail dot */
+  .progress-dot {
+    @apply w-2 h-2 rounded-full bg-neutral-300
+           transition-all duration-300;
+  }
+
+  .progress-dot-active {
+    @apply bg-accent scale-125;
+  }
+
+  /* Filter pill */
+  .filter-pill {
+    @apply px-4 py-2 text-sm font-medium rounded-full
+           bg-neutral-100 text-neutral-600
+           border border-transparent
+           transition-all duration-200 cursor-pointer
+           hover:bg-neutral-200;
+  }
+
+  .filter-pill-active {
+    @apply bg-accent text-white border-accent hover:bg-accent-dark;
+  }
+}
+
+/* ============================================
+   UTILITY STYLES
+   ============================================ */
+
 @layer utilities {
+  /* Text balance */
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Hide scrollbar but keep scroll functionality */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent
+           bg-gradient-to-r from-accent to-accent-light;
+  }
+
+  /* Accent underline animation */
+  .link-underline {
+    @apply relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-accent
+           transition-all duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Clip path reveal */
+  .clip-reveal {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .clip-reveal-active {
+    clip-path: inset(0 0% 0 0);
+  }
+
+  /* Mask gradient for images */
+  .mask-gradient-bottom {
+    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  }
+
+  /* Debug grid overlay */
+  .debug-grid {
+    background-image:
+      linear-gradient(to right, rgb(124 58 237 / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(124 58 237 / 0.1) 1px, transparent 1px);
+    background-size: 4rem 4rem;
   }
 }
