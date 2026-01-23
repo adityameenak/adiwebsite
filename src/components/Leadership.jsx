@@ -1,26 +1,35 @@
+import { motion } from 'framer-motion';
 import { leadership } from '../data/content';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+import { fadeInUp, fadeInUpReduced, staggerContainer } from '../utils/animations';
 
 export default function Leadership() {
-  const [ref, isVisible] = useScrollAnimation();
+  const reducedMotion = useReducedMotion();
+  const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
 
   return (
     <section id="leadership" className="py-24 px-6 lg:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
-        <div
-          ref={ref}
-          className={`transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={staggerContainer}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12">
+          <motion.h2
+            variants={variants}
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-12"
+          >
             Leadership
-          </h2>
+          </motion.h2>
 
-          <div className="space-y-8">
+          <motion.div variants={staggerContainer} className="space-y-8">
             {leadership.map((item) => (
-              <div
+              <motion.div
                 key={item.id}
+                variants={variants}
+                whileHover={reducedMotion ? {} : { scale: 1.01 }}
+                transition={{ duration: 0.2 }}
                 className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
               >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
@@ -44,10 +53,10 @@ export default function Leadership() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

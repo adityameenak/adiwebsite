@@ -1,8 +1,18 @@
+import { motion } from 'framer-motion';
 import { personalInfo } from '../data/content';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+import { fadeInUp, fadeInUpReduced, staggerContainer } from '../utils/animations';
 
 export default function Contact() {
-  const [ref, isVisible] = useScrollAnimation();
+  const reducedMotion = useReducedMotion();
+  const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
+
+  const buttonVariants = reducedMotion
+    ? {}
+    : {
+        hover: { scale: 1.02 },
+        tap: { scale: 0.98 },
+      };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,22 +26,29 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 px-6 lg:px-8 bg-white">
       <div className="max-w-3xl mx-auto">
-        <div
-          ref={ref}
-          className={`transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={staggerContainer}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+          <motion.h2
+            variants={variants}
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+          >
             Get in Touch
-          </h2>
+          </motion.h2>
 
-          <p className="text-lg text-gray-600 mb-8">
+          <motion.p variants={variants} className="text-lg text-gray-600 mb-8">
             I'm always open to discussing research opportunities, collaborative
             projects, or just connecting about semiconductors and sustainable energy.
-          </p>
+          </motion.p>
 
-          <form onSubmit={handleSubmit} className="space-y-6 mb-8">
+          <motion.form
+            variants={variants}
+            onSubmit={handleSubmit}
+            className="space-y-6 mb-8"
+          >
             <div>
               <label
                 htmlFor="subject"
@@ -66,15 +83,21 @@ export default function Contact() {
               />
             </div>
 
-            <button
+            <motion.button
               type="submit"
-              className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-all hover:scale-105 shadow-lg shadow-purple-600/30"
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
+              className="w-full px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors shadow-lg shadow-purple-600/30"
             >
               Send Message
-            </button>
-          </form>
+            </motion.button>
+          </motion.form>
 
-          <div className="flex items-center justify-center gap-6 pt-8 border-t border-gray-100">
+          <motion.div
+            variants={variants}
+            className="flex items-center justify-center gap-6 pt-8 border-t border-gray-100"
+          >
             <a
               href={personalInfo.linkedin}
               target="_blank"
@@ -96,8 +119,8 @@ export default function Contact() {
               </svg>
               <span className="font-medium">Email</span>
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

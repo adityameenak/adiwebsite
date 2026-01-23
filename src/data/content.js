@@ -19,11 +19,12 @@ export const experience = [
     company: "Samsung Semiconductor",
     period: "Jan 2026 - Present",
     description: [
-      "Competitive undergraduate fellow working on semiconductor materials and fabrication concepts",
-      "Engaged in mentored, hands-on engineering work across advanced manufacturing ecosystems",
-      "Recipient of a $10,000 merit-based fellowship"
+      "Researching indium nanowire architectures to contain thermal runaway in lithium-ion batteries",
+      "Designing woven nanowire structures that act as thermal barriers and improve battery safety",
+      "Applying materials science principles to address critical manufacturing and safety challenges",
+      "Recipient of a $10,000 merit-based fellowship for advanced semiconductor and energy research"
     ],
-    tags: ["Semiconductors", "Materials Science", "Manufacturing"]
+    tags: ["Battery Safety", "Nanomaterials", "Thermal Management", "Materials Science"]
   },
   {
     id: 2,
@@ -69,30 +70,34 @@ export const projects = [
 ];
 
 export const writing = {
-  description: "I write long-form articles on semiconductors, sustainable energy, and AI in chemical engineering, reaching 400+ monthly readers from academic and professional audiences.",
+  description: "I write long-form articles on semiconductors, sustainable energy, and emerging technologies, reaching 400+ monthly readers from academic and professional audiences.",
   platform: "Substack",
   readers: "400+",
+  substackUrl: "https://adimeenak.substack.com/",
   articles: [
     {
       id: 1,
-      title: "The Future of Semiconductor Manufacturing",
-      excerpt: "Exploring emerging trends in advanced fabrication processes and materials science.",
-      date: "Coming Soon",
-      tag: "Semiconductors"
+      title: "Stacked, Bonded, Fused: The Era Of Advanced Packaging",
+      excerpt: "How chiplet architectures and 3D integration are reshaping semiconductor manufacturing and enabling the next generation of high-performance computing.",
+      date: "Jan 2026",
+      tag: "Semiconductors",
+      url: "https://adimeenak.substack.com/"
     },
     {
       id: 2,
-      title: "AI-Driven Process Optimization in Chemical Engineering",
-      excerpt: "How machine learning is transforming traditional chemical engineering workflows.",
-      date: "Coming Soon",
-      tag: "AI & ChemE"
+      title: "Quantum Computing - The Next Frontier",
+      excerpt: "Breaking down quantum computing fundamentals, current hardware approaches, and the engineering challenges standing between us and practical quantum advantage.",
+      date: "Dec 2025",
+      tag: "Emerging Tech",
+      url: "https://adimeenak.substack.com/"
     },
     {
       id: 3,
-      title: "Sustainable Energy Systems: From Biomass to Batteries",
-      excerpt: "A deep dive into renewable energy technologies and their engineering challenges.",
-      date: "Coming Soon",
-      tag: "Sustainability"
+      title: "Digital Twins And The Future Of Renewable Energy",
+      excerpt: "Exploring how digital twin technology is optimizing wind farms, solar installations, and grid infrastructure for maximum efficiency and reliability.",
+      date: "Nov 2025",
+      tag: "Sustainability",
+      url: "https://adimeenak.substack.com/"
     }
   ]
 };
@@ -142,8 +147,8 @@ export const awards = [
 export const navigation = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
   { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
   { name: "Writing", href: "#writing" },
   { name: "Resume", href: "#resume" },
   { name: "Contact", href: "#contact" }

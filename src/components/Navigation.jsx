@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { navigation } from '../data/content';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,8 +29,27 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navVariants = {
+    hidden: { y: -20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.4, ease: 'easeOut' }
+    }
+  };
+
+  const linkVariants = reducedMotion
+    ? {}
+    : {
+        hover: { y: -2 },
+        tap: { y: 0 }
+      };
+
   return (
-    <nav
+    <motion.nav
+      initial={reducedMotion ? false : 'hidden'}
+      animate="visible"
+      variants={navVariants}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/80 backdrop-blur-md shadow-sm'
@@ -36,26 +58,38 @@ export default function Navigation() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a
+          <motion.a
             href="#home"
+            whileHover={reducedMotion ? {} : { scale: 1.05 }}
+            whileTap={reducedMotion ? {} : { scale: 0.98 }}
             className="text-xl font-bold text-gray-900 hover:text-purple-600 transition-colors"
           >
             Adi
-          </a>
+          </motion.a>
 
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <a
+              <motion.a
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-medium transition-colors ${
+                variants={linkVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className={`text-sm font-medium transition-colors relative ${
                   activeSection === item.href.substring(1)
                     ? 'text-purple-600'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
                 {item.name}
-              </a>
+                {activeSection === item.href.substring(1) && (
+                  <motion.span
+                    layoutId={reducedMotion ? undefined : 'activeSection'}
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-600 rounded-full"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </motion.a>
             ))}
           </div>
 
@@ -79,6 +113,6 @@ export default function Navigation() {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }

@@ -1,28 +1,42 @@
+import { motion } from 'framer-motion';
 import { about, education } from '../data/content';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { useReducedMotion } from '../hooks/useReducedMotion';
+import { fadeInUp, fadeInUpReduced, staggerContainer } from '../utils/animations';
 
 export default function About() {
-  const [ref, isVisible] = useScrollAnimation();
+  const reducedMotion = useReducedMotion();
+  const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
 
   return (
     <section id="about" className="py-24 px-6 lg:px-8 bg-white">
       <div className="max-w-4xl mx-auto">
-        <div
-          ref={ref}
-          className={`transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          variants={staggerContainer}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+          <motion.h2
+            variants={variants}
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+          >
             About
-          </h2>
+          </motion.h2>
 
-          <div className="space-y-6">
-            <p className="text-lg text-gray-600 leading-relaxed">
+          <motion.div variants={staggerContainer} className="space-y-6">
+            <motion.p
+              variants={variants}
+              className="text-lg text-gray-600 leading-relaxed"
+            >
               {about.paragraph}
-            </p>
+            </motion.p>
 
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
+            <motion.div
+              variants={variants}
+              whileHover={reducedMotion ? {} : { scale: 1.01 }}
+              transition={{ duration: 0.2 }}
+              className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
+            >
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
                 Education
               </h3>
@@ -41,9 +55,9 @@ export default function About() {
                   <span>Expected {education.graduationDate}</span>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

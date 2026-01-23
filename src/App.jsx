@@ -15,8 +15,8 @@ function App() {
       <Navigation />
       <Hero />
       <About />
-      <Projects />
       <Experience />
+      <Projects />
       <Writing />
       <Leadership />
       <Resume />
