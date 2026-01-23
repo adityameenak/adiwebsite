@@ -142,7 +142,7 @@ export default function FooterContact() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             <p className="text-sm text-neutral-500">
-              © {currentYear} {personalInfo.fullName}. All rights reserved.
+              © {currentYear} Adi. All rights reserved.
             </p>
 
             {/* Social icons */}

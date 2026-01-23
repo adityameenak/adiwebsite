@@ -174,10 +174,11 @@ export default function About() {
             {/* Stats */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-2 gap-4"
+              className="grid grid-cols-3 gap-4"
             >
               <StatCard value="2+" label="Years Research" />
-              <StatCard value="$10K" label="Fellowship" />
+              <StatCard value="Semis" label="Focus" />
+              <StatCard value="2028" label="Class" />
             </motion.div>
           </div>
         </motion.div>

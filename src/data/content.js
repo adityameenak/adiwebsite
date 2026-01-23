@@ -1,6 +1,5 @@
 export const personalInfo = {
   name: "Adi",
-  fullName: "Aditya Meenakshisundaram",
   title: "Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems.",
   tagline: "Houston, TX • Class of 2028",
   email: "adityameenakshisundaram@gmail.com",
@@ -64,95 +63,36 @@ export const experience = [
   }
 ];
 
-// Extended projects with categories for filtering
+// Hardcoded placeholder projects - 2 only
 export const projects = [
   {
     id: 1,
     title: "Sustainapath",
-    description: "AI-powered platform that analyzes chemical processes across sustainability, cost, and time. Generates quantitative performance scores and targeted optimization recommendations.",
-    shortDescription: "AI sustainability scoring for chemical processes",
-    tags: ["AI", "Python", "Process Engineering"],
+    description: "AI-assisted process optimization (WIP)",
+    shortDescription: "AI-assisted process optimization (WIP)",
+    tags: ["Sustainability", "Optimization", "Web"],
     category: "sustainability",
-    impact: "3 processes optimized",
     featured: true,
     demoUrl: null,
-    githubUrl: "https://github.com/adimeenakshi/sustainapath",
-    image: null, // Add image path if available
+    githubUrl: null,
   },
   {
     id: 2,
     title: "SolarIQ",
-    description: "Data-driven solar energy analysis tool modeling panel performance under real-world conditions. Integrates environmental data with thermodynamic models to estimate energy output.",
-    shortDescription: "Solar panel performance prediction tool",
-    tags: ["Python", "Data Analytics", "Thermodynamics"],
+    description: "Solar energy analytics platform (WIP)",
+    shortDescription: "Solar energy analytics platform (WIP)",
+    tags: ["Sustainability", "Energy", "Analytics"],
     category: "sustainability",
-    impact: "15% accuracy improvement",
-    featured: true,
-    demoUrl: null,
-    githubUrl: "https://github.com/adimeenakshi/solariq",
-    image: null,
-  },
-  {
-    id: 3,
-    title: "Thermal Barrier Simulator",
-    description: "COMSOL-based simulation tool for modeling thermal runaway containment in battery cells. Validates nanowire weave designs before physical fabrication.",
-    shortDescription: "Battery thermal runaway simulation",
-    tags: ["COMSOL", "MATLAB", "Simulation"],
-    category: "semiconductors",
-    impact: "Reduced prototyping by 40%",
     featured: true,
     demoUrl: null,
     githubUrl: null,
-    image: null,
-  },
-  {
-    id: 4,
-    title: "Process Yield Predictor",
-    description: "Machine learning model predicting semiconductor fabrication yield based on process parameters. Trained on historical fab data to identify optimal operating windows.",
-    shortDescription: "ML-powered fab yield optimization",
-    tags: ["Python", "ML", "Semiconductors"],
-    category: "semiconductors",
-    impact: "2% yield increase",
-    featured: true,
-    demoUrl: null,
-    githubUrl: "https://github.com/adimeenakshi/yield-predictor",
-    image: null,
-  },
-  {
-    id: 5,
-    title: "Portfolio Website",
-    description: "Personal portfolio built with React and Tailwind CSS. Features smooth scroll animations, editorial typography, and accessible design patterns.",
-    shortDescription: "React + Tailwind editorial portfolio",
-    tags: ["React", "Tailwind", "Framer Motion"],
-    category: "web",
-    impact: "This site!",
-    featured: false,
-    demoUrl: "https://adimeenakshi.com",
-    githubUrl: "https://github.com/adimeenakshi/portfolio",
-    image: null,
-  },
-  {
-    id: 6,
-    title: "ChemCalc Toolkit",
-    description: "Suite of chemical engineering calculation tools for mass balance, heat transfer, and reactor design. Used by 50+ students in unit operations courses.",
-    shortDescription: "Engineering calculation toolkit",
-    tags: ["Python", "Streamlit", "ChemE"],
-    category: "tools",
-    impact: "50+ active users",
-    featured: false,
-    demoUrl: null,
-    githubUrl: "https://github.com/adimeenakshi/chemcalc",
-    image: null,
   },
 ];
 
 // Project filter categories
 export const projectCategories = [
   { id: 'all', label: 'All Projects' },
-  { id: 'semiconductors', label: 'Semiconductors' },
   { id: 'sustainability', label: 'Sustainability' },
-  { id: 'web', label: 'Web' },
-  { id: 'tools', label: 'Tools' },
 ];
 
 export const writing = {
