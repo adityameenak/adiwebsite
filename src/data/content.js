@@ -15,40 +15,52 @@ export const about = {
 export const experience = [
   {
     id: 1,
-    role: "Semiconductor Fellow",
-    company: "Samsung Semiconductor",
+    role: "Undergraduate Research Fellow",
+    company: "Samsung Austin Semiconductor",
     period: "Jan 2026 - Present",
     description: [
-      "Researching indium nanowire architectures to contain thermal runaway in lithium-ion batteries",
-      "Designing woven nanowire structures that act as thermal barriers and improve battery safety",
-      "Applying materials science principles to address critical manufacturing and safety challenges",
-      "Recipient of a $10,000 merit-based fellowship for advanced semiconductor and energy research"
+      "Developing indium nanowire weave architectures designed to contain thermal runaway and protect adjacent cells in lithium-ion battery packs",
+      "Fabricating and iterating on nanowire samples, then characterizing thermal barrier performance under controlled heating conditions",
+      "Collaborating with mentors to refine processing parameters and evaluate safety outcomes across multiple design iterations",
+      "Awarded $10,000 merit-based fellowship supporting battery safety and advanced materials research"
     ],
     tags: ["Battery Safety", "Nanomaterials", "Thermal Management", "Materials Science"]
   },
   {
     id: 2,
-    role: "Silicon Carbide Researcher",
-    company: "Green Group",
+    role: "Undergraduate Researcher",
+    company: "Green Group, Texas A&M",
     period: "Aug 2025 - Present",
     description: [
-      "Researching polymer-to-ceramic conversion of polycarbosilane films into silicon carbide",
-      "Studying how processing conditions affect electrical conductivity and film morphology",
-      "Exploring RF-based rapid heating techniques for SiC fibers for thermal shielding applications"
+      "Processing polycarbosilane precursor films and converting them to silicon carbide through controlled pyrolysis",
+      "Characterizing how temperature profiles and atmosphere conditions affect SiC film morphology and electrical conductivity",
+      "Supporting ongoing work on polymer-derived ceramics for high-temperature and thermal shielding applications"
     ],
-    tags: ["SiC", "Materials", "Thermal Properties"]
+    tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Thermal Processing"]
   },
   {
     id: 3,
-    role: "Bioprocess Research Assistant",
-    company: "Holtzapple Group",
+    role: "Undergraduate Researcher",
+    company: "Holtzapple Group, Texas A&M",
     period: "Jan 2025 - Jul 2025",
     description: [
-      "Conducted research on biomass-to-energy conversion and process scalability",
-      "Improved succinic acid yield through controlled experimentation and data-driven optimization",
-      "Applied GC, UV-Vis, and MATLAB modeling to evaluate and improve process performance"
+      "Ran fermentation experiments to optimize succinic acid yield from biomass feedstocks",
+      "Collected and analyzed samples using gas chromatography and UV-Vis spectroscopy",
+      "Built MATLAB models to compare experimental results against predicted process performance"
     ],
-    tags: ["Bioprocess", "Sustainability", "Data Analysis"]
+    tags: ["Bioprocessing", "Fermentation", "Data Analysis"]
+  },
+  {
+    id: 4,
+    role: "External Deputy, Sophomore Retreat",
+    company: "AIChE Texas A&M Chapter",
+    period: "Sep 2025 - Present",
+    description: [
+      "Leading sponsorship outreach to regional companies, coordinating logistics for recruiter attendance and event funding",
+      "Managing communication with industry contacts and internal committee members to align timelines and deliverables",
+      "Supporting Professional Development Committee initiatives focused on resume workshops and networking events"
+    ],
+    tags: ["Leadership", "Event Coordination", "Industry Outreach"]
   }
 ];
 
@@ -102,23 +114,7 @@ export const writing = {
   ]
 };
 
-export const leadership = [
-  {
-    id: 1,
-    organization: "AIChE (American Institute of Chemical Engineers)",
-    period: "Sep 2025 - Present",
-    roles: [
-      {
-        title: "External Deputy for Sophomore Retreat",
-        description: "Coordinating recruiter outreach and industry engagement"
-      },
-      {
-        title: "Professional Development Committee",
-        description: "Member organizing career-focused events"
-      }
-    ]
-  }
-];
+export const leadership = [];
 
 export const education = {
   school: "Texas A&M University",

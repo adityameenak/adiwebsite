@@ -7,6 +7,11 @@ export default function Leadership() {
   const reducedMotion = useReducedMotion();
   const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
 
+  // Don't render section if no leadership data
+  if (!leadership || leadership.length === 0) {
+    return null;
+  }
+
   return (
     <section id="leadership" className="py-24 px-6 lg:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
