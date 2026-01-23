@@ -8,10 +8,14 @@ import Leadership from './components/Leadership';
 import Resume from './components/Resume';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { ScrollProgress } from './components/motion';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative">
+      {/* Scroll progress indicator */}
+      <ScrollProgress />
+
       <Navigation />
       <Hero />
       <About />

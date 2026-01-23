@@ -1,43 +1,69 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { about, education } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { fadeInUp, fadeInUpReduced, staggerContainer } from '../utils/animations';
 
 export default function About() {
   const reducedMotion = useReducedMotion();
-  const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: reducedMotion ? 0 : 0.15,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = reducedMotion
+    ? {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.4 } },
+      }
+    : {
+        hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
+        visible: {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+        },
+      };
 
   return (
     <section id="about" className="py-24 px-6 lg:px-8 bg-white">
-      <div className="max-w-4xl mx-auto">
+      <div ref={sectionRef} className="max-w-4xl mx-auto">
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={staggerContainer}
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
         >
           <motion.h2
-            variants={variants}
+            variants={itemVariants}
             className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
           >
             About
           </motion.h2>
 
-          <motion.div variants={staggerContainer} className="space-y-6">
+          <motion.div variants={containerVariants} className="space-y-6">
             <motion.p
-              variants={variants}
+              variants={itemVariants}
               className="text-lg text-gray-600 leading-relaxed"
             >
               {about.paragraph}
             </motion.p>
 
             <motion.div
-              variants={variants}
-              whileHover={reducedMotion ? {} : { scale: 1.01 }}
-              transition={{ duration: 0.2 }}
-              className="bg-gray-50 rounded-2xl p-8 border border-gray-100"
+              variants={itemVariants}
+              whileHover={reducedMotion ? {} : { scale: 1.01, y: -2 }}
+              transition={{ duration: 0.3 }}
+              className="group bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:border-purple-200 hover:shadow-lg hover:shadow-purple-500/5 transition-all duration-300"
             >
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors">
                 Education
               </h3>
               <div className="space-y-2">

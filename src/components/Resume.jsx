@@ -1,80 +1,96 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { fadeInUp, fadeInUpReduced, staggerContainer } from '../utils/animations';
+import { FiDownload, FiExternalLink } from 'react-icons/fi';
 
 export default function Resume() {
   const reducedMotion = useReducedMotion();
-  const variants = reducedMotion ? fadeInUpReduced : fadeInUp;
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: reducedMotion ? 0 : 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = reducedMotion
+    ? {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { duration: 0.4 } },
+      }
+    : {
+        hidden: { opacity: 0, y: 24, filter: 'blur(6px)' },
+        visible: {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+        },
+      };
 
   const buttonVariants = reducedMotion
     ? {}
     : {
-        hover: { scale: 1.02 },
+        hover: { scale: 1.02, y: -2 },
         tap: { scale: 0.98 },
       };
 
   return (
     <section id="resume" className="py-24 px-6 lg:px-8 bg-gray-50">
-      <div className="max-w-5xl mx-auto">
+      <div ref={sectionRef} className="max-w-3xl mx-auto">
         <motion.div
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          variants={staggerContainer}
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={containerVariants}
         >
           <motion.h2
-            variants={variants}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-8"
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-4"
           >
             Resume
           </motion.h2>
 
-          <motion.div
-            variants={variants}
-            className="bg-white rounded-2xl p-8 border border-gray-100"
+          <motion.p
+            variants={itemVariants}
+            className="text-gray-500 mb-8"
           >
-            <div className="aspect-[8.5/11] bg-gray-100 rounded-lg flex items-center justify-center mb-6">
-              <div className="text-center">
-                <svg
-                  className="w-16 h-16 text-gray-400 mx-auto mb-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                  />
-                </svg>
-                <p className="text-gray-500">PDF Viewer Placeholder</p>
-              </div>
-            </div>
+            Download my resume or view it in a new tab.
+          </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.a
-                href="/resume.pdf"
-                download
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="flex-1 px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors text-center"
-              >
-                Download Resume
-              </motion.a>
-              <motion.a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={buttonVariants}
-                whileHover="hover"
-                whileTap="tap"
-                className="flex-1 px-6 py-3 bg-white text-gray-900 rounded-lg font-medium border-2 border-gray-200 hover:border-purple-600 hover:text-purple-600 transition-colors text-center"
-              >
-                View Full Screen
-              </motion.a>
-            </div>
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <motion.a
+              href="/resume.pdf"
+              download="Aditya_Meenakshisundaram_Resume.pdf"
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors shadow-md shadow-purple-600/20"
+            >
+              <FiDownload className="w-5 h-5" />
+              Download Resume
+            </motion.a>
+
+            <motion.a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-gray-700 rounded-lg font-medium border border-gray-200 hover:border-purple-400 hover:text-purple-600 transition-colors"
+            >
+              <FiExternalLink className="w-5 h-5" />
+              View in New Tab
+            </motion.a>
           </motion.div>
         </motion.div>
       </div>
