@@ -161,19 +161,6 @@ export default function HeroChapter() {
           variants={containerVariants}
           className="max-w-5xl"
         >
-          {/* Profile Image */}
-          <motion.div
-            variants={itemVariants}
-            className="relative w-36 h-36 sm:w-44 sm:h-44 mb-10"
-          >
-            <div className="absolute -inset-1 rounded-full bg-gradient-to-br from-accent/20 via-accent/10 to-transparent blur-sm" />
-            <img
-              src="/linkedinpfp.png"
-              alt={personalInfo.name}
-              className="relative w-full h-full rounded-full object-cover ring-2 ring-white shadow-xl"
-            />
-          </motion.div>
-
           {/* Overline */}
           <motion.p
             variants={itemVariants}
