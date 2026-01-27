@@ -166,7 +166,7 @@ export default function HeroChapter() {
             variants={itemVariants}
             src="/linkedinpfp.png"
             alt={personalInfo.name}
-            className="w-20 h-20 rounded-full object-cover mb-6"
+            className="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover mb-8 ring-4 ring-neutral-100 shadow-lg"
           />
 
           {/* Overline */}
