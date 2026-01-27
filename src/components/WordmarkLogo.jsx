@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useScrollTo } from '../hooks/useLenis';
 
@@ -11,15 +12,21 @@ import { useScrollTo } from '../hooks/useLenis';
 export default function WordmarkLogo() {
   const reducedMotion = useReducedMotion();
   const { scrollTo } = useScrollTo();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = (e) => {
     e.preventDefault();
-    scrollTo('#home', { offset: 0, duration: 1.5 });
+    if (location.pathname === '/') {
+      scrollTo('#home', { offset: 0, duration: 1.5 });
+    } else {
+      navigate('/');
+    }
   };
 
   return (
     <motion.a
-      href="#home"
+      href="/"
       onClick={handleClick}
       className="fixed top-6 left-6 sm:top-8 sm:left-8 lg:top-10 lg:left-12 z-50"
       initial={{ opacity: 0, x: -20 }}

@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { useScrollTo } from '../hooks/useLenis';
 import MagneticButton from './MagneticButton';
 
 /**
@@ -57,7 +57,7 @@ function useTypewriter(text, { delay = 0, speed = 70 } = {}) {
  */
 export default function HeroChapter() {
   const reducedMotion = useReducedMotion();
-  const { scrollTo } = useScrollTo();
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
 
   // Typewriter for "Hi, I'm Adi"
@@ -77,14 +77,14 @@ export default function HeroChapter() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const smoothY = useSpring(y, { stiffness: 50, damping: 20 });
 
-  const handleScrollToProjects = (e) => {
+  const handleNavigateToProjects = (e) => {
     e.preventDefault();
-    scrollTo('#projects', { offset: -80, duration: 1.2 });
+    navigate('/projects');
   };
 
-  const handleScrollToExperience = (e) => {
+  const handleNavigateToExperience = (e) => {
     e.preventDefault();
-    scrollTo('#experience', { offset: -80, duration: 1.2 });
+    navigate('/experience');
   };
 
   // Animation variants
@@ -161,6 +161,14 @@ export default function HeroChapter() {
           variants={containerVariants}
           className="max-w-5xl"
         >
+          {/* Profile Image */}
+          <motion.img
+            variants={itemVariants}
+            src="/linkedinpfp.png"
+            alt={personalInfo.name}
+            className="w-20 h-20 rounded-full object-cover mb-6"
+          />
+
           {/* Overline */}
           <motion.p
             variants={itemVariants}
@@ -193,8 +201,8 @@ export default function HeroChapter() {
           >
             <MagneticButton
               as="a"
-              href="#projects"
-              onClick={handleScrollToProjects}
+              href="/projects"
+              onClick={handleNavigateToProjects}
               magnetStrength={0.2}
               className="btn-primary text-base px-8 py-4"
             >
@@ -216,8 +224,8 @@ export default function HeroChapter() {
 
             <MagneticButton
               as="a"
-              href="#experience"
-              onClick={handleScrollToExperience}
+              href="/experience"
+              onClick={handleNavigateToExperience}
               magnetStrength={0.2}
               className="btn-secondary text-base px-8 py-4"
             >
