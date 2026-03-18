@@ -210,12 +210,24 @@ function ProjectCard({ project, reducedMotion }) {
 
           {/* Details button */}
           <div className="mt-auto">
-            <button
-              className="text-sm font-medium text-neutral-600 hover:text-accent
-                       transition-colors duration-200"
-            >
-              Details →
-            </button>
+            {project.demoUrl ? (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-neutral-600 hover:text-accent
+                         transition-colors duration-200"
+              >
+                View Project →
+              </a>
+            ) : (
+              <button
+                className="text-sm font-medium text-neutral-600 hover:text-accent
+                         transition-colors duration-200"
+              >
+                Details →
+              </button>
+            )}
           </div>
         </div>
       </div>

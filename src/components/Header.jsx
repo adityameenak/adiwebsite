@@ -7,8 +7,7 @@ const Header = () => {
         <h1>Aditya Meenakshisundaram</h1>
         <p className="lead">
           <a href="https://www.linkedin.com/in/adityameenakshi/" className="text-white">LinkedIn</a> | 
-          <a href="mailto:adityameenakshisundaram@gmail.com" className="text-white"> adityameenakshisundaram@gmail.com</a> | 
-          Houston, Texas
+          <a href="mailto:adityameenakshisundaram@gmail.com" className="text-white"> adityameenakshisundaram@gmail.com</a>
         </p>
       </div>
     </header>

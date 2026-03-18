@@ -1,10 +1,10 @@
 export const personalInfo = {
   name: "Adi",
   title: "Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems.",
-  tagline: "Houston, TX • Class of 2028",
+  tagline: "College Station, TX • Class of 2028",
   email: "adityameenakshisundaram@gmail.com",
   linkedin: "https://www.linkedin.com/in/adityameenakshi/",
-  location: "Houston, Texas"
+  location: "College Station, TX"
 };
 
 export const about = {
@@ -63,8 +63,19 @@ export const experience = [
   }
 ];
 
-// Hardcoded placeholder projects - 2 only
+// Hardcoded placeholder projects
 export const projects = [
+  {
+    id: 3,
+    title: "Aggie Research Finder",
+    description: "Built a platform that helps Texas A&M students discover undergraduate research opportunities more easily by exploring labs, research areas, and faculty interests in one place. Designed to make research more accessible and help students find opportunities aligned with their goals.",
+    shortDescription: "Platform helping Texas A&M students discover undergraduate research opportunities by exploring labs, faculty interests, and research areas in one place.",
+    tags: ["Next.js", "React", "Tailwind CSS"],
+    category: "web",
+    featured: true,
+    demoUrl: "https://aggie-research-finder.vercel.app/",
+    githubUrl: null,
+  },
   {
     id: 1,
     title: "Sustainapath",
@@ -92,6 +103,7 @@ export const projects = [
 // Project filter categories
 export const projectCategories = [
   { id: 'all', label: 'All Projects' },
+  { id: 'web', label: 'Web' },
   { id: 'sustainability', label: 'Sustainability' },
 ];
 
