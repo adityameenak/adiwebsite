@@ -46,7 +46,7 @@ export default function Writing() {
       <div
         className="absolute bottom-0 left-0 w-96 h-96 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at bottom left, rgba(124,58,237,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(circle at bottom left, rgba(78,205,196,0.04) 0%, transparent 70%)',
         }}
       />
 

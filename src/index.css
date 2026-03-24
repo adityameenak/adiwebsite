@@ -293,8 +293,8 @@
   /* Debug grid overlay */
   .debug-grid {
     background-image:
-      linear-gradient(to right, rgb(124 58 237 / 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(124 58 237 / 0.1) 1px, transparent 1px);
+      linear-gradient(to right, rgb(91 155 213 / 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(91 155 213 / 0.1) 1px, transparent 1px);
     background-size: 4rem 4rem;
   }
 }

@@ -133,7 +133,7 @@ export default function HeroChapter() {
           style={{
             y: smoothY,
             opacity,
-            background: 'radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(91,155,213,0.09) 0%, transparent 70%)',
             filter: 'blur(60px)',
           }}
         />

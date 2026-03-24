@@ -41,7 +41,7 @@ export default function FooterContact() {
         ref={sectionRef}
         id="contact"
         className="section-padding text-white relative overflow-hidden"
-        style={{ background: 'rgba(10,10,10,0.85)' }}
+        style={{ background: 'rgba(13,27,42,0.90)' }}
       >
         {/* Strong top separator */}
         <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
@@ -50,7 +50,7 @@ export default function FooterContact() {
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at top, rgba(124,58,237,0.14) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at top, rgba(91,155,213,0.10) 0%, transparent 70%)',
           }}
         />
 
@@ -141,7 +141,7 @@ export default function FooterContact() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/5" style={{ background: 'rgba(10,10,10,0.95)' }}>
+      <footer className="py-8 border-t border-white/5" style={{ background: 'rgba(13,27,42,0.96)' }}>
         <div className="container-wide">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-neutral-600">
