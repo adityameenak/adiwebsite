@@ -92,7 +92,7 @@ export default function ProgressRail() {
           aria-label="Page sections"
         >
           {/* Background track */}
-          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-neutral-200" />
+          <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-white/15" />
 
           {/* Progress fill */}
           <motion.div
@@ -120,7 +120,7 @@ export default function ProgressRail() {
                   className={`w-2.5 h-2.5 rounded-full border-2 transition-all duration-300 ${
                     isActive
                       ? 'bg-accent border-accent scale-125'
-                      : 'bg-white border-neutral-300 group-hover:border-accent'
+                      : 'bg-neutral-800 border-neutral-700 group-hover:border-accent'
                   }`}
                   whileHover={reducedMotion ? {} : { scale: 1.3 }}
                   transition={{ duration: 0.2 }}
@@ -165,7 +165,7 @@ export function TopProgressBar() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-0.5 bg-neutral-100 z-50">
+    <div className="fixed top-0 left-0 right-0 h-0.5 bg-white/5 z-50">
       <motion.div
         className="h-full bg-accent origin-left"
         style={{ width: `${progress}%` }}

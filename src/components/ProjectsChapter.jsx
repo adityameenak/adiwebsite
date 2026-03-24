@@ -6,8 +6,7 @@ import FilterPills from './FilterPills';
 
 /**
  * ProjectsChapter - Project grid with filtering
- *
- * Simplified cards with title, description, tags, and Details button.
+ * Dark glass card treatment on the animated canvas background.
  */
 export default function ProjectsChapter() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -15,7 +14,6 @@ export default function ProjectsChapter() {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
-  // Filter projects
   const filteredProjects = useMemo(() => {
     if (activeFilter === 'all') return projects;
     return projects.filter((p) => p.category === activeFilter);
@@ -24,9 +22,10 @@ export default function ProjectsChapter() {
   const filtersWithCount = useMemo(() => {
     return projectCategories.map((cat) => ({
       ...cat,
-      count: cat.id === 'all'
-        ? projects.length
-        : projects.filter((p) => p.category === cat.id).length,
+      count:
+        cat.id === 'all'
+          ? projects.length
+          : projects.filter((p) => p.category === cat.id).length,
     }));
   }, []);
 
@@ -65,9 +64,17 @@ export default function ProjectsChapter() {
     <section
       ref={sectionRef}
       id="projects"
-      className="section-padding bg-neutral-50 relative overflow-hidden"
+      className="section-padding relative overflow-hidden"
     >
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-radial from-accent/3 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+      {/* Subtle accent glow top-right */}
+      <div
+        className="absolute top-0 right-0 w-96 h-96 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at top right, rgba(124,58,237,0.06) 0%, transparent 70%)',
+        }}
+      />
 
       <div className="container-wide relative">
         {/* Header */}
@@ -83,10 +90,10 @@ export default function ProjectsChapter() {
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-4">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
                 Projects
               </h2>
-              <p className="text-lg text-neutral-600 max-w-xl">
+              <p className="text-lg text-neutral-400 max-w-xl">
                 Technical projects spanning semiconductors, sustainability, and software.
               </p>
             </div>
@@ -133,19 +140,19 @@ export default function ProjectsChapter() {
               exit={{ opacity: 0 }}
               className="text-center py-16"
             >
-              <p className="text-neutral-500 text-lg">
-                No projects in this category yet.
-              </p>
+              <p className="text-neutral-500 text-lg">No projects in this category yet.</p>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+
+      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
     </section>
   );
 }
 
 /**
- * ProjectCard - Simple project card
+ * ProjectCard – dark glass treatment
  */
 function ProjectCard({ project, reducedMotion }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -160,13 +167,16 @@ function ProjectCard({ project, reducedMotion }) {
     >
       <div
         className={`
-          relative h-full bg-white rounded-xl p-6 lg:p-8
-          border border-neutral-200
+          relative h-full rounded-xl p-6 lg:p-8
+          border backdrop-blur-sm
           transition-all duration-300
-          ${isHovered ? 'border-accent/30 shadow-lg' : ''}
+          ${isHovered
+            ? 'border-accent/30 shadow-lg shadow-accent/8'
+            : 'border-white/10'
+          }
         `}
+        style={{ background: isHovered ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.04)' }}
       >
-        {/* Content */}
         <div className="flex flex-col h-full">
           {/* Category */}
           <span className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-3">
@@ -178,28 +188,28 @@ function ProjectCard({ project, reducedMotion }) {
             className={`
               text-xl lg:text-2xl font-bold mb-3
               transition-colors duration-200
-              ${isHovered ? 'text-accent' : 'text-neutral-900'}
+              ${isHovered ? 'text-accent' : 'text-white'}
             `}
           >
             {project.title}
           </h3>
 
-          {/* Description - short and literal */}
-          <p className="text-neutral-600 text-sm lg:text-base leading-relaxed mb-6 flex-grow">
+          {/* Description */}
+          <p className="text-neutral-400 text-sm lg:text-base leading-relaxed mb-6 flex-grow">
             {project.shortDescription}
           </p>
 
-          {/* Tags - 3 max */}
+          {/* Tags */}
           <div className="flex flex-wrap gap-2 mb-6">
             {project.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className={`
                   text-xs font-medium px-2.5 py-1 rounded-md
-                  transition-colors duration-200
+                  border transition-colors duration-200
                   ${isHovered
-                    ? 'bg-accent/10 text-accent'
-                    : 'bg-neutral-100 text-neutral-600'
+                    ? 'bg-accent/10 text-accent border-accent/20'
+                    : 'bg-white/5 text-neutral-400 border-white/10'
                   }
                 `}
               >
@@ -208,23 +218,20 @@ function ProjectCard({ project, reducedMotion }) {
             ))}
           </div>
 
-          {/* Details button */}
+          {/* Link */}
           <div className="mt-auto">
             {project.demoUrl ? (
               <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-neutral-600 hover:text-accent
+                className="text-sm font-medium text-neutral-400 hover:text-accent
                          transition-colors duration-200"
               >
                 View Project →
               </a>
             ) : (
-              <button
-                className="text-sm font-medium text-neutral-600 hover:text-accent
-                         transition-colors duration-200"
-              >
+              <button className="text-sm font-medium text-neutral-400 hover:text-accent transition-colors duration-200">
                 Details →
               </button>
             )}

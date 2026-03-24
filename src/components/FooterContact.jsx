@@ -7,12 +7,7 @@ import { FiMail, FiLinkedin, FiGithub, FiArrowUpRight } from 'react-icons/fi';
 
 /**
  * FooterContact - Combined contact section and footer
- *
- * Features:
- * - Large CTA headline
- * - Clean contact links
- * - Minimal footer with copyright
- * - Magnetic buttons for social links
+ * Already dark – polished with stronger glow and depth treatment.
  */
 export default function FooterContact() {
   const reducedMotion = useReducedMotion();
@@ -45,10 +40,19 @@ export default function FooterContact() {
       <section
         ref={sectionRef}
         id="contact"
-        className="section-padding bg-neutral-950 text-white relative overflow-hidden"
+        className="section-padding text-white relative overflow-hidden"
+        style={{ background: 'rgba(10,10,10,0.85)' }}
       >
-        {/* Gradient background accent */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial from-accent/10 to-transparent blur-3xl pointer-events-none" />
+        {/* Strong top separator */}
+        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+
+        {/* Large gradient orb behind headline */}
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
+          style={{
+            background: 'radial-gradient(ellipse at top, rgba(124,58,237,0.14) 0%, transparent 70%)',
+          }}
+        />
 
         <div className="container-wide relative">
           <motion.div
@@ -108,7 +112,7 @@ export default function FooterContact() {
                 rel="noopener noreferrer"
                 magnetStrength={0.15}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white
-                         rounded-lg font-medium border border-neutral-700
+                         rounded-lg font-medium border border-white/20
                          hover:border-accent hover:text-accent transition-colors duration-200"
               >
                 <FiLinkedin className="w-5 h-5" />
@@ -119,7 +123,7 @@ export default function FooterContact() {
             {/* Divider */}
             <motion.div
               variants={itemVariants}
-              className="w-full h-px bg-neutral-800 mb-12"
+              className="w-full h-px bg-white/10 mb-12"
             />
 
             {/* Quick links */}
@@ -137,37 +141,20 @@ export default function FooterContact() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-neutral-950 border-t border-neutral-900">
+      <footer className="py-8 border-t border-white/5" style={{ background: 'rgba(10,10,10,0.95)' }}>
         <div className="container-wide">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Copyright */}
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-neutral-600">
               © {currentYear} Adi. All rights reserved.
             </p>
 
-            {/* Social icons */}
             <div className="flex items-center gap-4">
-              <SocialLink
-                href={`mailto:${personalInfo.email}`}
-                icon={FiMail}
-                label="Email"
-              />
-              <SocialLink
-                href={personalInfo.linkedin}
-                icon={FiLinkedin}
-                label="LinkedIn"
-              />
-              <SocialLink
-                href="https://github.com/adimeenakshi"
-                icon={FiGithub}
-                label="GitHub"
-              />
+              <SocialLink href={`mailto:${personalInfo.email}`} icon={FiMail} label="Email" />
+              <SocialLink href={personalInfo.linkedin} icon={FiLinkedin} label="LinkedIn" />
+              <SocialLink href="https://github.com/adimeenakshi" icon={FiGithub} label="GitHub" />
             </div>
 
-            {/* Location */}
-            <p className="text-sm text-neutral-500">
-              {personalInfo.location}
-            </p>
+            <p className="text-sm text-neutral-600">{personalInfo.location}</p>
           </div>
         </div>
       </footer>
@@ -182,13 +169,15 @@ function QuickLink({ href, label }) {
   return (
     <a
       href={href}
-      className="group flex items-center justify-center gap-1 text-neutral-400
+      className="group flex items-center justify-center gap-1 text-neutral-500
                hover:text-white transition-colors duration-200"
     >
       {label}
-      <FiArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-1 translate-x-1
-                                group-hover:opacity-100 group-hover:translate-y-0
-                                group-hover:translate-x-0 transition-all duration-200" />
+      <FiArrowUpRight
+        className="w-3.5 h-3.5 opacity-0 -translate-y-1 translate-x-1
+                  group-hover:opacity-100 group-hover:translate-y-0
+                  group-hover:translate-x-0 transition-all duration-200"
+      />
     </a>
   );
 }
@@ -205,7 +194,7 @@ function SocialLink({ href, icon: Icon, label }) {
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
       aria-label={label}
-      className="p-2 text-neutral-500 hover:text-accent transition-colors duration-200"
+      className="p-2 text-neutral-600 hover:text-accent transition-colors duration-200"
       whileHover={reducedMotion ? {} : { scale: 1.1 }}
       whileTap={reducedMotion ? {} : { scale: 0.95 }}
     >

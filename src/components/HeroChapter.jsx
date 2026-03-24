@@ -15,7 +15,6 @@ function useTypewriter(text, { delay = 0, speed = 70 } = {}) {
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    // If reduced motion, show full text instantly
     if (reducedMotion) {
       setDisplayedText(text);
       setIsComplete(true);
@@ -54,13 +53,13 @@ function useTypewriter(text, { delay = 0, speed = 70 } = {}) {
 
 /**
  * HeroChapter - Hero section with typewriter effect
+ * Dark theme – renders on top of the ChemicalBackground canvas.
  */
 export default function HeroChapter() {
   const reducedMotion = useReducedMotion();
   const navigate = useNavigate();
   const sectionRef = useRef(null);
 
-  // Typewriter for "Hi, I'm Adi"
   const heroText = "Hi, I'm Adi.";
   const { displayedText, isComplete, showCursor } = useTypewriter(heroText, {
     delay: 300,
@@ -87,7 +86,6 @@ export default function HeroChapter() {
     navigate('/experience');
   };
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -106,16 +104,13 @@ export default function HeroChapter() {
         visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
       };
 
-  // Render typed text with "Adi" highlighted
+  // Render typed text with "Adi" in accent color
   const renderTypedText = () => {
     const nameIndex = displayedText.indexOf('Adi');
-    if (nameIndex === -1) {
-      return <>{displayedText}</>;
-    }
+    if (nameIndex === -1) return <>{displayedText}</>;
     const beforeName = displayedText.slice(0, nameIndex);
     const name = displayedText.slice(nameIndex, nameIndex + 3);
     const afterName = displayedText.slice(nameIndex + 3);
-
     return (
       <>
         {beforeName}
@@ -131,23 +126,17 @@ export default function HeroChapter() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Subtle grid pattern background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-
-      {/* Gradient orbs (subtle, not distracting) */}
+      {/* Scroll parallax accent orb */}
       {!reducedMotion && (
-        <>
-          <motion.div
-            className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full
-                       bg-gradient-radial from-accent/5 to-transparent blur-3xl"
-            style={{ y: smoothY, opacity }}
-          />
-          <motion.div
-            className="absolute -bottom-60 -left-40 w-[500px] h-[500px] rounded-full
-                       bg-gradient-radial from-neutral-200/50 to-transparent blur-3xl"
-            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]), opacity }}
-          />
-        </>
+        <motion.div
+          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{
+            y: smoothY,
+            opacity,
+            background: 'radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
       )}
 
       {/* Main content */}
@@ -164,13 +153,13 @@ export default function HeroChapter() {
           {/* Overline */}
           <motion.p
             variants={itemVariants}
-            className="text-sm font-medium text-neutral-500 tracking-wide uppercase mb-6"
+            className="text-sm font-medium text-neutral-400 tracking-wide uppercase mb-6"
           >
             Chemical Engineering · Semiconductors · Research
           </motion.p>
 
           {/* Main headline with typewriter */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-900 tracking-tight mb-8 min-h-[1.2em]">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight mb-8 min-h-[1.2em]">
             {renderTypedText()}
             {showCursor && (
               <span className="inline-block w-[3px] h-[0.85em] bg-accent ml-1 animate-pulse align-middle" />
@@ -180,7 +169,7 @@ export default function HeroChapter() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="text-xl sm:text-2xl lg:text-3xl text-neutral-600 font-light
+            className="text-xl sm:text-2xl lg:text-3xl text-neutral-300 font-light
                        max-w-3xl leading-relaxed mb-12"
           >
             {personalInfo.title}
@@ -199,18 +188,8 @@ export default function HeroChapter() {
               className="btn-primary text-base px-8 py-4"
             >
               View Projects
-              <svg
-                className="ml-2 w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                />
+              <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </MagneticButton>
 
@@ -219,21 +198,21 @@ export default function HeroChapter() {
               href="/experience"
               onClick={handleNavigateToExperience}
               magnetStrength={0.2}
-              className="btn-secondary text-base px-8 py-4"
+              className="btn-ghost-dark text-base px-8 py-4"
             >
               See Experience
             </MagneticButton>
           </motion.div>
         </motion.div>
 
-        {/* Stats row - 3 items, no Fellowship */}
+        {/* Stats row */}
         <motion.div
           variants={itemVariants}
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.8 }}
           className="mt-20 lg:mt-32 grid grid-cols-3 gap-8 lg:gap-12 max-w-3xl
-                     border-t border-neutral-200 pt-8"
+                     border-t border-white/10 pt-8"
         >
           <StatItem label="Research" value="2+ Years" />
           <StatItem label="Focus" value="Semiconductors" />
@@ -253,10 +232,8 @@ export default function HeroChapter() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-neutral-400 uppercase tracking-widest">
-            Scroll
-          </span>
-          <div className="w-px h-8 bg-gradient-to-b from-neutral-400 to-transparent" />
+          <span className="text-xs text-neutral-500 uppercase tracking-widest">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-neutral-500 to-transparent" />
         </motion.div>
       </motion.div>
     </section>
@@ -264,7 +241,7 @@ export default function HeroChapter() {
 }
 
 /**
- * StatItem - Small stat display
+ * StatItem - Small stat display (dark theme)
  */
 function StatItem({ label, value }) {
   const reducedMotion = useReducedMotion();
@@ -277,9 +254,7 @@ function StatItem({ label, value }) {
       transition={{ duration: reducedMotion ? 0.2 : 0.5 }}
       className="flex flex-col text-center"
     >
-      <span className="text-2xl lg:text-3xl font-bold text-neutral-900">
-        {value}
-      </span>
+      <span className="text-2xl lg:text-3xl font-bold text-white">{value}</span>
       <span className="text-sm text-neutral-500 mt-1">{label}</span>
     </motion.div>
   );

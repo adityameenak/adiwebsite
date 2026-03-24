@@ -4,6 +4,7 @@ import { TopProgressBar } from '../components/ProgressRail';
 import ProjectsChapter from '../components/ProjectsChapter';
 import Writing from '../components/Writing';
 import FooterContact from '../components/FooterContact';
+import ChemicalBackground from '../components/ChemicalBackground';
 
 /**
  * ProjectsPage - Dedicated page for Projects + Writing sections
@@ -11,13 +12,12 @@ import FooterContact from '../components/FooterContact';
 export default function ProjectsPage() {
   return (
     <LenisProvider>
-      <div className="min-h-screen bg-white relative">
-        {/* Fixed elements */}
+      <div className="min-h-screen bg-neutral-950 relative">
+        <ChemicalBackground />
         <WordmarkLogo />
         <TopProgressBar />
 
-        {/* Main content */}
-        <main className="pt-24">
+        <main className="relative pt-24" style={{ zIndex: 1 }}>
           <ProjectsChapter />
           <Writing />
           <FooterContact />
