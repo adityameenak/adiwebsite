@@ -7,7 +7,7 @@ import { FiMail, FiLinkedin, FiGithub, FiArrowUpRight } from 'react-icons/fi';
 
 /**
  * FooterContact - Combined contact section and footer
- * Already dark – polished with stronger glow and depth treatment.
+ * Warm dark treatment at the base for visual grounding and contrast.
  */
 export default function FooterContact() {
   const reducedMotion = useReducedMotion();
@@ -36,21 +36,22 @@ export default function FooterContact() {
 
   return (
     <>
-      {/* Contact Section */}
+      {/* Contact Section — warm dark canvas */}
       <section
         ref={sectionRef}
         id="contact"
-        className="section-padding text-white relative overflow-hidden"
-        style={{ background: 'rgba(13,27,42,0.90)' }}
+        className="section-padding relative overflow-hidden"
+        style={{ background: '#1C1917' }}
       >
-        {/* Strong top separator */}
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
+        {/* Warm top separator */}
+        <div className="absolute top-0 inset-x-0 h-px"
+             style={{ background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent)' }} />
 
-        {/* Large gradient orb behind headline */}
+        {/* Soft warm glow behind headline */}
         <div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at top, rgba(91,155,213,0.10) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at top, rgba(230,160,130,0.07) 0%, transparent 70%)',
           }}
         />
 
@@ -64,7 +65,8 @@ export default function FooterContact() {
             {/* Section label */}
             <motion.p
               variants={itemVariants}
-              className="text-sm font-medium text-accent tracking-wide uppercase mb-6"
+              className="text-sm font-medium tracking-wide uppercase mb-6"
+              style={{ color: 'rgba(230,160,130,0.85)' }}
             >
               Get in Touch
             </motion.p>
@@ -73,16 +75,17 @@ export default function FooterContact() {
             <motion.h2
               variants={itemVariants}
               className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-                         font-medium tracking-tight leading-tight mb-8"
+                         font-medium tracking-tight leading-tight mb-8 text-white"
             >
               Let's build something{' '}
-              <span className="text-accent">together.</span>
+              <span className="text-accent-light">together.</span>
             </motion.h2>
 
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto mb-12"
+              className="text-lg sm:text-xl max-w-2xl mx-auto mb-12"
+              style={{ color: 'rgba(255,255,255,0.45)' }}
             >
               I'm always interested in discussing research opportunities, internships,
               or collaborations in semiconductors and sustainable technology.
@@ -98,7 +101,7 @@ export default function FooterContact() {
                 href={`mailto:${personalInfo.email}`}
                 magnetStrength={0.15}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-neutral-900
-                         rounded-lg font-medium hover:bg-accent hover:text-white
+                         rounded-xl font-medium hover:bg-neutral-100
                          transition-colors duration-200"
               >
                 <FiMail className="w-5 h-5" />
@@ -111,9 +114,9 @@ export default function FooterContact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 magnetStrength={0.15}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white
-                         rounded-lg font-medium border border-white/20
-                         hover:border-accent hover:text-accent transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-8 py-4 text-white
+                         rounded-xl font-medium transition-colors duration-200"
+                style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.05)' }}
               >
                 <FiLinkedin className="w-5 h-5" />
                 LinkedIn
@@ -123,7 +126,8 @@ export default function FooterContact() {
             {/* Divider */}
             <motion.div
               variants={itemVariants}
-              className="w-full h-px bg-white/10 mb-12"
+              className="w-full h-px mb-12"
+              style={{ background: 'rgba(255,255,255,0.08)' }}
             />
 
             {/* Quick links */}
@@ -141,10 +145,13 @@ export default function FooterContact() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 border-t border-white/5" style={{ background: 'rgba(13,27,42,0.96)' }}>
+      <footer
+        className="py-8 border-t"
+        style={{ background: '#15100E', borderColor: 'rgba(255,255,255,0.06)' }}
+      >
         <div className="container-wide">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-neutral-600">
+            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.25)' }}>
               © {currentYear} Adi. All rights reserved.
             </p>
 
@@ -154,7 +161,9 @@ export default function FooterContact() {
               <SocialLink href="https://github.com/adimeenakshi" icon={FiGithub} label="GitHub" />
             </div>
 
-            <p className="text-sm text-neutral-600">{personalInfo.location}</p>
+            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.25)' }}>
+              {personalInfo.location}
+            </p>
           </div>
         </div>
       </footer>
@@ -162,17 +171,14 @@ export default function FooterContact() {
   );
 }
 
-/**
- * Quick navigation link
- */
 function QuickLink({ href, label }) {
   return (
     <a
       href={href}
-      className="group flex items-center justify-center gap-1 text-neutral-500
-               hover:text-white transition-colors duration-200"
+      className="group flex items-center justify-center gap-1 transition-colors duration-200"
+      style={{ color: 'rgba(255,255,255,0.35)' }}
     >
-      {label}
+      <span className="hover:text-white transition-colors">{label}</span>
       <FiArrowUpRight
         className="w-3.5 h-3.5 opacity-0 -translate-y-1 translate-x-1
                   group-hover:opacity-100 group-hover:translate-y-0
@@ -182,9 +188,6 @@ function QuickLink({ href, label }) {
   );
 }
 
-/**
- * Social icon link
- */
 function SocialLink({ href, icon: Icon, label }) {
   const reducedMotion = useReducedMotion();
 
@@ -194,8 +197,9 @@ function SocialLink({ href, icon: Icon, label }) {
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
       aria-label={label}
-      className="p-2 text-neutral-600 hover:text-accent transition-colors duration-200"
-      whileHover={reducedMotion ? {} : { scale: 1.1 }}
+      className="p-2 transition-colors duration-200"
+      style={{ color: 'rgba(255,255,255,0.30)' }}
+      whileHover={reducedMotion ? {} : { scale: 1.1, color: '#4D9CC7' }}
       whileTap={reducedMotion ? {} : { scale: 0.95 }}
     >
       <Icon className="w-5 h-5" />

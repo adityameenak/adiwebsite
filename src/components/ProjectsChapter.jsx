@@ -5,8 +5,7 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 import FilterPills from './FilterPills';
 
 /**
- * ProjectsChapter - Project grid with filtering
- * Dark glass card treatment on the animated canvas background.
+ * ProjectsChapter - Project grid with filtering — light editorial cards.
  */
 export default function ProjectsChapter() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -66,15 +65,7 @@ export default function ProjectsChapter() {
       id="projects"
       className="section-padding relative overflow-hidden"
     >
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-      {/* Subtle accent glow top-right */}
-      <div
-        className="absolute top-0 right-0 w-96 h-96 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at top right, rgba(91,155,213,0.05) 0%, transparent 70%)',
-        }}
-      />
+      <div className="absolute top-0 inset-x-0 h-px section-divider" />
 
       <div className="container-wide relative">
         {/* Header */}
@@ -90,10 +81,10 @@ export default function ProjectsChapter() {
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-4">
                 Projects
               </h2>
-              <p className="text-lg text-neutral-400 max-w-xl">
+              <p className="text-lg text-neutral-500 max-w-xl">
                 Technical projects spanning semiconductors, sustainability, and software.
               </p>
             </div>
@@ -113,7 +104,7 @@ export default function ProjectsChapter() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-7"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
@@ -140,19 +131,45 @@ export default function ProjectsChapter() {
               exit={{ opacity: 0 }}
               className="text-center py-16"
             >
-              <p className="text-neutral-500 text-lg">No projects in this category yet.</p>
+              <p className="text-neutral-400 text-lg">No projects in this category yet.</p>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px section-divider" />
     </section>
   );
 }
 
 /**
- * ProjectCard – dark glass treatment
+ * StatusBadge — renders a tasteful status chip
+ */
+function StatusBadge({ status }) {
+  if (!status) return null;
+
+  const styles = {
+    Completed: 'status-completed',
+    'In Progress': 'status-in-progress',
+    Live: 'status-live',
+  };
+
+  const dots = {
+    Completed: 'bg-emerald-500',
+    'In Progress': 'bg-amber-500',
+    Live: 'bg-accent',
+  };
+
+  return (
+    <span className={styles[status] || 'status-live'}>
+      <span className={`w-1.5 h-1.5 rounded-full ${dots[status] || 'bg-accent'}`} />
+      {status}
+    </span>
+  );
+}
+
+/**
+ * ProjectCard – premium light card
  */
 function ProjectCard({ project, reducedMotion }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -162,40 +179,41 @@ function ProjectCard({ project, reducedMotion }) {
       className="group relative h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      whileHover={reducedMotion ? {} : { y: -6 }}
+      whileHover={reducedMotion ? {} : { y: -5 }}
       transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div
         className={`
-          relative h-full rounded-xl p-6 lg:p-8
-          border backdrop-blur-sm
-          transition-all duration-300
+          relative h-full rounded-2xl p-6 lg:p-8
+          bg-white border transition-all duration-300
           ${isHovered
-            ? 'border-accent/30 shadow-lg shadow-accent/8'
-            : 'border-white/10'
+            ? 'border-accent/30 shadow-soft-lg'
+            : 'border-neutral-200 shadow-card'
           }
         `}
-        style={{ background: isHovered ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.04)' }}
       >
         <div className="flex flex-col h-full">
-          {/* Category */}
-          <span className="text-xs font-medium text-neutral-500 uppercase tracking-wide mb-3">
-            {project.category}
-          </span>
+          {/* Top row — category + status */}
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-xs font-medium text-neutral-400 uppercase tracking-wide">
+              {project.category}
+            </span>
+            {project.status && <StatusBadge status={project.status} />}
+          </div>
 
           {/* Title */}
           <h3
             className={`
               text-xl lg:text-2xl font-bold mb-3
               transition-colors duration-200
-              ${isHovered ? 'text-accent' : 'text-white'}
+              ${isHovered ? 'text-accent' : 'text-neutral-900'}
             `}
           >
             {project.title}
           </h3>
 
           {/* Description */}
-          <p className="text-neutral-400 text-sm lg:text-base leading-relaxed mb-6 flex-grow">
+          <p className="text-neutral-500 text-sm lg:text-base leading-relaxed mb-6 flex-grow">
             {project.shortDescription}
           </p>
 
@@ -208,8 +226,8 @@ function ProjectCard({ project, reducedMotion }) {
                   text-xs font-medium px-2.5 py-1 rounded-md
                   border transition-colors duration-200
                   ${isHovered
-                    ? 'bg-accent/10 text-accent border-accent/20'
-                    : 'bg-white/5 text-neutral-400 border-white/10'
+                    ? 'bg-accent-subtle text-accent border-accent/20'
+                    : 'bg-neutral-100 text-neutral-500 border-neutral-200'
                   }
                 `}
               >
@@ -225,15 +243,21 @@ function ProjectCard({ project, reducedMotion }) {
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm font-medium text-neutral-400 hover:text-accent
-                         transition-colors duration-200"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-accent
+                         hover:text-accent-dark transition-colors duration-200 group/link"
               >
-                View Project →
+                View Project
+                <svg
+                  className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
               </a>
             ) : (
-              <button className="text-sm font-medium text-neutral-400 hover:text-accent transition-colors duration-200">
-                Details →
-              </button>
+              <span className="text-sm font-medium text-neutral-400">
+                {project.status === 'In Progress' ? 'In development' : 'Details coming soon'}
+              </span>
             )}
           </div>
         </div>

@@ -36,7 +36,8 @@
   }
 
   body {
-    @apply font-sans antialiased text-neutral-200 bg-neutral-950;
+    @apply font-sans antialiased text-neutral-900;
+    background: #F5E8E3;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -44,7 +45,7 @@
 
   /* Selection color */
   ::selection {
-    @apply bg-accent/30 text-white;
+    @apply bg-accent/20 text-neutral-900;
   }
 
   /* Focus states */
@@ -59,7 +60,7 @@
 
   /* Headings */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold tracking-tight text-balance;
+    @apply font-heading font-bold tracking-tight text-balance text-neutral-900;
   }
 
   h1 { @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl; }
@@ -68,12 +69,12 @@
 
   /* Paragraphs */
   p {
-    @apply text-neutral-400 leading-relaxed;
+    @apply text-neutral-600 leading-relaxed;
   }
 
   /* Links */
   a {
-    @apply text-neutral-200 hover:text-accent transition-colors;
+    @apply text-neutral-700 hover:text-accent transition-colors;
   }
 
   /* Images */
@@ -109,38 +110,36 @@
 
   /* Wordmark styling */
   .wordmark {
-    @apply font-display font-medium uppercase tracking-widest
-           text-white hover:text-accent transition-colors duration-300;
+    @apply font-heading font-semibold text-neutral-900
+           hover:text-accent transition-colors duration-300;
   }
 
-  /* Card base – dark glass */
+  /* Card base – warm white */
   .card {
-    @apply rounded-xl border border-white/10 backdrop-blur-sm
+    @apply bg-white rounded-xl border border-neutral-200
            transition-all duration-300 ease-smooth;
-    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.03);
   }
 
   .card-hover {
-    @apply hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 hover:-translate-y-1;
+    @apply hover:border-accent/40 hover:shadow-soft hover:-translate-y-1;
   }
 
-  /* Glass card utility */
+  /* Glass card → now a warm card */
   .glass-card {
-    @apply rounded-2xl border border-white/10 backdrop-blur-sm;
-    background: rgba(255, 255, 255, 0.05);
+    @apply bg-white rounded-2xl border border-neutral-200;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
   }
 
-  /* Tag/pill styling – dark */
+  /* Tag/pill styling – light */
   .tag {
     @apply inline-flex items-center px-2.5 py-1
            text-xs font-medium rounded-md
-           text-neutral-400
-           border border-white/10;
-    background: rgba(255, 255, 255, 0.05);
+           text-neutral-600 bg-neutral-100 border border-neutral-200;
   }
 
   .tag-accent {
-    @apply bg-accent/15 text-accent border-accent/20;
+    @apply bg-accent-subtle text-accent border-accent/25;
   }
 
   /* Button base */
@@ -149,41 +148,39 @@
            font-medium transition-all duration-200
            focus-visible:outline-none focus-visible:ring-2
            focus-visible:ring-accent focus-visible:ring-offset-2
-           focus-visible:ring-offset-neutral-950;
+           focus-visible:ring-offset-white;
   }
 
   .btn-primary {
     @apply btn px-6 py-3 bg-accent text-white rounded-lg
-           hover:bg-accent-dark shadow-lg shadow-accent/25
+           hover:bg-accent-dark shadow-md shadow-accent/20
            active:scale-[0.98];
   }
 
-  /* Light outline button for dark backgrounds */
+  /* Light outlined button */
   .btn-secondary {
-    @apply btn px-6 py-3 text-white rounded-lg
-           border border-white/20
+    @apply btn px-6 py-3 text-neutral-900 rounded-lg
+           bg-white border border-neutral-300
            hover:border-accent hover:text-accent
            active:scale-[0.98];
-    background: rgba(255, 255, 255, 0.06);
   }
 
-  /* Ghost dark button */
+  /* Ghost button for light backgrounds */
   .btn-ghost-dark {
-    @apply btn px-6 py-3 text-neutral-300 rounded-lg
-           border border-white/15
-           hover:border-accent/50 hover:text-white
+    @apply btn px-6 py-3 text-neutral-700 rounded-lg
+           bg-neutral-100 border border-neutral-200
+           hover:border-accent/50 hover:text-accent
            active:scale-[0.98];
-    background: rgba(255, 255, 255, 0.04);
   }
 
   .btn-ghost {
-    @apply btn px-4 py-2 text-neutral-400 hover:text-white
-           hover:bg-white/8 rounded-lg;
+    @apply btn px-4 py-2 text-neutral-500 hover:text-neutral-900
+           hover:bg-neutral-100 rounded-lg;
   }
 
-  /* Progress rail dot */
+  /* Progress rail dot – light */
   .progress-dot {
-    @apply w-2 h-2 rounded-full bg-neutral-700
+    @apply w-2 h-2 rounded-full bg-neutral-300
            transition-all duration-300;
   }
 
@@ -191,18 +188,33 @@
     @apply bg-accent scale-125;
   }
 
-  /* Filter pill – dark */
+  /* Filter pill – light */
   .filter-pill {
     @apply px-4 py-2 text-sm font-medium rounded-full
-           text-neutral-400
-           border border-white/10
+           text-neutral-500 bg-white
+           border border-neutral-200
            transition-all duration-200 cursor-pointer
-           hover:text-white hover:bg-white/10;
-    background: rgba(255, 255, 255, 0.05);
+           hover:text-neutral-900 hover:border-neutral-400;
   }
 
   .filter-pill-active {
     @apply bg-accent text-white border-accent hover:bg-accent-dark;
+  }
+
+  /* Status badge styles */
+  .status-completed {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
+           bg-emerald-50 text-emerald-700 border border-emerald-200;
+  }
+
+  .status-in-progress {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
+           bg-amber-50 text-amber-700 border border-amber-200;
+  }
+
+  .status-live {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
+           bg-accent-subtle text-accent border border-accent/25;
   }
 }
 
@@ -275,13 +287,19 @@
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   }
 
-  /* Section separator line */
+  /* Section separator line – warm light */
   .section-divider {
     @apply w-full h-px;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.07), transparent);
   }
 
-  /* Faint white backgrounds for layering */
+  /* Subtle dot-grid texture overlay */
+  .dot-grid {
+    background-image: radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Legacy dark bg utilities – keep for backwards compat */
   .bg-white\/8 {
     background: rgba(255, 255, 255, 0.08);
   }

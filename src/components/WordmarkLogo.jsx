@@ -38,7 +38,7 @@ export default function WordmarkLogo() {
       }}
     >
       <span
-        className="font-sans font-bold text-lg sm:text-xl text-white
+        className="font-sans font-bold text-lg sm:text-xl text-neutral-900
                    hover:text-accent transition-colors duration-200
                    select-none cursor-pointer"
       >

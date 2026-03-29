@@ -4,8 +4,7 @@ import { about, education, awards } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 /**
- * About - Editorial about section
- * Dark glass card treatment to sit on the animated canvas background.
+ * About - Editorial about section — light card treatment.
  */
 export default function About() {
   const reducedMotion = useReducedMotion();
@@ -36,8 +35,8 @@ export default function About() {
       id="about"
       className="section-padding relative overflow-hidden"
     >
-      {/* Subtle section separator gradient at top */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {/* Section separator */}
+      <div className="absolute top-0 inset-x-0 h-px section-divider" />
 
       <div className="container-wide relative">
         <motion.div
@@ -57,14 +56,14 @@ export default function About() {
 
             <motion.h2
               variants={itemVariants}
-              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white mb-8"
+              className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-neutral-900 mb-8"
             >
               Engineering solutions for the future of technology.
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
-              className="text-lg lg:text-xl text-neutral-300 leading-relaxed mb-8"
+              className="text-lg lg:text-xl text-neutral-600 leading-relaxed mb-8"
             >
               {about.paragraph}
             </motion.p>
@@ -75,9 +74,10 @@ export default function About() {
                 (area) => (
                   <span
                     key={area}
-                    className="px-4 py-2 bg-white/8 text-neutral-300 rounded-full
-                             text-sm font-medium border border-white/10
-                             hover:border-accent/40 hover:text-white transition-colors duration-200"
+                    className="px-4 py-2 bg-white text-neutral-700 rounded-full
+                             text-sm font-medium border border-neutral-200
+                             hover:border-accent/50 hover:text-accent transition-colors duration-200
+                             shadow-sm"
                   >
                     {area}
                   </span>
@@ -87,29 +87,28 @@ export default function About() {
           </div>
 
           {/* Right column – Education & Awards */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-5">
             {/* Education Card */}
             <motion.div
               variants={itemVariants}
               className="relative rounded-2xl p-6 lg:p-8 overflow-hidden group
-                       border border-white/10 backdrop-blur-sm
-                       hover:border-accent/30 transition-colors duration-300"
-              style={{ background: 'rgba(255,255,255,0.04)' }}
+                       bg-white border border-neutral-200
+                       hover:border-accent/30 hover:shadow-soft transition-all duration-300"
             >
-              {/* Accent border top */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+              {/* Accent top bar */}
+              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-gradient-to-r from-accent/60 via-accent to-accent/60" />
 
-              <h3 className="text-lg font-heading font-bold text-white mb-4">Education</h3>
+              <h3 className="text-lg font-heading font-semibold text-neutral-900 mb-4">Education</h3>
 
               <div className="space-y-3">
                 <div>
-                  <p className="text-xl font-semibold text-white">{education.school}</p>
-                  <p className="text-neutral-400">
+                  <p className="text-xl font-semibold text-neutral-900">{education.school}</p>
+                  <p className="text-neutral-500 mt-0.5">
                     {education.degree} in {education.major}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-4 text-sm text-neutral-500">
+                <div className="flex items-center gap-4 text-sm text-neutral-400">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     GPA: {education.gpa}
@@ -125,16 +124,15 @@ export default function About() {
             {/* Awards / Highlights Card */}
             <motion.div
               variants={itemVariants}
-              className="rounded-2xl p-6 lg:p-8 border border-white/10 backdrop-blur-sm
-                       hover:border-accent/30 transition-colors duration-300"
-              style={{ background: 'rgba(255,255,255,0.04)' }}
+              className="rounded-2xl p-6 lg:p-8 bg-white border border-neutral-200
+                       hover:border-accent/30 hover:shadow-soft transition-all duration-300"
             >
-              <h3 className="text-lg font-heading font-bold text-white mb-4">Highlights</h3>
+              <h3 className="text-lg font-heading font-semibold text-neutral-900 mb-4">Highlights</h3>
 
               <ul className="space-y-4">
                 {awards.map((award) => (
                   <li key={award.id} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-accent/15 flex items-center justify-center flex-shrink-0 mt-0.5 border border-accent/20">
+                    <div className="w-8 h-8 rounded-lg bg-accent-subtle flex items-center justify-center flex-shrink-0 mt-0.5 border border-accent/20">
                       <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path
                           strokeLinecap="round"
@@ -145,8 +143,8 @@ export default function About() {
                       </svg>
                     </div>
                     <div>
-                      <p className="font-medium text-white">{award.title}</p>
-                      <p className="text-sm text-neutral-500">
+                      <p className="font-medium text-neutral-900">{award.title}</p>
+                      <p className="text-sm text-neutral-400 mt-0.5">
                         {award.description} · {award.date}
                       </p>
                     </div>
@@ -165,24 +163,22 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Subtle section separator gradient at bottom */}
-      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px section-divider" />
     </section>
   );
 }
 
 /**
- * StatCard – dark glass stat display
+ * StatCard – light stat display
  */
 function StatCard({ value, label }) {
   return (
     <div
-      className="rounded-xl p-5 text-center border border-white/10 backdrop-blur-sm
-                 hover:border-accent/30 transition-colors duration-200"
-      style={{ background: 'rgba(255,255,255,0.06)' }}
+      className="rounded-xl p-5 text-center bg-white border border-neutral-200
+                 hover:border-accent/30 hover:shadow-sm transition-all duration-200"
     >
       <p className="text-2xl lg:text-3xl font-heading font-bold text-accent mb-1">{value}</p>
-      <p className="text-sm text-neutral-500">{label}</p>
+      <p className="text-sm text-neutral-400">{label}</p>
     </div>
   );
 }

@@ -53,7 +53,7 @@ function useTypewriter(text, { delay = 0, speed = 70 } = {}) {
 
 /**
  * HeroChapter - Hero section with typewriter effect
- * Dark theme – renders on top of the ChemicalBackground canvas.
+ * Light editorial theme — sits on the warm rounded inner stage.
  */
 export default function HeroChapter() {
   const reducedMotion = useReducedMotion();
@@ -73,7 +73,7 @@ export default function HeroChapter() {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const smoothY = useSpring(y, { stiffness: 50, damping: 20 });
 
   const handleNavigateToProjects = (e) => {
@@ -126,22 +126,36 @@ export default function HeroChapter() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Scroll parallax accent orb */}
+      {/* Soft blush/peach decorative orb — top right */}
       {!reducedMotion && (
         <motion.div
-          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+          className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none"
           style={{
             y: smoothY,
             opacity,
-            background: 'radial-gradient(circle, rgba(91,155,213,0.09) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(230,160,130,0.10) 0%, transparent 65%)',
+            filter: 'blur(80px)',
+            transform: 'translate(35%, -20%)',
+          }}
+        />
+      )}
+
+      {/* Soft blue accent orb — bottom left */}
+      {!reducedMotion && (
+        <motion.div
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
+          style={{
+            opacity,
+            background: 'radial-gradient(circle, rgba(29,111,164,0.06) 0%, transparent 70%)',
             filter: 'blur(60px)',
+            transform: 'translate(-30%, 30%)',
           }}
         />
       )}
 
       {/* Main content */}
       <motion.div
-        className="container-wide relative z-10 pt-32 pb-20 lg:pt-40 lg:pb-32"
+        className="container-wide relative z-10 pt-32 pb-20 lg:pt-44 lg:pb-32"
         style={{ opacity: reducedMotion ? 1 : opacity }}
       >
         <motion.div
@@ -150,16 +164,18 @@ export default function HeroChapter() {
           variants={containerVariants}
           className="max-w-5xl"
         >
-          {/* Overline */}
-          <motion.p
-            variants={itemVariants}
-            className="text-sm font-medium text-neutral-400 tracking-wide uppercase mb-6"
-          >
-            Chemical Engineering · Semiconductors · Research
-          </motion.p>
+          {/* Status pill */}
+          <motion.div variants={itemVariants} className="mb-8">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full
+                             bg-white border border-neutral-200 text-neutral-600 text-sm font-medium
+                             shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              Chemical Engineering · Texas A&M · Class of 2028
+            </span>
+          </motion.div>
 
           {/* Main headline with typewriter */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight mb-8 min-h-[1.2em]">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-900 tracking-tight mb-8 min-h-[1.2em]">
             {renderTypedText()}
             {showCursor && (
               <span className="inline-block w-[3px] h-[0.85em] bg-accent ml-1 animate-pulse align-middle" />
@@ -169,8 +185,8 @@ export default function HeroChapter() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="text-xl sm:text-2xl lg:text-3xl text-neutral-300 font-light
-                       max-w-3xl leading-relaxed mb-12"
+            className="text-xl sm:text-2xl lg:text-2xl text-neutral-500 font-light
+                       max-w-2xl leading-relaxed mb-12"
           >
             {personalInfo.title}
           </motion.p>
@@ -189,7 +205,7 @@ export default function HeroChapter() {
             >
               View Projects
               <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </MagneticButton>
 
@@ -211,8 +227,8 @@ export default function HeroChapter() {
           initial="hidden"
           animate="visible"
           transition={{ delay: 0.8 }}
-          className="mt-20 lg:mt-32 grid grid-cols-3 gap-8 lg:gap-12 max-w-3xl
-                     border-t border-white/10 pt-8"
+          className="mt-20 lg:mt-32 grid grid-cols-3 gap-8 lg:gap-12 max-w-2xl
+                     border-t border-neutral-200 pt-8"
         >
           <StatItem label="Research" value="2+ Years" />
           <StatItem label="Focus" value="Semiconductors" />
@@ -232,8 +248,8 @@ export default function HeroChapter() {
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-neutral-500 uppercase tracking-widest">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-neutral-500 to-transparent" />
+          <span className="text-xs text-neutral-400 uppercase tracking-widest">Scroll</span>
+          <div className="w-px h-8 bg-gradient-to-b from-neutral-400 to-transparent" />
         </motion.div>
       </motion.div>
     </section>
@@ -241,7 +257,7 @@ export default function HeroChapter() {
 }
 
 /**
- * StatItem - Small stat display (dark theme)
+ * StatItem - Small stat display (light theme)
  */
 function StatItem({ label, value }) {
   const reducedMotion = useReducedMotion();
@@ -252,10 +268,10 @@ function StatItem({ label, value }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: reducedMotion ? 0.2 : 0.5 }}
-      className="flex flex-col text-center"
+      className="flex flex-col"
     >
-      <span className="text-2xl lg:text-3xl font-bold text-white">{value}</span>
-      <span className="text-sm text-neutral-500 mt-1">{label}</span>
+      <span className="text-2xl lg:text-3xl font-bold text-neutral-900">{value}</span>
+      <span className="text-sm text-neutral-400 mt-1">{label}</span>
     </motion.div>
   );
 }

@@ -4,8 +4,7 @@ import { experience } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 /**
- * ExperienceChapter - Editorial experience section
- * Dark glass card treatment on the animated canvas background.
+ * ExperienceChapter - Editorial experience section — light card treatment.
  */
 export default function ExperienceChapter() {
   const reducedMotion = useReducedMotion();
@@ -18,7 +17,7 @@ export default function ExperienceChapter() {
       id="experience"
       className="section-padding relative overflow-hidden"
     >
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute top-0 inset-x-0 h-px section-divider" />
 
       <div className="container-wide">
         {/* Desktop: Sticky two-column layout */}
@@ -32,14 +31,11 @@ export default function ExperienceChapter() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div className="absolute bottom-0 inset-x-0 h-px section-divider" />
     </section>
   );
 }
 
-/**
- * Desktop sticky layout with progress indicator
- */
 function StickyExperience({ items, reducedMotion, isInView }) {
   const containerRef = useRef(null);
 
@@ -68,11 +64,11 @@ function StickyExperience({ items, reducedMotion, isInView }) {
               Career Journey
             </p>
 
-            <h2 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-4">
+            <h2 className="text-4xl lg:text-5xl font-heading font-bold text-neutral-900 mb-4">
               Experience
             </h2>
 
-            <p className="text-lg text-neutral-400 mb-10">
+            <p className="text-lg text-neutral-500 mb-10">
               Research and industry experience in materials, semiconductors, and sustainable energy.
             </p>
 
@@ -80,7 +76,7 @@ function StickyExperience({ items, reducedMotion, isInView }) {
             {!reducedMotion && (
               <div className="relative pl-8">
                 {/* Background track */}
-                <div className="absolute left-0 top-0 w-0.5 h-full bg-white/10 rounded-full" />
+                <div className="absolute left-0 top-0 w-0.5 h-full bg-neutral-200 rounded-full" />
 
                 {/* Active progress */}
                 <motion.div
@@ -107,7 +103,7 @@ function StickyExperience({ items, reducedMotion, isInView }) {
       </div>
 
       {/* Scrolling right column */}
-      <div className="col-span-8 space-y-12 pt-4">
+      <div className="col-span-8 space-y-10 pt-4">
         {items.map((job, index) => (
           <ExperienceCard
             key={job.id}
@@ -123,9 +119,6 @@ function StickyExperience({ items, reducedMotion, isInView }) {
   );
 }
 
-/**
- * Progress marker for sticky sidebar
- */
 function ProgressMarker({ item, index, total, scrollProgress }) {
   const isActive = useTransform(
     scrollProgress,
@@ -133,20 +126,17 @@ function ProgressMarker({ item, index, total, scrollProgress }) {
     [0, 1]
   );
 
-  const opacity = useTransform(isActive, (value) => (value > 0.1 && value < 0.9 ? 1 : 0.4));
+  const opacity = useTransform(isActive, (value) => (value > 0.1 && value < 0.9 ? 1 : 0.35));
   const scale = useTransform(isActive, (value) => (value > 0.1 && value < 0.9 ? 1.3 : 1));
 
   return (
     <motion.div className="flex items-center gap-3" style={{ opacity }}>
       <motion.div className="w-2.5 h-2.5 rounded-full bg-accent -ml-8" style={{ scale }} />
-      <span className="text-sm font-medium text-neutral-400 truncate">{item.company}</span>
+      <span className="text-sm font-medium text-neutral-500 truncate">{item.company}</span>
     </motion.div>
   );
 }
 
-/**
- * Individual experience card – dark glass treatment
- */
 function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -159,7 +149,7 @@ function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
       (index + 0.8) / total,
       Math.min(1, (index + 1.3) / total),
     ],
-    [0.4, 1, 1, 0.4]
+    [0.5, 1, 1, 0.5]
   );
 
   const smoothOpacity = useSpring(cardOpacity, { stiffness: 100, damping: 30 });
@@ -174,16 +164,14 @@ function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
       className="group"
     >
       <div
-        className="rounded-2xl p-8 lg:p-10 border border-white/10 backdrop-blur-sm
-                   hover:border-accent/30 transition-all duration-300
-                   hover:shadow-lg hover:shadow-accent/5"
-        style={{ background: 'rgba(255,255,255,0.04)' }}
+        className="rounded-2xl p-8 lg:p-10 bg-white border border-neutral-200
+                   hover:border-accent/30 hover:shadow-soft-lg transition-all duration-300"
       >
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-6">
           <div>
             <h3
-              className="text-2xl lg:text-3xl font-heading font-bold text-white mb-2
+              className="text-2xl lg:text-3xl font-heading font-bold text-neutral-900 mb-2
                          group-hover:text-accent transition-colors duration-200"
             >
               {job.role}
@@ -192,7 +180,7 @@ function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
           </div>
           <span
             className="text-sm text-neutral-400 mt-2 md:mt-0 font-medium
-                       px-3 py-1 rounded-full border border-white/10 bg-white/5"
+                       px-3 py-1.5 rounded-full border border-neutral-200 bg-neutral-50 whitespace-nowrap"
           >
             {job.period}
           </span>
@@ -203,7 +191,7 @@ function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
           {job.description.map((item, i) => (
             <li key={i} className="flex items-start">
               <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2.5 mr-3 flex-shrink-0" />
-              <span className="text-neutral-300 leading-relaxed">{item}</span>
+              <span className="text-neutral-600 leading-relaxed">{item}</span>
             </li>
           ))}
         </ul>
@@ -213,8 +201,8 @@ function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
           {job.tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 text-neutral-400 rounded-full text-sm
-                       border border-white/10 bg-white/5
+              className="px-3 py-1 text-neutral-500 rounded-full text-sm
+                       border border-neutral-200 bg-neutral-50
                        group-hover:border-accent/30 group-hover:text-accent
                        transition-colors duration-200"
             >
@@ -227,9 +215,6 @@ function ExperienceCard({ job, index, total, scrollProgress, reducedMotion }) {
   );
 }
 
-/**
- * Mobile stacked layout
- */
 function MobileExperience({ items, reducedMotion, isInView }) {
   return (
     <>
@@ -243,10 +228,10 @@ function MobileExperience({ items, reducedMotion, isInView }) {
         <p className="text-sm font-medium text-accent tracking-wide uppercase mb-4">
           Career Journey
         </p>
-        <h2 className="text-3xl sm:text-4xl font-heading font-bold text-white mb-4">
+        <h2 className="text-3xl sm:text-4xl font-heading font-bold text-neutral-900 mb-4">
           Experience
         </h2>
-        <p className="text-neutral-400">
+        <p className="text-neutral-500">
           Research and industry experience in materials, semiconductors, and sustainable energy.
         </p>
       </motion.div>
@@ -254,7 +239,7 @@ function MobileExperience({ items, reducedMotion, isInView }) {
       {/* Timeline */}
       <div className="relative">
         {/* Vertical line */}
-        <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-white/10" />
+        <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-neutral-200" />
 
         <div className="space-y-8">
           {items.map((job, index) => (
@@ -267,23 +252,20 @@ function MobileExperience({ items, reducedMotion, isInView }) {
               className="relative pl-10"
             >
               {/* Timeline dot */}
-              <div className="absolute left-1.5 top-2 w-3 h-3 rounded-full bg-accent border-2 border-neutral-950" />
+              <div className="absolute left-1.5 top-2 w-3 h-3 rounded-full bg-accent border-2 border-white" />
 
-              <div
-                className="rounded-xl p-6 border border-white/10 backdrop-blur-sm"
-                style={{ background: 'rgba(255,255,255,0.04)' }}
-              >
+              <div className="rounded-xl p-6 bg-white border border-neutral-200">
                 <div className="mb-4">
-                  <h3 className="text-xl font-heading font-bold text-white mb-1">{job.role}</h3>
+                  <h3 className="text-xl font-heading font-bold text-neutral-900 mb-1">{job.role}</h3>
                   <p className="text-accent font-medium">{job.company}</p>
-                  <span className="text-sm text-neutral-500 mt-1 block">{job.period}</span>
+                  <span className="text-sm text-neutral-400 mt-1 block">{job.period}</span>
                 </div>
 
                 <ul className="space-y-2 mb-4">
                   {job.description.slice(0, 2).map((item, i) => (
                     <li key={i} className="flex items-start text-sm">
                       <span className="w-1 h-1 rounded-full bg-accent mt-2 mr-2 flex-shrink-0" />
-                      <span className="text-neutral-300 leading-relaxed">{item}</span>
+                      <span className="text-neutral-600 leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -292,7 +274,7 @@ function MobileExperience({ items, reducedMotion, isInView }) {
                   {job.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 text-neutral-400 rounded-full text-xs border border-white/10 bg-white/5"
+                      className="px-2 py-0.5 text-neutral-500 rounded-full text-xs border border-neutral-200 bg-neutral-50"
                     >
                       {tag}
                     </span>

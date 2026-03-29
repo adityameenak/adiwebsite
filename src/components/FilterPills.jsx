@@ -40,7 +40,7 @@ export default function FilterPills({
               focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2
               ${isActive
                 ? 'text-white'
-                : 'text-neutral-400 hover:text-white bg-white/8 hover:bg-white/12 border border-white/10'
+                : 'text-neutral-500 hover:text-neutral-900 bg-white border border-neutral-200 hover:border-neutral-400'
               }
             `}
             whileHover={reducedMotion ? {} : { scale: 1.02 }}
@@ -68,7 +68,7 @@ export default function FilterPills({
                     text-xs px-1.5 py-0.5 rounded-full
                     ${isActive
                       ? 'bg-white/20 text-white'
-                      : 'bg-white/10 text-neutral-500'
+                      : 'bg-neutral-200 text-neutral-400'
                     }
                   `}
                 >
