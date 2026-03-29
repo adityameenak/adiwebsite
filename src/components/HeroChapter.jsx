@@ -1,277 +1,185 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import MagneticButton from './MagneticButton';
+import { FiArrowUpRight } from 'react-icons/fi';
 
 /**
- * Typewriter Hook - Types out text character by character
- */
-function useTypewriter(text, { delay = 0, speed = 70 } = {}) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isComplete, setIsComplete] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (reducedMotion) {
-      setDisplayedText(text);
-      setIsComplete(true);
-      setShowCursor(false);
-      return;
-    }
-
-    setDisplayedText('');
-    setIsComplete(false);
-    setShowCursor(true);
-
-    let currentIndex = 0;
-    let intervalId;
-
-    const timeoutId = setTimeout(() => {
-      intervalId = setInterval(() => {
-        if (currentIndex < text.length) {
-          setDisplayedText(text.slice(0, currentIndex + 1));
-          currentIndex++;
-        } else {
-          clearInterval(intervalId);
-          setIsComplete(true);
-          setTimeout(() => setShowCursor(false), 800);
-        }
-      }, speed);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (intervalId) clearInterval(intervalId);
-    };
-  }, [text, delay, speed, reducedMotion]);
-
-  return { displayedText, isComplete, showCursor };
-}
-
-/**
- * HeroChapter - Hero section with typewriter effect
- * Light editorial theme — sits on the warm rounded inner stage.
+ * HeroChapter — editorial two-column hero.
+ *
+ * Layout (desktop):
+ *   Left: discipline strip → large display heading → subtitle → CTAs
+ *   Right: identity card panel (school, focus, fellowship, links)
+ *
+ * Bottom: horizontal stat strip with dividers.
+ *
+ * No typewriter. No centered layout. Strong typographic focal point.
  */
 export default function HeroChapter() {
   const reducedMotion = useReducedMotion();
   const navigate = useNavigate();
-  const sectionRef = useRef(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
-  const heroText = "Hi, I'm Adi.";
-  const { displayedText, isComplete, showCursor } = useTypewriter(heroText, {
-    delay: 300,
-    speed: 70,
-  });
+  const fadeUp = reducedMotion
+    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }
+    : {
+        hidden: { opacity: 0, y: 28 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
+      };
 
-  // Scroll-linked parallax
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const smoothY = useSpring(y, { stiffness: 50, damping: 20 });
-
-  const handleNavigateToProjects = (e) => {
-    e.preventDefault();
-    navigate('/projects');
-  };
-
-  const handleNavigateToExperience = (e) => {
-    e.preventDefault();
-    navigate('/experience');
-  };
-
-  const containerVariants = {
+  const container = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: reducedMotion ? 0 : 0.12,
-        delayChildren: reducedMotion ? 0.1 : 1.2,
-      },
+      transition: { staggerChildren: reducedMotion ? 0 : 0.09, delayChildren: 0.1 },
     },
   };
 
-  const itemVariants = reducedMotion
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.3 } } }
-    : {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
-      };
-
-  // Render typed text with "Adi" in accent color
-  const renderTypedText = () => {
-    const nameIndex = displayedText.indexOf('Adi');
-    if (nameIndex === -1) return <>{displayedText}</>;
-    const beforeName = displayedText.slice(0, nameIndex);
-    const name = displayedText.slice(nameIndex, nameIndex + 3);
-    const afterName = displayedText.slice(nameIndex + 3);
-    return (
-      <>
-        {beforeName}
-        <span className="text-accent">{name}</span>
-        {afterName}
-      </>
-    );
-  };
-
   return (
-    <section
-      ref={sectionRef}
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      {/* Soft blush/peach decorative orb — top right */}
-      {!reducedMotion && (
-        <motion.div
-          className="absolute top-0 right-0 w-[700px] h-[700px] rounded-full pointer-events-none"
-          style={{
-            y: smoothY,
-            opacity,
-            background: 'radial-gradient(circle, rgba(230,160,130,0.10) 0%, transparent 65%)',
-            filter: 'blur(80px)',
-            transform: 'translate(35%, -20%)',
-          }}
-        />
-      )}
-
-      {/* Soft blue accent orb — bottom left */}
-      {!reducedMotion && (
-        <motion.div
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none"
-          style={{
-            opacity,
-            background: 'radial-gradient(circle, rgba(29,111,164,0.06) 0%, transparent 70%)',
-            filter: 'blur(60px)',
-            transform: 'translate(-30%, 30%)',
-          }}
-        />
-      )}
-
-      {/* Main content */}
+    <section id="home" ref={ref} className="px-7 sm:px-10 lg:px-14 pt-14 pb-0 lg:pt-20">
       <motion.div
-        className="container-wide relative z-10 pt-32 pb-20 lg:pt-44 lg:pb-32"
-        style={{ opacity: reducedMotion ? 1 : opacity }}
+        variants={container}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
       >
+        {/* ── Discipline strip ── */}
         <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="max-w-5xl"
+          variants={fadeUp}
+          className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-12 lg:mb-16"
         >
-          {/* Status pill */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full
-                             bg-white border border-neutral-200 text-neutral-600 text-sm font-medium
-                             shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Chemical Engineering · Texas A&M · Class of 2028
+          {[
+            'Chemical Engineering',
+            'Semiconductors',
+            'Materials Science',
+            'Texas A\u00A0A&M',
+          ].map((tag, i, arr) => (
+            <span key={tag} className="flex items-center gap-3">
+              <span className="text-[13px] text-neutral-400 tracking-wide">{tag}</span>
+              {i < arr.length - 1 && (
+                <span className="text-neutral-300 text-xs" aria-hidden>·</span>
+              )}
             </span>
-          </motion.div>
-
-          {/* Main headline with typewriter */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-900 tracking-tight mb-8 min-h-[1.2em]">
-            {renderTypedText()}
-            {showCursor && (
-              <span className="inline-block w-[3px] h-[0.85em] bg-accent ml-1 animate-pulse align-middle" />
-            )}
-          </h1>
-
-          {/* Subtitle */}
-          <motion.p
-            variants={itemVariants}
-            className="text-xl sm:text-2xl lg:text-2xl text-neutral-500 font-light
-                       max-w-2xl leading-relaxed mb-12"
-          >
-            {personalInfo.title}
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-start gap-4"
-          >
-            <MagneticButton
-              as="a"
-              href="/projects"
-              onClick={handleNavigateToProjects}
-              magnetStrength={0.2}
-              className="btn-primary text-base px-8 py-4"
-            >
-              View Projects
-              <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </MagneticButton>
-
-            <MagneticButton
-              as="a"
-              href="/experience"
-              onClick={handleNavigateToExperience}
-              magnetStrength={0.2}
-              className="btn-ghost-dark text-base px-8 py-4"
-            >
-              See Experience
-            </MagneticButton>
-          </motion.div>
+          ))}
         </motion.div>
 
-        {/* Stats row */}
-        <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.8 }}
-          className="mt-20 lg:mt-32 grid grid-cols-3 gap-8 lg:gap-12 max-w-2xl
-                     border-t border-neutral-200 pt-8"
-        >
-          <StatItem label="Research" value="2+ Years" />
-          <StatItem label="Focus" value="Semiconductors" />
-          <StatItem label="Class of" value="2028" />
-        </motion.div>
-      </motion.div>
+        {/* ── Main two-column grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] xl:grid-cols-[1fr_284px] gap-10 lg:gap-14 xl:gap-20 items-end mb-12 lg:mb-16">
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isComplete ? 1 : 0 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
+          {/* Left — primary content */}
+          <div>
+            {/* Large display heading */}
+            <motion.h1
+              variants={fadeUp}
+              className="font-display font-medium tracking-tight leading-[0.92] text-neutral-900 mb-9"
+              style={{ fontSize: 'clamp(64px, 10vw, 124px)' }}
+            >
+              Hi, I'm{' '}
+              <em className="not-italic text-accent">Adi.</em>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              variants={fadeUp}
+              className="text-[17px] lg:text-[18px] text-neutral-500 font-light leading-relaxed max-w-[44ch] mb-10"
+            >
+              {personalInfo.title}
+            </motion.p>
+
+            {/* CTAs */}
+            <motion.div variants={fadeUp} className="flex items-center gap-5 sm:gap-7">
+              <button
+                onClick={() => navigate('/projects')}
+                className="btn-primary px-7 py-3.5 text-[14px]"
+              >
+                View Projects
+              </button>
+              <button
+                onClick={() => navigate('/experience')}
+                className="group flex items-center gap-1.5 text-[13px] font-medium text-neutral-500 hover:text-neutral-900 transition-colors"
+              >
+                Experience
+                <span className="group-hover:translate-x-0.5 transition-transform duration-200">→</span>
+              </button>
+            </motion.div>
+          </div>
+
+          {/* Right — identity panel (desktop only) */}
+          <motion.aside
+            variants={fadeUp}
+            className="hidden lg:block self-end"
+            aria-label="Identity summary"
+          >
+            <div
+              className="rounded-2xl bg-white border border-neutral-200 overflow-hidden"
+              style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 6px 24px -6px rgba(0,0,0,0.06)' }}
+            >
+              {/* Status row */}
+              <div className="flex items-center gap-2.5 px-5 py-4 border-b border-neutral-100">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+                <span className="text-[13px] font-medium text-neutral-700">Open to opportunities</span>
+              </div>
+
+              {/* Info table */}
+              <dl className="px-5 py-4 space-y-3 border-b border-neutral-100 text-[13px]">
+                {[
+                  { label: 'School',     value: 'Texas A&M' },
+                  { label: 'Major',      value: 'Chem. Engineering' },
+                  { label: 'Focus',      value: 'Semiconductors' },
+                  { label: 'Class',      value: '2028' },
+                  { label: 'Fellowship', value: 'Samsung Fellow', accent: true },
+                ].map(({ label, value, accent }) => (
+                  <div key={label} className="flex items-baseline justify-between gap-4">
+                    <dt className="text-neutral-400 flex-shrink-0">{label}</dt>
+                    <dd className={`font-medium text-right ${accent ? 'text-accent' : 'text-neutral-800'}`}>
+                      {value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+
+              {/* Links */}
+              <div className="px-5 py-4 space-y-3">
+                {[
+                  { label: 'LinkedIn', href: personalInfo.linkedin },
+                  { label: 'Email',    href: `mailto:${personalInfo.email}` },
+                ].map(({ label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={href.startsWith('http') ? '_blank' : undefined}
+                    rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="group flex items-center justify-between text-[13px] text-neutral-500 hover:text-accent transition-colors duration-200"
+                  >
+                    {label}
+                    <FiArrowUpRight className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </motion.aside>
+        </div>
+
+        {/* ── Horizontal stat strip ── */}
         <motion.div
-          animate={reducedMotion ? {} : { y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-2"
+          variants={fadeUp}
+          className="grid grid-cols-3 divide-x divide-neutral-200 border-t border-neutral-200 pt-8 pb-14 lg:pb-20"
         >
-          <span className="text-xs text-neutral-400 uppercase tracking-widest">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-neutral-400 to-transparent" />
+          <div className="pr-6 sm:pr-10">
+            <p className="text-[22px] lg:text-[26px] font-bold text-neutral-900 leading-tight">2+</p>
+            <p className="text-[12px] text-neutral-400 mt-1 tracking-wide uppercase">Years Research</p>
+          </div>
+          <div className="px-6 sm:px-10">
+            <p className="text-[22px] lg:text-[26px] font-bold text-neutral-900 leading-tight">Semis</p>
+            <p className="text-[12px] text-neutral-400 mt-1 tracking-wide uppercase">Focus Area</p>
+          </div>
+          <div className="pl-6 sm:pl-10">
+            <p className="text-[22px] lg:text-[26px] font-bold text-neutral-900 leading-tight">2028</p>
+            <p className="text-[12px] text-neutral-400 mt-1 tracking-wide uppercase">Class of</p>
+          </div>
         </motion.div>
       </motion.div>
     </section>
-  );
-}
-
-/**
- * StatItem - Small stat display (light theme)
- */
-function StatItem({ label, value }) {
-  const reducedMotion = useReducedMotion();
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: reducedMotion ? 0.2 : 0.5 }}
-      className="flex flex-col"
-    >
-      <span className="text-2xl lg:text-3xl font-bold text-neutral-900">{value}</span>
-      <span className="text-sm text-neutral-400 mt-1">{label}</span>
-    </motion.div>
   );
 }

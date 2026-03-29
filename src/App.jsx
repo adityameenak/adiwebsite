@@ -1,37 +1,36 @@
 import { LenisProvider } from './hooks/useLenis';
-import WordmarkLogo from './components/WordmarkLogo';
-import { TopProgressBar } from './components/ProgressRail';
-import Navigation from './components/Navigation';
+import SparseHeader from './components/SparseHeader';
 import HeroChapter from './components/HeroChapter';
 import About from './components/About';
 import FooterContact from './components/FooterContact';
 
 /**
- * App - Main application component (Home Page)
+ * App — Home page.
  *
- * Premium Editorial Portfolio — soft blush canvas, warm rounded stage.
+ * Layout:
+ *   Blush outer canvas → rounded shell (warm off-white + fine grid)
+ *     SparseHeader (inside shell, not fixed)
+ *     HeroChapter
+ *     About
+ *     FooterContact
  */
 function App() {
   return (
     <LenisProvider>
       {/* Blush outer canvas */}
-      <div className="min-h-screen" style={{ background: '#F5E8E3' }}>
-        {/* Fixed chrome */}
-        <Navigation />
-        <WordmarkLogo />
-        <TopProgressBar />
-
-        {/* Main rounded stage */}
-        <div className="px-3 sm:px-5 lg:px-8 pt-2 pb-8">
+      <div className="min-h-screen" style={{ background: '#F3E6E1' }}>
+        {/* Rounded main shell */}
+        <div className="px-3 sm:px-5 lg:px-9 pt-3 pb-8">
           <div
-            className="relative rounded-3xl lg:rounded-[2.5rem] overflow-hidden dot-grid"
+            className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden fine-grid"
             style={{
               background: '#FEFCF9',
-              minHeight: 'calc(100vh - 2.5rem)',
+              minHeight: 'calc(100vh - 2.75rem)',
               boxShadow:
-                '0 2px 8px rgba(120,80,60,0.06), 0 12px 48px -8px rgba(120,80,60,0.10)',
+                '0 0 0 1px rgba(180,130,110,0.10), 0 4px 12px rgba(120,70,50,0.06), 0 20px 60px -12px rgba(120,70,50,0.09)',
             }}
           >
+            <SparseHeader />
             <main>
               <HeroChapter />
               <About />

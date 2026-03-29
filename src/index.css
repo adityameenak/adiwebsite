@@ -37,7 +37,7 @@
 
   body {
     @apply font-sans antialiased text-neutral-900;
-    background: #F5E8E3;
+    background: #F3E6E1;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -88,18 +88,18 @@
    ============================================ */
 
 @layer components {
-  /* Container */
+  /* Container — inside shell, no extra horizontal padding (shell handles it) */
   .container-wide {
-    @apply mx-auto px-6 sm:px-8 lg:px-16 max-w-8xl;
+    @apply mx-auto px-7 sm:px-10 lg:px-14 max-w-8xl;
   }
 
   .container-narrow {
-    @apply mx-auto px-6 sm:px-8 lg:px-16 max-w-5xl;
+    @apply mx-auto px-7 sm:px-10 lg:px-14 max-w-5xl;
   }
 
-  /* Section spacing */
+  /* Section spacing — inside the shell, no top-nav offset needed */
   .section-padding {
-    @apply py-20 sm:py-24 lg:py-32;
+    @apply py-16 sm:py-20 lg:py-24;
   }
 
   /* Editorial headline */
@@ -293,7 +293,15 @@
     background: linear-gradient(to right, transparent, rgba(0,0,0,0.07), transparent);
   }
 
-  /* Subtle dot-grid texture overlay */
+  /* Fine line-grid texture — very understated, editorial */
+  .fine-grid {
+    background-image:
+      linear-gradient(to right,  rgba(0,0,0,0.022) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.022) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Legacy dot-grid (keep for compat) */
   .dot-grid {
     background-image: radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px);
     background-size: 24px 24px;
