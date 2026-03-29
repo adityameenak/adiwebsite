@@ -4,17 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import { FiArrowUpRight } from 'react-icons/fi';
+import HeroPortrait from './HeroPortrait';
 
 /**
- * HeroChapter — editorial two-column hero.
+ * HeroChapter — editorial two-column hero with portrait background.
  *
- * Layout (desktop):
- *   Left: discipline strip → large display heading → subtitle → CTAs
- *   Right: identity card panel (school, focus, fellowship, links)
+ * Layers (bottom → top):
+ *   1. HeroPortrait   — SVG bust, 13% opacity, blurred, fades at edges
+ *   2. Grid content   — text, identity card
+ *   3. Stat strip     — bottom divider
  *
- * Bottom: horizontal stat strip with dividers.
- *
- * No typewriter. No centered layout. Strong typographic focal point.
+ * The portrait occupies the right half of the section and bleeds gently
+ * into the text area, creating depth without reducing readability.
  */
 export default function HeroChapter() {
   const reducedMotion = useReducedMotion();
@@ -38,13 +39,22 @@ export default function HeroChapter() {
   };
 
   return (
-    <section id="home" ref={ref} className="px-7 sm:px-10 lg:px-14 pt-14 pb-0 lg:pt-20">
+    <section
+      id="home"
+      ref={ref}
+      className="relative overflow-hidden px-7 sm:px-10 lg:px-14 pt-14 pb-0 lg:pt-20"
+    >
+      {/* ── Portrait background layer ── */}
+      <HeroPortrait />
+
+      {/* ── Content (above portrait) ── */}
       <motion.div
         variants={container}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
+        className="relative z-10"
       >
-        {/* ── Discipline strip ── */}
+        {/* Discipline strip */}
         <motion.div
           variants={fadeUp}
           className="flex flex-wrap items-center gap-x-3 gap-y-1.5 mb-12 lg:mb-16"
@@ -53,7 +63,7 @@ export default function HeroChapter() {
             'Chemical Engineering',
             'Semiconductors',
             'Materials Science',
-            'Texas A\u00A0A&M',
+            'Texas\u00A0A&M',
           ].map((tag, i, arr) => (
             <span key={tag} className="flex items-center gap-3">
               <span className="text-[13px] text-neutral-400 tracking-wide">{tag}</span>
@@ -64,12 +74,11 @@ export default function HeroChapter() {
           ))}
         </motion.div>
 
-        {/* ── Main two-column grid ── */}
+        {/* Main two-column grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] xl:grid-cols-[1fr_284px] gap-10 lg:gap-14 xl:gap-20 items-end mb-12 lg:mb-16">
 
           {/* Left — primary content */}
           <div>
-            {/* Large display heading */}
             <motion.h1
               variants={fadeUp}
               className="font-display font-medium tracking-tight leading-[0.92] text-neutral-900 mb-9"
@@ -79,7 +88,6 @@ export default function HeroChapter() {
               <em className="not-italic text-accent">Adi.</em>
             </motion.h1>
 
-            {/* Subtitle */}
             <motion.p
               variants={fadeUp}
               className="text-[17px] lg:text-[18px] text-neutral-500 font-light leading-relaxed max-w-[44ch] mb-10"
@@ -87,7 +95,6 @@ export default function HeroChapter() {
               {personalInfo.title}
             </motion.p>
 
-            {/* CTAs */}
             <motion.div variants={fadeUp} className="flex items-center gap-5 sm:gap-7">
               <button
                 onClick={() => navigate('/projects')}
@@ -113,7 +120,10 @@ export default function HeroChapter() {
           >
             <div
               className="rounded-2xl bg-white border border-neutral-200 overflow-hidden"
-              style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 6px 24px -6px rgba(0,0,0,0.06)' }}
+              style={{
+                boxShadow:
+                  '0 1px 3px rgba(0,0,0,0.04), 0 6px 24px -6px rgba(0,0,0,0.08)',
+              }}
             >
               {/* Status row */}
               <div className="flex items-center gap-2.5 px-5 py-4 border-b border-neutral-100">
@@ -161,7 +171,7 @@ export default function HeroChapter() {
           </motion.aside>
         </div>
 
-        {/* ── Horizontal stat strip ── */}
+        {/* Stat strip */}
         <motion.div
           variants={fadeUp}
           className="grid grid-cols-3 divide-x divide-neutral-200 border-t border-neutral-200 pt-8 pb-14 lg:pb-20"
