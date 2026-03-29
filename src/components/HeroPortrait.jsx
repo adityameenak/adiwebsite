@@ -1,296 +1,270 @@
-import { motion } from 'framer-motion';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 /**
  * HeroPortrait
  *
- * A hand-crafted SVG bust portrait rendered as a softly-faded background
- * element in the hero section. Uses warm editorial tones (blush, cream, warm
- * brown) that integrate with the shell palette.
+ * SVG editorial portrait — used as a background focal-point in the hero.
  *
- * Technique:
- *  - SVG paths with Bezier curves for organic shapes
- *  - Radial/linear gradient fills for soft volume
- *  - Internal SVG mask for top/bottom edge fade
- *  - CSS mask-image for left/right edge fade
- *  - CSS blur filter for impressionistic softening
- *  - ~13% opacity so typography stays clearly dominant
+ * Visibility decisions:
+ *  - opacity 0.28 instead of 0.13 (0.13 was invisible on warm-white bg)
+ *  - fill colors shifted to dark warm sepia (#2C1A10, #A07560) for real
+ *    contrast against the #FEFCF9 surface
+ *  - CSS blur reduced to 0.5px (just enough to soften edges, not erase)
+ *  - mask-image loosened so only the very edges fade out
  *
- * Easily replaced: swap the SVG content for a real <image> tag pointing to
- * a portrait photo and the layering/masking will continue to work correctly.
+ * Swap-in: replace the <g id="portrait"> content with an SVG <image>
+ * pointing to a real portrait photo and all the layering will carry over.
  */
-export default function HeroPortrait({ className = '' }) {
+export default function HeroPortrait() {
   const reducedMotion = useReducedMotion();
-
-  // Unique gradient IDs to avoid collisions if the component is used twice
-  const uid = 'hp_';
 
   return (
     <div
-      className={`absolute top-0 right-0 bottom-0 pointer-events-none select-none hidden md:block ${className}`}
+      className="absolute top-0 right-0 bottom-0 pointer-events-none select-none hidden md:block"
       style={{
-        width: '54%',
-        maxWidth: '620px',
-        opacity: 0.13,
-        /* Fade left edge (so it blends into text area) and
-           right edge (where the shell rounds) */
+        width: '58%',
+        maxWidth: '660px',
+        opacity: reducedMotion ? 0 : 0.28,
         maskImage:
-          'linear-gradient(to right, transparent 0%, black 22%, black 82%, transparent 100%)',
+          'linear-gradient(to right, transparent 0%, black 8%, black 94%, transparent 100%)',
         WebkitMaskImage:
-          'linear-gradient(to right, transparent 0%, black 22%, black 82%, transparent 100%)',
+          'linear-gradient(to right, transparent 0%, black 8%, black 94%, transparent 100%)',
       }}
       aria-hidden="true"
     >
-      <motion.svg
-        viewBox="0 0 400 620"
+      <svg
+        viewBox="0 0 420 640"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
-        style={{ filter: 'blur(1.8px)' }}
-        initial={reducedMotion ? false : { opacity: 0, scale: 1.02 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.4, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        style={{ filter: 'blur(0.5px)' }}
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          {/* ── Gradient fills ── */}
-          <radialGradient id={`${uid}gFace`} cx="50%" cy="44%" r="56%">
-            <stop offset="0%"   stopColor="#DDBFAC" />
-            <stop offset="55%"  stopColor="#CEA898" />
-            <stop offset="100%" stopColor="#BFA090" />
-          </radialGradient>
-
-          <radialGradient id={`${uid}gHair`} cx="50%" cy="28%" r="58%">
-            <stop offset="0%"   stopColor="#9A7468" />
-            <stop offset="100%" stopColor="#7A5E52" />
-          </radialGradient>
-
-          <radialGradient id={`${uid}gShoulder`} cx="50%" cy="30%" r="60%">
-            <stop offset="0%"   stopColor="#C8B0A4" />
-            <stop offset="100%" stopColor="#B89E94" />
-          </radialGradient>
-
-          <radialGradient id={`${uid}gNeck`} cx="50%" cy="40%" r="60%">
-            <stop offset="0%"   stopColor="#D8BAA8" />
-            <stop offset="100%" stopColor="#C4A898" />
-          </radialGradient>
-
-          <linearGradient id={`${uid}gLip`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stopColor="#C49898" />
-            <stop offset="100%" stopColor="#B48888" />
-          </linearGradient>
-
-          {/* ── Top + bottom fade mask ── */}
-          <linearGradient id={`${uid}vFade`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stopColor="white" stopOpacity="0" />
-            <stop offset="8%"  stopColor="white" stopOpacity="1" />
-            <stop offset="80%" stopColor="white" stopOpacity="1" />
+          {/* ─── Top/bottom fade ─── */}
+          <linearGradient id="phVFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stopColor="white" stopOpacity="0" />
+            <stop offset="6%"   stopColor="white" stopOpacity="1" />
+            <stop offset="82%"  stopColor="white" stopOpacity="1" />
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </linearGradient>
-          <mask id={`${uid}fade`}>
-            <rect width="400" height="620" fill={`url(#${uid}vFade)`} />
+          <mask id="phFade">
+            <rect width="420" height="640" fill="url(#phVFade)" />
           </mask>
+
+          {/* ─── Fill gradients ─── */}
+          {/* Hair — deep warm brown */}
+          <radialGradient id="phHair" cx="50%" cy="30%" r="60%">
+            <stop offset="0%"   stopColor="#2C1A10" />
+            <stop offset="100%" stopColor="#1E1008" />
+          </radialGradient>
+
+          {/* Face — medium warm brown for contrast on cream bg */}
+          <radialGradient id="phFace" cx="50%" cy="42%" r="55%">
+            <stop offset="0%"   stopColor="#C09078" />
+            <stop offset="60%"  stopColor="#A87860" />
+            <stop offset="100%" stopColor="#906858" />
+          </radialGradient>
+
+          {/* Neck/shoulders — slightly darker */}
+          <radialGradient id="phNeck" cx="50%" cy="35%" r="60%">
+            <stop offset="0%"   stopColor="#B08878" />
+            <stop offset="100%" stopColor="#986868" />
+          </radialGradient>
+
+          {/* Shoulder body — darkest zone for grounding */}
+          <radialGradient id="phBody" cx="50%" cy="20%" r="70%">
+            <stop offset="0%"   stopColor="#785848" />
+            <stop offset="100%" stopColor="#604838" />
+          </radialGradient>
         </defs>
 
-        {/* ── All shapes sit inside the fade mask ── */}
-        <g mask={`url(#${uid}fade)`}>
+        <g mask="url(#phFade)">
 
-          {/* ────────────────────────────────────────
-              SHOULDERS / BODY BASE
-          ──────────────────────────────────────── */}
-          <ellipse cx="200" cy="585" rx="230" ry="90" fill={`url(#${uid}gShoulder)`} />
+          {/* ─────────────────────────────────────────
+              BODY / SHOULDERS
+          ───────────────────────────────────────── */}
+          {/* Wide torso base */}
+          <ellipse cx="210" cy="610" rx="250" ry="100" fill="url(#phBody)" />
 
-          {/* Shirt / clothing suggestion */}
+          {/* Clothing/shirt shape */}
           <path
-            d="M 30 620 C 40 550 80 510 120 495 L 140 510 L 200 490 L 260 510 L 280 495 C 320 510 360 550 370 620 Z"
-            fill="#B8A49C"
-            opacity="0.7"
+            d="M 20 640 C 30 570 75 530 120 515
+               L 148 530 L 210 508 L 272 530 L 300 515
+               C 345 530 390 570 400 640 Z"
+            fill="#604838"
+            opacity="0.85"
           />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               NECK
-          ──────────────────────────────────────── */}
+          ───────────────────────────────────────── */}
           <path
-            d="M 172 418 C 168 445 166 462 165 478
-               C 174 487 200 490 200 490
-               C 200 490 226 487 235 478
-               C 234 462 232 445 228 418 Z"
-            fill={`url(#${uid}gNeck)`}
+            d="M 185 422 C 180 450 178 468 176 486
+               C 186 496 210 500 210 500
+               C 210 500 234 496 244 486
+               C 242 468 240 450 235 422 Z"
+            fill="url(#phNeck)"
           />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               FACE
-              Organic bezier — wider at cheeks, tapers to chin
-          ──────────────────────────────────────── */}
+              Organic bezier — widest at cheekbones
+          ───────────────────────────────────────── */}
           <path
-            d="M 200 135
-               C 250 135 298 162 306 210
-               C 314 255 312 295 305 330
-               C 296 365 272 400 200 408
-               C 128 400 104 365 95 330
-               C 88 295 86 255 94 210
-               C 102 162 150 135 200 135 Z"
-            fill={`url(#${uid}gFace)`}
+            d="M 210 140
+               C 265 140 316 168 322 220
+               C 328 268 326 310 318 346
+               C 308 384 282 414 210 420
+               C 138 414 112 384 102 346
+               C 94 310 92 268 98 220
+               C 104 168 155 140 210 140 Z"
+            fill="url(#phFace)"
           />
 
-          {/* Jaw / chin highlight */}
-          <ellipse cx="200" cy="388" rx="50" ry="22" fill="#C8A898" opacity="0.4" />
+          {/* Chin / jaw definition */}
+          <ellipse cx="210" cy="400" rx="54" ry="22" fill="#906858" opacity="0.5" />
 
-          {/* Cheekbone subtle warmth */}
-          <ellipse cx="140" cy="295" rx="32" ry="22" fill="#D8B8A8" opacity="0.35" />
-          <ellipse cx="260" cy="295" rx="32" ry="22" fill="#D8B8A8" opacity="0.35" />
+          {/* Cheekbone warmth */}
+          <ellipse cx="148" cy="305" rx="34" ry="24" fill="#C0907A" opacity="0.4" />
+          <ellipse cx="272" cy="305" rx="34" ry="24" fill="#C0907A" opacity="0.4" />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               EARS
-          ──────────────────────────────────────── */}
+          ───────────────────────────────────────── */}
           <path
-            d="M 87 258 C 74 248 68 268 70 285 C 72 302 82 310 92 304"
-            fill="#C8A898" stroke="#B89888" strokeWidth="1" />
+            d="M 95 268 C 80 256 74 274 76 292
+               C 78 310 90 318 100 312"
+            fill="#A07868" stroke="#906858" strokeWidth="1"
+          />
           <path
-            d="M 313 258 C 326 248 332 268 330 285 C 328 302 318 310 308 304"
-            fill="#C8A898" stroke="#B89888" strokeWidth="1" />
+            d="M 325 268 C 340 256 346 274 344 292
+               C 342 310 330 318 320 312"
+            fill="#A07868" stroke="#906858" strokeWidth="1"
+          />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               HAIR
-              Main volume on top, flowing down sides
-          ──────────────────────────────────────── */}
+          ───────────────────────────────────────── */}
+          {/* Main dome */}
+          <ellipse cx="210" cy="100" rx="132" ry="76" fill="url(#phHair)" />
 
-          {/* Hair top mass */}
+          {/* Hair-to-face transition (fills the upper face curve) */}
           <path
-            d="M 200 135
-               C 150 135 108 148 92 168
-               C 76 188 72 215 75 238
-               C 82 222 86 208 90 200
-               C 94 185 102 165 115 153
-               C 128 140 162 124 200 122
-               C 238 124 272 140 285 153
-               C 298 165 306 185 310 200
-               C 314 208 318 222 325 238
-               C 328 215 324 188 308 168
-               C 292 148 250 135 200 135 Z"
-            fill={`url(#${uid}gHair)`}
+            d="M 210 140
+               C 155 140 110 155 98 190
+               C 88 178 84 155 90 138
+               C 104 98 152 68 210 64
+               C 268 68 316 98 330 138
+               C 336 155 332 178 322 190
+               C 310 155 265 140 210 140 Z"
+            fill="url(#phHair)"
           />
 
-          {/* Hair crown arch — the dome of the head above the face line */}
-          <ellipse cx="200" cy="108" rx="122" ry="68" fill={`url(#${uid}gHair)`} />
-
-          {/* Hair left side flow */}
+          {/* Left side hair flow */}
           <path
-            d="M 88 200 C 72 238 66 275 68 315
-               C 74 300 80 280 84 258
-               C 86 240 87 220 88 200 Z"
-            fill="#8A6858"
+            d="M 96 210 C 78 248 72 288 76 332
+               C 82 315 88 294 92 268
+               C 94 248 95 228 96 210 Z"
+            fill="#281408"
           />
 
-          {/* Hair right side flow */}
+          {/* Right side hair flow */}
           <path
-            d="M 312 200 C 328 238 334 275 332 315
-               C 326 300 320 280 316 258
-               C 314 240 313 220 312 200 Z"
-            fill="#8A6858"
+            d="M 324 210 C 342 248 348 288 344 332
+               C 338 315 332 294 328 268
+               C 326 248 325 228 324 210 Z"
+            fill="#281408"
           />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               EYEBROWS
-          ──────────────────────────────────────── */}
+          ───────────────────────────────────────── */}
           <path
-            d="M 135 205 C 145 199 158 197 170 202"
-            stroke="#7A5E52" strokeWidth="3.5" fill="none"
-            strokeLinecap="round"
+            d="M 142 210 C 154 203 168 201 180 206"
+            stroke="#281408" strokeWidth="4"
+            fill="none" strokeLinecap="round"
           />
           <path
-            d="M 230 202 C 242 197 255 199 265 205"
-            stroke="#7A5E52" strokeWidth="3.5" fill="none"
-            strokeLinecap="round"
+            d="M 240 206 C 252 201 266 203 278 210"
+            stroke="#281408" strokeWidth="4"
+            fill="none" strokeLinecap="round"
           />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               EYES
-          ──────────────────────────────────────── */}
-
-          {/* Left eye socket + lid */}
+          ───────────────────────────────────────── */}
+          {/* Left eye */}
           <path
-            d="M 133 222 C 142 213 162 212 172 222
-               C 162 231 142 231 133 222 Z"
-            fill="#7A5E52"
+            d="M 142 228 C 152 218 170 217 180 228
+               C 170 238 152 238 142 228 Z"
+            fill="#4A3028"
           />
-          {/* Left iris */}
-          <circle cx="152" cy="221" r="7.5" fill="#4A3830" />
-          {/* Left highlight */}
-          <circle cx="155" cy="219" r="2.2" fill="white" opacity="0.45" />
+          <circle cx="161" cy="227" r="8" fill="#1C0E08" />
+          <circle cx="164" cy="224" r="2.5" fill="white" opacity="0.5" />
 
-          {/* Right eye socket + lid */}
+          {/* Right eye */}
           <path
-            d="M 228 222 C 238 212 258 213 267 222
-               C 258 231 238 231 228 222 Z"
-            fill="#7A5E52"
+            d="M 240 228 C 250 217 268 218 278 228
+               C 268 238 250 238 240 228 Z"
+            fill="#4A3028"
           />
-          {/* Right iris */}
-          <circle cx="248" cy="221" r="7.5" fill="#4A3830" />
-          {/* Right highlight */}
-          <circle cx="251" cy="219" r="2.2" fill="white" opacity="0.45" />
+          <circle cx="259" cy="227" r="8" fill="#1C0E08" />
+          <circle cx="262" cy="224" r="2.5" fill="white" opacity="0.5" />
 
-          {/* ────────────────────────────────────────
+          {/* ─────────────────────────────────────────
               NOSE
-          ──────────────────────────────────────── */}
+          ───────────────────────────────────────── */}
           <path
-            d="M 200 238
-               C 197 255 192 272 188 280
-               C 192 286 200 289 200 289
-               C 200 289 208 286 212 280
-               C 208 272 203 255 200 238 Z"
-            fill="#B89888"
-            opacity="0.5"
+            d="M 210 248 C 207 268 201 286 197 296
+               C 204 303 210 306 210 306
+               C 210 306 216 303 223 296
+               C 219 286 213 268 210 248 Z"
+            fill="#906858" opacity="0.6"
           />
-          {/* Nostrils hint */}
-          <path
-            d="M 186 282 C 182 285 180 288 182 291 C 184 294 188 292 190 289"
-            fill="#A88878" opacity="0.4"
-          />
-          <path
-            d="M 214 282 C 218 285 220 288 218 291 C 216 294 212 292 210 289"
-            fill="#A88878" opacity="0.4"
-          />
+          {/* Nostril hints */}
+          <path d="M 195 298 C 190 302 189 306 191 310 C 194 313 198 311 200 307"
+                fill="#806050" opacity="0.5" />
+          <path d="M 225 298 C 230 302 231 306 229 310 C 226 313 222 311 220 307"
+                fill="#806050" opacity="0.5" />
 
-          {/* ────────────────────────────────────────
-              MOUTH / LIPS
-          ──────────────────────────────────────── */}
-
-          {/* Upper lip — M-shaped cupid's bow */}
+          {/* ─────────────────────────────────────────
+              MOUTH
+          ───────────────────────────────────────── */}
+          {/* Upper lip (cupid's bow) */}
           <path
-            d="M 168 328
-               C 174 323 183 320 191 322
-               C 196 318 204 318 209 322
-               C 217 320 226 323 232 328
-               C 226 334 218 338 210 336
-               C 207 339 200 341 200 341
-               C 200 341 193 339 190 336
-               C 182 338 174 334 168 328 Z"
-            fill={`url(#${uid}gLip)`}
+            d="M 178 344
+               C 185 338 195 335 203 337
+               C 207 333 213 333 217 337
+               C 225 335 235 338 242 344
+               C 235 352 226 356 218 354
+               C 215 358 210 360 210 360
+               C 210 360 205 358 202 354
+               C 194 356 185 352 178 344 Z"
+            fill="#A07070"
           />
-
           {/* Lower lip */}
           <path
-            d="M 168 328 C 174 342 185 349 200 350 C 215 349 226 342 232 328"
-            stroke="#B09090" strokeWidth="0.8" fill="none"
+            d="M 178 344 C 185 358 196 364 210 365 C 224 364 235 358 242 344"
+            stroke="#907060" strokeWidth="0.8" fill="none"
           />
-
-          {/* Lip separator line */}
+          {/* Lip centre line */}
           <path
-            d="M 171 330 C 185 335 200 337 229 330"
-            stroke="#A08080" strokeWidth="1.5" fill="none"
-            strokeLinecap="round" opacity="0.6"
+            d="M 181 347 C 195 352 210 354 239 347"
+            stroke="#906060" strokeWidth="1.8"
+            fill="none" strokeLinecap="round" opacity="0.7"
           />
 
-          {/* ────────────────────────────────────────
-              PHILTRUM (subtle vertical groove above lips)
-          ──────────────────────────────────────── */}
+          {/* ─────────────────────────────────────────
+              PHILTRUM
+          ───────────────────────────────────────── */}
           <path
-            d="M 195 302 L 193 322 M 205 302 L 207 322"
-            stroke="#B89888" strokeWidth="0.8" fill="none" opacity="0.3"
+            d="M 205 316 L 203 338 M 215 316 L 217 338"
+            stroke="#906858" strokeWidth="0.8"
+            fill="none" opacity="0.35"
           />
 
-        </g>{/* end fade mask group */}
-      </motion.svg>
+        </g>{/* /phFade mask */}
+      </svg>
     </div>
   );
 }
