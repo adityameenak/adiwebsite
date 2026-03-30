@@ -15,11 +15,11 @@ export const experience = [
   {
     id: 5,
     role: "TEX-E Fellow",
-    company: "Texas Exchange for Energy & Climate Entrepreneurship (TEX-E)",
-    period: "2026 - Present",
+    company: "Texas Energy & Entrepreneurship (TEX-E)",
+    period: "Jan 2026 - Present",
     description: [
-      "Selected for fellowship focused on energy and climate entrepreneurship at the intersection of technology and policy",
-      "Collaborating with peers and mentors to translate technical energy innovations into scalable, real-world solutions"
+      "Selected as a Fellow exploring commercialization of emerging energy technologies at the intersection of chemical engineering and entrepreneurship",
+      "Building cross-sector partnerships between academia, industry, and investors to accelerate commercialization pathways for emerging energy technologies including advanced materials and process innovations"
     ],
     tags: ["Energy", "Climate", "Entrepreneurship", "Fellowship"]
   },

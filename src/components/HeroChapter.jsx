@@ -392,7 +392,7 @@ export default function HeroChapter() {
       {/* Main content */}
       <div
         ref={contentRef}
-        className="relative px-7 sm:px-10 lg:px-14 pt-12 pb-0"
+        className="relative px-7 sm:px-10 lg:px-14 pt-12 pb-16 lg:pb-20"
         style={{ zIndex: 10 }}
       >
         <motion.div
@@ -474,29 +474,6 @@ export default function HeroChapter() {
             </motion.div>
           </motion.div>
 
-          {/* Stat strip */}
-          <motion.div
-            variants={fadeUp}
-            className="grid grid-cols-3 divide-x divide-neutral-200 border-t border-neutral-200 mt-20 lg:mt-24 xl:mt-28 pt-7 pb-12 lg:pb-16"
-          >
-            {[
-              { value: '2+', label: 'Years Research' },
-              { value: 'Semis', label: 'Focus Area' },
-              { value: '2028', label: 'Class Of' },
-            ].map(({ value, label }, i) => (
-              <div
-                key={label}
-                className={i === 0 ? 'pr-6 sm:pr-10' : i === 1 ? 'px-6 sm:px-10' : 'pl-6 sm:pl-10'}
-              >
-                <p className="text-[22px] lg:text-[26px] font-bold text-neutral-900 leading-tight tracking-tight">
-                  {value}
-                </p>
-                <p className="text-[10.5px] text-neutral-400 mt-1 tracking-widest uppercase">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
     </section>
