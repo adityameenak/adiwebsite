@@ -353,26 +353,6 @@ export default function HeroChapter() {
       {/* Portrait — real photo as background focal point */}
       <PortraitFocal motionX={portraitX} motionY={portraitY} reducedMotion={reducedMotion} />
 
-      {/* Floating status badge */}
-      <motion.div
-        variants={fadeIn}
-        initial="hidden"
-        animate="visible"
-        className="absolute top-12 right-7 sm:right-10 lg:right-14 hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full"
-        style={{
-          zIndex: 15,
-          background: 'rgba(255,255,255,0.76)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(140,120,110,0.14)',
-          boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-        }}
-      >
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
-        <span className="text-[11px] font-medium text-neutral-600 tracking-wide">
-          Open to opportunities
-        </span>
-      </motion.div>
 
       {/* Frosted identity card — bottom right */}
       <motion.div
@@ -457,8 +437,8 @@ export default function HeroChapter() {
             {/* Name — display serif with typewriter */}
             <motion.h1
               variants={fadeUp}
-              className="font-display tracking-tight leading-[0.88] text-neutral-900 mb-8"
-              style={{ fontSize: 'clamp(64px, 8.6vw, 132px)', minHeight: '2.2em', fontWeight: 800 }}
+              className="font-heading leading-[0.90] text-neutral-900 mb-8"
+              style={{ fontSize: 'clamp(64px, 8.6vw, 132px)', minHeight: '2.2em', fontWeight: 800, letterSpacing: '-0.025em' }}
             >
               <TypedHeadline displayed={displayed} cursorVisible={cursorVisible} />
             </motion.h1>

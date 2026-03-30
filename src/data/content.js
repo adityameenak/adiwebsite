@@ -97,7 +97,7 @@ export const projects = [
     tags: ["Python", "Streamlit", "Analytics"],
     category: "sustainability",
     featured: true,
-    status: "Completed",
+    status: "Live",
     demoUrl: "https://iqsolar.streamlit.app/",
     githubUrl: null,
   },
