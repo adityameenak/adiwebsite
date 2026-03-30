@@ -20,6 +20,7 @@ export default function SparseHeader() {
   const navLinks = [
     { label: 'Projects',   href: '/projects',    isRoute: true },
     { label: 'Experience', href: '/experience',  isRoute: true },
+    { label: 'Contact',    href: '/contact',     isRoute: true },
     { label: 'Resume',     href: RESUME_PDF,      external: true },
   ];
 
