@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { about, education, awards } from '../data/content';
+import { about, education } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 /**
@@ -111,46 +111,10 @@ export default function About() {
                 <div className="flex items-center gap-4 text-sm text-neutral-400">
                   <span className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    GPA: {education.gpa}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {education.graduationDate}
                   </span>
                 </div>
               </div>
-            </motion.div>
-
-            {/* Awards / Highlights Card */}
-            <motion.div
-              variants={itemVariants}
-              className="rounded-2xl p-6 lg:p-8 bg-white border border-neutral-200
-                       hover:border-accent/30 hover:shadow-soft transition-all duration-300"
-            >
-              <h3 className="text-lg font-heading font-semibold text-neutral-900 mb-4">Highlights</h3>
-
-              <ul className="space-y-4">
-                {awards.map((award) => (
-                  <li key={award.id} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-accent-subtle flex items-center justify-center flex-shrink-0 mt-0.5 border border-accent/20">
-                      <svg className="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                        />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="font-medium text-neutral-900">{award.title}</p>
-                      <p className="text-sm text-neutral-400 mt-0.5">
-                        {award.description} · {award.date}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
             </motion.div>
 
             {/* Stats */}

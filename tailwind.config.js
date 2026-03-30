@@ -36,11 +36,11 @@ export default {
          * SEM monitor displays, and process-tool interfaces.
          */
         accent: {
-          DEFAULT: '#1D6FA4',  // deep muted steel blue
-          light:   '#4D9CC7',  // lighter blue
-          dark:    '#155D8A',  // deeper
-          muted:   '#BAD9EF',  // very light blue (badge backgrounds)
-          subtle:  '#EBF4FB',  // near-white blue tint
+          DEFAULT: '#500000',  // Texas A&M maroon
+          light:   '#7A1818',  // lighter maroon
+          dark:    '#3A0000',  // deeper maroon
+          muted:   '#D4AAAA',  // very light maroon (badge backgrounds)
+          subtle:  '#F5ECEC',  // near-white maroon tint
         },
 
         /**
@@ -114,7 +114,7 @@ export default {
         'card':    '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
         'soft':    '0 4px 16px -4px rgb(0 0 0 / 0.08)',
         'soft-lg': '0 8px 32px -8px rgb(0 0 0 / 0.10)',
-        'glow':    '0 0 0 1px rgb(29 111 164 / 0.15), 0 4px 16px -4px rgb(29 111 164 / 0.12)',
+        'glow':    '0 0 0 1px rgb(80 0 0 / 0.12), 0 4px 16px -4px rgb(80 0 0 / 0.10)',
       },
 
       animation: {

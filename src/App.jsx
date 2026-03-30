@@ -18,7 +18,7 @@ function App() {
   return (
     <LenisProvider>
       {/* Blush outer canvas */}
-      <div className="min-h-screen" style={{ background: '#F3E6E1' }}>
+      <div className="min-h-screen" style={{ background: '#E8E4E0' }}>
         {/* Rounded main shell */}
         <div className="px-3 sm:px-5 lg:px-9 pt-3 pb-8">
           <div
