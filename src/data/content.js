@@ -13,6 +13,17 @@ export const about = {
 
 export const experience = [
   {
+    id: 5,
+    role: "TEX-E Fellow",
+    company: "Texas Exchange for Energy & Climate Entrepreneurship (TEX-E)",
+    period: "2026 - Present",
+    description: [
+      "Selected for fellowship focused on energy and climate entrepreneurship at the intersection of technology and policy",
+      "Collaborating with peers and mentors to translate technical energy innovations into scalable, real-world solutions"
+    ],
+    tags: ["Energy", "Climate", "Entrepreneurship", "Fellowship"]
+  },
+  {
     id: 1,
     role: "Samsung Semiconductor Undergraduate Fellow",
     company: "Samsung Austin Semiconductor",
