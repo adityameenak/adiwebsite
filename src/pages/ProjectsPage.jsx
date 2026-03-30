@@ -1,13 +1,12 @@
 import { LenisProvider } from '../hooks/useLenis';
 import SparseHeader from '../components/SparseHeader';
 import ProjectsChapter from '../components/ProjectsChapter';
-import Writing from '../components/Writing';
 import FooterContact from '../components/FooterContact';
 
 export default function ProjectsPage() {
   return (
     <LenisProvider>
-      <div className="min-h-screen" style={{ background: '#F3E6E1' }}>
+      <div className="min-h-screen" style={{ background: '#E8E4E0' }}>
         <div className="px-3 sm:px-5 lg:px-9 pt-3 pb-8">
           <div
             className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden fine-grid"
@@ -21,7 +20,6 @@ export default function ProjectsPage() {
             <SparseHeader />
             <main>
               <ProjectsChapter />
-              <Writing />
               <FooterContact />
             </main>
           </div>

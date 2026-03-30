@@ -457,8 +457,8 @@ export default function HeroChapter() {
             {/* Name — display serif with typewriter */}
             <motion.h1
               variants={fadeUp}
-              className="font-display font-medium tracking-tight leading-[0.88] text-neutral-900 mb-8"
-              style={{ fontSize: 'clamp(64px, 8.6vw, 132px)', minHeight: '2.2em' }}
+              className="font-display tracking-tight leading-[0.88] text-neutral-900 mb-8"
+              style={{ fontSize: 'clamp(64px, 8.6vw, 132px)', minHeight: '2.2em', fontWeight: 800 }}
             >
               <TypedHeadline displayed={displayed} cursorVisible={cursorVisible} />
             </motion.h1>

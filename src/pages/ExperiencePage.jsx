@@ -6,7 +6,7 @@ import FooterContact from '../components/FooterContact';
 export default function ExperiencePage() {
   return (
     <LenisProvider>
-      <div className="min-h-screen" style={{ background: '#F3E6E1' }}>
+      <div className="min-h-screen" style={{ background: '#E8E4E0' }}>
         <div className="px-3 sm:px-5 lg:px-9 pt-3 pb-8">
           <div
             className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden fine-grid"

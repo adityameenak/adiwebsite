@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-const RESUME_PDF = '/resume.pdf';
+const RESUME_PDF = '/AdityaMeenakshiResume.pdf';
 
 /**
  * SparseHeader — minimal in-shell header.
@@ -20,7 +20,6 @@ export default function SparseHeader() {
   const navLinks = [
     { label: 'Projects',   href: '/projects',    isRoute: true },
     { label: 'Experience', href: '/experience',  isRoute: true },
-    { label: 'Writing',    href: location.pathname === '/projects' ? '#writing' : '/projects' },
     { label: 'Resume',     href: RESUME_PDF,      external: true },
   ];
 

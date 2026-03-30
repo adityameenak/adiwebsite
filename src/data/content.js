@@ -101,6 +101,18 @@ export const projects = [
     demoUrl: "https://iqsolar.streamlit.app/",
     githubUrl: null,
   },
+  {
+    id: 4,
+    title: "Substack",
+    description: "Long-form writing on semiconductors, sustainable energy, and emerging technologies — covering topics like advanced packaging, quantum computing, and digital twins.",
+    shortDescription: "Writing on semiconductors, sustainable energy, and emerging tech — 400+ monthly readers on Substack.",
+    tags: ["Writing", "Semiconductors", "Sustainability"],
+    category: "writing",
+    featured: true,
+    status: "Live",
+    demoUrl: "https://adimeenak.substack.com/",
+    githubUrl: null,
+  },
 ];
 
 // Project filter categories
@@ -108,6 +120,7 @@ export const projectCategories = [
   { id: 'all', label: 'All Projects' },
   { id: 'web', label: 'Web' },
   { id: 'sustainability', label: 'Sustainability' },
+  { id: 'writing', label: 'Writing' },
 ];
 
 export const writing = {

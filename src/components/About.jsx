@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { about, education } from '../data/content';
+import { about } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 /**
@@ -43,10 +43,10 @@ export default function About() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12"
         >
-          {/* Left column – Main content */}
-          <div className="lg:col-span-7">
+          {/* Main content — full width */}
+          <div className="lg:col-span-12 lg:max-w-3xl">
             <motion.p
               variants={itemVariants}
               className="text-sm font-medium text-accent tracking-wide uppercase mb-4"
@@ -86,44 +86,6 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Right column – Education & Awards */}
-          <div className="lg:col-span-5 space-y-5">
-            {/* Education Card */}
-            <motion.div
-              variants={itemVariants}
-              className="relative rounded-2xl p-6 lg:p-8 overflow-hidden group
-                       bg-white border border-neutral-200
-                       hover:border-accent/30 hover:shadow-soft transition-all duration-300"
-            >
-              {/* Accent top bar */}
-              <div className="absolute top-0 left-0 right-0 h-[3px] rounded-t-2xl bg-gradient-to-r from-accent/60 via-accent to-accent/60" />
-
-              <h3 className="text-lg font-heading font-semibold text-neutral-900 mb-4">Education</h3>
-
-              <div className="space-y-3">
-                <div>
-                  <p className="text-xl font-semibold text-neutral-900">{education.school}</p>
-                  <p className="text-neutral-500 mt-0.5">
-                    {education.degree} in {education.major}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-4 text-sm text-neutral-400">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    {education.graduationDate}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div variants={itemVariants} className="grid grid-cols-3 gap-4">
-              <StatCard value="2+" label="Years Research" />
-              <StatCard value="Semis" label="Focus" />
-              <StatCard value="2028" label="Class" />
-            </motion.div>
-          </div>
         </motion.div>
       </div>
 
@@ -132,17 +94,3 @@ export default function About() {
   );
 }
 
-/**
- * StatCard – light stat display
- */
-function StatCard({ value, label }) {
-  return (
-    <div
-      className="rounded-xl p-5 text-center bg-white border border-neutral-200
-                 hover:border-accent/30 hover:shadow-sm transition-all duration-200"
-    >
-      <p className="text-2xl lg:text-3xl font-heading font-bold text-accent mb-1">{value}</p>
-      <p className="text-sm text-neutral-400">{label}</p>
-    </div>
-  );
-}
