@@ -196,7 +196,7 @@ function ProjectCard({ project, reducedMotion }) {
           {/* Top row — category + status */}
           <div className="flex items-center justify-between mb-4">
             <span className="text-xs font-medium text-neutral-400 uppercase tracking-wide">
-              {project.category}
+              {project.type || project.category}
             </span>
             {project.status && <StatusBadge status={project.status} />}
           </div>
