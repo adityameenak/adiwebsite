@@ -18,7 +18,7 @@ export const experience = [
     company: "Samsung Austin Semiconductor",
     period: "May 2026 - Present",
     description: [
-      "Joined the photolithography innovation and metrology team — just getting started and ramping up on processes and tools.",
+      "Joined the photo innovation DX and Metrology team — just getting started and ramping up on processes and tools.",
     ],
     tags: ["Photolithography", "Metrology", "Semiconductor Fabrication"]
   },
