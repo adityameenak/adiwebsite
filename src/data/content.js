@@ -13,6 +13,16 @@ export const about = {
 
 export const experience = [
   {
+    id: 6,
+    role: "Fabrication Engineering Intern",
+    company: "Samsung Austin Semiconductor",
+    period: "May 2026 - Present",
+    description: [
+      "Joined the photolithography innovation and metrology team — just getting started and ramping up on processes and tools.",
+    ],
+    tags: ["Photolithography", "Metrology", "Semiconductor Fabrication"]
+  },
+  {
     id: 5,
     role: "TEX-E Fellow",
     company: "Texas Energy & Entrepreneurship (TEX-E)",
