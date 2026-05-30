@@ -7,16 +7,23 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Bodoni Moda"', '"Playfair Display"', 'Georgia', 'serif'],
-        heading: ['"DM Sans"', '"Inter"', 'system-ui', 'sans-serif'],
-        sans:    ['"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+        // Inter is the sole display and body font (Plain Black substitute per DESIGN.md)
+        display: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans:    ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         mono:    ['"JetBrains Mono"', '"SF Mono"', 'Consolas', 'monospace'],
       },
 
       fontSize: {
+        // Clay display scale
+        'display-xl': ['72px',  { lineHeight: '1.0',  letterSpacing: '-2.5px' }],
+        'display-lg': ['56px',  { lineHeight: '1.05', letterSpacing: '-2px'   }],
+        'display-md': ['40px',  { lineHeight: '1.1',  letterSpacing: '-1px'   }],
+        'display-sm': ['32px',  { lineHeight: '1.15', letterSpacing: '-0.5px' }],
+        // Legacy large sizes kept for compatibility
         '7xl': ['4.5rem', { lineHeight: '1.1' }],
-        '8xl': ['6rem',   { lineHeight: '1' }],
-        '9xl': ['8rem',   { lineHeight: '1' }],
+        '8xl': ['6rem',   { lineHeight: '1'   }],
+        '9xl': ['8rem',   { lineHeight: '1'   }],
       },
 
       letterSpacing: {
@@ -30,24 +37,49 @@ export default {
       },
 
       colors: {
-        /**
-         * Accent — deep steel blue, calibrated for warm light backgrounds.
-         * Referencing the blue-gray of silicon wafer inspection optics,
-         * SEM monitor displays, and process-tool interfaces.
-         */
-        accent: {
-          DEFAULT: '#500000',  // Texas A&M maroon
-          light:   '#7A1818',  // lighter maroon
-          dark:    '#3A0000',  // deeper maroon
-          muted:   '#D4AAAA',  // very light maroon (badge backgrounds)
-          subtle:  '#F5ECEC',  // near-white maroon tint
+        // ── Clay primary text tokens ──────────────────────────────────────────
+        ink:          '#0a0a0a',
+        body:         '#3a3a3a',
+        muted:        '#6a6a6a',
+        'muted-soft': '#9a9a9a',
+        hairline:     '#e5e5e5',
+        'hairline-soft': '#f0f0f0',
+
+        // ── Clay surface tokens ───────────────────────────────────────────────
+        canvas:          '#fffaf0',   // Main page floor
+        'surface-soft':  '#faf5e8',   // Footer, CTA bands
+        'surface-card':  '#f5f0e0',   // Experience cards, secondary cards
+        'surface-strong':'#ebe6d6',   // Emphasized bands
+        'surface-dark':  '#0a1a1a',   // Rare dark cards
+        'surface-dark-elevated': '#1a2a2a',
+
+        // ── Clay brand accent palette (feature cards) ─────────────────────────
+        brand: {
+          pink:    '#ff4d8b',
+          teal:    '#1a3a3a',
+          lavender:'#b8a4ed',
+          peach:   '#ffb084',
+          ochre:   '#e8b94a',
+          mint:    '#a4d4c5',
+          coral:   '#ff6b5a',
         },
 
-        /**
-         * Neutral — warm stone family (slightly warm undertone vs. pure gray).
-         * The warmth references bone, parchment, and cream-colored lab surfaces
-         * rather than cold tech-gray. The dark end anchors the footer.
-         */
+        // ── Semantic ──────────────────────────────────────────────────────────
+        success: '#22c55e',
+        warning: '#f59e0b',
+        error:   '#ef4444',
+
+        // ── accent mapped to Clay near-black primary ──────────────────────────
+        // Keeps existing Tailwind class names working throughout components.
+        accent: {
+          DEFAULT: '#0a0a0a',
+          light:   '#1f1f1f',
+          dark:    '#000000',
+          muted:   '#e5e5e5',
+          subtle:  '#faf5e8',
+        },
+
+        // ── Neutral — warm stone scale ────────────────────────────────────────
         neutral: {
           50:  '#FAFAF9',
           100: '#F5F5F4',
@@ -61,40 +93,15 @@ export default {
           900: '#1C1917',
           950: '#0C0A09',
         },
-
-        /**
-         * Canvas — warm bone/ivory page background.
-         * The tone of a high-quality technical paper or scientific journal page.
-         */
-        canvas: '#F4F1EC',
-
-        /**
-         * Blush — warm pink-beige outer page canvas.
-         * Soft, editorial, premium.
-         */
-        blush: {
-          DEFAULT: '#F5E8E3',
-          50:  '#FDF5F2',
-          100: '#F9EDE7',
-          200: '#F0D5CB',
-          300: '#E7BBAE',
-        },
-
-        /**
-         * Surface — warm off-white inner container.
-         */
-        surface: {
-          DEFAULT: '#FEFCF9',
-          warm:    '#F8F4EF',
-        },
       },
 
       spacing: {
-        '18':  '4.5rem',
-        '22':  '5.5rem',
-        '30':  '7.5rem',
-        '128': '32rem',
-        '144': '36rem',
+        '18':      '4.5rem',
+        '22':      '5.5rem',
+        '30':      '7.5rem',
+        '128':     '32rem',
+        '144':     '36rem',
+        'section': '96px',   // Clay section rhythm token
       },
 
       maxWidth: {
@@ -102,19 +109,28 @@ export default {
         '9xl': '96rem',
       },
 
+      // ── Clay border-radius scale ──────────────────────────────────────────
       borderRadius: {
-        '4xl': '2rem',
+        'xs':   '6px',
+        'sm':   '8px',
+        'md':   '12px',
+        'lg':   '16px',
+        'xl':   '24px',
+        'pill': '9999px',
+        'full': '9999px',
+        // Legacy alias kept so any leftover rounded-2xl still works
+        '2xl':  '1rem',
+        '4xl':  '2rem',
       },
 
-      /**
-       * Shadows — gentle elevation for cards on warm light background.
-       * No colored glow — that reads as decorative. These are functional shadows.
-       */
+      // ── Shadows — hairline-based, no heavy glows ──────────────────────────
       boxShadow: {
-        'card':    '0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
-        'soft':    '0 4px 16px -4px rgb(0 0 0 / 0.08)',
-        'soft-lg': '0 8px 32px -8px rgb(0 0 0 / 0.10)',
-        'glow':    '0 0 0 1px rgb(80 0 0 / 0.12), 0 4px 16px -4px rgb(80 0 0 / 0.10)',
+        'hairline': '0 0 0 1px #e5e5e5',
+        'soft':     '0 4px 16px -4px rgb(0 0 0 / 0.08)',
+        'soft-lg':  '0 8px 32px -8px rgb(0 0 0 / 0.10)',
+        // Legacy aliases
+        'card':     '0 0 0 1px #e5e5e5',
+        'glow':     '0 4px 16px -4px rgb(0 0 0 / 0.08)',
       },
 
       animation: {

@@ -6,11 +6,6 @@ import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const RESUME_PDF = '/AdityaMeenakshiResume.pdf';
 
-/**
- * SparseHeader — minimal in-shell header.
- * Lives inside the rounded container (not fixed).
- * Left: name + descriptor. Right: nav links + status pill + LinkedIn.
- */
 export default function SparseHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -18,10 +13,9 @@ export default function SparseHeader() {
   const location = useLocation();
 
   const navLinks = [
-    { label: 'Projects',   href: '/projects',    isRoute: true },
-    { label: 'Experience', href: '/experience',  isRoute: true },
-    { label: 'Contact',    href: '/contact',     isRoute: true },
-    { label: 'Resume',     href: RESUME_PDF,      external: true },
+    { label: 'Projects',   href: '/projects',   isRoute: true },
+    { label: 'Experience', href: '/experience', isRoute: true },
+    { label: 'Contact',    href: '/contact',    isRoute: true },
   ];
 
   const handleLinkClick = (e, link) => {
@@ -29,40 +23,52 @@ export default function SparseHeader() {
       e.preventDefault();
       navigate(link.href);
       setMobileOpen(false);
-    } else if (!link.external) {
+    } else {
       setMobileOpen(false);
     }
   };
 
+  const isActive = (href) => location.pathname === href;
+
   return (
-    <header className="relative flex items-center justify-between px-7 sm:px-10 lg:px-14 py-5 lg:py-6 border-b border-neutral-100/80">
-      {/* Left — identity */}
+    <header
+      style={{
+        background: '#fffaf0',
+        height: '64px',
+        borderBottom: '1px solid #e5e5e5',
+      }}
+      className="relative flex items-center justify-between px-6 sm:px-10 lg:px-14"
+    >
+      {/* Wordmark */}
       <a
         href="/"
         onClick={(e) => { e.preventDefault(); navigate('/'); }}
-        className="flex items-center gap-2.5 group select-none"
+        className="select-none"
+        style={{ fontSize: '15px', fontWeight: 600, color: '#0a0a0a', letterSpacing: 0 }}
       >
-        <span className="font-semibold text-[15px] text-neutral-900 group-hover:text-accent transition-colors duration-200">
-          Adi
-        </span>
-        <span className="text-neutral-300 hidden sm:block" aria-hidden>·</span>
-        <span className="text-[13px] text-neutral-400 hidden sm:block">
+        Adi
+        <span style={{ color: '#9a9a9a', margin: '0 8px', fontWeight: 400 }}>·</span>
+        <span style={{ fontSize: '13px', fontWeight: 500, color: '#6a6a6a' }} className="hidden sm:inline">
           Chemical Engineering
         </span>
       </a>
 
-      {/* Right — nav + status + social */}
-      <div className="flex items-center gap-4 sm:gap-5 lg:gap-6">
-        {/* Desktop nav links */}
-        <nav className="hidden md:flex items-center gap-5 lg:gap-7" aria-label="Primary">
+      {/* Right cluster */}
+      <div className="flex items-center gap-4 sm:gap-6">
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-6" aria-label="Primary">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              target={link.external ? '_blank' : undefined}
-              rel={link.external ? 'noopener noreferrer' : undefined}
               onClick={(e) => handleLinkClick(e, link)}
-              className="text-[13px] text-neutral-400 hover:text-neutral-900 transition-colors duration-200"
+              style={{
+                fontSize: '14px',
+                fontWeight: 500,
+                color: isActive(link.href) ? '#0a0a0a' : '#6a6a6a',
+                textDecoration: 'none',
+              }}
+              className="hover:text-ink transition-colors duration-150"
             >
               {link.label}
             </a>
@@ -70,27 +76,49 @@ export default function SparseHeader() {
         </nav>
 
         {/* Separator */}
-        <span className="hidden md:block w-px h-4 bg-neutral-200" aria-hidden />
+        <span className="hidden md:block" style={{ width: '1px', height: '16px', background: '#e5e5e5' }} aria-hidden />
 
         {/* Status pill */}
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-medium tracking-wide whitespace-nowrap">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <span className="hidden xs:inline">Available</span>
+        <span
+          className="hidden sm:inline-flex items-center gap-1.5"
+          style={{
+            padding: '4px 12px',
+            borderRadius: '9999px',
+            background: '#f5f0e0',
+            border: '1px solid #e5e5e5',
+            fontSize: '12px',
+            fontWeight: 600,
+            color: '#3a3a3a',
+          }}
+        >
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+          Available
         </span>
 
-        {/* LinkedIn */}
+        {/* Resume CTA */}
         <a
-          href={personalInfo.linkedin}
+          href={RESUME_PDF}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:block text-[13px] text-neutral-400 hover:text-neutral-900 transition-colors duration-200"
+          className="hidden md:inline-flex items-center justify-center"
+          style={{
+            height: '36px',
+            padding: '0 16px',
+            borderRadius: '8px',
+            background: '#0a0a0a',
+            color: '#ffffff',
+            fontSize: '13px',
+            fontWeight: 600,
+            textDecoration: 'none',
+          }}
         >
-          LinkedIn
+          Resume
         </a>
 
         {/* Mobile toggle */}
         <motion.button
-          className="md:hidden p-1 text-neutral-500 hover:text-neutral-900 transition-colors"
+          className="md:hidden p-1"
+          style={{ color: '#6a6a6a' }}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           whileTap={reducedMotion ? {} : { scale: 0.95 }}
@@ -104,35 +132,56 @@ export default function SparseHeader() {
         </motion.button>
       </div>
 
-      {/* Mobile dropdown — sits inside shell */}
+      {/* Mobile dropdown */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -6 }}
+            initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
+            exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 right-0 z-50 bg-surface border-b border-neutral-100 px-7 py-4 space-y-1"
-            style={{ background: '#FEFCF9' }}
+            className="absolute top-full left-0 right-0 z-50 px-6 py-4 space-y-1"
+            style={{
+              background: '#fffaf0',
+              borderBottom: '1px solid #e5e5e5',
+            }}
           >
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                target={link.external ? '_blank' : undefined}
-                rel={link.external ? 'noopener noreferrer' : undefined}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="block py-2.5 text-[15px] font-medium text-neutral-600 hover:text-accent transition-colors"
+                className="block py-2.5 transition-colors"
+                style={{ fontSize: '15px', fontWeight: 500, color: '#3a3a3a', textDecoration: 'none' }}
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 border-t border-neutral-100 mt-1 space-y-2.5">
-              <a href={`mailto:${personalInfo.email}`} className="block py-1 text-[13px] text-neutral-400 hover:text-neutral-900 transition-colors">
+            <a
+              href={RESUME_PDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block py-2.5 transition-colors"
+              style={{ fontSize: '15px', fontWeight: 500, color: '#3a3a3a', textDecoration: 'none' }}
+            >
+              Resume
+            </a>
+            <div style={{ borderTop: '1px solid #e5e5e5', marginTop: '8px', paddingTop: '12px' }} className="space-y-2">
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="block py-1 transition-colors"
+                style={{ fontSize: '13px', color: '#6a6a6a', textDecoration: 'none' }}
+              >
                 {personalInfo.email}
               </a>
-              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="block py-1 text-[13px] text-neutral-400 hover:text-neutral-900 transition-colors">
-                LinkedIn ↗
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block py-1 transition-colors"
+                style={{ fontSize: '13px', color: '#6a6a6a', textDecoration: 'none' }}
+              >
+                LinkedIn
               </a>
             </div>
           </motion.div>

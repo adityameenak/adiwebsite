@@ -30,83 +30,95 @@ function ContactSection() {
 
   const container = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: reducedMotion ? 0 : 0.09, delayChildren: 0.1 },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: reducedMotion ? 0 : 0.09, delayChildren: 0.05 } },
   };
 
   const fadeUp = reducedMotion
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
-    : {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-      };
+    ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
+    : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } };
 
   return (
-    <section ref={ref} id="contact" className="section-padding relative">
-      <div className="absolute top-0 inset-x-0 h-px section-divider" />
-
+    <section
+      ref={ref}
+      id="contact"
+      style={{
+        paddingTop: '96px',
+        paddingBottom: '96px',
+        background: '#fffaf0',
+      }}
+    >
       <div className="container-wide">
         <motion.div
           variants={container}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="max-w-lg"
+          style={{ maxWidth: '480px' }}
         >
-          {/* Label */}
           <motion.p
             variants={fadeUp}
-            className="text-sm font-medium text-accent tracking-wide uppercase mb-4"
+            style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '16px' }}
           >
             Contact
           </motion.p>
 
-          {/* Heading */}
           <motion.h2
             variants={fadeUp}
-            className="text-4xl lg:text-5xl font-heading font-bold text-neutral-900 mb-3"
+            style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 500, letterSpacing: '-2px', color: '#0a0a0a', marginBottom: '12px', lineHeight: 1.05 }}
           >
             Get in touch.
           </motion.h2>
 
-          {/* Subline */}
           <motion.p
             variants={fadeUp}
-            className="text-[16px] text-neutral-500 leading-relaxed mb-10"
+            style={{ fontSize: '16px', color: '#6a6a6a', lineHeight: 1.55, marginBottom: '40px' }}
           >
             Feel free to reach out for research opportunities, collaborations, or just to connect.
           </motion.p>
 
-          {/* Contact links */}
-          <motion.div variants={fadeUp} className="space-y-3">
+          <motion.div variants={fadeUp} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {CONTACT_LINKS.map(({ label, value, href, icon: Icon, external }) => (
               <a
                 key={label}
                 href={href}
                 target={external ? '_blank' : undefined}
                 rel={external ? 'noopener noreferrer' : undefined}
-                className="group flex items-center justify-between px-5 py-4 rounded-xl
-                           bg-white border border-neutral-200
-                           hover:border-accent/30 hover:shadow-soft
-                           transition-all duration-200"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '16px 20px',
+                  borderRadius: '16px',
+                  background: '#f5f0e0',
+                  border: '1px solid #e5e5e5',
+                  textDecoration: 'none',
+                  transition: 'border-color 0.15s',
+                }}
+                className="group hover:border-ink"
               >
-                <div className="flex items-center gap-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-accent-subtle flex items-center justify-center border border-accent/15 flex-shrink-0">
-                    <Icon className="w-4 h-4 text-accent" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div
+                    style={{
+                      width: '36px',
+                      height: '36px',
+                      borderRadius: '8px',
+                      background: '#ebe6d6',
+                      border: '1px solid #d6d0c4',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon style={{ width: '16px', height: '16px', color: '#6a6a6a' }} />
                   </div>
                   <div>
-                    <p className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest">
+                    <p style={{ fontSize: '11px', fontWeight: 600, color: '#9a9a9a', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '2px' }}>
                       {label}
                     </p>
-                    <p className="text-[13px] text-neutral-700 font-medium mt-0.5">{value}</p>
+                    <p style={{ fontSize: '13px', color: '#0a0a0a', fontWeight: 500 }}>{value}</p>
                   </div>
                 </div>
-                <FiArrowUpRight
-                  className="w-4 h-4 text-neutral-300 flex-shrink-0
-                             group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5
-                             transition-all duration-200"
-                />
+                <FiArrowUpRight style={{ width: '16px', height: '16px', color: '#9a9a9a', flexShrink: 0 }} />
               </a>
             ))}
           </motion.div>
@@ -119,24 +131,12 @@ function ContactSection() {
 export default function ContactPage() {
   return (
     <LenisProvider>
-      <div className="min-h-screen" style={{ background: '#E8E4E0' }}>
-        <div className="px-3 sm:px-5 lg:px-9 pt-3 pb-8">
-          <div
-            className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden fine-grid"
-            style={{
-              background: '#FEFCF9',
-              minHeight: 'calc(100vh - 2.75rem)',
-              boxShadow:
-                '0 0 0 1px rgba(180,130,110,0.10), 0 4px 12px rgba(120,70,50,0.06), 0 20px 60px -12px rgba(120,70,50,0.09)',
-            }}
-          >
-            <SparseHeader />
-            <main>
-              <ContactSection />
-              <FooterContact />
-            </main>
-          </div>
-        </div>
+      <div style={{ background: '#fffaf0', minHeight: '100vh' }}>
+        <SparseHeader />
+        <main>
+          <ContactSection />
+        </main>
+        <FooterContact />
       </div>
     </LenisProvider>
   );

@@ -1,238 +1,310 @@
-/* Google Fonts Import - Editorial Typography System */
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;0,6..96,700;0,6..96,800;0,6..96,900;1,6..96,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Google Fonts — Inter for display and body, JetBrains Mono for tags */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ============================================
-   BASE STYLES
+   BASE
    ============================================ */
 
 @layer base {
-  /* Prevent Lenis horizontal scroll */
   html {
     overflow-x: hidden;
   }
 
-  html.lenis, html.lenis body {
-    height: auto;
-  }
-
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-
-  .lenis.lenis-scrolling iframe {
-    pointer-events: none;
-  }
+  /* Lenis smooth scroll */
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+  .lenis.lenis-stopped { overflow: hidden; }
+  .lenis.lenis-scrolling iframe { pointer-events: none; }
 
   body {
-    @apply font-sans antialiased text-neutral-900;
-    background: #E8E4E0;
+    @apply font-sans antialiased;
+    background: #fffaf0;
+    color: #0a0a0a;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* Selection color */
   ::selection {
-    @apply bg-accent/20 text-neutral-900;
+    background: rgba(10, 10, 10, 0.12);
+    color: #0a0a0a;
   }
 
-  /* Focus states */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-accent;
+    outline: 2px solid #0a0a0a;
+    outline-offset: 2px;
   }
 
-  /* Smooth transitions for all interactive elements */
   a, button {
     @apply transition-colors duration-200;
   }
 
-  /* Headings */
+  /* Headings — Inter weight 500, negative letter-spacing (Plain Black substitute) */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold tracking-tight text-balance text-neutral-900;
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-weight: 500;
+    color: #0a0a0a;
+    text-wrap: balance;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
   }
 
-  h1 { @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl; }
-  h2 { @apply text-3xl sm:text-4xl md:text-5xl; }
-  h3 { @apply text-xl sm:text-2xl; }
-
-  /* Paragraphs */
   p {
-    @apply text-neutral-600 leading-relaxed;
+    color: #3a3a3a;
+    line-height: 1.55;
   }
 
-  /* Links */
   a {
-    @apply text-neutral-700 hover:text-accent transition-colors;
+    color: #0a0a0a;
   }
 
-  /* Images */
   img {
     @apply max-w-full h-auto;
   }
 }
 
 /* ============================================
-   COMPONENT STYLES
+   COMPONENTS
    ============================================ */
 
 @layer components {
-  /* Container — inside shell, no extra horizontal padding (shell handles it) */
+  /* Container — max 1280px centered, generous padding */
   .container-wide {
-    @apply mx-auto px-7 sm:px-10 lg:px-14 max-w-8xl;
+    @apply mx-auto px-6 sm:px-10 lg:px-14;
+    max-width: 1280px;
   }
 
   .container-narrow {
-    @apply mx-auto px-7 sm:px-10 lg:px-14 max-w-5xl;
+    @apply mx-auto px-6 sm:px-10 lg:px-14;
+    max-width: 800px;
   }
 
-  /* Section spacing — inside the shell, no top-nav offset needed */
+  /* Section rhythm — 96px per Clay DESIGN.md */
   .section-padding {
-    @apply py-16 sm:py-20 lg:py-24;
+    padding-top: 96px;
+    padding-bottom: 96px;
   }
 
-  /* Editorial headline */
+  /* Display headline — Inter 500, tight negative tracking */
+  .headline-display-xl {
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 1.0;
+    letter-spacing: -2.5px;
+    color: #0a0a0a;
+  }
+
+  .headline-display-lg {
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    color: #0a0a0a;
+  }
+
+  .headline-display-md {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    color: #0a0a0a;
+  }
+
+  /* Legacy alias — keeps existing components compiling */
   .headline-editorial {
-    @apply font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl
-           font-medium tracking-tight leading-none;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: #0a0a0a;
   }
 
-  /* Wordmark styling */
+  /* Top nav */
   .wordmark {
-    @apply font-heading font-semibold text-neutral-900
-           hover:text-accent transition-colors duration-300;
+    font-size: 15px;
+    font-weight: 600;
+    color: #0a0a0a;
+    letter-spacing: 0;
   }
 
-  /* Card base – warm white */
+  /* ── Buttons ── */
+  .btn {
+    @apply inline-flex items-center justify-center
+           font-semibold transition-all duration-200
+           focus-visible:outline-none focus-visible:ring-2
+           focus-visible:ring-ink focus-visible:ring-offset-2
+           focus-visible:ring-offset-canvas;
+    font-size: 14px;
+    line-height: 1;
+    height: 44px;
+  }
+
+  /* Primary — near-black, white text, 12px radius */
+  .btn-primary {
+    @apply btn px-5 rounded-md;
+    background: #0a0a0a;
+    color: #ffffff;
+  }
+  .btn-primary:hover { background: #1f1f1f; }
+  .btn-primary:active { transform: scale(0.98); }
+
+  /* Secondary — cream with hairline */
+  .btn-secondary {
+    @apply btn px-5 rounded-md border;
+    background: #fffaf0;
+    color: #0a0a0a;
+    border-color: #e5e5e5;
+  }
+  .btn-secondary:hover { border-color: #0a0a0a; }
+  .btn-secondary:active { transform: scale(0.98); }
+
+  /* On-color — white button over brand-colored cards */
+  .btn-on-color {
+    @apply btn px-5 rounded-md;
+    background: #fffaf0;
+    color: #0a0a0a;
+  }
+  .btn-on-color:hover { background: #ffffff; }
+
+  /* Ghost */
+  .btn-ghost {
+    @apply btn px-4 rounded-md;
+    background: transparent;
+    color: #6a6a6a;
+  }
+  .btn-ghost:hover { background: #f5f0e0; color: #0a0a0a; }
+
+  /* Legacy aliases — keeps existing components compiling */
+  .btn-ghost-dark { @apply btn-ghost; }
+
+  /* ── Cards ── */
+
+  /* Base cream card — hairline border, no shadow */
   .card {
-    @apply bg-white rounded-xl border border-neutral-200
-           transition-all duration-300 ease-smooth;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.03);
+    background: #f5f0e0;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+    @apply transition-all duration-200;
   }
 
-  .card-hover {
-    @apply hover:border-accent/40 hover:shadow-soft hover:-translate-y-1;
+  .card-hover:hover {
+    border-color: #0a0a0a;
   }
 
-  /* Glass card → now a warm card */
+  /* Feature card variants — branded saturated fills */
+  .feature-card {
+    border-radius: 24px;
+    padding: 32px;
+    @apply transition-all duration-200;
+  }
+
+  .feature-card-teal     { background: #1a3a3a; color: #ffffff; }
+  .feature-card-lavender { background: #b8a4ed; color: #0a0a0a; }
+  .feature-card-ochre    { background: #e8b94a; color: #0a0a0a; }
+  .feature-card-peach    { background: #ffb084; color: #0a0a0a; }
+  .feature-card-pink     { background: #ff4d8b; color: #ffffff; }
+  .feature-card-cream    { background: #f5f0e0; color: #0a0a0a; border: 1px solid #e5e5e5; }
+
+  /* Product mockup card */
   .glass-card {
-    @apply bg-white rounded-2xl border border-neutral-200;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);
+    background: #fffaf0;
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
   }
 
-  /* Tag/pill styling – light */
+  /* ── Tags / badges ── */
   .tag {
-    @apply inline-flex items-center px-2.5 py-1
-           text-xs font-medium rounded-md
-           text-neutral-600 bg-neutral-100 border border-neutral-200;
+    @apply inline-flex items-center;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    background: #f5f0e0;
+    color: #0a0a0a;
+    border: 1px solid #e5e5e5;
   }
 
   .tag-accent {
-    @apply bg-accent-subtle text-accent border-accent/25;
+    background: #f5f0e0;
+    color: #0a0a0a;
+    border-color: #e5e5e5;
   }
 
-  /* Button base */
-  .btn {
-    @apply inline-flex items-center justify-center
-           font-medium transition-all duration-200
-           focus-visible:outline-none focus-visible:ring-2
-           focus-visible:ring-accent focus-visible:ring-offset-2
-           focus-visible:ring-offset-white;
-  }
-
-  .btn-primary {
-    @apply btn px-6 py-3 bg-accent text-white rounded-lg
-           hover:bg-accent-dark shadow-md shadow-accent/20
-           active:scale-[0.98];
-  }
-
-  /* Light outlined button */
-  .btn-secondary {
-    @apply btn px-6 py-3 text-neutral-900 rounded-lg
-           bg-white border border-neutral-300
-           hover:border-accent hover:text-accent
-           active:scale-[0.98];
-  }
-
-  /* Ghost button for light backgrounds */
-  .btn-ghost-dark {
-    @apply btn px-6 py-3 text-neutral-700 rounded-lg
-           bg-neutral-100 border border-neutral-200
-           hover:border-accent/50 hover:text-accent
-           active:scale-[0.98];
-  }
-
-  .btn-ghost {
-    @apply btn px-4 py-2 text-neutral-500 hover:text-neutral-900
-           hover:bg-neutral-100 rounded-lg;
-  }
-
-  /* Progress rail dot – light */
-  .progress-dot {
-    @apply w-2 h-2 rounded-full bg-neutral-300
-           transition-all duration-300;
-  }
-
-  .progress-dot-active {
-    @apply bg-accent scale-125;
-  }
-
-  /* Filter pill – light */
+  /* ── Filter tabs — category-tab style ── */
   .filter-pill {
-    @apply px-4 py-2 text-sm font-medium rounded-full
-           text-neutral-500 bg-white
-           border border-neutral-200
-           transition-all duration-200 cursor-pointer
-           hover:text-neutral-900 hover:border-neutral-400;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #6a6a6a;
+    background: transparent;
+    border: 1px solid #e5e5e5;
+    cursor: pointer;
+    @apply transition-all duration-150;
   }
+  .filter-pill:hover { color: #0a0a0a; border-color: #0a0a0a; }
 
   .filter-pill-active {
-    @apply bg-accent text-white border-accent hover:bg-accent-dark;
+    background: #f5f0e0;
+    color: #0a0a0a;
+    border-color: #e5e5e5;
   }
 
-  /* Status badge styles */
+  /* ── Status badges ── */
   .status-completed {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-           bg-emerald-50 text-emerald-700 border border-emerald-200;
+    @apply inline-flex items-center gap-1.5;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f5f0e0;
+    color: #0a0a0a;
+    border: 1px solid #e5e5e5;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .status-in-progress {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-           bg-amber-50 text-amber-700 border border-amber-200;
+    @apply inline-flex items-center gap-1.5;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #faf5e8;
+    color: #3a3a3a;
+    border: 1px solid #e8b94a;
   }
 
   .status-live {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium
-           bg-accent-subtle text-accent border border-accent/25;
+    @apply inline-flex items-center gap-1.5;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f5f0e0;
+    color: #0a0a0a;
+    border: 1px solid #e5e5e5;
   }
+
+  /* Legacy dots */
+  .progress-dot { @apply w-2 h-2 rounded-full bg-neutral-300 transition-all duration-300; }
+  .progress-dot-active { background: #0a0a0a; transform: scale(1.25); }
 }
 
 /* ============================================
-   UTILITY STYLES
+   UTILITIES
    ============================================ */
 
 @layer utilities {
-  /* Text balance */
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-balance { text-wrap: balance; }
 
-  /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    *,
-    ::before,
-    ::after {
+    *, ::before, ::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -240,87 +312,59 @@
     }
   }
 
-  /* Hide scrollbar but keep scroll functionality */
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+  .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
 
   /* Gradient text */
   .text-gradient {
-    @apply bg-clip-text text-transparent
-           bg-gradient-to-r from-accent to-accent-light;
+    background: linear-gradient(135deg, #0a0a0a 0%, #3a3a3a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  /* Accent underline animation */
-  .link-underline {
-    @apply relative;
-  }
-
+  /* Ink underline animation */
+  .link-underline { @apply relative; }
   .link-underline::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-px bg-accent
-           transition-all duration-300;
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 1px;
+    background: #0a0a0a;
+    @apply transition-all duration-300;
   }
+  .link-underline:hover::after { width: 100%; }
 
-  .link-underline:hover::after {
-    @apply w-full;
-  }
+  /* Clip reveal */
+  .clip-reveal { clip-path: inset(0 100% 0 0); transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .clip-reveal-active { clip-path: inset(0 0% 0 0); }
 
-  /* Clip path reveal */
-  .clip-reveal {
-    clip-path: inset(0 100% 0 0);
-    transition: clip-path 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .clip-reveal-active {
-    clip-path: inset(0 0% 0 0);
-  }
-
-  /* Mask gradient for images */
+  /* Mask gradient */
   .mask-gradient-bottom {
     mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   }
 
-  /* Section separator line – warm light */
+  /* Section hairline divider */
   .section-divider {
     @apply w-full h-px;
-    background: linear-gradient(to right, transparent, rgba(0,0,0,0.07), transparent);
+    background: linear-gradient(to right, transparent, #e5e5e5, transparent);
   }
 
-  /* Fine line-grid texture — very understated, editorial */
+  /* Fine grid texture */
   .fine-grid {
     background-image:
-      linear-gradient(to right,  rgba(0,0,0,0.022) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0,0,0,0.022) 1px, transparent 1px);
+      linear-gradient(to right,  rgba(0,0,0,0.018) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.018) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
-  /* Legacy dot-grid (keep for compat) */
   .dot-grid {
     background-image: radial-gradient(circle, rgba(0,0,0,0.04) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
-  /* Legacy dark bg utilities – keep for backwards compat */
-  .bg-white\/8 {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .bg-white\/12 {
-    background: rgba(255, 255, 255, 0.12);
-  }
-
-  /* Debug grid overlay */
-  .debug-grid {
-    background-image:
-      linear-gradient(to right, rgb(91 155 213 / 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(91 155 213 / 0.1) 1px, transparent 1px);
-    background-size: 4rem 4rem;
-  }
+  /* Legacy dark bg utilities */
+  .bg-white\/8  { background: rgba(255,255,255,0.08); }
+  .bg-white\/12 { background: rgba(255,255,255,0.12); }
 }

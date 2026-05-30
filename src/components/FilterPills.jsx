@@ -1,32 +1,14 @@
 import { motion } from 'framer-motion';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-/**
- * FilterPills - Animated filter buttons for project filtering
- *
- * Features:
- * - Smooth active state transitions
- * - Accessible keyboard navigation
- * - Count badges
- * - Horizontal scroll on mobile
- */
-export default function FilterPills({
-  filters,
-  activeFilter,
-  onFilterChange,
-  className = '',
-}) {
+// Clay category-tab style: transparent inactive, surface-card active, pill shape
+export default function FilterPills({ filters, activeFilter, onFilterChange, className = '' }) {
   const reducedMotion = useReducedMotion();
 
   return (
-    <div
-      className={`flex flex-wrap gap-2 sm:gap-3 ${className}`}
-      role="tablist"
-      aria-label="Filter projects"
-    >
+    <div className={`flex flex-wrap gap-2 ${className}`} role="tablist" aria-label="Filter projects">
       {filters.map(({ id, label, count }) => {
         const isActive = activeFilter === id;
-
         return (
           <motion.button
             key={id}
@@ -34,44 +16,33 @@ export default function FilterPills({
             role="tab"
             aria-selected={isActive}
             aria-controls="projects-grid"
-            className={`
-              relative px-4 py-2 text-sm font-medium rounded-full
-              transition-colors duration-200 outline-none
-              focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2
-              ${isActive
-                ? 'text-white'
-                : 'text-neutral-500 hover:text-neutral-900 bg-white border border-neutral-200 hover:border-neutral-400'
-              }
-            `}
-            whileHover={reducedMotion ? {} : { scale: 1.02 }}
             whileTap={reducedMotion ? {} : { scale: 0.98 }}
+            style={{
+              position: 'relative',
+              padding: '8px 16px',
+              borderRadius: '9999px',
+              fontSize: '14px',
+              fontWeight: 500,
+              cursor: 'pointer',
+              border: '1px solid',
+              outline: 'none',
+              background: isActive ? '#f5f0e0' : 'transparent',
+              color: isActive ? '#0a0a0a' : '#6a6a6a',
+              borderColor: isActive ? '#e5e5e5' : '#e5e5e5',
+              transition: 'all 0.15s ease',
+            }}
+            className={isActive ? '' : 'hover:text-ink hover:border-ink'}
           >
-            {/* Active background pill */}
-            {isActive && (
-              <motion.div
-                layoutId="activeFilter"
-                className="absolute inset-0 bg-accent rounded-full"
-                transition={{
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 30,
-                }}
-              />
-            )}
-
-            {/* Label */}
-            <span className="relative z-10 flex items-center gap-2">
+            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               {label}
               {typeof count === 'number' && (
-                <span
-                  className={`
-                    text-xs px-1.5 py-0.5 rounded-full
-                    ${isActive
-                      ? 'bg-white/20 text-white'
-                      : 'bg-neutral-200 text-neutral-400'
-                    }
-                  `}
-                >
+                <span style={{
+                  fontSize: '12px',
+                  padding: '1px 6px',
+                  borderRadius: '9999px',
+                  background: isActive ? '#ebe6d6' : '#f0f0f0',
+                  color: isActive ? '#3a3a3a' : '#9a9a9a',
+                }}>
                   {count}
                 </span>
               )}
@@ -83,79 +54,15 @@ export default function FilterPills({
   );
 }
 
-/**
- * FilterPillsScrollable - Horizontal scroll version for mobile
- */
-export function FilterPillsScrollable({
-  filters,
-  activeFilter,
-  onFilterChange,
-  className = '',
-}) {
-  const reducedMotion = useReducedMotion();
-
+export function FilterPillsScrollable({ filters, activeFilter, onFilterChange, className = '' }) {
   return (
     <div className={`relative ${className}`}>
-      {/* Fade gradients for scroll indication */}
-      <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none sm:hidden" />
-      <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none sm:hidden" />
-
       <div
-        className="flex gap-2 overflow-x-auto hide-scrollbar py-1 px-1 -mx-1 sm:flex-wrap sm:overflow-visible"
+        className="flex gap-2 overflow-x-auto hide-scrollbar py-1"
         role="tablist"
         aria-label="Filter projects"
       >
-        {filters.map(({ id, label, count }) => {
-          const isActive = activeFilter === id;
-
-          return (
-            <motion.button
-              key={id}
-              onClick={() => onFilterChange(id)}
-              role="tab"
-              aria-selected={isActive}
-              className={`
-                relative flex-shrink-0 px-4 py-2 text-sm font-medium rounded-full
-                transition-colors duration-200 outline-none
-                focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2
-                ${isActive
-                  ? 'text-white'
-                  : 'text-neutral-600 hover:text-neutral-900 bg-neutral-100 hover:bg-neutral-200'
-                }
-              `}
-              whileTap={reducedMotion ? {} : { scale: 0.98 }}
-            >
-              {isActive && (
-                <motion.div
-                  layoutId="activeFilterScroll"
-                  className="absolute inset-0 bg-accent rounded-full"
-                  transition={{
-                    type: 'spring',
-                    stiffness: 400,
-                    damping: 30,
-                  }}
-                />
-              )}
-
-              <span className="relative z-10 flex items-center gap-2 whitespace-nowrap">
-                {label}
-                {typeof count === 'number' && count > 0 && (
-                  <span
-                    className={`
-                      text-xs px-1.5 py-0.5 rounded-full
-                      ${isActive
-                        ? 'bg-white/20 text-white'
-                        : 'bg-neutral-200 text-neutral-500'
-                      }
-                    `}
-                  >
-                    {count}
-                  </span>
-                )}
-              </span>
-            </motion.button>
-          );
-        })}
+        <FilterPills filters={filters} activeFilter={activeFilter} onFilterChange={onFilterChange} />
       </div>
     </div>
   );
