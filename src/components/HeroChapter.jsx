@@ -56,26 +56,6 @@ function Cursor({ done }) {
   );
 }
 
-// ─── Hero stat card ─────────────────────────────────────────────────────────
-function StatCard({ label, value }) {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '2px',
-      }}
-    >
-      <span style={{ fontSize: '22px', fontWeight: 600, color: '#0a0a0a', letterSpacing: '-0.5px' }}>
-        {value}
-      </span>
-      <span style={{ fontSize: '12px', fontWeight: 500, color: '#6a6a6a', letterSpacing: '0.5px' }}>
-        {label}
-      </span>
-    </div>
-  );
-}
-
 // ─── Main hero component ────────────────────────────────────────────────────
 export default function HeroChapter() {
   const reducedMotion = useReducedMotion();
@@ -238,21 +218,6 @@ export default function HeroChapter() {
               </a>
             </motion.div>
 
-            {/* Stats row */}
-            <motion.div
-              variants={fadeUp}
-              style={{
-                display: 'flex',
-                gap: '32px',
-                marginTop: '56px',
-                paddingTop: '32px',
-                borderTop: '1px solid #e5e5e5',
-              }}
-            >
-              <StatCard value="3.86" label="GPA" />
-              <StatCard value="$10k" label="Samsung Fellowship" />
-              <StatCard value="400+" label="Monthly Readers" />
-            </motion.div>
           </motion.div>
 
           {/* Right — 5 columns — photo card */}

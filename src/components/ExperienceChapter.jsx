@@ -44,7 +44,7 @@ export default function ExperienceChapter() {
           </motion.div>
 
           {/* Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-5">
+          <div className="grid grid-cols-1 gap-4">
             {experience.map((job) => (
               <motion.div key={job.id} variants={fadeUp}>
                 <ExperienceCard job={job} reducedMotion={reducedMotion} />
