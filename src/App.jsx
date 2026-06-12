@@ -3,8 +3,9 @@ import SparseHeader from './components/SparseHeader';
 import HeroChapter from './components/HeroChapter';
 import About from './components/About';
 import TechStackSection from './components/TechStackSection';
-import ProjectsChapter from './components/ProjectsChapter';
 import ExperienceChapter from './components/ExperienceChapter';
+import ProjectsChapter from './components/ProjectsChapter';
+import EducationChapter from './components/EducationChapter';
 import FooterContact from './components/FooterContact';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <TechStackSection />
           <ExperienceChapter />
           <ProjectsChapter />
+          <EducationChapter />
         </main>
         <FooterContact />
       </div>

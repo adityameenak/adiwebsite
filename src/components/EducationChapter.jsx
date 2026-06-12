@@ -77,7 +77,6 @@ export default function EducationChapter() {
             </p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
               {[
-                { label: 'GPA', value: education.gpa },
                 { label: 'Graduating', value: education.graduationDate },
                 { label: 'Location', value: education.location },
               ].map(({ label, value }) => (
