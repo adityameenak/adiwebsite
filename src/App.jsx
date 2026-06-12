@@ -17,9 +17,9 @@ export default function App() {
           <HeroChapter />
           <About />
           <TechStackSection />
+          <EducationChapter />
           <ExperienceChapter />
           <ProjectsChapter />
-          <EducationChapter />
         </main>
         <FooterContact />
       </div>
