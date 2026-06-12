@@ -18,7 +18,9 @@ export const experience = [
     company: "Samsung Austin Semiconductor",
     period: "May 2026 - Present",
     description: [
-      "Photo Innovation DX and Metrology",
+      "Engineered cloud-based data analytics and process-control pipelines (Python, SQL, Streamlit) to automate lithography workflows, parsing and validating 5,000+ metrology data points to optimize performance across multiple toolsets",
+      "Developed a mathematical overlay correction algorithm that transforms 500+ wafer-level WK/RK measurements into lot-level scanner offsets, identifying abnormal multi-layer alignment behavior to protect downstream device yield",
+      "Architected a predictive Photoresist (PR) modeling application to dynamically optimize spin-coater dispense parameters and fluid dynamics, targeting a strict 10-angstrom film thickness range; automated equipment adjustments reduced test-wafer qualification time by 15%",
     ],
     tags: ["Photolithography", "Metrology", "Semiconductor Fabrication"]
   },
