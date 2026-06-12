@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { education, technicalSkills, advancedCoursework, awards } from '../data/content';
+import { education, technicalSkills, advancedCoursework } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const ACCENT = '#b87c45';
@@ -64,57 +64,37 @@ export default function EducationChapter() {
               borderRadius: '16px',
               padding: '28px 32px',
               marginBottom: '40px',
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '24px',
-              justifyContent: 'space-between',
-              alignItems: 'center',
             }}
           >
-            <div>
-              <p style={{ fontSize: '11px', fontWeight: 700, color: ACCENT, letterSpacing: '1.4px', textTransform: 'uppercase', marginBottom: '8px', opacity: 0.75 }}>
-                Degree
-              </p>
-              <h3 style={{ fontSize: '19px', fontWeight: 600, color: '#0a0a0a', marginBottom: '4px' }}>
-                {education.school}
-              </h3>
-              <p style={{ fontSize: '14px', color: '#6a6a6a', marginBottom: '16px' }}>
-                {education.degree} · {education.major}
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {[
-                  { label: 'GPA', value: education.gpa },
-                  { label: 'Graduating', value: education.graduationDate },
-                  { label: 'Location', value: education.location },
-                ].map(({ label, value }) => (
-                  <span
-                    key={label}
-                    style={{
-                      padding: '4px 12px',
-                      borderRadius: '9999px',
-                      fontSize: '11px',
-                      fontWeight: 600,
-                      background: 'rgba(0,0,0,0.04)',
-                      color: '#6a6a6a',
-                      border: '1px solid #d6d0c4',
-                    }}
-                  >
-                    {label}: {value}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Awards column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', minWidth: '200px' }}>
-              {awards.map((award) => (
-                <div key={award.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                  <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: ACCENT, marginTop: '7px', flexShrink: 0, opacity: 0.55 }} />
-                  <div>
-                    <p style={{ fontSize: '13px', fontWeight: 600, color: '#0a0a0a', lineHeight: 1.3 }}>{award.title}</p>
-                    <p style={{ fontSize: '11px', color: '#9a9a9a' }}>{award.description} · {award.date}</p>
-                  </div>
-                </div>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: ACCENT, letterSpacing: '1.4px', textTransform: 'uppercase', marginBottom: '8px', opacity: 0.75 }}>
+              Degree
+            </p>
+            <h3 style={{ fontSize: '19px', fontWeight: 600, color: '#0a0a0a', marginBottom: '4px' }}>
+              {education.school}
+            </h3>
+            <p style={{ fontSize: '14px', color: '#6a6a6a', marginBottom: '16px' }}>
+              {education.degree} · {education.major}
+            </p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+              {[
+                { label: 'GPA', value: education.gpa },
+                { label: 'Graduating', value: education.graduationDate },
+                { label: 'Location', value: education.location },
+              ].map(({ label, value }) => (
+                <span
+                  key={label}
+                  style={{
+                    padding: '4px 12px',
+                    borderRadius: '9999px',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    background: 'rgba(0,0,0,0.04)',
+                    color: '#6a6a6a',
+                    border: '1px solid #d6d0c4',
+                  }}
+                >
+                  {label}: {value}
+                </span>
               ))}
             </div>
           </motion.div>

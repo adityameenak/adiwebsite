@@ -2,6 +2,7 @@ import { LenisProvider } from './hooks/useLenis';
 import SparseHeader from './components/SparseHeader';
 import HeroChapter from './components/HeroChapter';
 import About from './components/About';
+import TechStackSection from './components/TechStackSection';
 import ProjectsChapter from './components/ProjectsChapter';
 import ExperienceChapter from './components/ExperienceChapter';
 import FooterContact from './components/FooterContact';
@@ -14,6 +15,7 @@ export default function App() {
         <main>
           <HeroChapter />
           <About />
+          <TechStackSection />
           <ExperienceChapter />
           <ProjectsChapter />
         </main>

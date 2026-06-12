@@ -193,20 +193,16 @@ export const education = {
 
 export const technicalSkills = [
   {
-    category: "Languages",
-    skills: ["Python", "SQL", "JavaScript", "MATLAB"],
+    category: "Programming & Data Analysis",
+    skills: ["Python", "NumPy", "Pandas", "Matplotlib", "scikit-learn", "MATLAB", "SQL", "HTML"],
   },
   {
-    category: "Frameworks & Tools",
-    skills: ["React", "Next.js", "Streamlit", "Tailwind CSS", "Git"],
+    category: "Characterization & Instrumentation",
+    skills: ["SEM", "XRD", "FTIR", "TGA", "Optical Microscopy", "Thermal Conductivity Measurement"],
   },
   {
-    category: "Data & Analytics",
-    skills: ["Data Pipelines", "Statistical Process Control", "Mathematical Modeling", "Metrology Analysis"],
-  },
-  {
-    category: "Lab & Fabrication",
-    skills: ["Photolithography", "SEM Characterization", "Thermal Conductivity Measurement", "Gas Chromatography", "UV-Vis Spectroscopy", "Pyrolysis Processing", "Nanowire Fabrication"],
+    category: "Materials & Processes",
+    skills: ["Pyrolysis", "Nanowire Fabrication", "RF Heating", "Thermodynamics"],
   },
 ];
 
@@ -225,20 +221,7 @@ export const advancedCoursework = [
   { code: "PHYS 2326", name: "University Physics II" },
 ];
 
-export const awards = [
-  {
-    id: 1,
-    title: "Samsung Semiconductor Fellow Scholarship",
-    date: "Jan 2026",
-    description: "$10,000 competitive fellowship"
-  },
-  {
-    id: 2,
-    title: "Dean's List",
-    date: "Spring 2025",
-    description: "College of Engineering, 4.0 GPA"
-  }
-];
+export const awards = [];
 
 export const navigation = [
   { name: "Home", href: "#home" },
