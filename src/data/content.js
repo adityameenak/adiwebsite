@@ -30,8 +30,9 @@ export const experience = [
     company: "Texas Energy & Entrepreneurship (TEX-E)",
     period: "Jan 2026 - Present",
     description: [
-      "Selected as a Fellow exploring commercialization of emerging energy technologies at the intersection of chemical engineering and entrepreneurship",
-      "Building cross-sector partnerships between academia, industry, and investors to accelerate commercialization pathways for emerging energy technologies including advanced materials and process innovations"
+      "Evaluated 5+ commercialization pathways for emerging energy technologies by assessing technical feasibility, process scalability, market need, and deployment barriers",
+      "Developed venture strategies to translate lab-scale advanced materials and energy concepts into pilot-scale hardware applications, incorporating TRL analysis, customer discovery, and go-to-market planning",
+      "Analyzed climate-tech and deep-tech hardware markets by evaluating manufacturing constraints, commercialization risk, and deployment economics",
     ],
     tags: ["Energy", "Climate", "Entrepreneurship", "Fellowship"]
   },
