@@ -1,22 +1,27 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { education, technicalSkills, advancedCoursework } from '../data/content';
+import { education } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
 const ACCENT = '#b87c45';
 
-const CATEGORY_COLORS = [
-  { bg: '#b87c4518', border: '#b87c4535', text: '#b87c45' },
-  { bg: '#5a7e7018', border: '#5a7e7035', text: '#5a7e70' },
-  { bg: '#7370a018', border: '#7370a035', text: '#7370a0' },
-  { bg: '#6a849a18', border: '#6a849a35', text: '#6a849a' },
+const FOCUS_AREAS = [
+  'Fluid Mechanics',
+  'Thermodynamics',
+  'Heat & Mass Transfer',
+  'Chemical Reaction Engineering',
+  'Transport Phenomena',
+  'Process Dynamics & Control',
+  'Materials Science',
+  'Electrochemistry & Battery Systems',
+  'Semiconductor Processes & Microelectronics',
+  'Engineering Mathematics',
 ];
 
 export default function EducationChapter() {
   const reducedMotion = useReducedMotion();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.08 });
-  const [activeTab, setActiveTab] = useState('stack');
 
   const container = {
     hidden: { opacity: 0 },
@@ -50,184 +55,94 @@ export default function EducationChapter() {
               Education
             </h2>
             <p style={{ fontSize: '16px', color: '#6a6a6a', maxWidth: '44ch', lineHeight: 1.55 }}>
-              Technical skills, tools, and coursework from engineering research and software development.
+              Chemical engineering with a focus on batteries, semiconductor processes, and advanced materials.
             </p>
           </motion.div>
 
-          {/* Degree card */}
-          <motion.div
-            variants={fadeUp}
-            style={{
-              background: 'linear-gradient(155deg, #fdf9f2 0%, #f5f0e0 100%)',
-              border: '1px solid #e5e5e5',
-              borderLeft: `3px solid ${ACCENT}`,
-              borderRadius: '16px',
-              padding: '28px 32px',
-              marginBottom: '40px',
-            }}
-          >
-            <p style={{ fontSize: '11px', fontWeight: 700, color: ACCENT, letterSpacing: '1.4px', textTransform: 'uppercase', marginBottom: '8px', opacity: 0.75 }}>
-              Degree
-            </p>
-            <h3 style={{ fontSize: '19px', fontWeight: 600, color: '#0a0a0a', marginBottom: '4px' }}>
-              {education.school}
-            </h3>
-            <p style={{ fontSize: '14px', color: '#6a6a6a', marginBottom: '16px' }}>
-              {education.degree} · {education.major}
-            </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-              {[
-                { label: 'Graduating', value: education.graduationDate },
-                { label: 'Location', value: education.location },
-              ].map(({ label, value }) => (
-                <span
-                  key={label}
-                  style={{
-                    padding: '4px 12px',
-                    borderRadius: '9999px',
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    background: 'rgba(0,0,0,0.04)',
-                    color: '#6a6a6a',
-                    border: '1px solid #d6d0c4',
-                  }}
-                >
-                  {label}: {value}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+          {/* Two-column layout: degree card + focus areas */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-10">
 
-          {/* Tabs */}
-          <motion.div variants={fadeUp} style={{ marginBottom: '32px' }}>
-            <div
+            {/* Degree card */}
+            <motion.div
+              variants={fadeUp}
               style={{
-                display: 'inline-flex',
-                background: 'rgba(0,0,0,0.04)',
-                borderRadius: '10px',
-                padding: '4px',
-                gap: '2px',
+                background: 'linear-gradient(155deg, #fdf9f2 0%, #f5f0e0 100%)',
+                border: '1px solid #e5e5e5',
+                borderLeft: `3px solid ${ACCENT}`,
+                borderRadius: '16px',
+                padding: '28px 32px',
+                display: 'flex',
+                flexDirection: 'column',
               }}
             >
-              {[
-                { id: 'stack', label: 'Technical Stack' },
-                { id: 'courses', label: 'Coursework' },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  style={{
-                    padding: '8px 20px',
-                    borderRadius: '7px',
-                    fontSize: '13px',
-                    fontWeight: 600,
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'all 0.18s ease',
-                    background: activeTab === tab.id ? '#fdf9f2' : 'transparent',
-                    color: activeTab === tab.id ? '#0a0a0a' : '#6a6a6a',
-                    boxShadow: activeTab === tab.id ? '0 1px 3px rgba(0,0,0,0.08)' : 'none',
-                  }}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Tab content */}
-          {activeTab === 'stack' && (
-            <motion.div
-              key="stack"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '12px' }}
-            >
-              {technicalSkills.map((group, i) => {
-                const color = CATEGORY_COLORS[i % CATEGORY_COLORS.length];
-                return (
-                  <div
-                    key={group.category}
-                    style={{
-                      background: 'linear-gradient(155deg, #fdf9f2 0%, #f5f0e0 100%)',
-                      border: '1px solid #e5e5e5',
-                      borderTop: `3px solid ${color.text}`,
-                      borderRadius: '14px',
-                      padding: '22px 24px',
-                    }}
-                  >
-                    <p style={{ fontSize: '11px', fontWeight: 700, color: color.text, letterSpacing: '1.3px', textTransform: 'uppercase', marginBottom: '14px', opacity: 0.85 }}>
-                      {group.category}
-                    </p>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                      {group.skills.map((skill) => (
-                        <span
-                          key={skill}
-                          style={{
-                            padding: '5px 12px',
-                            borderRadius: '9999px',
-                            fontSize: '12px',
-                            fontWeight: 600,
-                            background: color.bg,
-                            color: color.text,
-                            border: `1px solid ${color.border}`,
-                          }}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </motion.div>
-          )}
-
-          {activeTab === 'courses' && (
-            <motion.div
-              key="courses"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '8px' }}
-            >
-              {advancedCoursework.map((course, i) => (
-                <div
-                  key={course.code}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '14px',
-                    background: 'linear-gradient(155deg, #fdf9f2 0%, #f5f0e0 100%)',
-                    border: '1px solid #e5e5e5',
-                    borderRadius: '12px',
-                    padding: '14px 18px',
-                  }}
-                >
+              <p style={{ fontSize: '11px', fontWeight: 700, color: ACCENT, letterSpacing: '1.4px', textTransform: 'uppercase', marginBottom: '12px', opacity: 0.75 }}>
+                Degree
+              </p>
+              <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#0a0a0a', marginBottom: '6px', lineHeight: 1.25 }}>
+                {education.school}
+              </h3>
+              <p style={{ fontSize: '14px', color: '#6a6a6a', marginBottom: '20px', lineHeight: 1.5 }}>
+                {education.degree}<br />{education.major}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: 'auto' }}>
+                {[
+                  { label: 'Graduating', value: education.graduationDate },
+                  { label: 'Location', value: education.location },
+                ].map(({ label, value }) => (
                   <span
+                    key={label}
                     style={{
-                      flexShrink: 0,
-                      padding: '4px 10px',
-                      borderRadius: '6px',
-                      fontSize: '10px',
-                      fontWeight: 700,
-                      background: `${ACCENT}15`,
-                      color: ACCENT,
-                      border: `1px solid ${ACCENT}30`,
-                      letterSpacing: '0.3px',
-                      fontFamily: 'monospace',
+                      padding: '4px 12px',
+                      borderRadius: '9999px',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      background: 'rgba(0,0,0,0.04)',
+                      color: '#6a6a6a',
+                      border: '1px solid #d6d0c4',
                     }}
                   >
-                    {course.code}
+                    {label}: {value}
                   </span>
-                  <span style={{ fontSize: '13px', fontWeight: 500, color: '#3a3a3a', lineHeight: 1.3 }}>
-                    {course.name}
-                  </span>
-                </div>
-              ))}
+                ))}
+              </div>
             </motion.div>
-          )}
+
+            {/* Focus areas */}
+            <motion.div
+              variants={fadeUp}
+              className="lg:col-span-2"
+              style={{
+                background: 'linear-gradient(155deg, #fdf9f2 0%, #f5f0e0 100%)',
+                border: '1px solid #e5e5e5',
+                borderTop: `3px solid ${ACCENT}`,
+                borderRadius: '16px',
+                padding: '28px 32px',
+              }}
+            >
+              <p style={{ fontSize: '11px', fontWeight: 700, color: ACCENT, letterSpacing: '1.4px', textTransform: 'uppercase', marginBottom: '18px', opacity: 0.75 }}>
+                Coursework Focus
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {FOCUS_AREAS.map((area) => (
+                  <span
+                    key={area}
+                    style={{
+                      padding: '7px 15px',
+                      borderRadius: '9999px',
+                      fontSize: '13px',
+                      fontWeight: 500,
+                      background: `${ACCENT}12`,
+                      color: '#3a3a3a',
+                      border: `1px solid ${ACCENT}25`,
+                    }}
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+          </div>
 
         </motion.div>
       </div>
