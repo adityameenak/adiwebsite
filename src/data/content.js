@@ -191,6 +191,40 @@ export const education = {
   location: "College Station, TX"
 };
 
+export const technicalSkills = [
+  {
+    category: "Languages",
+    skills: ["Python", "SQL", "JavaScript", "MATLAB"],
+  },
+  {
+    category: "Frameworks & Tools",
+    skills: ["React", "Next.js", "Streamlit", "Tailwind CSS", "Git"],
+  },
+  {
+    category: "Data & Analytics",
+    skills: ["Data Pipelines", "Statistical Process Control", "Mathematical Modeling", "Metrology Analysis"],
+  },
+  {
+    category: "Lab & Fabrication",
+    skills: ["Photolithography", "SEM Characterization", "Thermal Conductivity Measurement", "Gas Chromatography", "UV-Vis Spectroscopy", "Pyrolysis Processing", "Nanowire Fabrication"],
+  },
+];
+
+export const advancedCoursework = [
+  { code: "CHEN 2100", name: "Process Principles" },
+  { code: "CHEN 3210", name: "Chemical Engineering Thermodynamics I" },
+  { code: "CHEN 3220", name: "Chemical Engineering Thermodynamics II" },
+  { code: "CHEN 3320", name: "Heat Transfer Operations" },
+  { code: "CHEN 3330", name: "Mass Transfer Operations" },
+  { code: "CHEN 4300", name: "Chemical Reaction Engineering" },
+  { code: "CHEN 4350", name: "Process Dynamics & Control" },
+  { code: "MSEN 3100", name: "Introduction to Materials Science" },
+  { code: "MATH 2415", name: "Calculus III" },
+  { code: "MATH 3351", name: "Engineering Mathematics" },
+  { code: "PHYS 2325", name: "University Physics I" },
+  { code: "PHYS 2326", name: "University Physics II" },
+];
+
 export const awards = [
   {
     id: 1,
