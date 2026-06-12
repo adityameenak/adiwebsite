@@ -41,9 +41,9 @@ export const experience = [
     company: "Samsung Austin Semiconductor",
     period: "Jan 2026 - Present",
     description: [
-      "Researching indium nanowire weave architectures to contain thermal runaway and protect adjacent cells in lithium-ion batteries",
-      "Fabricating nanowire samples and characterizing thermal barrier performance under controlled heating conditions",
-      "Iterating on processing parameters with mentors to evaluate safety outcomes across design cycles",
+      "Engineered 1–2 mm thick indium/titanium nanowire composite formulations to create a passive thermal-switching material, reducing heat propagation during lithium-ion battery thermal runaway",
+      "Characterized thermal transport behavior across 50 wt% and 75 wt% nanowire-loaded formulations, varying porosity, composition, and indium content using thermal conductivity measurements and controlled heating experiments",
+      "Analyzed SEM morphology across multiple formulation iterations to correlate composite structure, conductive pathway formation, and processing conditions with mechanical integrity and thermal-switching performance",
       "Awarded $10,000 merit-based fellowship for battery safety and advanced materials research"
     ],
     tags: ["Battery Safety", "Nanomaterials", "Thermal Management", "Materials Science"]
