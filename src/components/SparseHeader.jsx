@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 
-const RESUME_PDF = '/AdityaMeenakshiResume.pdf';
+const RESUME_PDF = '/resume.pdf';
 
 export default function SparseHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
