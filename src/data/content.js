@@ -13,77 +13,41 @@ export const about = {
 
 export const experience = [
   {
-    id: 6,
-    role: "Fabrication Engineering Intern",
-    company: "Samsung Austin Semiconductor",
-    period: "May 2026 - Present",
-    description: [
-      "Engineered cloud-based data analytics and process-control pipelines (Python, SQL, Streamlit) to automate lithography workflows, parsing and validating 5,000+ metrology data points to optimize performance across multiple toolsets",
-      "Developed a mathematical overlay correction algorithm that transforms 500+ wafer-level WK/RK measurements into lot-level scanner offsets, identifying abnormal multi-layer alignment behavior to protect downstream device yield",
-      "Architected a predictive Photoresist (PR) modeling application to dynamically optimize spin-coater dispense parameters and fluid dynamics, targeting a strict 10-angstrom film thickness range; automated equipment adjustments reduced test-wafer qualification time by 15%",
-    ],
-    tags: ["Photolithography", "Metrology", "Semiconductor Fabrication"]
-  },
-  {
-    id: 5,
-    role: "TEX-E Fellow",
-    company: "Texas Energy & Entrepreneurship (TEX-E)",
-    period: "Jan 2026 - Present",
-    description: [
-      "Evaluated 5+ commercialization pathways for emerging energy technologies by assessing technical feasibility, process scalability, market need, and deployment barriers",
-      "Developed venture strategies to translate lab-scale advanced materials and energy concepts into pilot-scale hardware applications, incorporating TRL analysis, customer discovery, and go-to-market planning",
-      "Analyzed climate-tech and deep-tech hardware markets by evaluating manufacturing constraints, commercialization risk, and deployment economics",
-    ],
-    tags: ["Energy", "Climate", "Entrepreneurship", "Fellowship"]
-  },
-  {
     id: 1,
-    role: "Samsung Semiconductor Undergraduate Fellow",
+    role: "Photolithography & Metrology Intern",
     company: "Samsung Austin Semiconductor",
-    period: "Jan 2026 - Present",
+    period: "Austin, TX • May 2026 – Present",
     description: [
-      "Engineered 1–2 mm thick indium/titanium nanowire composite formulations to create a passive thermal-switching material, reducing heat propagation during lithium-ion battery thermal runaway",
-      "Characterized thermal transport behavior across 50 wt% and 75 wt% nanowire-loaded formulations, varying porosity, composition, and indium content using thermal conductivity measurements and controlled heating experiments",
-      "Analyzed SEM morphology across multiple formulation iterations to correlate composite structure, conductive pathway formation, and processing conditions with mechanical integrity and thermal-switching performance",
-      "Awarded $10,000 merit-based fellowship for battery safety and advanced materials research"
+      "Engineered a Streamlit-deployed overlay-correction algorithm converting 500+ wafer- and shot-level measurements into lot-level scanner corrections, exposing abnormal multi-layer misalignment at source and saving 250 engineering hours",
+      "Deployed a CNN defect-classification system trained on FFT-generated heatmaps of live TEL lithography-tool image streams, replacing manual image review with real-time technician alerts",
+      "Recovered 300–400 wafers per day (5% of tool capacity) by tracing a wafer-routing anomaly to a slow buffer robot arm stalling lots at downstream track stations, using SPC (I-MR) control charts on tool-level throughput",
+      "Built a predictive modeling application forecasting photoresist film thickness from spin-coater dispense parameters, calculating spin-speed setpoints to hold lots within a 10-Å SPC window and cutting wafer qualification time by 15%"
     ],
-    tags: ["Battery Safety", "Nanomaterials", "Thermal Management", "Materials Science"]
+    tags: ["Photolithography", "Metrology", "Process Control"]
   },
   {
     id: 2,
-    role: "Silicon Carbide (SiC) Researcher",
-    company: "Green Group, Texas A&M",
-    period: "Aug 2025 - Present",
+    role: "Semiconductor Fellow",
+    company: "Samsung Austin Semiconductor",
+    period: "College Station, TX • Jan 2026 – Present",
     description: [
-      "Processing polycarbosilane precursor films and converting them to silicon carbide via controlled pyrolysis",
-      "Characterizing how temperature and atmosphere conditions affect SiC film morphology and conductivity",
-      "Contributing to polymer-derived ceramics research for high-temperature applications"
+      "Fabricated 1–2 mm indium/titanium nanowire composites transitioning from thermally conductive to insulating states at critical temperatures, suppressing heat propagation during lithium-ion battery thermal runaway without active control",
+      "Mapped composition-to-threshold behavior across 50 wt% and 75 wt% formulations by resolving thermal-conductivity response against porosity, composition, and indium content, isolating the loading window triggering switching",
+      "Linked switching thresholds and mechanical integrity to microstructure and conductive-pathway formation through SEM cross-sectioning across 4+ iterations, guiding each reformulation"
     ],
-    tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Thermal Processing"]
+    tags: ["Battery Safety", "Nanomaterials", "Thermal Management"]
   },
   {
     id: 3,
-    role: "Sustainable Energy Researcher",
-    company: "Holtzapple Group, Texas A&M",
-    period: "Jan 2025 - Jul 2025",
+    role: "Silicon Carbide (SiC) Researcher",
+    company: "Green Group, Texas A&M University",
+    period: "College Station, TX • Aug 2025 – Present",
     description: [
-      "Conducted fermentation experiments to optimize succinic acid yield from biomass feedstocks",
-      "Analyzed samples using gas chromatography and UV-Vis spectroscopy",
-      "Developed MATLAB models to compare experimental results against process predictions"
+      "Established a reproducible polycarbosilane-to-SiC conversion window viable for high-power semiconductor integration, narrowing pyrolysis ramp rate and atmosphere parameters across 10+ controlled runs spanning 800–1200°C",
+      "Pinpointed the cracking mechanisms limiting polymer-to-ceramic conversion quality by correlating thermal processing conditions against SiC morphology, ceramic yield, and electrical conductivity via SEM, TGA, and four-point probe analysis",
+      "Cut heating non-uniformity across SiC fiber cross-sections by demonstrating RF-driven volumetric heating as a faster, energy-efficient alternative to conventional furnace pyrolysis for ceramic conversion"
     ],
-    tags: ["Sustainable Energy", "Bioprocessing", "Data Analysis"]
-  },
-  {
-    id: 4,
-    role: "External Deputy, Sophomore Retreat",
-    company: "AIChE Texas A&M Chapter",
-    period: "Sep 2025 - Present",
-    description: [
-      "Leading sponsorship outreach to regional companies, coordinating logistics for recruiter attendance and event funding",
-      "Managing communication with industry contacts and internal committee members to align timelines and deliverables",
-      "Supporting Professional Development Committee initiatives focused on resume workshops and networking events"
-    ],
-    tags: ["Leadership", "Event Coordination", "Industry Outreach"]
+    tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"]
   }
 ];
 
@@ -222,7 +186,12 @@ export const advancedCoursework = [
   { code: "PHYS 2326", name: "University Physics II" },
 ];
 
-export const awards = [];
+export const awards = [
+  { id: 1, name: "Samsung Semiconductor Fellowship" },
+  { id: 2, name: "TEX-E Fellowship" },
+  { id: 3, name: "Humba Ventures Deep Tech Fellowship" },
+  { id: 4, name: "Craig & Galen Brown Engineering Honors", org: "Texas A&M" }
+];
 
 export const navigation = [
   { name: "Home", href: "#home" },

@@ -6,6 +6,7 @@ import ExperiencePage from './pages/ExperiencePage.jsx'
 import ProjectsPage from './pages/ProjectsPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import EducationPage from './pages/EducationPage.jsx'
+import AwardsPage from './pages/AwardsPage.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/education" element={<EducationPage />} />
+        <Route path="/awards" element={<AwardsPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

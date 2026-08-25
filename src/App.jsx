@@ -6,6 +6,7 @@ import TechStackSection from './components/TechStackSection';
 import ExperienceChapter from './components/ExperienceChapter';
 import ProjectsChapter from './components/ProjectsChapter';
 import EducationChapter from './components/EducationChapter';
+import AwardsChapter from './components/AwardsChapter';
 import FooterContact from './components/FooterContact';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <TechStackSection />
           <EducationChapter />
           <ExperienceChapter />
+          <AwardsChapter />
           <ProjectsChapter />
         </main>
         <FooterContact />

@@ -16,6 +16,7 @@ export default function SparseHeader() {
     { label: 'Projects',   href: '/projects',   isRoute: true },
     { label: 'Experience', href: '/experience', isRoute: true },
     { label: 'Education',  href: '/education',  isRoute: true },
+    { label: 'Awards',     href: '/awards',     isRoute: true },
     { label: 'Contact',    href: '/contact',    isRoute: true },
   ];
 
