@@ -55,14 +55,14 @@ export const experience = [
 export const projects = [
   {
     id: 3,
-    title: "Aggie Research Finder",
-    description: "Built a platform that helps Texas A&M students discover undergraduate research opportunities more easily by exploring labs, research areas, and faculty interests in one place. Designed to make research more accessible and help students find opportunities aligned with their goals.",
-    shortDescription: "Platform helping Texas A&M students discover undergraduate research opportunities by exploring labs, faculty interests, and research areas in one place.",
+    title: "STEM Research Finder",
+    description: "Built a platform that helps students across the country discover STEM research opportunities more easily by exploring labs, research areas, and faculty interests at universities nationwide. Designed to make research more accessible and help students find opportunities aligned with their goals, no matter where they're located.",
+    shortDescription: "Platform helping students nationwide discover STEM research opportunities by exploring labs, faculty interests, and research areas across universities.",
     tags: ["Next.js", "React", "Tailwind CSS"],
     category: "web",
     featured: true,
     status: "Live",
-    demoUrl: "https://aggie-research-finder.vercel.app/",
+    demoUrl: "https://stemresearchfinder.vercel.app/",
     githubUrl: null,
   },
   {

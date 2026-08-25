@@ -7,7 +7,7 @@ import FilterPills from './FilterPills';
 // Color assignment per project — cycles through brand palette
 // teal (dark, white text), lavender (light, dark text), ochre (light, dark text), peach (light, dark text)
 const PROJECT_COLORS = {
-  3: { bg: '#1a3a3a', text: '#ffffff', linkText: '#a4d4c5', tagBg: 'rgba(255,255,255,0.12)', tagText: '#e5e5e5', tagBorder: 'rgba(255,255,255,0.16)' }, // Aggie Research Finder
+  3: { bg: '#1a3a3a', text: '#ffffff', linkText: '#a4d4c5', tagBg: 'rgba(255,255,255,0.12)', tagText: '#e5e5e5', tagBorder: 'rgba(255,255,255,0.16)' }, // STEM Research Finder
   1: { bg: '#b8a4ed', text: '#0a0a0a', linkText: '#3a2a6a', tagBg: 'rgba(10,10,10,0.08)', tagText: '#1a1a3a', tagBorder: 'rgba(10,10,10,0.12)' }, // Sustainapath
   2: { bg: '#e8b94a', text: '#0a0a0a', linkText: '#5a3a00', tagBg: 'rgba(10,10,10,0.08)', tagText: '#3a2a00', tagBorder: 'rgba(10,10,10,0.12)' }, // SolarIQ
   4: { bg: '#ffb084', text: '#0a0a0a', linkText: '#5a2a00', tagBg: 'rgba(10,10,10,0.08)', tagText: '#3a1a00', tagBorder: 'rgba(10,10,10,0.12)' }, // Substack
