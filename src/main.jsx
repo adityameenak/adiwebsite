@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import App from './App.jsx'
 import ExperiencePage from './pages/ExperiencePage.jsx'
 import ProjectsPage from './pages/ProjectsPage.jsx'
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/education" element={<EducationPage />} />
         <Route path="/awards" element={<AwardsPage />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   </React.StrictMode>,
 )
