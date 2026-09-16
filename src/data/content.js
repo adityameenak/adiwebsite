@@ -15,25 +15,25 @@ export const experience = [
   {
     id: 1,
     role: "Photolithography & Metrology Intern",
-    company: "Samsung Austin Semiconductor",
-    period: "Austin, TX • May 2026 – Present",
+    company: "Samsung Semiconductor",
+    period: "Austin, TX • May 2026 – Aug 2026",
     description: [
-      "Engineered a Streamlit-deployed overlay-correction algorithm converting 500+ wafer- and shot-level measurements into lot-level scanner corrections, exposing abnormal multi-layer misalignment at source and saving 250 engineering hours",
-      "Deployed a CNN defect-classification system trained on FFT-generated heatmaps of live TEL lithography-tool image streams, replacing manual image review with real-time technician alerts",
-      "Recovered 300–400 wafers per day (5% of tool capacity) by tracing a wafer-routing anomaly to a slow buffer robot arm stalling lots at downstream track stations, using SPC (I-MR) control charts on tool-level throughput",
-      "Built a predictive modeling application forecasting photoresist film thickness from spin-coater dispense parameters, calculating spin-speed setpoints to hold lots within a 10-Å SPC window and cutting wafer qualification time by 15%"
+      "Architected a Python-based overlay-correction tool converting 500+ wafer- and shot-level measurements per lot into scanner correction sets, resolving multi-layer misalignment to the source layer and saving 250 engineering hours annually",
+      "Deployed a PyTorch CNN defect classifier trained on FFT-derived heatmaps from spinner-tool imagery, replacing manual review with automated, real-time defect classification",
+      "Recovered 300–400 wafers/day by using I-MR control charts to isolate and resolve a downstream track bottleneck caused by a degraded buffer unit transfer mechanism",
+      "Automated the restoration of lot-level overlay metrology skip factors (1/k) to process-type defaults using Python and SQL, replacing a manual revert step and saving 50 department-hours/week"
     ],
     tags: ["Photolithography", "Metrology", "Process Control"]
   },
   {
     id: 2,
-    role: "Semiconductor Fellow",
-    company: "Samsung Austin Semiconductor",
+    role: "Samsung Semiconductor Research Fellow",
+    company: "Samsung Semiconductor",
     period: "College Station, TX • Jan 2026 – Present",
     description: [
-      "Fabricated 1–2 mm indium/titanium nanowire composites transitioning from thermally conductive to insulating states at critical temperatures, suppressing heat propagation during lithium-ion battery thermal runaway without active control",
-      "Mapped composition-to-threshold behavior across 50 wt% and 75 wt% formulations by resolving thermal-conductivity response against porosity, composition, and indium content, isolating the loading window triggering switching",
-      "Linked switching thresholds and mechanical integrity to microstructure and conductive-pathway formation through SEM cross-sectioning across 4+ iterations, guiding each reformulation"
+      "Fabricated 1–2 mm indium/titanium nanowire composites capable of autonomous thermal switching, suppressing heat propagation during lithium-ion battery thermal runaway without active control",
+      "Mapped thermal-conductivity responses against porosity and indium content across 50 wt% and 75 wt% formulations, identifying the material-loading range associated with thermal switching",
+      "Analyzed conductive-pathway formation and mechanical integrity via SEM cross-sections across 4+ prototype iterations, using microstructural data to guide material reformulation"
     ],
     tags: ["Battery Safety", "Nanomaterials", "Thermal Management"]
   },
@@ -43,9 +43,9 @@ export const experience = [
     company: "Green Group, Texas A&M University",
     period: "College Station, TX • Aug 2025 – Present",
     description: [
-      "Established a reproducible polycarbosilane-to-SiC conversion window viable for high-power semiconductor integration, narrowing pyrolysis ramp rate and atmosphere parameters across 10+ controlled runs spanning 800–1200°C",
-      "Pinpointed the cracking mechanisms limiting polymer-to-ceramic conversion quality by correlating thermal processing conditions against SiC morphology, ceramic yield, and electrical conductivity via SEM, TGA, and four-point probe analysis",
-      "Cut heating non-uniformity across SiC fiber cross-sections by demonstrating RF-driven volumetric heating as a faster, energy-efficient alternative to conventional furnace pyrolysis for ceramic conversion"
+      "Optimized pyrolysis ramp rates and atmosphere parameters (800–1200°C) across 10+ controlled runs, establishing a reproducible polycarbosilane-to-SiC conversion window for high-power device integration",
+      "Correlated thermal processing conditions with SiC morphology, ceramic yield, and electrical conductivity via SEM, TGA, and four-point probe analysis, isolating the cracking mechanisms limiting polymer-to-ceramic conversion",
+      "Demonstrated RF-driven volumetric heating as a faster, energy-efficient alternative to conventional furnace pyrolysis, mitigating cross-sectional heating non-uniformity during ceramic conversion"
     ],
     tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"]
   }
@@ -56,9 +56,9 @@ export const projects = [
   {
     id: 3,
     title: "STEM Research Finder",
-    description: "Built a platform that helps students across the country discover STEM research opportunities more easily by exploring labs, research areas, and faculty interests at universities nationwide. Designed to make research more accessible and help students find opportunities aligned with their goals, no matter where they're located.",
-    shortDescription: "Platform helping students nationwide discover STEM research opportunities by exploring labs, faculty interests, and research areas across universities.",
-    tags: ["Next.js", "React", "Tailwind CSS"],
+    description: "Co-created and lead development of a research-discovery platform indexing 5,000+ STEM faculty across universities nationwide, grown to 3,000+ active student users with no paid acquisition. Python scraping and normalization pipelines pull research interests, lab affiliations, and departmental data from 50+ structurally inconsistent university sites, deduplicating records and auto-refreshing the index bimonthly. Multi-attribute search across institution, discipline, and research area replaces hours of manual department-page browsing with a single query.",
+    shortDescription: "Research-discovery platform indexing 5,000+ STEM faculty nationwide, used by 3,000+ students with no paid acquisition.",
+    tags: ["Python", "Web Scraping", "Next.js", "React"],
     category: "web",
     featured: true,
     status: "Live",
@@ -94,7 +94,7 @@ export const projects = [
     id: 4,
     title: "Substack",
     description: "Long-form writing on semiconductors, sustainable energy, and emerging technologies — covering topics like advanced packaging, quantum computing, and digital twins.",
-    shortDescription: "Writing on semiconductors, sustainable energy, and emerging tech — 400+ monthly readers on Substack.",
+    shortDescription: "20+ long-form articles on semiconductor manufacturing, materials, and energy storage — 400+ monthly readers on Substack.",
     tags: ["Writing", "Semiconductors", "Sustainability"],
     category: "writing",
     featured: true,
@@ -113,7 +113,7 @@ export const projectCategories = [
 ];
 
 export const writing = {
-  description: "I write long-form articles on semiconductors, sustainable energy, and emerging technologies, reaching 400+ monthly readers from academic and professional audiences.",
+  description: "I've published 20+ long-form articles on semiconductor manufacturing, materials, and energy storage, analyzing process physics, materials tradeoffs, and supply-chain limits across EUV lithography and advanced packaging for 400+ monthly readers.",
   platform: "Substack",
   readers: "400+",
   substackUrl: "https://adimeenak.substack.com/",
@@ -151,23 +151,23 @@ export const education = {
   school: "Texas A&M University",
   degree: "Bachelor of Science",
   major: "Honors Chemical Engineering",
-  gpa: "3.86/4.00",
+  gpa: "3.91/4.00",
   graduationDate: "May 2028",
   location: "College Station, TX"
 };
 
 export const technicalSkills = [
   {
-    category: "Programming & Data Analysis",
-    skills: ["Python", "NumPy", "Pandas", "Matplotlib", "scikit-learn", "MATLAB", "SQL", "HTML"],
-  },
-  {
-    category: "Characterization & Instrumentation",
-    skills: ["SEM", "XRD", "FTIR", "TGA", "Optical Microscopy", "Thermal Conductivity Measurement"],
-  },
-  {
     category: "Materials & Processes",
-    skills: ["Pyrolysis", "Nanowire Fabrication", "RF Heating", "Thermodynamics"],
+    skills: ["Semiconductor Manufacturing", "Photolithography", "Nanowire Fabrication", "Thin Film Processing"],
+  },
+  {
+    category: "Characterization",
+    skills: ["SEM", "XRD", "FTIR", "TGA", "Optical Microscopy"],
+  },
+  {
+    category: "Programming & Data",
+    skills: ["Python", "NumPy", "Pandas", "scikit-learn", "PyTorch", "SQL", "MATLAB"],
   },
 ];
 

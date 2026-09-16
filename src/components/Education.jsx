@@ -10,7 +10,7 @@ const Education = () => {
             <h5 className="card-title">Texas A&M University</h5>
             <p className="card-text">Bachelor of Science in Honors Chemical Engineering</p>
             <p className="card-text"><small className="text-muted">Expected Graduation: May 2028</small></p>
-            <p className="card-text">GPA: 3.86/4.00</p>
+            <p className="card-text">GPA: 3.91/4.00</p>
           </div>
         </div>
       </div>
