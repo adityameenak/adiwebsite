@@ -37,7 +37,7 @@ export default function EducationChapter() {
       ref={sectionRef}
       id="education"
       style={{
-        background: '#faf5e8',
+        background: 'var(--section-soft, #faf5e8)',
         borderTop: '1px solid #e5e5e5',
         paddingTop: '96px',
         paddingBottom: '96px',

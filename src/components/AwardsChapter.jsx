@@ -25,7 +25,7 @@ export default function AwardsChapter() {
       ref={sectionRef}
       id="awards"
       style={{
-        background: '#fffaf0',
+        background: 'var(--section-canvas, #fffaf0)',
         borderTop: '1px solid #e5e5e5',
         paddingTop: '96px',
         paddingBottom: '96px',

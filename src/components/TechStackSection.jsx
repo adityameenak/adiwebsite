@@ -29,7 +29,7 @@ export default function TechStackSection() {
     <section
       ref={sectionRef}
       style={{
-        background: '#fffaf0',
+        background: 'var(--section-canvas, #fffaf0)',
         borderTop: '1px solid #e5e5e5',
         borderBottom: '1px solid #e5e5e5',
         paddingTop: '72px',

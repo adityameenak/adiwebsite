@@ -45,7 +45,7 @@ export default function ProjectsChapter() {
       };
 
   return (
-    <section ref={sectionRef} id="projects" style={{ paddingTop: '96px', paddingBottom: '96px', background: '#fffaf0' }}>
+    <section ref={sectionRef} id="projects" style={{ paddingTop: '96px', paddingBottom: '96px', background: 'var(--section-canvas, #fffaf0)' }}>
       <div className="container-wide">
         {/* Header */}
         <motion.div

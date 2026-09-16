@@ -29,7 +29,7 @@ export default function About() {
       ref={sectionRef}
       id="about"
       style={{
-        background: '#faf5e8',
+        background: 'var(--section-soft, #faf5e8)',
         borderTop: '1px solid #e5e5e5',
         borderBottom: '1px solid #e5e5e5',
         paddingTop: '80px',
