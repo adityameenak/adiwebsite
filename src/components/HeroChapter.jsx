@@ -119,7 +119,7 @@ export default function HeroChapter() {
     >
       <HeroBackground pointerX={smoothX} pointerY={smoothY} />
 
-      <div className="container-wide" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container-wide" style={{ position: 'relative', zIndex: 10 }}>
         {/* 7/5 grid — text left, photo right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
