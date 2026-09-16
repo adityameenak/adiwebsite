@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform, useInView } from 'fram
 import { useNavigate } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import HeroBackground from './HeroBackground';
 
 // ─── Typewriter hook ───────────────────────────────────────────────────────────
 function useTypewriter(text, { speed = 60, delay = 380 } = {}) {
@@ -109,13 +110,16 @@ export default function HeroChapter() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
+        position: 'relative',
         background: '#fffaf0',
         paddingTop: '80px',
         paddingBottom: '96px',
         overflow: 'hidden',
       }}
     >
-      <div className="container-wide">
+      <HeroBackground pointerX={smoothX} pointerY={smoothY} />
+
+      <div className="container-wide" style={{ position: 'relative', zIndex: 1 }}>
         {/* 7/5 grid — text left, photo right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
