@@ -6,7 +6,7 @@ import FooterContact from '../components/FooterContact';
 export default function ProjectsPage() {
   return (
     <LenisProvider>
-      <div style={{ background: '#fffaf0', minHeight: '100vh' }}>
+      <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
         <SparseHeader />
         <main>
           <ProjectsChapter />

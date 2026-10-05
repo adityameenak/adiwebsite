@@ -109,15 +109,14 @@ export default function HeroChapter() {
       onMouseLeave={handleMouseLeave}
       style={{
         position: 'relative',
-        background: '#fffaf0',
-        paddingTop: '80px',
-        paddingBottom: '96px',
+        paddingTop: '56px',
+        paddingBottom: '64px',
         overflow: 'hidden',
       }}
     >
       <div className="container-wide" style={{ position: 'relative', zIndex: 10 }}>
         {/* 7/5 grid — text left, photo right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
           {/* Left — 7 columns */}
           <motion.div
@@ -127,7 +126,7 @@ export default function HeroChapter() {
             animate={isInView ? 'visible' : 'hidden'}
           >
             {/* Eyebrow label */}
-            <motion.div variants={fadeIn} className="flex items-center gap-3 mb-8">
+            <motion.div variants={fadeIn} className="flex items-center gap-3 mb-6">
               <span style={{ display: 'block', width: '32px', height: '1px', background: 'var(--accent)' }} />
               <span style={{ fontFamily: 'var(--mono)', fontSize: '12px', letterSpacing: '0.14em', color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Portfolio
@@ -138,22 +137,17 @@ export default function HeroChapter() {
             <motion.h1
               variants={fadeUp}
               style={{
-                fontSize: 'clamp(52px, 7.5vw, 80px)',
+                fontSize: 'clamp(40px, 5.5vw, 64px)',
                 fontWeight: 500,
                 lineHeight: 1.0,
-                letterSpacing: '-2.5px',
-                color: '#0a0a0a',
-                marginBottom: '24px',
-                minHeight: '2.1em',
+                letterSpacing: '-0.04em',
+                color: 'var(--ink)',
+                marginBottom: '20px',
+                minHeight: '1.05em',
               }}
             >
               {prefixDisplayed}
-              {displayed.length > PREFIX.length && (
-                <>
-                  <br />
-                  <span style={{ color: '#0a0a0a' }}>{nameDisplayed}</span>
-                </>
-              )}
+              {nameDisplayed && <span style={{ color: 'var(--accent)' }}>{nameDisplayed}</span>}
               <Cursor done={done} />
             </motion.h1>
 
@@ -161,11 +155,11 @@ export default function HeroChapter() {
             <motion.p
               variants={fadeUp}
               style={{
-                fontSize: '18px',
+                fontSize: '17px',
                 fontWeight: 400,
-                lineHeight: 1.55,
-                color: '#3a3a3a',
-                maxWidth: '38ch',
+                lineHeight: 1.6,
+                color: 'var(--body)',
+                maxWidth: '44ch',
                 marginBottom: '8px',
               }}
             >
@@ -175,7 +169,7 @@ export default function HeroChapter() {
             {/* Location tagline */}
             <motion.p
               variants={fadeUp}
-              style={{ fontFamily: 'var(--mono)', fontSize: '12.5px', color: '#9a9a9a', marginBottom: '40px' }}
+              style={{ fontFamily: 'var(--mono)', fontSize: '12.5px', color: 'var(--faint)', marginBottom: '28px' }}
             >
               {personalInfo.tagline}
             </motion.p>
@@ -208,13 +202,33 @@ export default function HeroChapter() {
                   alignItems: 'center',
                   fontSize: '14px',
                   fontWeight: 600,
-                  color: '#6a6a6a',
+                  color: 'var(--muted)',
                   textDecoration: 'none',
                   border: '1px solid transparent',
                 }}
                 className="hover:text-ink transition-colors"
               >
                 LinkedIn
+              </a>
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  height: '44px',
+                  padding: '0 20px',
+                  borderRadius: '12px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: 'var(--muted)',
+                  textDecoration: 'none',
+                  border: '1px solid transparent',
+                }}
+                className="hover:text-ink transition-colors"
+              >
+                GitHub
               </a>
             </motion.div>
 
@@ -235,12 +249,14 @@ export default function HeroChapter() {
             >
               <div
                 style={{
-                  background: '#faf5e8',
+                  background: 'var(--surface)',
                   borderRadius: '24px',
                   overflow: 'hidden',
                   aspectRatio: '4/5',
+                  maxWidth: '360px',
+                  marginLeft: 'auto',
                   position: 'relative',
-                  border: '1px solid #e5e5e5',
+                  border: '1px solid var(--rule)',
                 }}
               >
                 <img
@@ -262,15 +278,15 @@ export default function HeroChapter() {
                     bottom: '20px',
                     left: '20px',
                     right: '20px',
-                    background: 'rgba(255,250,240,0.88)',
+                    background: 'var(--header-bg)',
                     backdropFilter: 'blur(12px)',
                     WebkitBackdropFilter: 'blur(12px)',
                     borderRadius: '12px',
-                    border: '1px solid rgba(229,229,229,0.6)',
+                    border: '1px solid var(--rule)',
                     padding: '14px 16px',
                   }}
                 >
-                  <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1.2px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '8px' }}>
+                  <p style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '1.2px', color: 'var(--faint)', textTransform: 'uppercase', marginBottom: '8px' }}>
                     Focus Areas
                   </p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
@@ -280,11 +296,11 @@ export default function HeroChapter() {
                         style={{
                           padding: '3px 10px',
                           borderRadius: '9999px',
-                          background: '#f5f0e0',
-                          border: '1px solid #e5e5e5',
+                          background: 'var(--surface)',
+                          border: '1px solid var(--rule)',
                           fontSize: '11px',
                           fontWeight: 500,
-                          color: '#3a3a3a',
+                          color: 'var(--body)',
                         }}
                       >
                         {area}

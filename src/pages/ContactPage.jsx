@@ -5,7 +5,8 @@ import SparseHeader from '../components/SparseHeader';
 import FooterContact from '../components/FooterContact';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { FiMail, FiLinkedin, FiArrowUpRight } from 'react-icons/fi';
+import SectionLabel from '../components/effects/SectionLabel';
+import { FiMail, FiLinkedin, FiGithub, FiArrowUpRight } from 'react-icons/fi';
 
 const CONTACT_LINKS = [
   {
@@ -19,6 +20,13 @@ const CONTACT_LINKS = [
     value: 'linkedin.com/in/adityameenakshi',
     href: personalInfo.linkedin,
     icon: FiLinkedin,
+    external: true,
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/adityameenak',
+    href: personalInfo.github,
+    icon: FiGithub,
     external: true,
   },
 ];
@@ -42,9 +50,9 @@ function ContactSection() {
       ref={ref}
       id="contact"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
-        background: '#fffaf0',
+        paddingTop: '64px',
+        paddingBottom: '64px',
+        background: 'var(--bg)',
       }}
     >
       <div className="container-wide">
@@ -54,23 +62,18 @@ function ContactSection() {
           animate={isInView ? 'visible' : 'hidden'}
           style={{ maxWidth: '480px' }}
         >
-          <motion.p
-            variants={fadeUp}
-            style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '16px' }}
-          >
-            Contact
-          </motion.p>
+          <SectionLabel>Contact</SectionLabel>
 
           <motion.h2
             variants={fadeUp}
-            style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 500, letterSpacing: '-2px', color: '#0a0a0a', marginBottom: '12px', lineHeight: 1.05 }}
+            style={{ fontSize: 'clamp(30px, 3.6vw, 40px)', fontWeight: 500, letterSpacing: '-0.03em', color: 'var(--ink)', marginBottom: '12px', lineHeight: 1.05 }}
           >
             Get in touch.
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
-            style={{ fontSize: '16px', color: '#6a6a6a', lineHeight: 1.55, marginBottom: '40px' }}
+            style={{ fontSize: '16px', color: 'var(--muted)', lineHeight: 1.55, marginBottom: '40px' }}
           >
             Feel free to reach out for research opportunities, collaborations, or just to connect.
           </motion.p>
@@ -88,12 +91,12 @@ function ContactSection() {
                   justifyContent: 'space-between',
                   padding: '16px 20px',
                   borderRadius: '16px',
-                  background: '#f5f0e0',
-                  border: '1px solid #e5e5e5',
+                  background: 'var(--surface)',
+                  border: '1px solid var(--rule)',
                   textDecoration: 'none',
                   transition: 'border-color 0.15s',
                 }}
-                className="group hover:border-ink"
+                className="group contact-link"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div
@@ -101,24 +104,24 @@ function ContactSection() {
                       width: '36px',
                       height: '36px',
                       borderRadius: '8px',
-                      background: '#ebe6d6',
-                      border: '1px solid #d6d0c4',
+                      background: 'var(--surface-strong)',
+                      border: '1px solid var(--rule)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       flexShrink: 0,
                     }}
                   >
-                    <Icon style={{ width: '16px', height: '16px', color: '#6a6a6a' }} />
+                    <Icon style={{ width: '16px', height: '16px', color: 'var(--muted)' }} />
                   </div>
                   <div>
-                    <p style={{ fontSize: '11px', fontWeight: 600, color: '#9a9a9a', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '2px' }}>
+                    <p style={{ fontSize: '11px', fontWeight: 600, color: 'var(--faint)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '2px' }}>
                       {label}
                     </p>
-                    <p style={{ fontSize: '13px', color: '#0a0a0a', fontWeight: 500 }}>{value}</p>
+                    <p style={{ fontSize: '13px', color: 'var(--ink)', fontWeight: 500 }}>{value}</p>
                   </div>
                 </div>
-                <FiArrowUpRight style={{ width: '16px', height: '16px', color: '#9a9a9a', flexShrink: 0 }} />
+                <FiArrowUpRight style={{ width: '16px', height: '16px', color: 'var(--faint)', flexShrink: 0 }} />
               </a>
             ))}
           </motion.div>
@@ -131,7 +134,7 @@ function ContactSection() {
 export default function ContactPage() {
   return (
     <LenisProvider>
-      <div style={{ background: '#fffaf0', minHeight: '100vh' }}>
+      <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
         <SparseHeader />
         <main>
           <ContactSection />

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import { FiMail, FiLinkedin } from 'react-icons/fi';
+import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
 
 export default function FooterContact() {
   const currentYear = new Date().getFullYear();
@@ -9,9 +9,9 @@ export default function FooterContact() {
   return (
     <footer
       style={{
-        background: '#faf5e8',
-        borderTop: '1px solid #e5e5e5',
-        padding: '40px 0',
+        background: 'var(--bg-soft)',
+        borderTop: '1px solid var(--rule)',
+        padding: '28px 0',
       }}
     >
       <div className="container-wide">
@@ -24,16 +24,17 @@ export default function FooterContact() {
           }}
           className="sm:flex-row sm:justify-between"
         >
-          <p style={{ fontSize: '13px', color: '#9a9a9a', fontWeight: 400 }}>
-            &copy; {currentYear} Adi. All rights reserved.
+          <p style={{ fontSize: '13px', color: 'var(--faint)', fontWeight: 400 }}>
+            &copy; {currentYear} Aditya Meenakshisundaram
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             <SocialLink href={`mailto:${personalInfo.email}`} icon={FiMail} label="Email" />
             <SocialLink href={personalInfo.linkedin} icon={FiLinkedin} label="LinkedIn" />
+            <SocialLink href={personalInfo.github} icon={FiGithub} label="GitHub" />
           </div>
 
-          <p style={{ fontSize: '13px', color: '#9a9a9a', fontWeight: 400 }}>
+          <p style={{ fontSize: '13px', color: 'var(--faint)', fontWeight: 400 }}>
             {personalInfo.location}
           </p>
         </div>
@@ -50,8 +51,9 @@ function SocialLink({ href, icon: Icon, label }) {
       target={href.startsWith('http') ? '_blank' : undefined}
       rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
       aria-label={label}
-      style={{ padding: '8px', color: '#9a9a9a', display: 'flex', alignItems: 'center' }}
-      whileHover={reducedMotion ? {} : { scale: 1.1, color: '#0a0a0a' }}
+      className="footer-social"
+      style={{ padding: '8px', display: 'flex', alignItems: 'center' }}
+      whileHover={reducedMotion ? {} : { scale: 1.1 }}
       whileTap={reducedMotion ? {} : { scale: 0.95 }}
     >
       <Icon style={{ width: '16px', height: '16px' }} />

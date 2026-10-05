@@ -4,11 +4,21 @@ export const personalInfo = {
   tagline: "College Station, TX • Class of 2028",
   email: "adityameenakshisundaram@gmail.com",
   linkedin: "https://www.linkedin.com/in/adityameenakshi/",
+  github: "https://github.com/adityameenak",
   location: "College Station, TX"
 };
 
 export const about = {
-  paragraph: "I'm an Honors Chemical Engineering student at Texas A&M University with a deep interest in semiconductor manufacturing, materials science, battery safety, and AI-driven process optimization. My work spans from advanced semiconductor fabrication to sustainable energy systems, and I'm passionate about applying engineering principles to solve real-world challenges. Through research, industry fellowships, and hands-on projects, I focus on bridging theory with practical application in cutting-edge technology."
+  headline: "Better materials, and the tools to study them.",
+  paragraphs: [
+    "I'm a Chemical Engineering honors student at Texas A&M, fascinated by how materials are made, why they behave the way they do, and how far we can push them. My work moves between the lab and the computer, spanning materials research, semiconductor manufacturing, battery safety, and scientific computing.",
+    "Here you'll find tools I've built for research discovery, chemical process optimization, and energy analytics, along with my research and writing on semiconductors and energy.",
+  ],
+  currently: [
+    "Building heat-switching battery materials as a Samsung Semiconductor Research Fellow",
+    "Turning polymers into conductive silicon carbide at Texas A&M",
+    "Writing about semiconductors and energy on Substack",
+  ],
 };
 
 export const experience = [
@@ -18,34 +28,35 @@ export const experience = [
     company: "Samsung Semiconductor",
     period: "Austin, TX • May 2026 – Aug 2026",
     description: [
-      "Architected a Python-based overlay-correction tool converting 500+ wafer- and shot-level measurements per lot into scanner correction sets, resolving multi-layer misalignment to the source layer and saving 250 engineering hours annually",
-      "Deployed a PyTorch CNN defect classifier trained on FFT-derived heatmaps from spinner-tool imagery, replacing manual review with automated, real-time defect classification",
-      "Recovered 300–400 wafers/day by using I-MR control charts to isolate and resolve a downstream track bottleneck caused by a degraded buffer unit transfer mechanism",
-      "Automated the restoration of lot-level overlay metrology skip factors (1/k) to process-type defaults using Python and SQL, replacing a manual revert step and saving 50 department-hours/week"
+      "Engineered a Python-based overlay-correction tool that converted 500+ wafer- and shot-level measurements per lot into scanner corrections, resolving multi-layer misalignments and saving 250 engineering hours annually",
+      "Deployed a PyTorch CNN trained on FFT-derived heatmaps to classify spinner-tool defects, automating real-time review of 1,000+ images daily",
+      "Restored throughput by 300–400 wafers/day using I-MR control charts to isolate a downstream track bottleneck and resolve a degraded buffer-unit transfer mechanism",
+      "Automated resets of lot-level overlay metrology skip factors to process-type defaults using Python and SQL, eliminating manual reverts and saving 50 department-hours per week"
     ],
     tags: ["Photolithography", "Metrology", "Process Control"]
   },
   {
     id: 2,
     role: "Samsung Semiconductor Research Fellow",
-    company: "Samsung Semiconductor",
+    company: "Samsung Semiconductor & Artie McFerrin Department of Chemical Engineering",
     period: "College Station, TX • Jan 2026 – Present",
     description: [
-      "Fabricated 1–2 mm indium/titanium nanowire composites capable of autonomous thermal switching, suppressing heat propagation during lithium-ion battery thermal runaway without active control",
-      "Mapped thermal-conductivity responses against porosity and indium content across 50 wt% and 75 wt% formulations, identifying the material-loading range associated with thermal switching",
-      "Analyzed conductive-pathway formation and mechanical integrity via SEM cross-sections across 4+ prototype iterations, using microstructural data to guide material reformulation"
+      "Project: lithium-ion battery thermal-runaway mitigation using a sprayable, passive thermal-switching composite, designed to switch from heat conduction to insulation via indium melt-out, with CaCO₃ releasing CO₂ for fire mitigation and a retained titanium framework for structural support",
+      "Executed synthesis end to end: mixed CaCO₃, indium, and titanium nanowires, compacted pellets, and heat-treated at 900 °C for 1 hour; examined structure and conductive pathways using SEM cross-sections across 4+ prototype iterations",
+      "Compared heat-transfer response across 50–70 wt% indium pellets using hot-plate heating and top-surface temperature measurements; identified 65 wt% as the best-performing formulation tested, with improved structural integrity"
     ],
     tags: ["Battery Safety", "Nanomaterials", "Thermal Management"]
   },
   {
     id: 3,
     role: "Silicon Carbide (SiC) Researcher",
-    company: "Green Group, Texas A&M University",
+    company: "Artie McFerrin Department of Chemical Engineering, Texas A&M University",
     period: "College Station, TX • Aug 2025 – Present",
     description: [
-      "Optimized pyrolysis ramp rates and atmosphere parameters (800–1200°C) across 10+ controlled runs, establishing a reproducible polycarbosilane-to-SiC conversion window for high-power device integration",
-      "Correlated thermal processing conditions with SiC morphology, ceramic yield, and electrical conductivity via SEM, TGA, and four-point probe analysis, isolating the cracking mechanisms limiting polymer-to-ceramic conversion",
-      "Demonstrated RF-driven volumetric heating as a faster, energy-efficient alternative to conventional furnace pyrolysis, mitigating cross-sectional heating non-uniformity during ceramic conversion"
+      "Project: conversion of liquid polycarbosilane (PCS) into electrically conductive silicon carbide for RF susceptor applications, targeting the lowest pyrolysis temperature needed to obtain conductivity",
+      "Executed synthesis end to end, from liquid PCS through degassing, curing, resting, and pyrolysis; completed 10+ controlled runs at 800–1200 °C, varying temperature, ramp rate, and atmosphere",
+      "Narrowed the onset of measurable electrical conductivity to pyrolysis temperatures between 900 and 1000 °C using four-point probe measurements, guiding subsequent trials within that range",
+      "Characterized ceramic yield and microstructure using TGA and SEM; evaluated RF heating response to assess how conversion temperature affected electromagnetic coupling and heat generation"
     ],
     tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"]
   }
@@ -56,27 +67,36 @@ export const projects = [
   {
     id: 5,
     title: "Switchable Thermal Barriers Against Battery Runaway",
-    description: "One-dimensional transient finite-volume model of a five-cell lithium-ion stack with Arrhenius self-heating, a smooth temperature-switchable barrier conductivity k(T) and convective end cooling. A 2 mm switchable barrier holds the normal-operation peak at the conductive barrier's 38.0 °C (vs 64.5 °C for an aerogel insulator) while confining runaway to the trigger cell; a conductive barrier lets runaway reach all five cells in about a minute. A 361-design sweep shows containment is governed by the hot-state conductance k_off/L, which must stay below ~32 W/m²K, and a switch-temperature sweep finds a 38–175 °C operating window. The solver conserves energy to round-off and is verified against analytical, ODE-solver and convergence tests.",
-    shortDescription: "Finite-volume model of a five-cell Li-ion stack showing a temperature-switchable barrier keeps cells as cool as a conductor in normal use (38 °C vs 64.5 °C for aerogel) yet confines runaway to the trigger cell. A 361-design sweep reduces containment to one number: hot-state conductance below ~32 W/m²K.",
-    tags: ["Python", "Finite-Volume", "Battery Safety", "Heat Transfer", "Arrhenius Kinetics"],
-    type: "Research · Technical Report",
+    description: "When one battery cell overheats, it can set off its neighbors like dominoes. The barrier between cells has two opposite jobs: let heat escape on a normal day, and block it when a cell fails. I built a simulation of a battery pack to test a barrier that works like a fuse for heat, conducting while it is cool and insulating once it gets hot.",
+    shortDescription: "When one battery cell overheats it can set off its neighbors like dominoes. I simulated a battery pack to test a barrier that acts like a fuse for heat: it lets heat escape while cells are cool, then blocks it once a cell fails. It kept the pack as cool as a normal heat-spreading barrier day to day, yet stopped the chain reaction, and showed that what matters most is how well the barrier insulates once it's hot.",
+    tags: ["Python", "Simulation", "Battery Safety", "Heat Transfer"],
+    type: "Research · Technical report",
     category: "research",
     featured: true,
-    status: "Oct 2026",
-    paperUrl: "/papers/switchable-barrier-runaway.pdf",
+    lead: true,
+    status: "Report",
+    links: [
+      { label: "Read the paper", href: "/papers/switchable-barrier-runaway.pdf", primary: true },
+      { label: "Code on GitHub", href: "https://github.com/adityameenak/switchable-barrier-runaway" },
+    ],
     demoUrl: null,
     githubUrl: "https://github.com/adityameenak/switchable-barrier-runaway",
   },
   {
     id: 3,
     title: "STEM Research Finder",
-    description: "Co-created and lead development of a research-discovery platform indexing 5,000+ STEM faculty across universities nationwide, grown to 3,000+ active student users with no paid acquisition. Python scraping and normalization pipelines pull research interests, lab affiliations, and departmental data from 50+ structurally inconsistent university sites, deduplicating records and auto-refreshing the index bimonthly. Multi-attribute search across institution, discipline, and research area replaces hours of manual department-page browsing with a single query.",
-    shortDescription: "Research-discovery platform indexing 5,000+ STEM faculty nationwide, used by 3,000+ students with no paid acquisition.",
-    tags: ["Python", "Web Scraping", "Next.js", "React"],
+    description: "Co-created and launched a multi-tenant research-discovery platform supporting university-specific deployments, indexing 5,000+ STEM faculty nationwide and attracting 3,000+ student users without paid acquisition. Python data pipelines across 50+ university web sources extract and standardize faculty research profiles, deduplicate records, and automate index updates. Resume-based faculty matching and personalized outreach drafting connect student experience with relevant research labs.",
+    shortDescription: "A search engine for undergrad research. It pulls faculty profiles from university websites across the country into one place, so students can search by school, field or research topic, get matched to labs from their resume, and draft a personal outreach email, instead of trawling department pages. 5,000+ faculty indexed and 3,000+ students using it, with no paid marketing.",
+    lead: true,
+    links: [
+      { label: "Visit the site", href: "https://stemresearchfinder.tech/", primary: true },
+    ],
+    tags: ["Python", "Data Pipelines", "Next.js", "React"],
+    type: "Web platform · Co-creator & lead developer",
     category: "web",
     featured: true,
     status: "Live",
-    demoUrl: "https://stemresearchfinder.vercel.app/",
+    demoUrl: "https://stemresearchfinder.tech/",
     githubUrl: null,
   },
   {
@@ -108,7 +128,7 @@ export const projects = [
     id: 4,
     title: "Substack",
     description: "Long-form writing on semiconductors, sustainable energy, and emerging technologies — covering topics like advanced packaging, quantum computing, and digital twins.",
-    shortDescription: "20+ long-form articles on semiconductor manufacturing, materials, and energy storage — 400+ monthly readers on Substack.",
+    shortDescription: "30+ long-form articles on semiconductor manufacturing, materials, and energy storage — 400+ monthly readers on Substack.",
     tags: ["Writing", "Semiconductors", "Sustainability"],
     category: "writing",
     featured: true,
@@ -128,7 +148,7 @@ export const projectCategories = [
 ];
 
 export const writing = {
-  description: "I've published 20+ long-form articles on semiconductor manufacturing, materials, and energy storage, analyzing process physics, materials tradeoffs, and supply-chain limits across EUV lithography and advanced packaging for 400+ monthly readers.",
+  description: "I've published 30+ long-form articles on semiconductor manufacturing, materials, and energy storage, analyzing process physics, materials tradeoffs, and supply-chain limits across EUV lithography and advanced packaging for 400+ monthly readers.",
   platform: "Substack",
   readers: "400+",
   substackUrl: "https://adimeenak.substack.com/",
@@ -173,16 +193,16 @@ export const education = {
 
 export const technicalSkills = [
   {
-    category: "Materials & Processes",
-    skills: ["Semiconductor Manufacturing", "Photolithography", "Nanowire Fabrication", "Thin Film Processing"],
+    category: "Processing & Testing",
+    skills: ["Photolithography", "Overlay Metrology", "Pyrolysis", "Thermal Testing", "Statistical Process Control"],
   },
   {
     category: "Characterization",
-    skills: ["SEM", "XRD", "FTIR", "TGA", "Optical Microscopy"],
+    skills: ["SEM", "XRD", "TGA", "Optical Microscopy"],
   },
   {
     category: "Programming & Data",
-    skills: ["Python", "NumPy", "Pandas", "scikit-learn", "PyTorch", "SQL", "MATLAB"],
+    skills: ["Python", "NumPy", "Pandas", "SciPy", "PyTorch", "TensorFlow", "SQL", "MATLAB", "Git", "Docker", "Linux"],
   },
 ];
 
@@ -202,10 +222,12 @@ export const advancedCoursework = [
 ];
 
 export const awards = [
-  { id: 1, name: "Samsung Semiconductor Fellowship" },
-  { id: 2, name: "TEX-E Fellowship" },
-  { id: 3, name: "Humba Ventures Deep Tech Fellowship" },
-  { id: 4, name: "Craig & Galen Brown Engineering Honors", org: "Texas A&M" }
+  { id: 1, name: "Samsung Semiconductor Research Fellowship", org: "$10,000" },
+  { id: 2, name: "Samsung Semiconductor Intern Scholarship", org: "$10,000" },
+  { id: 3, name: "Humba Deep Tech Fellowship", org: "$6,000" },
+  { id: 4, name: "TEX-E Fellowship" },
+  { id: 5, name: "Omega Chi Epsilon" },
+  { id: 6, name: "Craig & Galen Brown Engineering Honors", org: "Texas A&M" },
 ];
 
 export const navigation = [

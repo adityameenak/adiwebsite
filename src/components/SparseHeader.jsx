@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import { useTheme } from '../hooks/useTheme';
+import { FiSun, FiMoon } from 'react-icons/fi';
 
 const RESUME_PDF = '/resume.pdf';
 
 export default function SparseHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const reducedMotion = useReducedMotion();
+  const { theme, toggle: toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,7 +19,6 @@ export default function SparseHeader() {
     { label: 'Projects',   href: '/projects',   isRoute: true },
     { label: 'Experience', href: '/experience', isRoute: true },
     { label: 'Education',  href: '/education',  isRoute: true },
-    { label: 'Awards',     href: '/awards',     isRoute: true },
     { label: 'Contact',    href: '/contact',    isRoute: true },
   ];
 
@@ -35,11 +37,11 @@ export default function SparseHeader() {
   return (
     <header
       style={{
-        background: 'rgba(255, 250, 240, 0.88)',
+        background: 'var(--header-bg)',
         backdropFilter: 'blur(8px)',
         WebkitBackdropFilter: 'blur(8px)',
         height: '64px',
-        borderBottom: '1px solid #e5e5e5',
+        borderBottom: '1px solid var(--rule)',
         position: 'sticky',
         top: 0,
         zIndex: 900,
@@ -51,11 +53,11 @@ export default function SparseHeader() {
         href="/"
         onClick={(e) => { e.preventDefault(); navigate('/'); }}
         className="select-none"
-        style={{ fontSize: '15px', fontWeight: 600, color: '#0a0a0a', letterSpacing: 0 }}
+        style={{ fontSize: '15px', fontWeight: 600, color: 'var(--ink)', letterSpacing: 0 }}
       >
         Adi
-        <span style={{ color: '#9a9a9a', margin: '0 8px', fontWeight: 400 }}>·</span>
-        <span style={{ fontSize: '13px', fontWeight: 500, color: '#6a6a6a' }} className="hidden sm:inline">
+        <span style={{ color: 'var(--accent)', margin: '0 8px', fontWeight: 400 }}>·</span>
+        <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--muted)' }} className="hidden sm:inline">
           Chemical Engineering
         </span>
       </a>
@@ -77,7 +79,7 @@ export default function SparseHeader() {
         </nav>
 
         {/* Separator */}
-        <span className="hidden md:block" style={{ width: '1px', height: '16px', background: '#e5e5e5' }} aria-hidden />
+        <span className="hidden md:block" style={{ width: '1px', height: '16px', background: 'var(--rule)' }} aria-hidden />
 
         {/* Status pill */}
         <span
@@ -85,11 +87,11 @@ export default function SparseHeader() {
           style={{
             padding: '4px 12px',
             borderRadius: '9999px',
-            background: '#f5f0e0',
-            border: '1px solid #e5e5e5',
+            background: 'var(--surface)',
+            border: '1px solid var(--rule)',
             fontSize: '12px',
             fontWeight: 600,
-            color: '#3a3a3a',
+            color: 'var(--body)',
           }}
         >
           <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
@@ -106,8 +108,8 @@ export default function SparseHeader() {
             height: '36px',
             padding: '0 16px',
             borderRadius: '8px',
-            background: '#0a0a0a',
-            color: '#ffffff',
+            background: 'var(--ink)',
+            color: 'var(--on-ink)',
             fontSize: '13px',
             fontWeight: 600,
             textDecoration: 'none',
@@ -116,10 +118,21 @@ export default function SparseHeader() {
           Resume
         </a>
 
+        {/* Theme toggle */}
+        <button
+          type="button"
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+        >
+          {theme === 'dark' ? <FiSun size={15} /> : <FiMoon size={15} />}
+        </button>
+
         {/* Mobile toggle */}
         <motion.button
           className="md:hidden p-1"
-          style={{ color: '#6a6a6a' }}
+          style={{ color: 'var(--muted)' }}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           whileTap={reducedMotion ? {} : { scale: 0.95 }}
@@ -143,8 +156,8 @@ export default function SparseHeader() {
             transition={{ duration: 0.15 }}
             className="absolute top-full left-0 right-0 z-50 px-6 py-4 space-y-1"
             style={{
-              background: '#fffaf0',
-              borderBottom: '1px solid #e5e5e5',
+              background: 'var(--bg)',
+              borderBottom: '1px solid var(--rule)',
             }}
           >
             {navLinks.map((link) => (
@@ -153,7 +166,7 @@ export default function SparseHeader() {
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
                 className="block py-2.5 transition-colors"
-                style={{ fontSize: '15px', fontWeight: 500, color: '#3a3a3a', textDecoration: 'none' }}
+                style={{ fontSize: '15px', fontWeight: 500, color: 'var(--body)', textDecoration: 'none' }}
               >
                 {link.label}
               </a>
@@ -163,15 +176,15 @@ export default function SparseHeader() {
               target="_blank"
               rel="noopener noreferrer"
               className="block py-2.5 transition-colors"
-              style={{ fontSize: '15px', fontWeight: 500, color: '#3a3a3a', textDecoration: 'none' }}
+              style={{ fontSize: '15px', fontWeight: 500, color: 'var(--body)', textDecoration: 'none' }}
             >
               Resume
             </a>
-            <div style={{ borderTop: '1px solid #e5e5e5', marginTop: '8px', paddingTop: '12px' }} className="space-y-2">
+            <div style={{ borderTop: '1px solid var(--rule)', marginTop: '8px', paddingTop: '12px' }} className="space-y-2">
               <a
                 href={`mailto:${personalInfo.email}`}
                 className="block py-1 transition-colors"
-                style={{ fontSize: '13px', color: '#6a6a6a', textDecoration: 'none' }}
+                style={{ fontSize: '13px', color: 'var(--muted)', textDecoration: 'none' }}
               >
                 {personalInfo.email}
               </a>
@@ -180,9 +193,18 @@ export default function SparseHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block py-1 transition-colors"
-                style={{ fontSize: '13px', color: '#6a6a6a', textDecoration: 'none' }}
+                style={{ fontSize: '13px', color: 'var(--muted)', textDecoration: 'none' }}
               >
                 LinkedIn
+              </a>
+              <a
+                href={personalInfo.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block py-1 transition-colors"
+                style={{ fontSize: '13px', color: 'var(--muted)', textDecoration: 'none' }}
+              >
+                GitHub
               </a>
             </div>
           </motion.div>

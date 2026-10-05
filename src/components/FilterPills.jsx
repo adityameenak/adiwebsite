@@ -27,8 +27,8 @@ export default function FilterPills({ filters, activeFilter, onFilterChange, cla
               border: '1px solid',
               outline: 'none',
               background: isActive ? 'var(--accent-soft)' : 'transparent',
-              color: isActive ? 'var(--accent)' : '#6a6a6a',
-              borderColor: isActive ? 'var(--accent)' : '#e5e5e5',
+              color: isActive ? 'var(--accent)' : 'var(--muted)',
+              borderColor: isActive ? 'var(--accent)' : 'var(--rule)',
               transition: 'all 0.15s ease',
             }}
             className={isActive ? '' : 'hover:text-ink hover:border-ink'}
@@ -36,7 +36,7 @@ export default function FilterPills({ filters, activeFilter, onFilterChange, cla
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               {label}
               {typeof count === 'number' && (
-                <span style={{ fontSize: '11px', color: isActive ? 'var(--accent)' : '#9a9a9a', opacity: 0.8 }}>
+                <span style={{ fontSize: '11px', color: isActive ? 'var(--accent)' : 'var(--faint)', opacity: 0.8 }}>
                   {count}
                 </span>
               )}

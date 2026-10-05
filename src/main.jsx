@@ -1,13 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import App from './App.jsx'
 import ExperiencePage from './pages/ExperiencePage.jsx'
 import ProjectsPage from './pages/ProjectsPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import EducationPage from './pages/EducationPage.jsx'
-import AwardsPage from './pages/AwardsPage.jsx'
 import SiteEffects from './components/effects/SiteEffects.jsx'
 import './index.css'
 
@@ -21,7 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/projects" element={<ProjectsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/education" element={<EducationPage />} />
-        <Route path="/awards" element={<AwardsPage />} />
+        <Route path="/awards" element={<Navigate to="/education" replace />} />
       </Routes>
       <Analytics />
     </BrowserRouter>

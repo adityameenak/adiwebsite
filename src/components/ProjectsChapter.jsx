@@ -36,67 +36,62 @@ export default function ProjectsChapter() {
         exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
       };
 
+  const leads = filteredProjects.filter((p) => p.lead);
+  const rest = filteredProjects.filter((p) => !p.lead);
+
   return (
-    <section ref={sectionRef} id="projects" style={{ paddingTop: '96px', paddingBottom: '96px', background: 'var(--section-canvas, #fffaf0)' }}>
+    <section ref={sectionRef} id="projects" className="sec">
       <div className="container-wide">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: reducedMotion ? 0.2 : 0.55 }}
-          style={{ marginBottom: '48px' }}
+          transition={{ duration: reducedMotion ? 0.2 : 0.5 }}
+          className="sec-head flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5"
         >
-          <SectionLabel>Featured Work</SectionLabel>
-
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <div>
-              <h2 style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 500, letterSpacing: '-2px', color: '#0a0a0a', marginBottom: '12px' }}>
-                Projects
-              </h2>
-              <p style={{ fontSize: '16px', color: '#6a6a6a', maxWidth: '44ch', lineHeight: 1.55 }}>
-                Technical projects spanning semiconductors, sustainability, and software.
-              </p>
-            </div>
-
-            <FilterPills
-              filters={filtersWithCount}
-              activeFilter={activeFilter}
-              onFilterChange={setActiveFilter}
-              className="lg:self-end"
-            />
+          <div>
+            <SectionLabel>Featured Work</SectionLabel>
+            <h2 className="sec-title">Projects</h2>
           </div>
+          <FilterPills
+            filters={filtersWithCount}
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
         </motion.div>
 
-        {/* Projects grid */}
         <motion.div
+          id="projects-grid"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 lg:gap-6"
+          className="flex flex-col gap-4"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={itemVariants}
-                layout
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-                className={project.paperUrl ? 'md:col-span-2' : undefined}
-              >
-                {project.paperUrl
-                  ? <LeadProjectCard project={project} />
-                  : <ProjectCard project={project} />}
+            {leads.map((project) => (
+              <motion.div key={project.id} variants={itemVariants} layout initial="hidden" animate="visible" exit="exit">
+                <LeadProjectCard project={project} />
               </motion.div>
             ))}
           </AnimatePresence>
+
+          {rest.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <AnimatePresence mode="popLayout">
+                {rest.map((project) => (
+                  <motion.div key={project.id} variants={itemVariants} layout initial="hidden" animate="visible" exit="exit">
+                    <ProjectCard project={project} />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            </div>
+          )}
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <div style={{ textAlign: 'center', padding: '64px 0' }}>
-            <p style={{ color: '#9a9a9a', fontSize: '16px' }}>No projects in this category.</p>
-          </div>
+          <p style={{ textAlign: 'center', padding: '48px 0', color: 'var(--faint)', fontSize: '15px' }}>
+            No projects in this category.
+          </p>
         )}
       </div>
     </section>
@@ -111,7 +106,7 @@ const CARD_LINK_ARROW = (
 
 function TagRow({ tags, limit }) {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '20px' }}>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '16px' }}>
       {tags.slice(0, limit).map((tag) => (
         <span key={tag} className="mono-chip">{tag}</span>
       ))}
@@ -119,7 +114,9 @@ function TagRow({ tags, limit }) {
   );
 }
 
-// Full-width card for research with a paper: accent top rule, status dot, stacked actions.
+const isExternal = (href) => href.startsWith('http') || href.endsWith('.pdf');
+
+// Full-width card: accent top rule, status dot, stacked actions.
 function LeadProjectCard({ project }) {
   return (
     <article className="project-card project-card--lead">
@@ -127,22 +124,23 @@ function LeadProjectCard({ project }) {
         <p className="project-card__label">
           <span className="status-dot" aria-hidden="true" />
           {project.type}
-          <span style={{ color: '#9a9a9a' }}>· {project.status}</span>
         </p>
-        <h3 className="project-card__title" style={{ fontSize: '24px' }}>{project.title}</h3>
-        <p className="project-card__body" style={{ maxWidth: '62ch' }}>{project.shortDescription}</p>
+        <h3 className="project-card__title" style={{ fontSize: '21px' }}>{project.title}</h3>
+        <p className="project-card__body" style={{ maxWidth: '68ch' }}>{project.shortDescription}</p>
         <TagRow tags={project.tags} limit={5} />
       </div>
 
       <div className="project-actions">
-        <a href={project.paperUrl} target="_blank" rel="noopener noreferrer" className="is-primary">
-          Read the paper {CARD_LINK_ARROW}
-        </a>
-        {project.githubUrl && (
-          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-            Code on GitHub {CARD_LINK_ARROW}
+        {project.links.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className={link.primary ? 'is-primary' : undefined}
+            {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {link.label} {CARD_LINK_ARROW}
           </a>
-        )}
+        ))}
       </div>
     </article>
   );
@@ -155,7 +153,7 @@ function ProjectCard({ project }) {
 
   return (
     <Tag {...linkProps} className="project-card">
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
         <span className="project-card__meta">{project.type || project.category}</span>
         {project.status && <span className="project-card__meta">{project.status}</span>}
       </div>
@@ -167,7 +165,7 @@ function ProjectCard({ project }) {
 
       <p className="project-card__body" style={{ flex: 1 }}>{project.shortDescription}</p>
 
-      <TagRow tags={project.tags} limit={4} />
+      <TagRow tags={project.tags} limit={3} />
     </Tag>
   );
 }

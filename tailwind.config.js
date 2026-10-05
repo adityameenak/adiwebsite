@@ -38,17 +38,17 @@ export default {
 
       colors: {
         // ── Clay primary text tokens ──────────────────────────────────────────
-        ink:          '#0a0a0a',
-        body:         '#3a3a3a',
-        muted:        '#6a6a6a',
-        'muted-soft': '#9a9a9a',
-        hairline:     '#e5e5e5',
+        ink:          'var(--ink)',
+        body:         'var(--body)',
+        muted:        'var(--muted)',
+        'muted-soft': 'var(--faint)',
+        hairline:     'var(--rule)',
         'hairline-soft': '#f0f0f0',
 
         // ── Clay surface tokens ───────────────────────────────────────────────
-        canvas:          '#fffaf0',   // Main page floor
-        'surface-soft':  '#faf5e8',   // Footer, CTA bands
-        'surface-card':  '#f5f0e0',   // Experience cards, secondary cards
+        canvas:          'var(--bg)',   // Main page floor
+        'surface-soft':  'var(--bg-soft)',   // Footer, CTA bands
+        'surface-card':  'var(--surface)',   // Experience cards, secondary cards
         'surface-strong':'#ebe6d6',   // Emphasized bands
         'surface-dark':  '#0a1a1a',   // Rare dark cards
         'surface-dark-elevated': '#1a2a2a',
