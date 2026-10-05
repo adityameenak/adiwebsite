@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { education } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import SectionLabel from './effects/SectionLabel';
 
 const ACCENT = '#b87c45';
 
@@ -48,9 +49,7 @@ export default function EducationChapter() {
 
           {/* Section header */}
           <motion.div variants={fadeUp} style={{ marginBottom: '52px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '12px' }}>
-              Academic Background
-            </p>
+            <SectionLabel>Academic Background</SectionLabel>
             <h2 style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 500, letterSpacing: '-2px', color: '#0a0a0a', marginBottom: '12px' }}>
               Education
             </h2>

@@ -4,7 +4,7 @@ Modern, minimalist portfolio website built with Vite, React, and Tailwind CSS.
 
 ## Features
 
-- **Modern Design**: Sleek, minimalist interface with purple accents
+- **Modern Design**: Minimalist cream-and-maroon interface with a pointer glow, custom cursor and reading-progress bar
 - **One-Page Layout**: Smooth scrolling between sections
 - **Fully Responsive**: Works beautifully on all devices
 - **Scroll Animations**: Subtle fade-in effects as you scroll

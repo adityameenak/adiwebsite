@@ -2,16 +2,8 @@ import { useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { projects, projectCategories } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import SectionLabel from './effects/SectionLabel';
 import FilterPills from './FilterPills';
-
-// Color assignment per project — cycles through brand palette
-// teal (dark, white text), lavender (light, dark text), ochre (light, dark text), peach (light, dark text)
-const PROJECT_COLORS = {
-  3: { bg: '#1a3a3a', text: '#ffffff', linkText: '#a4d4c5', tagBg: 'rgba(255,255,255,0.12)', tagText: '#e5e5e5', tagBorder: 'rgba(255,255,255,0.16)' }, // STEM Research Finder
-  1: { bg: '#b8a4ed', text: '#0a0a0a', linkText: '#3a2a6a', tagBg: 'rgba(10,10,10,0.08)', tagText: '#1a1a3a', tagBorder: 'rgba(10,10,10,0.12)' }, // Sustainapath
-  2: { bg: '#e8b94a', text: '#0a0a0a', linkText: '#5a3a00', tagBg: 'rgba(10,10,10,0.08)', tagText: '#3a2a00', tagBorder: 'rgba(10,10,10,0.12)' }, // SolarIQ
-  4: { bg: '#ffb084', text: '#0a0a0a', linkText: '#5a2a00', tagBg: 'rgba(10,10,10,0.08)', tagText: '#3a1a00', tagBorder: 'rgba(10,10,10,0.12)' }, // Substack
-};
 
 export default function ProjectsChapter() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -54,9 +46,7 @@ export default function ProjectsChapter() {
           transition={{ duration: reducedMotion ? 0.2 : 0.55 }}
           style={{ marginBottom: '48px' }}
         >
-          <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '12px' }}>
-            Featured Work
-          </p>
+          <SectionLabel>Featured Work</SectionLabel>
 
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
             <div>
@@ -86,8 +76,18 @@ export default function ProjectsChapter() {
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
-              <motion.div key={project.id} variants={itemVariants} layout initial="hidden" animate="visible" exit="exit">
-                <ProjectCard project={project} reducedMotion={reducedMotion} />
+              <motion.div
+                key={project.id}
+                variants={itemVariants}
+                layout
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className={project.paperUrl ? 'md:col-span-2' : undefined}
+              >
+                {project.paperUrl
+                  ? <LeadProjectCard project={project} />
+                  : <ProjectCard project={project} />}
               </motion.div>
             ))}
           </AnimatePresence>
@@ -103,103 +103,71 @@ export default function ProjectsChapter() {
   );
 }
 
-function ProjectCard({ project, reducedMotion }) {
-  const colors = PROJECT_COLORS[project.id] || PROJECT_COLORS[4];
+const CARD_LINK_ARROW = (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M7 17L17 7M8 7h9v9" />
+  </svg>
+);
+
+function TagRow({ tags, limit }) {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '20px' }}>
+      {tags.slice(0, limit).map((tag) => (
+        <span key={tag} className="mono-chip">{tag}</span>
+      ))}
+    </div>
+  );
+}
+
+// Full-width card for research with a paper: accent top rule, status dot, stacked actions.
+function LeadProjectCard({ project }) {
+  return (
+    <article className="project-card project-card--lead">
+      <div style={{ minWidth: 0 }}>
+        <p className="project-card__label">
+          <span className="status-dot" aria-hidden="true" />
+          {project.type}
+          <span style={{ color: '#9a9a9a' }}>· {project.status}</span>
+        </p>
+        <h3 className="project-card__title" style={{ fontSize: '24px' }}>{project.title}</h3>
+        <p className="project-card__body" style={{ maxWidth: '62ch' }}>{project.shortDescription}</p>
+        <TagRow tags={project.tags} limit={5} />
+      </div>
+
+      <div className="project-actions">
+        <a href={project.paperUrl} target="_blank" rel="noopener noreferrer" className="is-primary">
+          Read the paper {CARD_LINK_ARROW}
+        </a>
+        {project.githubUrl && (
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+            Code on GitHub {CARD_LINK_ARROW}
+          </a>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function ProjectCard({ project }) {
+  const href = project.demoUrl || project.githubUrl;
+  const Tag = href ? 'a' : 'article';
+  const linkProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
 
   return (
-    <motion.article
-      whileHover={reducedMotion ? {} : { y: -4 }}
-      transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-      style={{
-        background: colors.bg,
-        borderRadius: '24px',
-        padding: '32px',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        minHeight: '280px',
-      }}
-    >
-      {/* Top row */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' }}>
-        <span style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.2px', textTransform: 'uppercase', color: colors.text, opacity: 0.65 }}>
-          {project.type || project.category}
-        </span>
-        {project.status && (
-          <span
-            style={{
-              padding: '3px 10px',
-              borderRadius: '9999px',
-              fontSize: '11px',
-              fontWeight: 600,
-              background: colors.tagBg,
-              color: colors.tagText,
-              border: `1px solid ${colors.tagBorder}`,
-            }}
-          >
-            {project.status}
-          </span>
-        )}
+    <Tag {...linkProps} className="project-card">
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+        <span className="project-card__meta">{project.type || project.category}</span>
+        {project.status && <span className="project-card__meta">{project.status}</span>}
       </div>
 
-      {/* Title */}
-      <h3 style={{ fontSize: '22px', fontWeight: 600, color: colors.text, lineHeight: 1.2, letterSpacing: '-0.3px', marginBottom: '10px' }}>
+      <h3 className="project-card__title">
         {project.title}
+        {href && <span className="project-card__arrow">{CARD_LINK_ARROW}</span>}
       </h3>
 
-      {/* Description */}
-      <p style={{ fontSize: '15px', color: colors.text, opacity: 0.75, lineHeight: 1.6, marginBottom: '24px', flex: 1 }}>
-        {project.shortDescription}
-      </p>
+      <p className="project-card__body" style={{ flex: 1 }}>{project.shortDescription}</p>
 
-      {/* Tags */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '24px' }}>
-        {project.tags.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            style={{
-              padding: '4px 10px',
-              borderRadius: '9999px',
-              fontSize: '12px',
-              fontWeight: 500,
-              background: colors.tagBg,
-              color: colors.tagText,
-              border: `1px solid ${colors.tagBorder}`,
-            }}
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      {/* Link */}
-      <div style={{ marginTop: 'auto' }}>
-        {project.demoUrl ? (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              fontSize: '14px',
-              fontWeight: 600,
-              color: colors.linkText,
-              textDecoration: 'none',
-            }}
-          >
-            View Project
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        ) : (
-          <span style={{ fontSize: '14px', color: colors.text, opacity: 0.45 }}>
-            {project.status === 'In Progress' ? 'In development' : 'Coming soon'}
-          </span>
-        )}
-      </div>
-    </motion.article>
+      <TagRow tags={project.tags} limit={4} />
+    </Tag>
   );
 }

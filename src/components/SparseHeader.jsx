@@ -35,11 +35,16 @@ export default function SparseHeader() {
   return (
     <header
       style={{
-        background: '#fffaf0',
+        background: 'rgba(255, 250, 240, 0.88)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
         height: '64px',
         borderBottom: '1px solid #e5e5e5',
+        position: 'sticky',
+        top: 0,
+        zIndex: 900,
       }}
-      className="relative flex items-center justify-between px-6 sm:px-10 lg:px-14"
+      className="flex items-center justify-between px-6 sm:px-10 lg:px-14"
     >
       {/* Wordmark */}
       <a
@@ -64,13 +69,7 @@ export default function SparseHeader() {
               key={link.label}
               href={link.href}
               onClick={(e) => handleLinkClick(e, link)}
-              style={{
-                fontSize: '14px',
-                fontWeight: 500,
-                color: isActive(link.href) ? '#0a0a0a' : '#6a6a6a',
-                textDecoration: 'none',
-              }}
-              className="hover:text-ink transition-colors duration-150"
+              className={`nav-link${isActive(link.href) ? ' is-active' : ''}`}
             >
               {link.label}
             </a>

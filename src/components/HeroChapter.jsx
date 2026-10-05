@@ -3,7 +3,6 @@ import { motion, useMotionValue, useSpring, useTransform, useInView } from 'fram
 import { useNavigate } from 'react-router-dom';
 import { personalInfo } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
-import HeroBackground from './HeroBackground';
 
 // ─── Typewriter hook ───────────────────────────────────────────────────────────
 function useTypewriter(text, { speed = 60, delay = 380 } = {}) {
@@ -42,15 +41,14 @@ function Cursor({ done }) {
   return (
     <motion.span
       animate={{ opacity: [1, 0, 1] }}
-      transition={{ duration: 0.85, repeat: Infinity, ease: 'linear' }}
+      transition={{ duration: 0.85, repeat: Infinity, ease: 'linear', times: [0, 0.5, 1] }}
       style={{
         display: 'inline-block',
-        width: '3px',
+        width: '0.42em',
         height: '0.78em',
-        background: '#0a0a0a',
-        marginLeft: '4px',
+        background: 'var(--accent)',
+        marginLeft: '6px',
         verticalAlign: 'middle',
-        borderRadius: '1px',
       }}
       aria-hidden="true"
     />
@@ -117,8 +115,6 @@ export default function HeroChapter() {
         overflow: 'hidden',
       }}
     >
-      <HeroBackground pointerX={smoothX} pointerY={smoothY} />
-
       <div className="container-wide" style={{ position: 'relative', zIndex: 10 }}>
         {/* 7/5 grid — text left, photo right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -132,8 +128,8 @@ export default function HeroChapter() {
           >
             {/* Eyebrow label */}
             <motion.div variants={fadeIn} className="flex items-center gap-3 mb-8">
-              <span style={{ display: 'block', width: '32px', height: '1px', background: '#e5e5e5' }} />
-              <span style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase' }}>
+              <span style={{ display: 'block', width: '32px', height: '1px', background: 'var(--accent)' }} />
+              <span style={{ fontFamily: 'var(--mono)', fontSize: '12px', letterSpacing: '0.14em', color: 'var(--accent)', textTransform: 'uppercase' }}>
                 Portfolio
               </span>
             </motion.div>
@@ -179,7 +175,7 @@ export default function HeroChapter() {
             {/* Location tagline */}
             <motion.p
               variants={fadeUp}
-              style={{ fontSize: '13px', color: '#9a9a9a', fontWeight: 500, marginBottom: '40px' }}
+              style={{ fontFamily: 'var(--mono)', fontSize: '12.5px', color: '#9a9a9a', marginBottom: '40px' }}
             >
               {personalInfo.tagline}
             </motion.p>

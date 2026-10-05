@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { about } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import SectionLabel from './effects/SectionLabel';
 
 export default function About() {
   const reducedMotion = useReducedMotion();
@@ -45,12 +46,7 @@ export default function About() {
         >
           {/* Left — label + headline */}
           <div className="lg:col-span-4">
-            <motion.p
-              variants={fadeUp}
-              style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '16px' }}
-            >
-              About
-            </motion.p>
+            <SectionLabel>About</SectionLabel>
             <motion.h2
               variants={fadeUp}
               style={{

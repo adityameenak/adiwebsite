@@ -10,6 +10,17 @@
    ============================================ */
 
 @layer base {
+  :root {
+    /* Aggie maroon accent */
+    --accent: #7d1f1f;
+    --accent-soft: #f6e8e1;
+    --glow: rgba(125, 31, 31, 0.07);
+    --ring: rgba(125, 31, 31, 0.45);
+    --ring-fill: rgba(125, 31, 31, 0.06);
+    --rule: #e5e5e5;
+    --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  }
+
   html {
     overflow-x: hidden;
   }
@@ -31,8 +42,8 @@
   }
 
   ::selection {
-    background: rgba(10, 10, 10, 0.12);
-    color: #0a0a0a;
+    background: var(--accent-soft);
+    color: var(--accent);
   }
 
   *:focus-visible {
@@ -367,4 +378,143 @@
   /* Legacy dark bg utilities */
   .bg-white\/8  { background: rgba(255,255,255,0.08); }
   .bg-white\/12 { background: rgba(255,255,255,0.12); }
+}
+
+/* ============================================
+   AMBIENT EFFECTS (SiteEffects / SectionLabel)
+   ============================================ */
+
+/* Reading progress */
+.fx-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  z-index: 1001; pointer-events: none;
+}
+
+/* Pointer glow — multiply keeps it a tint on cream, invisible on dark text */
+.fx-glow {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  mix-blend-mode: multiply;
+  background: radial-gradient(440px circle at var(--mx, 50%) var(--my, 30%), var(--glow), transparent 70%);
+}
+
+/* Dot + ring cursor (fine pointers only) */
+.fx-cursor-dot, .fx-cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 1002;
+  border-radius: 50%; pointer-events: none;
+  opacity: 0; transition: opacity 200ms ease;
+}
+.fx-cursor-dot { width: 5px; height: 5px; background: var(--accent); }
+.fx-cursor-ring {
+  width: 28px; height: 28px; border: 1px solid var(--ring);
+  transition: opacity 200ms ease, width 180ms ease, height 180ms ease,
+              border-color 180ms ease, background 180ms ease;
+}
+.has-custom-cursor.cursor-visible .fx-cursor-dot,
+.has-custom-cursor.cursor-visible .fx-cursor-ring { opacity: 1; }
+.cursor-hovering .fx-cursor-ring {
+  width: 44px; height: 44px; border-color: var(--accent); background: var(--ring-fill);
+}
+.cursor-down .fx-cursor-ring { width: 22px; height: 22px; }
+
+/* Section eyebrow with drawing rule */
+.sec-label {
+  display: flex; align-items: center; gap: 0.9rem; margin-bottom: 14px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+}
+.sec-label > span { white-space: nowrap; }
+.sec-label::after {
+  content: ''; flex: 1; max-width: 220px; height: 1px; background: var(--rule);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s;
+}
+.sec-label.is-inview::after { transform: scaleX(1); }
+
+/* Mono chip — used for tags, coursework, stack */
+.mono-chip {
+  font-family: var(--mono); font-size: 11px; color: #6a6a6a;
+  border: 1px solid var(--rule); border-radius: 3px; padding: 2px 8px;
+  transition: border-color 130ms, color 130ms, background 130ms, transform 130ms;
+}
+.mono-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+
+/* Accent underline that grows on hover */
+.link-grow {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1px; background-repeat: no-repeat; background-position: left bottom;
+  transition: background-size 250ms ease, color 150ms;
+}
+.link-grow:hover { background-size: 100% 1px; color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-cursor-dot, .fx-cursor-ring { display: none; }
+}
+
+/* Header nav — mono, accent underline on hover/active */
+.nav-link {
+  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em;
+  color: #6a6a6a; text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 1px;
+  transition: color 130ms, border-color 130ms;
+}
+.nav-link:hover, .nav-link.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* Project cards — hairline, accent on hover */
+.project-card {
+  display: flex; flex-direction: column; height: 100%;
+  border: 1px solid var(--rule); border-radius: 6px;
+  padding: 26px 28px; background: rgba(255, 250, 240, 0.6);
+  color: inherit; text-decoration: none;
+  transition: border-color 150ms, background 150ms, transform 150ms;
+}
+.project-card:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-3px); }
+.project-card__meta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #9a9a9a;
+}
+.project-card__title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 20px; font-weight: 600; line-height: 1.25; letter-spacing: -0.3px;
+  margin-bottom: 10px; transition: color 150ms;
+}
+.project-card__arrow { color: #9a9a9a; display: inline-flex; transition: color 150ms, transform 150ms; }
+.project-card:hover .project-card__title,
+.project-card:hover .project-card__arrow { color: var(--accent); }
+.project-card:hover .project-card__arrow { transform: translate(2px, -2px); }
+.project-card__body { font-size: 15px; line-height: 1.6; color: #3a3a3a; }
+
+.project-card--lead {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: end;
+  border-top: 3px solid var(--accent); padding: 30px 32px;
+}
+.project-card--lead:hover { transform: none; background: rgba(255, 250, 240, 0.6); border-color: var(--rule); border-top-color: var(--accent); }
+.project-card__label {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent);
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.project-actions {
+  display: flex; flex-direction: column; gap: 9px; min-width: 190px;
+  font-family: var(--mono); font-size: 12px;
+}
+.project-actions a {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--rule); border-radius: 4px; padding: 9px 14px;
+  color: #3a3a3a; text-decoration: none;
+  transition: border-color 130ms, color 130ms, background 130ms, transform 130ms, filter 130ms;
+}
+.project-actions a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
+.project-actions a.is-primary { border-color: var(--accent); background: var(--accent); color: #fffaf0; }
+.project-actions a.is-primary:hover { color: #fffaf0; filter: brightness(1.15); }
+
+@media (max-width: 767px) {
+  .project-card--lead { grid-template-columns: 1fr; padding: 24px 20px; }
+  .project-card { padding: 22px 20px; }
+  .project-actions { min-width: 0; }
 }

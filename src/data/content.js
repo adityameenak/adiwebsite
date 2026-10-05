@@ -54,6 +54,20 @@ export const experience = [
 // Hardcoded placeholder projects
 export const projects = [
   {
+    id: 5,
+    title: "Switchable Thermal Barriers Against Battery Runaway",
+    description: "One-dimensional transient finite-volume model of a five-cell lithium-ion stack with Arrhenius self-heating, a smooth temperature-switchable barrier conductivity k(T) and convective end cooling. A 2 mm switchable barrier holds the normal-operation peak at the conductive barrier's 38.0 °C (vs 64.5 °C for an aerogel insulator) while confining runaway to the trigger cell; a conductive barrier lets runaway reach all five cells in about a minute. A 361-design sweep shows containment is governed by the hot-state conductance k_off/L, which must stay below ~32 W/m²K, and a switch-temperature sweep finds a 38–175 °C operating window. The solver conserves energy to round-off and is verified against analytical, ODE-solver and convergence tests.",
+    shortDescription: "Finite-volume model of a five-cell Li-ion stack showing a temperature-switchable barrier keeps cells as cool as a conductor in normal use (38 °C vs 64.5 °C for aerogel) yet confines runaway to the trigger cell. A 361-design sweep reduces containment to one number: hot-state conductance below ~32 W/m²K.",
+    tags: ["Python", "Finite-Volume", "Battery Safety", "Heat Transfer", "Arrhenius Kinetics"],
+    type: "Research · Technical Report",
+    category: "research",
+    featured: true,
+    status: "Oct 2026",
+    paperUrl: "/papers/switchable-barrier-runaway.pdf",
+    demoUrl: null,
+    githubUrl: "https://github.com/adityameenak/switchable-barrier-runaway",
+  },
+  {
     id: 3,
     title: "STEM Research Finder",
     description: "Co-created and lead development of a research-discovery platform indexing 5,000+ STEM faculty across universities nationwide, grown to 3,000+ active student users with no paid acquisition. Python scraping and normalization pipelines pull research interests, lab affiliations, and departmental data from 50+ structurally inconsistent university sites, deduplicating records and auto-refreshing the index bimonthly. Multi-attribute search across institution, discipline, and research area replaces hours of manual department-page browsing with a single query.",
@@ -107,6 +121,7 @@ export const projects = [
 // Project filter categories
 export const projectCategories = [
   { id: 'all', label: 'All Projects' },
+  { id: 'research', label: 'Research' },
   { id: 'web', label: 'Web' },
   { id: 'sustainability', label: 'Sustainability' },
   { id: 'writing', label: 'Writing' },

@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { technicalSkills } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import SectionLabel from './effects/SectionLabel';
 
 const CATEGORY_COLORS = [
   { text: '#b87c45', bg: '#b87c4514', border: '#b87c4530' },
@@ -45,9 +46,7 @@ export default function TechStackSection() {
             style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', marginBottom: '40px' }}
           >
             <div>
-              <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '8px' }}>
-                Technical Stack
-              </p>
+              <SectionLabel>Technical Stack</SectionLabel>
               <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 500, letterSpacing: '-1.5px', color: '#0a0a0a' }}>
                 Skills & Tools
               </h2>

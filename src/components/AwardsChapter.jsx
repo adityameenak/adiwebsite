@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { awards } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
+import SectionLabel from './effects/SectionLabel';
 
 // Muted, warm-palette accents — distinct but not loud
 const ACCENTS = ['#b87c45', '#5a7e70', '#7370a0', '#6a849a'];
@@ -35,9 +36,7 @@ export default function AwardsChapter() {
         <motion.div variants={container} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
           {/* Header */}
           <motion.div variants={fadeUp} style={{ marginBottom: '56px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '1.5px', color: '#9a9a9a', textTransform: 'uppercase', marginBottom: '12px' }}>
-              Recognition
-            </p>
+            <SectionLabel>Recognition</SectionLabel>
             <h2 style={{ fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 500, letterSpacing: '-2px', color: '#0a0a0a', marginBottom: '12px' }}>
               Awards
             </h2>

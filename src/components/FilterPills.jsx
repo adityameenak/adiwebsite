@@ -19,16 +19,16 @@ export default function FilterPills({ filters, activeFilter, onFilterChange, cla
             whileTap={reducedMotion ? {} : { scale: 0.98 }}
             style={{
               position: 'relative',
-              padding: '8px 16px',
-              borderRadius: '9999px',
-              fontSize: '14px',
-              fontWeight: 500,
+              padding: '6px 12px',
+              borderRadius: '4px',
+              fontFamily: 'var(--mono)',
+              fontSize: '12px',
               cursor: 'pointer',
               border: '1px solid',
               outline: 'none',
-              background: isActive ? '#f5f0e0' : 'transparent',
-              color: isActive ? '#0a0a0a' : '#6a6a6a',
-              borderColor: isActive ? '#e5e5e5' : '#e5e5e5',
+              background: isActive ? 'var(--accent-soft)' : 'transparent',
+              color: isActive ? 'var(--accent)' : '#6a6a6a',
+              borderColor: isActive ? 'var(--accent)' : '#e5e5e5',
               transition: 'all 0.15s ease',
             }}
             className={isActive ? '' : 'hover:text-ink hover:border-ink'}
@@ -36,13 +36,7 @@ export default function FilterPills({ filters, activeFilter, onFilterChange, cla
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               {label}
               {typeof count === 'number' && (
-                <span style={{
-                  fontSize: '12px',
-                  padding: '1px 6px',
-                  borderRadius: '9999px',
-                  background: isActive ? '#ebe6d6' : '#f0f0f0',
-                  color: isActive ? '#3a3a3a' : '#9a9a9a',
-                }}>
+                <span style={{ fontSize: '11px', color: isActive ? 'var(--accent)' : '#9a9a9a', opacity: 0.8 }}>
                   {count}
                 </span>
               )}

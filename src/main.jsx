@@ -8,11 +8,13 @@ import ProjectsPage from './pages/ProjectsPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import EducationPage from './pages/EducationPage.jsx'
 import AwardsPage from './pages/AwardsPage.jsx'
+import SiteEffects from './components/effects/SiteEffects.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
+      <SiteEffects />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/experience" element={<ExperiencePage />} />
