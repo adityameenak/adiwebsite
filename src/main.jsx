@@ -8,6 +8,7 @@ import ProjectsPage from './pages/ProjectsPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import EducationPage from './pages/EducationPage.jsx'
 import SiteEffects from './components/effects/SiteEffects.jsx'
+import AdiAssistant from './components/assistant/AdiAssistant.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/education" element={<EducationPage />} />
         <Route path="/awards" element={<Navigate to="/education" replace />} />
       </Routes>
+      <AdiAssistant />
       <Analytics />
     </BrowserRouter>
   </React.StrictMode>,

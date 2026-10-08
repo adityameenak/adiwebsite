@@ -38,6 +38,8 @@ export function LenisProvider({ children }) {
     });
 
     setLenis(lenisInstance);
+    // Lets components outside this provider (e.g. adi.ai) scroll smoothly.
+    window.__lenis = lenisInstance;
 
     // Animation frame loop
     function raf(time) {
@@ -53,6 +55,7 @@ export function LenisProvider({ children }) {
         cancelAnimationFrame(rafRef.current);
       }
       lenisInstance.destroy();
+      if (window.__lenis === lenisInstance) window.__lenis = null;
     };
   }, [reducedMotion]);
 

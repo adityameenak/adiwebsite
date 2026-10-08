@@ -114,12 +114,14 @@ function TagRow({ tags, limit }) {
   );
 }
 
+const projectAnchor = (title) => `project-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
+
 const isExternal = (href) => href.startsWith('http') || href.endsWith('.pdf');
 
 // Full-width card: accent top rule, status dot, stacked actions.
 function LeadProjectCard({ project }) {
   return (
-    <article className="project-card project-card--lead">
+    <article id={projectAnchor(project.title)} className="project-card project-card--lead" style={{ scrollMarginTop: '80px' }}>
       <div style={{ minWidth: 0 }}>
         <p className="project-card__label">
           <span className="status-dot" aria-hidden="true" />
@@ -152,7 +154,7 @@ function ProjectCard({ project }) {
   const linkProps = href ? { href, target: '_blank', rel: 'noopener noreferrer' } : {};
 
   return (
-    <Tag {...linkProps} className="project-card">
+    <Tag {...linkProps} id={projectAnchor(project.title)} className="project-card" style={{ scrollMarginTop: '80px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
         <span className="project-card__meta">{project.type || project.category}</span>
         {project.status && <span className="project-card__meta">{project.status}</span>}

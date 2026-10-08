@@ -93,6 +93,41 @@ portfolio-website/
 └── vite.config.js           # Vite configuration
 ```
 
+## adi.ai — portfolio assistant
+
+A floating "Ask adi.ai ✦" assistant answers questions about Adi using a
+curated knowledge base, and links visitors to the relevant parts of the site.
+
+**How it fits together**
+
+- `src/components/assistant/` — launcher, chat panel (lazy-loaded), safe
+  Markdown renderer, streaming chat hook, and site navigation helper.
+- `api/chat.js` — Vercel serverless function (`POST /api/chat`). Calls OpenAI
+  server-side and streams the reply. Validation, origin check, rate limiting,
+  input/output caps and prompt-injection rules live in `api/_lib/`.
+- `knowledge/` — what the assistant knows (Markdown) and every link it may
+  show (`links.json`). Edit these to update answers; no UI changes needed.
+  See `knowledge/README.md`.
+
+**Run locally**
+
+```bash
+cp .env.example .env.local   # then set OPENAI_API_KEY
+npm run dev                  # /api/chat is served by the Vite dev server
+```
+
+No key yet? `ADI_AI_MOCK=1 npm run dev` streams a canned reply so you can work
+on the UI.
+
+**Deploy (Vercel)**
+
+1. Project → Settings → Environment Variables: add `OPENAI_API_KEY`
+   (Production and Preview). Optional: `OPENAI_MODEL`.
+2. Redeploy. `vercel.json` bundles `knowledge/` into the function and keeps
+   `/api/*` out of the SPA rewrite.
+3. Optional hardening: add a Vercel Firewall rate-limit rule for `/api/chat`
+   and a monthly budget limit on the OpenAI key.
+
 ## Deployment
 
 ### Deploy to Vercel (Recommended)
