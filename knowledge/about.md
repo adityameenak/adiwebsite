@@ -13,7 +13,7 @@
 - Expected graduation: May 2028 (Class of 2028).
 - Cumulative GPA: 3.91 / 4.00.
 - Craig & Galen Brown Engineering Honors at Texas A&M.
-- Member of Omega Chi Epsilon (chemical engineering honor society).
+- Organizations: Omega Chi Epsilon (chemical engineering honor society), AIChE (American Institute of Chemical Engineers), Aggies in Tech.
 - Coursework focus: Fluid Mechanics; Thermodynamics; Heat & Mass Transfer; Chemical Reaction Engineering; Transport Phenomena; Process Dynamics & Control; Materials Science; Electrochemistry & Battery Systems; Semiconductor Processes & Microelectronics; Engineering Mathematics.
 
 ## Honors and awards

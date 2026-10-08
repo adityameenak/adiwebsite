@@ -8,7 +8,7 @@ const MAX_MESSAGES_IN = 40;        // reject anything longer outright
 const HISTORY_SENT = 10;           // only the last N turns go to the model
 const MAX_USER_CHARS = 1000;
 const MAX_ASSISTANT_CHARS = 4000;
-const MAX_OUTPUT_TOKENS = 700;
+const MAX_OUTPUT_TOKENS = 900;
 const UPSTREAM_TIMEOUT_MS = 45_000;
 
 const DEFAULT_MODEL = 'gpt-6-luna';

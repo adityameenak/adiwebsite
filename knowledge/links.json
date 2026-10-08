@@ -1,26 +1,140 @@
 {
   "actions": [
-    { "id": "about", "label": "About Adi", "route": "/", "section": "about", "description": "His background and what he's working on now" },
-    { "id": "experience", "label": "View experience", "route": "/experience", "section": "experience", "description": "Samsung internship, research fellowship and SiC research" },
-    { "id": "projects", "label": "Explore projects", "route": "/projects", "section": "projects", "description": "All projects" },
-    { "id": "education", "label": "Education", "route": "/education", "section": "education", "description": "Texas A&M degree, GPA, coursework" },
-    { "id": "awards", "label": "Honors & awards", "route": "/education", "section": "awards", "description": "Fellowships, scholarships and honors" },
-    { "id": "contact", "label": "Contact page", "route": "/contact", "section": "contact", "description": "How to reach him" },
-
-    { "id": "stem-research-finder", "label": "View STEM Research Finder", "route": "/projects", "section": "project-stem-research-finder", "description": "Project card for STEM Research Finder" },
-    { "id": "stem-research-finder-site", "label": "Visit stemresearchfinder.tech", "href": "https://stemresearchfinder.tech/", "description": "The live STEM Research Finder site" },
-    { "id": "switchable-barrier", "label": "View battery barrier project", "route": "/projects", "section": "project-switchable-thermal-barriers-against-battery-runaway", "description": "Project card for the switchable thermal barrier simulation" },
-    { "id": "switchable-barrier-paper", "label": "Read the paper (PDF)", "href": "/papers/switchable-barrier-runaway.pdf", "description": "The switchable thermal barrier technical report" },
-    { "id": "switchable-barrier-code", "label": "Simulation code on GitHub", "href": "https://github.com/adityameenak/switchable-barrier-runaway", "description": "Source code for the switchable barrier simulation" },
-    { "id": "sustainapath", "label": "View Sustainapath", "route": "/projects", "section": "project-sustainapath", "description": "Project card for Sustainapath" },
-    { "id": "sustainapath-site", "label": "Open Sustainapath", "href": "https://sustainapath.vercel.app/", "description": "The live Sustainapath app" },
-    { "id": "solariq", "label": "View SolarIQ", "route": "/projects", "section": "project-solariq", "description": "Project card for SolarIQ" },
-    { "id": "solariq-site", "label": "Open SolarIQ", "href": "https://iqsolar.streamlit.app/", "description": "The live SolarIQ app" },
-    { "id": "substack", "label": "Read his Substack", "href": "https://adimeenak.substack.com/", "description": "His Substack publication" },
-
-    { "id": "resume", "label": "Download resume", "href": "/resume.pdf", "description": "His resume (PDF)" },
-    { "id": "linkedin", "label": "LinkedIn", "href": "https://www.linkedin.com/in/adityameenakshi/", "description": "His LinkedIn profile" },
-    { "id": "github", "label": "GitHub", "href": "https://github.com/adityameenak", "description": "His GitHub profile" },
-    { "id": "email", "label": "Email Adi", "href": "mailto:adityameenakshisundaram@gmail.com", "description": "Email him directly" }
+    {
+      "id": "about",
+      "label": "About Adi",
+      "route": "/",
+      "section": "about",
+      "description": "His background and what he's working on now"
+    },
+    {
+      "id": "experience",
+      "label": "View experience",
+      "route": "/experience",
+      "section": "experience",
+      "description": "Samsung internship, research fellowship and SiC research"
+    },
+    {
+      "id": "projects",
+      "label": "Explore projects",
+      "route": "/projects",
+      "section": "projects",
+      "description": "All projects"
+    },
+    {
+      "id": "education",
+      "label": "Education",
+      "route": "/education",
+      "section": "education",
+      "description": "Texas A&M degree, GPA, coursework"
+    },
+    {
+      "id": "awards",
+      "label": "Honors & awards",
+      "route": "/education",
+      "section": "awards",
+      "description": "Fellowships, scholarships and honors"
+    },
+    {
+      "id": "contact",
+      "label": "Contact page",
+      "route": "/contact",
+      "section": "contact",
+      "description": "How to reach him"
+    },
+    {
+      "id": "stem-research-finder",
+      "label": "View STEM Research Finder",
+      "route": "/projects",
+      "section": "project-stem-research-finder",
+      "description": "Project card for STEM Research Finder"
+    },
+    {
+      "id": "stem-research-finder-site",
+      "label": "Visit stemresearchfinder.tech",
+      "href": "https://stemresearchfinder.tech/",
+      "description": "The live STEM Research Finder site"
+    },
+    {
+      "id": "stem-research-finder-code",
+      "label": "STEM Research Finder code",
+      "href": "https://github.com/adityameenak/AggieResearchFinder",
+      "description": "Public source code for STEM Research Finder"
+    },
+    {
+      "id": "switchable-barrier",
+      "label": "View battery barrier project",
+      "route": "/projects",
+      "section": "project-switchable-thermal-barriers-against-battery-runaway",
+      "description": "Project card for the switchable thermal barrier simulation"
+    },
+    {
+      "id": "switchable-barrier-paper",
+      "label": "Read the paper (PDF)",
+      "href": "/papers/switchable-barrier-runaway.pdf",
+      "description": "The switchable thermal barrier technical report"
+    },
+    {
+      "id": "switchable-barrier-code",
+      "label": "Simulation code on GitHub",
+      "href": "https://github.com/adityameenak/switchable-barrier-runaway",
+      "description": "Source code for the switchable barrier simulation"
+    },
+    {
+      "id": "sustainapath",
+      "label": "View Sustainapath",
+      "route": "/projects",
+      "section": "project-sustainapath",
+      "description": "Project card for Sustainapath"
+    },
+    {
+      "id": "sustainapath-site",
+      "label": "Open Sustainapath",
+      "href": "https://sustainapath.vercel.app/",
+      "description": "The live Sustainapath app"
+    },
+    {
+      "id": "solariq",
+      "label": "View SolarIQ",
+      "route": "/projects",
+      "section": "project-solariq",
+      "description": "Project card for SolarIQ"
+    },
+    {
+      "id": "solariq-site",
+      "label": "Open SolarIQ",
+      "href": "https://iqsolar.streamlit.app/",
+      "description": "The live SolarIQ app"
+    },
+    {
+      "id": "substack",
+      "label": "Read his Substack",
+      "href": "https://adimeenak.substack.com/",
+      "description": "His Substack publication"
+    },
+    {
+      "id": "resume",
+      "label": "Download resume",
+      "href": "/resume.pdf",
+      "description": "His resume (PDF)"
+    },
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/adityameenakshi/",
+      "description": "His LinkedIn profile"
+    },
+    {
+      "id": "github",
+      "label": "GitHub",
+      "href": "https://github.com/adityameenak",
+      "description": "His GitHub profile"
+    },
+    {
+      "id": "email",
+      "label": "Email Adi",
+      "href": "mailto:adityameenakshisundaram@gmail.com",
+      "description": "Email him directly"
+    }
   ]
 }
