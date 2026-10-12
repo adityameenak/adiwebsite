@@ -4,11 +4,12 @@
 
 - Role: Samsung Semiconductor Research Fellow, January 2026 – present, with the Artie McFerrin Department of Chemical Engineering at Texas A&M.
 - Goal: mitigate lithium-ion battery thermal runaway with a sprayable, passive thermal-switching composite.
-- How it is designed to work: the material conducts heat normally, then switches to insulating when indium melts out at high temperature. Calcium carbonate (CaCO3) releases CO2 to help suppress fire, and a retained titanium framework provides structural support.
+- How it is designed to work: the material conducts heat normally, then switches to insulating through indium phase change (melt-out) at high temperature. Calcium carbonate (CaCO3) releases CO2 to help suppress fire, and a retained titanium framework provides structural support.
 - What he did: ran the synthesis end to end — mixed CaCO3, indium and titanium nanowires, compacted pellets, and heat-treated them at 900 °C for 1 hour. Examined structure and conductive pathways with SEM cross-sections across 4+ prototype iterations.
 - He has also fabricated drop-cast composites incorporating calcium carbonate microsalt crystals, indium and titanium nanowires, investigating formulations meant to transition autonomously from conduction to insulation at critical temperatures, as a step toward a sprayable protective material.
 - He characterized thermal conductivity across formulations to see how porosity and composition (indium content) influence heat transport.
-- Results so far: compared heat-transfer response across pellets with 50–70 wt% indium using hot-plate heating and top-surface temperature measurements. Identified 65 wt% indium as the best-performing formulation tested, with improved structural integrity.
+- Results so far: calculated thermal conductivity from k = αρCₚ (thermal diffusivity × density × heat capacity) across formulations with 50–70 wt% indium, using hot-plate heating and top-surface temperature measurements. Identified 65 wt% indium as the strongest-performing composition across thermal response and structural integrity.
+- The switchable-barrier simulation (below) is part of this fellowship: he built a verified 1D finite-volume model of a 5-cell battery stack and swept 361 barrier designs to find the hot-state conductance threshold (~32 W/m²·K) for suppressing propagation.
 - Plain-English summary: when one battery cell overheats it can set off its neighbors. He is developing a coating that passes heat normally but turns into an insulator when things get dangerously hot, acting like a fuse for heat.
 
 ## Switchable thermal barriers — simulation study (technical report)
@@ -53,12 +54,12 @@ Public: technical report (PDF on his portfolio), plain-English explainer, and op
 
 ## Silicon carbide from polymer precursors (Texas A&M)
 
-- Role: Silicon Carbide (SiC) Researcher in the Green Group, August 2025 – present, Artie McFerrin Department of Chemical Engineering, Texas A&M.
+- Role: Undergraduate Researcher in the Green Lab, August 2025 – present, Artie McFerrin Department of Chemical Engineering, Texas A&M.
 - Goal: convert liquid polycarbosilane (PCS) into electrically conductive silicon carbide for RF susceptor applications (materials that heat up in a radio-frequency field), targeting the lowest pyrolysis temperature that still gives conductivity.
 - What he did: ran the synthesis end to end, from liquid PCS through degassing, curing, resting and pyrolysis; completed 10+ controlled runs at 800–1200 °C, varying temperature, ramp rate and atmosphere.
 - Varied temperature, ramp rate and atmosphere to identify conditions for electrical conductivity and RF susceptor performance.
 - Results: narrowed the onset of measurable electrical conductivity to pyrolysis temperatures between 900 and 1000 °C using four-point probe measurements, guiding later trials in that range.
-- Characterization: measured ceramic yield and microstructure with TGA and SEM, and evaluated RF heating response to see how conversion temperature affected electromagnetic coupling and heat generation.
+- Characterization: achieved 92% SiC phase purity, measured by XRD; examined backbone-fiber and PCS-coating cross-sections with SEM; measured ceramic yield with TGA; and evaluated RF heating at 200–300 W to see how conversion temperature affected electromagnetic coupling and temperature response.
 - Plain-English summary: he turns a liquid polymer into a ceramic by baking it, and works out how hot you need to bake it for the ceramic to conduct electricity, so it can be heated with radio waves.
 
 ## Semiconductor materials processing

@@ -28,10 +28,10 @@ export const experience = [
     company: "Samsung Semiconductor",
     period: "Austin, TX • May 2026 – Aug 2026",
     description: [
-      "Engineered a Python-based overlay-correction tool that converted 500+ wafer- and shot-level measurements per lot into scanner corrections, resolving multi-layer misalignments and saving 250 engineering hours annually",
-      "Deployed a PyTorch CNN trained on FFT-derived heatmaps to classify spinner-tool defects, automating real-time review of 1,000+ images daily",
-      "Restored throughput by 300–400 wafers/day using I-MR control charts to isolate a downstream track bottleneck and resolve a degraded buffer-unit transfer mechanism",
-      "Automated resets of lot-level overlay metrology skip factors to process-type defaults using Python and SQL, eliminating manual reverts and saving 50 department-hours per week"
+      "Recovered 300–400 wafers/day of throughput using I-MR statistical process control to isolate a downstream track bottleneck caused by a degraded buffer-unit transfer mechanism",
+      "Built a Python-based overlay-correction tool that transformed 500+ wafer- and shot-level metrology measurements per lot into scanner alignment corrections, saving 250 engineering hours annually",
+      "Developed and deployed a PyTorch CNN on FFT-derived heatmaps to classify spin-coater defects with 84% accuracy, automating review of 1,000+ previously manual process images per day",
+      "Automated lot-level overlay metrology skip-factor resets with Python and SQL, restoring process-specific defaults while saving 50 engineering hours per week"
     ],
     tags: ["Photolithography", "Metrology", "Process Control"]
   },
@@ -41,22 +41,23 @@ export const experience = [
     company: "Samsung Semiconductor & Artie McFerrin Department of Chemical Engineering",
     period: "College Station, TX • Jan 2026 – Present",
     description: [
-      "Project: lithium-ion battery thermal-runaway mitigation using a sprayable, passive thermal-switching composite, designed to switch from heat conduction to insulation via indium melt-out, with CaCO₃ releasing CO₂ for fire mitigation and a retained titanium framework for structural support",
-      "Executed synthesis end to end: mixed CaCO₃, indium, and titanium nanowires, compacted pellets, and heat-treated at 900 °C for 1 hour; examined structure and conductive pathways using SEM cross-sections across 4+ prototype iterations",
-      "Compared heat-transfer response across 50–70 wt% indium pellets using hot-plate heating and top-surface temperature measurements; identified 65 wt% as the best-performing formulation tested, with improved structural integrity"
+      "Developed a passive thermal-switching composite for lithium-ion battery thermal-runaway mitigation, using indium phase change, CaCO₃ decomposition, and a retained titanium framework to transition from heat conduction to insulation",
+      "Calculated thermal conductivity (k = αρCₚ) across 50–70 wt% indium formulations, identifying 65 wt% as the strongest-performing composition across thermal response and structural integrity",
+      "Fabricated composites end to end through powder mixing, pellet pressing, and 900 °C heat treatment; analyzed cross-sectional morphology and conductive pathways by SEM across 4+ prototype iterations",
+      "Built a verified 1D finite-volume model of a 5-cell battery stack in Python; swept 361 barrier designs and identified a simulation-predicted hot-state conductance threshold of ~32 W m⁻² K⁻¹ for suppressing runaway propagation"
     ],
-    tags: ["Battery Safety", "Nanomaterials", "Thermal Management"]
+    tags: ["Battery Safety", "Thermal Management", "Simulation"]
   },
   {
     id: 3,
-    role: "Silicon Carbide (SiC) Researcher",
+    role: "Undergraduate Researcher, Green Lab",
     company: "Artie McFerrin Department of Chemical Engineering, Texas A&M University",
     period: "College Station, TX • Aug 2025 – Present",
     description: [
-      "Project: conversion of liquid polycarbosilane (PCS) into electrically conductive silicon carbide for RF susceptor applications, targeting the lowest pyrolysis temperature needed to obtain conductivity",
-      "Executed synthesis end to end, from liquid PCS through degassing, curing, resting, and pyrolysis; completed 10+ controlled runs at 800–1200 °C, varying temperature, ramp rate, and atmosphere",
-      "Narrowed the onset of measurable electrical conductivity to pyrolysis temperatures between 900 and 1000 °C using four-point probe measurements, guiding subsequent trials within that range",
-      "Characterized ceramic yield and microstructure using TGA and SEM; evaluated RF heating response to assess how conversion temperature affected electromagnetic coupling and heat generation"
+      "Project: conversion of liquid polycarbosilane (PCS) into electrically conductive silicon carbide for RF susceptor applications; targeted the lowest pyrolysis temperature needed to obtain conductivity",
+      "Processed liquid PCS through degassing, curing, resting, and pyrolysis; completed 10+ controlled runs at 800–1200 °C while varying temperature, ramp rate, and atmosphere",
+      "Narrowed the onset of measurable electrical conductivity to 900–1000 °C using four-point probe measurements, guiding subsequent trials within the identified transition range",
+      "Achieved 92% SiC phase purity using XRD, examined backbone-fiber and PCS-coating cross-sections using SEM, and evaluated RF heating at 200–300 W to assess electromagnetic coupling and temperature response"
     ],
     tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"]
   }

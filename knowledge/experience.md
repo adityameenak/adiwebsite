@@ -3,7 +3,7 @@
 ## Samsung Austin Semiconductor — Photolithography Innovation & Metrology Intern
 
 **Overview**
-- Summer 2026 internship (May–July 2026, completed) at Samsung Austin Semiconductor in Austin, Texas.
+- Summer 2026 internship (May–August 2026, completed) at Samsung Austin Semiconductor in Austin, Texas.
 - Team: Photo Innovation and Metrology (PIM), within the Photolithography department.
 - Focus: using software, data analytics and process engineering to improve semiconductor manufacturing — process control, manufacturing automation, data analytics and defect detection.
 - Main tools: Python and SQL; Streamlit for engineer-facing apps; statistical process control; machine learning (CNNs). Worked around lithography scanners, spinner/track systems and metrology equipment.
@@ -27,9 +27,9 @@
 
 ### 3. CNN defect classification
 - Problem: spinner/track equipment produces image data that can reveal defects and abnormal processing. Technicians reviewed these images manually, which was repetitive, didn't scale, and could catch problems late.
-- What he built: a convolutional neural network (PyTorch) that classifies defects from spinner-tool imagery. Images are first converted into FFT (fast Fourier transform) heatmaps — a frequency-domain view that makes periodic and abnormal patterns stand out — which are then fed to the CNN.
-- Workflow: equipment image → FFT heatmap → CNN → defect classification, designed to flag abnormal images so technicians get alerted and can investigate. It automated real-time review of 1,000+ images per day.
-- Not public: architecture, training-set size, defect classes and accuracy figures.
+- What he built: a convolutional neural network (PyTorch) that classifies spin-coater defects from process imagery, with 84% classification accuracy. Images are first converted into FFT (fast Fourier transform) heatmaps — a frequency-domain view that makes periodic and abnormal patterns stand out — which are then fed to the CNN.
+- Workflow: equipment image → FFT heatmap → CNN → defect classification, designed to flag abnormal images so technicians get alerted and can investigate. It automated review of 1,000+ previously manual process images per day.
+- Not public: architecture, training-set size and defect classes.
 
 ### 4. Throughput troubleshooting with statistical process control
 - Problem: a lithography track system was processing fewer wafers than expected, creating a bottleneck (longer cycle times, lower equipment utilization).
@@ -40,7 +40,7 @@
 ### 5. Overlay metrology skip-factor restoration
 - Problem: fabs don't measure every lot; sampling "skip factors" control how often overlay metrology is skipped. Restoring lot-level skip factors to their process-type defaults was a repetitive manual task.
 - What he built: automation (Python and SQL) that restores lot-level overlay metrology skip factors to their defaults, eliminating the manual reverts.
-- Impact: about 50 department-hours saved per week.
+- Impact: about 50 engineering hours saved per week, while restoring process-specific defaults.
 
 ### What he took from it
 - Experience across semiconductor process engineering (overlay, photoresist, wafer handling, metrology sampling), production-focused software (data extraction, cleaning and validation; Streamlit apps for non-programmers) and data-driven manufacturing (predictive models and computer vision).
@@ -49,9 +49,8 @@
 <!--
 TODO(Adi): Still unknown — add only if public-safe:
 - Photoresist model type (e.g. regression on spin speed?), inputs, validation.
-- CNN architecture / classes / accuracy; whether alerts went live in production.
+- CNN architecture / classes; whether alerts went live in production.
 - Which I-MR variable exposed the robot arm issue.
-- Dates: your notes say May 18 – July 31, but the website says May–Aug 2026. Make them match.
 -->
 
 ## Samsung Semiconductor Research Fellow (with Texas A&M Chemical Engineering)
@@ -60,7 +59,7 @@ TODO(Adi): Still unknown — add only if public-safe:
 - Affiliation: Samsung Semiconductor & the Artie McFerrin Department of Chemical Engineering at Texas A&M.
 - See research.md ("Thermal-switching battery composite") for the full description.
 
-## Silicon Carbide (SiC) Researcher — Texas A&M
+## Undergraduate Researcher, Green Lab — Texas A&M (silicon carbide)
 
 - Dates: August 2025 – present, College Station, Texas.
 - Affiliation: Artie McFerrin Department of Chemical Engineering, Texas A&M University.

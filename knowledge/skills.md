@@ -17,7 +17,7 @@ Only skills listed on his portfolio or resume, with where he has used them.
 
 ## Machine learning and AI
 
-- Built and deployed a PyTorch convolutional neural network at Samsung that classifies spinner-tool defects from FFT-derived image heatmaps, reviewing 1,000+ images per day in real time (CNN-based image classification with FFT-derived image features).
+- Built and deployed a PyTorch convolutional neural network at Samsung that classifies spinner-tool defects from FFT-derived image heatmaps, with 84% accuracy, reviewing 1,000+ images per day (CNN-based image classification with FFT-derived image features).
 - Built a predictive model at Samsung relating spin-coater settings to photoresist thickness and recommending spin-speed setpoints (about 15% less test-wafer qualification time).
 - Built Sustainapath, an AI-driven process-optimization platform.
 - Built resume-based faculty matching and outreach drafting into STEM Research Finder.
@@ -42,5 +42,8 @@ Only skills listed on his portfolio or resume, with where he has used them.
 - Scanning electron microscopy (SEM), X-ray diffraction (XRD), Fourier-transform infrared spectroscopy (FTIR), thermogravimetric analysis (TGA), optical microscopy, four-point probe.
 
 ## Modeling and simulation
+
+- Engineering modeling tools: COMSOL Multiphysics, Aspen Plus, Fusion 360.
+- Process safety: LOPA (layer of protection analysis) and process hazard analysis.
 
 - Transient finite-volume heat-transfer modeling with Arrhenius reaction kinetics, implicit time stepping, operator splitting and adaptive time steps; verification against analytical and ODE-solver references, energy-conservation checks and mesh-convergence studies (switchable-barrier report). Automated tests with CI on GitHub.
