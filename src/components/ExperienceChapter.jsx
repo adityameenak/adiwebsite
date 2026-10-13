@@ -1,6 +1,5 @@
-import { Suspense, lazy, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
+import { Suspense, lazy, useId, useRef, useState } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
 import { experience } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SectionLabel from './effects/SectionLabel';
@@ -12,7 +11,8 @@ const Diagram = lazy(() => import('./experience/diagrams'));
  * Experience as short case studies rather than resume bullets.
  * - variant "full" (the /experience page): story + Problem → Approach → Result
  *   cards, each with a schematic diagram and a "What is …?" explainer.
- * - variant "compact" (home page): story + one line per case, linking to the full page.
+ * - variant "compact" (home page): story + one clickable row per case that
+ *   expands in place to show the same diagram and details.
  */
 export default function ExperienceChapter({ variant = 'full' }) {
   const reducedMotion = useReducedMotion();
@@ -35,25 +35,18 @@ export default function ExperienceChapter({ variant = 'full' }) {
           <motion.div variants={fadeUp} className="sec-head">
             <SectionLabel>Career</SectionLabel>
             <h2 className="sec-title">Experience</h2>
+            {compact && <p className="sec-sub">Click any project to see what it was and how it worked.</p>}
           </motion.div>
 
           <div className="xp-roles">
             {experience.map((job) => (
               <motion.article key={job.id} variants={fadeUp} className="xp-role">
                 <RoleHeader job={job} />
-                {compact ? <CaseRows cases={job.cases} /> : <CaseGrid cases={job.cases} />}
+                {compact ? <CaseRows cases={job.cases} reducedMotion={reducedMotion} /> : <CaseGrid cases={job.cases} />}
               </motion.article>
             ))}
           </div>
 
-          {compact && (
-            <motion.div variants={fadeUp}>
-              {/* The router keeps the scroll position, so start the new page at the top. */}
-              <Link to="/experience" className="xp-more" onClick={() => window.scrollTo(0, 0)}>
-                Read the case studies <span aria-hidden="true">→</span>
-              </Link>
-            </motion.div>
-          )}
         </motion.div>
       </div>
     </section>
@@ -77,16 +70,48 @@ function RoleHeader({ job }) {
   );
 }
 
-function CaseRows({ cases }) {
+function CaseRows({ cases, reducedMotion }) {
+  const [openTitle, setOpenTitle] = useState(null);
+  const baseId = useId();
+
   return (
     <ul className="xp-rows">
-      {cases.map((c) => (
-        <li key={c.title} className="xp-row">
-          <span className="case__tag">{c.tag}</span>
-          <span className="xp-row__title">{c.title}</span>
-          <span className="xp-row__result">{c.result}</span>
-        </li>
-      ))}
+      {cases.map((c, i) => {
+        const open = openTitle === c.title;
+        const panelId = `${baseId}-case-${i}`;
+        return (
+          <li key={c.title} className={`xp-row${open ? ' is-open' : ''}`}>
+            <button
+              type="button"
+              className="xp-row__btn"
+              aria-expanded={open}
+              aria-controls={panelId}
+              onClick={() => setOpenTitle(open ? null : c.title)}
+            >
+              <span className="case__tag">{c.tag}</span>
+              <span className="xp-row__title">{c.title}</span>
+              <span className="xp-row__result">{c.result}</span>
+              <span className="xp-row__chev" aria-hidden="true">{open ? '−' : '+'}</span>
+            </button>
+            <AnimatePresence initial={false}>
+              {open && (
+                <motion.div
+                  id={panelId}
+                  className="xp-row__panel"
+                  initial={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                  animate={reducedMotion ? { opacity: 1 } : { height: 'auto', opacity: 1 }}
+                  exit={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
+                  transition={{ duration: reducedMotion ? 0.1 : 0.35, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="xp-row__inner">
+                    <CaseDetail c={c} layout="wide" />
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -96,40 +121,55 @@ function CaseGrid({ cases }) {
     <div className="xp-grid">
       {cases.map((c) => (
         <article key={c.title} className="case">
-          <div className="case__figure">
-            <Suspense fallback={<div className="dg-placeholder" />}>
-              <Diagram id={c.diagram} label={`Diagram: ${c.title}`} />
-            </Suspense>
-          </div>
-          {c.explainer && (
-            <details className="case__explainer">
-              <summary>{c.explainer.title}</summary>
-              <p>{c.explainer.text}</p>
-            </details>
-          )}
-
-          <div className="case__body">
-            <span className="case__tag">{c.tag}</span>
-            <h4 className="case__title">{c.title}</h4>
-            <dl className="case__steps">
-              {c.problem && (<><dt>Problem</dt><dd>{c.problem}</dd></>)}
-              <dt>Approach</dt><dd>{c.approach}</dd>
-              <dt className="is-result">Result</dt><dd className="case__result">{c.result}</dd>
-            </dl>
-
-            {(c.tools?.length || c.links?.length) && (
-              <div className="case__foot">
-                {c.tools?.map((tool) => <span key={tool} className="mono-chip">{tool}</span>)}
-                {c.links?.map((l) => (
-                  <a key={l.href} href={l.href} className="case__link" target="_blank" rel="noopener noreferrer">
-                    {l.label} <span aria-hidden="true">↗</span>
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
+          <CaseDetail c={c} />
         </article>
       ))}
+    </div>
+  );
+}
+
+/** Diagram + plain-English caption + explainer + Problem → Approach → Result. */
+function CaseDetail({ c, layout = 'card' }) {
+  return (
+    <div className={`case-detail case-detail--${layout}`}>
+      <figure className="case__figure">
+        <Suspense fallback={<div className="dg-placeholder" />}>
+          <Diagram id={c.diagram} label={`Diagram: ${c.title}. ${c.caption || ''}`} />
+        </Suspense>
+        {c.caption && <figcaption className="case__caption">{c.caption}</figcaption>}
+      </figure>
+
+      <div className="case__body">
+        {layout === 'card' && (
+          <>
+            <span className="case__tag">{c.tag}</span>
+            <h4 className="case__title">{c.title}</h4>
+          </>
+        )}
+        <dl className="case__steps">
+          {c.problem && (<><dt>Problem</dt><dd>{c.problem}</dd></>)}
+          <dt>Approach</dt><dd>{c.approach}</dd>
+          <dt className="is-result">Result</dt><dd className="case__result">{c.result}</dd>
+        </dl>
+
+        {c.explainer && (
+          <details className="case__explainer">
+            <summary>{c.explainer.title}</summary>
+            <p>{c.explainer.text}</p>
+          </details>
+        )}
+
+        {(c.tools?.length || c.links?.length) && (
+          <div className="case__foot">
+            {c.tools?.map((tool) => <span key={tool} className="mono-chip">{tool}</span>)}
+            {c.links?.map((l) => (
+              <a key={l.href} href={l.href} className="case__link" target="_blank" rel="noopener noreferrer">
+                {l.label} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -44,6 +44,7 @@ export const experience = [
         approach: "Used I-MR control charts on equipment performance to trace the slowdown downstream, to a degraded buffer-unit transfer mechanism.",
         result: "300–400 wafers/day recovered",
         diagram: "track",
+        caption: "Wafers move through the track from left to right and pile up in front of the slow buffer arm. The chart below shows the sudden jump that gave the problem away.",
         explainer: {
           title: "What is a track, and what do I-MR charts catch?",
           text: "The track is the machine linked to the lithography scanner that coats, bakes and develops wafers, passing them between modules with robotic arms and buffers. An I-MR chart plots each measurement and the jump between consecutive ones against control limits, so a shift in how a machine behaves stands out from normal noise.",
@@ -57,6 +58,7 @@ export const experience = [
         result: "250 engineering hours saved / yr",
         tools: ["Python", "SQL"],
         diagram: "overlay",
+        caption: "Each new layer has to sit exactly on top of the one below. The tool measures how far off it is, works out the fix, and tells the scanner how to line up the next wafers.",
         explainer: {
           title: "What is overlay?",
           text: "A chip is built from dozens of patterned layers, and each one has to land almost exactly on top of the one below it. Overlay is that alignment. Metrology tools measure how far each layer is off at marks across the wafer, and those errors are turned into corrections the scanner applies to the next wafers.",
@@ -70,6 +72,7 @@ export const experience = [
         result: "84% accuracy · 1,000+ images/day automated",
         tools: ["PyTorch", "FFT"],
         diagram: "cnn",
+        caption: "A photo of the wafer is turned into a pattern map (the FFT), and a neural network learns which patterns mean which kind of defect.",
         explainer: {
           title: "Why an FFT?",
           text: "A fast Fourier transform turns an image into its frequency content, so repeating streaks, swirls and ripples show up as distinct bright spots and rings. That makes coating defects easier for a convolutional neural network, an image-recognition model, to tell apart.",
@@ -83,6 +86,7 @@ export const experience = [
         result: "50 engineering hours saved / week",
         tools: ["Python", "SQL"],
         diagram: "skip",
+        caption: "Not every lot gets measured. Ticked boxes were measured, dashed ones skipped. When that setting drifts, the automation snaps it back to the right default.",
         explainer: {
           title: "What is a metrology skip factor?",
           text: "Fabs don't measure every lot; that would tie up expensive metrology tools. A skip factor sets how often measurement is skipped. When it drifts from the process default, a fab either measures too little or wastes tool time, so it has to be put back.",
@@ -113,6 +117,7 @@ export const experience = [
         result: "Refined across 4+ prototype iterations",
         tools: ["SEM"],
         diagram: "switch",
+        caption: "Left: when the battery is cool, connected indium carries heat through the barrier. Right: when a cell overheats, the indium melts out and the barrier blocks the heat.",
         explainer: {
           title: "What is thermal runaway, and what is a thermal switch?",
           text: "When a lithium-ion cell overheats, its chemistry releases more heat, which speeds the reactions up further, and it can set off the cells next to it. A thermal switch passes heat while things are normal, then changes structure when it gets hot (here, indium melting out) so it insulates instead.",
@@ -124,6 +129,7 @@ export const experience = [
         approach: "Calculated thermal conductivity (k = αρCₚ) across 50–70 wt% indium formulations.",
         result: "65 wt% indium strongest overall",
         diagram: "conductivity",
+        caption: "Thermal conductivity is worked out from three measurements. Of the formulations tested between 50 and 70% indium, 65% did best overall.",
         explainer: {
           title: "What is thermal conductivity?",
           text: "Thermal conductivity, k, is how easily heat flows through a material. Here it comes from three measured properties: how fast heat spreads (thermal diffusivity, α), density (ρ) and heat capacity (Cₚ). The best formulation balances heat transport with holding together structurally.",
@@ -140,6 +146,7 @@ export const experience = [
           { label: "Code on GitHub", href: "https://github.com/adityameenak/switchable-barrier-runaway" },
         ],
         diagram: "stack",
+        caption: "Five battery cells in a row. The first one is in thermal runaway, and the switched-off barrier next to it stops the heat from reaching the others.",
         explainer: {
           title: "What is a finite-volume model?",
           text: "It splits the battery stack into many thin slices and tracks how much heat flows in and out of each one, step by step in time. Because heat is only ever moved between slices, energy is conserved, which makes it a reliable way to watch a heat front travel, or get stopped.",
@@ -169,6 +176,7 @@ export const experience = [
         approach: "Ran 10+ controlled runs at 800–1200 °C, varying temperature, ramp rate and atmosphere, and measured conductivity with a four-point probe.",
         result: "Conductivity onset narrowed to 900–1000 °C",
         diagram: "pyrolysis",
+        caption: "The furnace heats the liquid polymer until it turns into ceramic. Somewhere between 900 and 1000 °C, the material starts to conduct electricity.",
         explainer: {
           title: "What is pyrolysis?",
           text: "Pyrolysis is baking a material at high temperature without oxygen. A preceramic polymer like polycarbosilane cures into a solid, then converts into silicon carbide ceramic. The temperature profile controls its structure, and whether it conducts electricity.",
@@ -181,6 +189,7 @@ export const experience = [
         result: "92% SiC phase purity",
         tools: ["XRD", "SEM"],
         diagram: "xrd",
+        caption: "Left: the X-ray scan shows peaks that match silicon carbide. Right: the sample heats up inside a radio-frequency coil, which is what an RF susceptor is for.",
         explainer: {
           title: "What is an RF susceptor, and what does XRD show?",
           text: "An RF susceptor is a material that absorbs radio-frequency energy and heats up, which takes enough electrical conductivity to couple with the field. X-ray diffraction identifies which crystal phases are present, showing how much of the sample actually became silicon carbide.",

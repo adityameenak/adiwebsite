@@ -42,15 +42,15 @@ function Track({ on, t }) {
       ))}
       <text className="tx" x="150" y="77" textAnchor="end">QUEUE</text>
 
-      <text className="tx" x="20" y="100">I-MR</text>
+      <text className="tx" x="20" y="100">TRANSFER TIME (I-MR CHART)</text>
       <line className="ln dash" x1="28" y1="122" x2="300" y2="122" />
-      <text className="tx tx-acc" x="300" y="117" textAnchor="end">UCL</text>
+      <text className="tx tx-acc" x="300" y="117" textAnchor="end">LIMIT</text>
       <line className="ln" x1="28" y1="139" x2="300" y2="139" opacity="0.5" />
       <motion.path className="ink" d={path} initial={{ pathLength: 0 }} animate={on ? { pathLength: 1 } : {}} transition={t(0.2, 1.4)} />
       {points.map((y, i) => (
         <circle key={i} className={i >= 7 ? 'f-acc' : 'f-ink'} cx={xs[i]} cy={y} r="2.4" />
       ))}
-      <text className="tx" x="20" y="166">shift past the control limit → investigate</text>
+      <text className="tx" x="20" y="166">sudden jump past the limit → something changed</text>
     </>
   );
 }
@@ -305,8 +305,8 @@ function Xrd({ on, t }) {
       <line className="ln" x1="16" y1="152" x2="196" y2="152" />
       <motion.path className="ink" d={d} initial={{ pathLength: 0 }} animate={on ? { pathLength: 1 } : {}} transition={t(0.1, 1.4)} />
       {[[70, 60], [110, 106], [152, 98]].map(([x, yy]) => <text key={x} className="tx tx-acc" x={x} y={yy} textAnchor="middle">SiC</text>)}
-      <text className="tx" x="196" y="166" textAnchor="end">2θ →</text>
-      <text className="tx" x="16" y="26">XRD · 92% SiC PHASE</text>
+      <text className="tx" x="196" y="166" textAnchor="end">X-RAY ANGLE →</text>
+      <text className="tx" x="16" y="26">X-RAY SCAN · 92% SiC</text>
 
       <motion.rect
         className="f-acc" x="242" y="76" width="36" height="44" rx="3"
