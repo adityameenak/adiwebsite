@@ -16,7 +16,7 @@ export default function App() {
           <HeroChapter />
           <About />
           <EducationChapter />
-          <ExperienceChapter />
+          <ExperienceChapter variant="compact" />
           <ProjectsChapter />
         </main>
         <div style={{ position: 'relative', zIndex: 1 }}>

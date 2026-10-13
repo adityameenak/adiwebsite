@@ -33,7 +33,62 @@ export const experience = [
       "Developed and deployed a PyTorch CNN on FFT-derived heatmaps to classify spin-coater defects with 84% accuracy, automating review of 1,000+ previously manual process images per day",
       "Automated lot-level overlay metrology skip-factor resets with Python and SQL, restoring process-specific defaults while saving 50 engineering hours per week"
     ],
-    tags: ["Photolithography", "Metrology", "Process Control"]
+    tags: ["Photolithography", "Metrology", "Process Control"],
+    icon: "wafer",
+    summary: "A summer on the Photo Innovation and Metrology team in a high-volume chip fab, turning fab data into tools engineers actually use: code, statistics and machine learning applied to alignment, defects and throughput.",
+    cases: [
+      {
+        tag: "Process control",
+        title: "Track throughput bottleneck",
+        problem: "A lithography track was moving fewer wafers than it should.",
+        approach: "Used I-MR control charts on equipment performance to trace the slowdown downstream, to a degraded buffer-unit transfer mechanism.",
+        result: "300–400 wafers/day recovered",
+        diagram: "track",
+        explainer: {
+          title: "What is a track, and what do I-MR charts catch?",
+          text: "The track is the machine linked to the lithography scanner that coats, bakes and develops wafers, passing them between modules with robotic arms and buffers. An I-MR chart plots each measurement and the jump between consecutive ones against control limits, so a shift in how a machine behaves stands out from normal noise.",
+        },
+      },
+      {
+        tag: "Automation",
+        title: "Overlay correction tool",
+        problem: "Turning overlay measurements into scanner corrections was a manual, spreadsheet-driven job.",
+        approach: "Built a Python tool that transforms 500+ wafer- and shot-level metrology measurements per lot into scanner alignment corrections.",
+        result: "250 engineering hours saved / yr",
+        tools: ["Python", "SQL"],
+        diagram: "overlay",
+        explainer: {
+          title: "What is overlay?",
+          text: "A chip is built from dozens of patterned layers, and each one has to land almost exactly on top of the one below it. Overlay is that alignment. Metrology tools measure how far each layer is off at marks across the wafer, and those errors are turned into corrections the scanner applies to the next wafers.",
+        },
+      },
+      {
+        tag: "Machine learning",
+        title: "Spin-coater defect classification",
+        problem: "Process images from spin-coating equipment were reviewed by hand.",
+        approach: "Converted images into FFT-derived heatmaps and trained a PyTorch convolutional neural network to classify defects.",
+        result: "84% accuracy · 1,000+ images/day automated",
+        tools: ["PyTorch", "FFT"],
+        diagram: "cnn",
+        explainer: {
+          title: "Why an FFT?",
+          text: "A fast Fourier transform turns an image into its frequency content, so repeating streaks, swirls and ripples show up as distinct bright spots and rings. That makes coating defects easier for a convolutional neural network, an image-recognition model, to tell apart.",
+        },
+      },
+      {
+        tag: "Automation",
+        title: "Metrology skip-factor resets",
+        problem: "Restoring lot-level overlay metrology skip factors to their defaults was repetitive manual work.",
+        approach: "Automated the resets with Python and SQL, restoring process-specific defaults.",
+        result: "50 engineering hours saved / week",
+        tools: ["Python", "SQL"],
+        diagram: "skip",
+        explainer: {
+          title: "What is a metrology skip factor?",
+          text: "Fabs don't measure every lot; that would tie up expensive metrology tools. A skip factor sets how often measurement is skipped. When it drifts from the process default, a fab either measures too little or wastes tool time, so it has to be put back.",
+        },
+      },
+    ],
   },
   {
     id: 2,
@@ -46,7 +101,51 @@ export const experience = [
       "Fabricated composites end to end through powder mixing, pellet pressing, and 900 °C heat treatment; analyzed cross-sectional morphology and conductive pathways by SEM across 4+ prototype iterations",
       "Built a verified 1D finite-volume model of a 5-cell battery stack in Python; swept 361 barrier designs and identified a simulation-predicted hot-state conductance threshold of ~32 W m⁻² K⁻¹ for suppressing runaway propagation"
     ],
-    tags: ["Battery Safety", "Thermal Management", "Simulation"]
+    tags: ["Battery Safety", "Thermal Management", "Simulation"],
+    icon: "battery",
+    summary: "Building a coating that acts like a fuse for heat: it carries heat away from battery cells normally, then turns insulating when one fails, to stop thermal runaway from spreading.",
+    cases: [
+      {
+        tag: "Materials",
+        title: "Thermal-switching composite",
+        problem: "Battery barriers need to conduct heat in normal use but block it during runaway.",
+        approach: "Designed a composite around indium phase change, CaCO₃ decomposition and a titanium framework, made by powder mixing, pellet pressing and 900 °C heat treatment, then studied with SEM cross-sections.",
+        result: "Refined across 4+ prototype iterations",
+        tools: ["SEM"],
+        diagram: "switch",
+        explainer: {
+          title: "What is thermal runaway, and what is a thermal switch?",
+          text: "When a lithium-ion cell overheats, its chemistry releases more heat, which speeds the reactions up further, and it can set off the cells next to it. A thermal switch passes heat while things are normal, then changes structure when it gets hot (here, indium melting out) so it insulates instead.",
+        },
+      },
+      {
+        tag: "Characterization",
+        title: "Thermal conductivity",
+        approach: "Calculated thermal conductivity (k = αρCₚ) across 50–70 wt% indium formulations.",
+        result: "65 wt% indium strongest overall",
+        diagram: "conductivity",
+        explainer: {
+          title: "What is thermal conductivity?",
+          text: "Thermal conductivity, k, is how easily heat flows through a material. Here it comes from three measured properties: how fast heat spreads (thermal diffusivity, α), density (ρ) and heat capacity (Cₚ). The best formulation balances heat transport with holding together structurally.",
+        },
+      },
+      {
+        tag: "Simulation",
+        title: "Barrier design sweep",
+        approach: "Built a verified 1D finite-volume model of a 5-cell battery stack in Python and swept 361 barrier designs.",
+        result: "~32 W m⁻² K⁻¹ hot-state conductance threshold",
+        tools: ["Python", "SciPy"],
+        links: [
+          { label: "Read the paper", href: "/papers/switchable-barrier-runaway.pdf" },
+          { label: "Code on GitHub", href: "https://github.com/adityameenak/switchable-barrier-runaway" },
+        ],
+        diagram: "stack",
+        explainer: {
+          title: "What is a finite-volume model?",
+          text: "It splits the battery stack into many thin slices and tracks how much heat flows in and out of each one, step by step in time. Because heat is only ever moved between slices, energy is conserved, which makes it a reliable way to watch a heat front travel, or get stopped.",
+        },
+      },
+    ],
   },
   {
     id: 3,
@@ -59,7 +158,35 @@ export const experience = [
       "Narrowed the onset of measurable electrical conductivity to 900–1000 °C using four-point probe measurements, guiding subsequent trials within the identified transition range",
       "Achieved 92% SiC phase purity using XRD, examined backbone-fiber and PCS-coating cross-sections using SEM, and evaluated RF heating at 200–300 W to assess electromagnetic coupling and temperature response"
     ],
-    tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"]
+    tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"],
+    icon: "furnace",
+    summary: "Turning a liquid polymer into conductive silicon carbide, and finding the lowest bake temperature that makes it work as an RF susceptor.",
+    cases: [
+      {
+        tag: "Process",
+        title: "Pyrolysis window",
+        problem: "Find the lowest pyrolysis temperature that still makes the ceramic conduct.",
+        approach: "Ran 10+ controlled runs at 800–1200 °C, varying temperature, ramp rate and atmosphere, and measured conductivity with a four-point probe.",
+        result: "Conductivity onset narrowed to 900–1000 °C",
+        diagram: "pyrolysis",
+        explainer: {
+          title: "What is pyrolysis?",
+          text: "Pyrolysis is baking a material at high temperature without oxygen. A preceramic polymer like polycarbosilane cures into a solid, then converts into silicon carbide ceramic. The temperature profile controls its structure, and whether it conducts electricity.",
+        },
+      },
+      {
+        tag: "Characterization",
+        title: "Phase purity and RF response",
+        approach: "Measured phase with XRD, imaged backbone-fiber and PCS-coating cross-sections with SEM, and tested RF heating at 200–300 W.",
+        result: "92% SiC phase purity",
+        tools: ["XRD", "SEM"],
+        diagram: "xrd",
+        explainer: {
+          title: "What is an RF susceptor, and what does XRD show?",
+          text: "An RF susceptor is a material that absorbs radio-frequency energy and heats up, which takes enough electrical conductivity to couple with the field. X-ray diffraction identifies which crystal phases are present, showing how much of the sample actually became silicon carbide.",
+        },
+      },
+    ],
   }
 ];
 
