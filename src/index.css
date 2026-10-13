@@ -688,6 +688,42 @@
 .case__link { font-family: var(--mono); font-size: 11.5px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; margin-left: 4px; }
 .case__link:hover { border-bottom-color: var(--accent); }
 
+/* Research story: the project → how I approached it → what I discovered */
+.xp-role > .rs { margin-left: 70px; }
+.rs { display: flex; flex-direction: column; gap: 28px; }
+.rs-label {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+}
+.rs-label::after { content: ''; flex: 1; max-width: 160px; height: 1px; background: var(--rule); }
+.rs-text { font-size: 15px; line-height: 1.65; color: var(--body); max-width: 62ch; }
+.rs-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 24px; align-items: start; }
+.rs .case__figure { border: 1px solid var(--rule); border-radius: 10px; }
+.rs-steps { list-style: none; margin: 0; padding: 0; }
+.rs-step { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 4px 14px; padding: 16px 0; border-top: 1px dashed var(--rule); }
+.rs-step:first-child { border-top: none; padding-top: 0; }
+.rs-step.has-figure { grid-template-columns: 34px minmax(0, 1fr) minmax(0, 0.9fr); gap: 4px 24px; align-items: start; }
+.rs-num { font-family: var(--mono); font-size: 13px; color: var(--accent); padding-top: 1px; }
+.rs-step__title { font-size: 15.5px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 4px; }
+.rs-findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.rs-findings li {
+  position: relative; padding: 12px 14px 12px 40px; max-width: 78ch;
+  border: 1px solid var(--rule); border-left: 3px solid var(--accent); border-radius: 8px;
+  background: var(--surface); font-size: 15px; line-height: 1.55; color: var(--ink);
+}
+.rs-findings li::before { content: '→'; position: absolute; left: 15px; top: 12px; font-family: var(--mono); color: var(--accent); }
+.xp-research .xp-row { border-top: none; }
+/* Visible at rest (unlike plain rows), so it reads as a button */
+.xp-row__btn--research { border-color: var(--rule); background: var(--surface); padding-top: 12px; padding-bottom: 12px; }
+.xp-row__btn--research .xp-row__title { font-weight: 600; }
+
+@media (max-width: 900px) {
+  .xp-role > .rs { margin-left: 0; }
+  .rs-split { grid-template-columns: 1fr; gap: 14px; }
+  .rs-step.has-figure { grid-template-columns: 34px minmax(0, 1fr); }
+  .rs-step.has-figure .case__figure { grid-column: 2; margin-top: 10px; }
+}
+
 /* Schematic diagrams */
 .dg { display: block; width: 100%; height: auto; overflow: visible; }
 .dg-placeholder { aspect-ratio: 320 / 180; }

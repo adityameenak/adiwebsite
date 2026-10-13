@@ -108,51 +108,49 @@ export const experience = [
     tags: ["Battery Safety", "Thermal Management", "Simulation"],
     icon: "battery",
     summary: "Building a coating that acts like a fuse for heat: it carries heat away from battery cells normally, then turns insulating when one fails, to stop thermal runaway from spreading.",
-    cases: [
-      {
-        tag: "Materials",
-        title: "Thermal-switching composite",
-        problem: "Battery barriers need to conduct heat in normal use but block it during runaway.",
-        approach: "Designed a composite around indium phase change, CaCO₃ decomposition and a titanium framework, made by powder mixing, pellet pressing and 900 °C heat treatment, then studied with SEM cross-sections.",
-        result: "Refined across 4+ prototype iterations",
-        tools: ["SEM"],
+    kind: "research",
+    story: {
+      project: {
+        text: "When one lithium-ion cell overheats, it can set off the cells next to it in a chain reaction called thermal runaway. The barrier between cells has two jobs that pull in opposite directions: carry heat away on a normal day, and block it the moment a cell fails. This project is a passive coating that does both. It conducts heat normally and switches to insulating when things get dangerous, with no sensors or electronics.",
         diagram: "switch",
         caption: "Left: when the battery is cool, connected indium carries heat through the barrier. Right: when a cell overheats, the indium melts out and the barrier blocks the heat.",
         explainer: {
-          title: "What is thermal runaway, and what is a thermal switch?",
-          text: "When a lithium-ion cell overheats, its chemistry releases more heat, which speeds the reactions up further, and it can set off the cells next to it. A thermal switch passes heat while things are normal, then changes structure when it gets hot (here, indium melting out) so it insulates instead.",
+          title: "What is thermal runaway?",
+          text: "When a lithium-ion cell gets hot enough, its chemistry starts releasing heat on its own, which heats it further and speeds the reactions up even more. That runaway can take a cell to several hundred degrees and push its neighbors past the same tipping point.",
         },
       },
-      {
-        tag: "Characterization",
-        title: "Thermal conductivity",
-        approach: "Calculated thermal conductivity (k = αρCₚ) across 50–70 wt% indium formulations.",
-        result: "65 wt% indium strongest overall",
-        diagram: "conductivity",
-        caption: "Thermal conductivity is worked out from three measurements. Of the formulations tested between 50 and 70% indium, 65% did best overall.",
-        explainer: {
-          title: "What is thermal conductivity?",
-          text: "Thermal conductivity, k, is how easily heat flows through a material. Here it comes from three measured properties: how fast heat spreads (thermal diffusivity, α), density (ρ) and heat capacity (Cₚ). The best formulation balances heat transport with holding together structurally.",
+      approach: [
+        {
+          title: "Designed the switch",
+          text: "Built the composite around three ingredients with separate jobs: indium, which melts out at high temperature to break the heat path; calcium carbonate (CaCO₃), which decomposes to release CO₂ that helps suppress fire; and a titanium framework that holds the structure together.",
         },
-      },
-      {
-        tag: "Simulation",
-        title: "Barrier design sweep",
-        approach: "Built a verified 1D finite-volume model of a 5-cell battery stack in Python and swept 361 barrier designs.",
-        result: "~32 W m⁻² K⁻¹ hot-state conductance threshold",
-        tools: ["Python", "SciPy"],
-        links: [
-          { label: "Read the paper", href: "/papers/switchable-barrier-runaway.pdf" },
-          { label: "Code on GitHub", href: "https://github.com/adityameenak/switchable-barrier-runaway" },
-        ],
-        diagram: "stack",
-        caption: "Five battery cells in a row. The first one is in thermal runaway, and the switched-off barrier next to it stops the heat from reaching the others.",
-        explainer: {
-          title: "What is a finite-volume model?",
-          text: "It splits the battery stack into many thin slices and tracks how much heat flows in and out of each one, step by step in time. Because heat is only ever moved between slices, energy is conserved, which makes it a reliable way to watch a heat front travel, or get stopped.",
+        {
+          title: "Made and refined it",
+          text: "Fabricated each composite end to end through powder mixing, pellet pressing and 900 °C heat treatment, then cut cross-sections and used SEM to check the conductive pathways and structural integrity, refining the recipe over 4+ prototype iterations.",
         },
-      },
-    ],
+        {
+          title: "Measured how well it carries heat",
+          text: "Calculated thermal conductivity, k = αρCₚ, across formulations from 50 to 70 wt% indium to see how composition and porosity change heat transport.",
+          diagram: "conductivity",
+          caption: "Thermal conductivity comes from three measurements: how fast heat spreads, density and heat capacity.",
+        },
+        {
+          title: "Simulated it at the battery-pack scale",
+          text: "Built a verified 1D finite-volume model of a 5-cell battery stack in Python and swept 361 barrier designs to see which ones stop runaway from spreading.",
+          diagram: "stack",
+          caption: "Five cells in a row. The first is in thermal runaway, and the switched-off barrier next to it keeps the heat from reaching the others.",
+          links: [
+            { label: "Read the paper", href: "/papers/switchable-barrier-runaway.pdf" },
+            { label: "Code on GitHub", href: "https://github.com/adityameenak/switchable-barrier-runaway" },
+          ],
+        },
+      ],
+      findings: [
+        "65 wt% indium was the strongest composition, balancing thermal response with structural integrity.",
+        "In simulation, a barrier stops the chain reaction when its hot-state conductance stays below about 32 W m⁻² K⁻¹: one clear target for a real material to hit.",
+        "A switching barrier kept cells as cool as an ordinary heat-spreading barrier in normal use, while still containing runaway to the first cell.",
+      ],
+    },
   },
   {
     id: 3,
@@ -168,34 +166,38 @@ export const experience = [
     tags: ["Silicon Carbide", "Polymer-Derived Ceramics", "Materials Science"],
     icon: "furnace",
     summary: "Turning a liquid polymer into conductive silicon carbide, and finding the lowest bake temperature that makes it work as an RF susceptor.",
-    cases: [
-      {
-        tag: "Process",
-        title: "Pyrolysis window",
-        problem: "Find the lowest pyrolysis temperature that still makes the ceramic conduct.",
-        approach: "Ran 10+ controlled runs at 800–1200 °C, varying temperature, ramp rate and atmosphere, and measured conductivity with a four-point probe.",
-        result: "Conductivity onset narrowed to 900–1000 °C",
+    kind: "research",
+    story: {
+      project: {
+        text: "Silicon carbide (SiC) is a tough ceramic that can heat up inside a radio-frequency field, which makes it useful as an RF susceptor. This project makes it from a liquid polymer, polycarbosilane (PCS), by baking it in a furnace. The goal is to find the lowest bake temperature that still makes the ceramic conduct electricity.",
         diagram: "pyrolysis",
         caption: "The furnace heats the liquid polymer until it turns into ceramic. Somewhere between 900 and 1000 °C, the material starts to conduct electricity.",
         explainer: {
           title: "What is pyrolysis?",
-          text: "Pyrolysis is baking a material at high temperature without oxygen. A preceramic polymer like polycarbosilane cures into a solid, then converts into silicon carbide ceramic. The temperature profile controls its structure, and whether it conducts electricity.",
+          text: "Pyrolysis is baking a material at high temperature without oxygen. A preceramic polymer like polycarbosilane cures into a solid, then converts into silicon carbide ceramic. The temperature profile controls its structure, and whether it conducts.",
         },
       },
-      {
-        tag: "Characterization",
-        title: "Phase purity and RF response",
-        approach: "Measured phase with XRD, imaged backbone-fiber and PCS-coating cross-sections with SEM, and tested RF heating at 200–300 W.",
-        result: "92% SiC phase purity",
-        tools: ["XRD", "SEM"],
-        diagram: "xrd",
-        caption: "Left: the X-ray scan shows peaks that match silicon carbide. Right: the sample heats up inside a radio-frequency coil, which is what an RF susceptor is for.",
-        explainer: {
-          title: "What is an RF susceptor, and what does XRD show?",
-          text: "An RF susceptor is a material that absorbs radio-frequency energy and heats up, which takes enough electrical conductivity to couple with the field. X-ray diffraction identifies which crystal phases are present, showing how much of the sample actually became silicon carbide.",
+      approach: [
+        {
+          title: "Turned liquid polymer into ceramic",
+          text: "Took liquid PCS through degassing, curing, resting and pyrolysis, completing 10+ controlled runs between 800 and 1200 °C while varying the temperature, ramp rate and atmosphere.",
         },
-      },
-    ],
+        {
+          title: "Measured when it starts to conduct",
+          text: "Used four-point probe measurements on each run to track electrical conductivity against conversion temperature, then focused later trials on the range where it switched on.",
+        },
+        {
+          title: "Checked what it became, and how it heats",
+          text: "Used XRD to measure how much of the sample became silicon carbide, SEM to examine backbone-fiber and PCS-coating cross-sections, and RF heating at 200–300 W to see how conversion temperature affects electromagnetic coupling and temperature response.",
+          diagram: "xrd",
+          caption: "Left: the X-ray scan shows peaks that match silicon carbide. Right: the sample heats up inside a radio-frequency coil.",
+        },
+      ],
+      findings: [
+        "Measurable electrical conductivity switches on between 900 and 1000 °C, narrowing where the search for the lowest workable temperature needs to focus.",
+        "The converted material reached 92% silicon carbide phase purity, measured by XRD.",
+      ],
+    },
   }
 ];
 
