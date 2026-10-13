@@ -838,3 +838,16 @@
 .footer-social { color: var(--faint); transition: color 150ms; }
 .footer-social:hover { color: var(--accent); }
 .contact-link:hover { border-color: var(--accent) !important; }
+
+/* Contact page: links on the left, a small personal photo on the right */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 480px) minmax(0, 300px); justify-content: space-between; align-items: center; gap: 48px; }
+.contact-photo { margin: 0; justify-self: end; width: 100%; max-width: 300px; transform: rotate(1.5deg); }
+.contact-photo img {
+  display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
+  border-radius: 14px; border: 1px solid var(--rule); box-shadow: 0 14px 34px -18px rgba(30, 10, 10, 0.35);
+}
+.contact-photo figcaption { margin-top: 10px; text-align: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--faint); }
+@media (max-width: 767px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .contact-photo { justify-self: center; max-width: 240px; transform: none; }
+}

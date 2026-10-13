@@ -55,7 +55,7 @@ function ContactSection() {
         background: 'var(--bg)',
       }}
     >
-      <div className="container-wide">
+      <div className="container-wide contact-grid">
         <motion.div
           variants={container}
           initial="hidden"
@@ -126,6 +126,24 @@ function ContactSection() {
             ))}
           </motion.div>
         </motion.div>
+
+        {/* A low-key personal touch beside the contact links */}
+        <motion.figure
+          className="contact-photo"
+          initial={{ opacity: 0, y: reducedMotion ? 0 : 16 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: reducedMotion ? 0.2 : 0.6, delay: reducedMotion ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img
+            src="/images/ring-day.jpg"
+            alt="Adi giving a thumbs up and showing his Aggie Ring by the lake at Texas A&M"
+            width="750"
+            height="1000"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Aggie Ring Day · Texas A&amp;M</figcaption>
+        </motion.figure>
       </div>
     </section>
   );
