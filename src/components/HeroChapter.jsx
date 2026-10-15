@@ -160,10 +160,11 @@ export default function HeroChapter() {
                 lineHeight: 1.6,
                 color: 'var(--body)',
                 maxWidth: '44ch',
+                textWrap: 'balance', // even line lengths, no one-word last line
                 marginBottom: '8px',
               }}
             >
-              Chemical Engineering student at Texas A&M, focused on semiconductors, advanced materials, and sustainable energy systems.
+              Chemical engineering student at Texas A&M working on battery safety and advanced materials.
             </motion.p>
 
             {/* Location tagline */}

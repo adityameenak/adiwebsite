@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Adi",
-  title: "Honors Chemical Engineering student at Texas A&M focused on semiconductors, advanced materials, and sustainable energy systems.",
+  title: "Honors Chemical Engineering student at Texas A&M working on battery safety and advanced materials.",
   tagline: "College Station, TX • Class of 2028",
   email: "adityameenakshisundaram@gmail.com",
   linkedin: "https://www.linkedin.com/in/adityameenakshi/",
