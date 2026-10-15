@@ -4,7 +4,7 @@ Only skills listed on his portfolio or resume, with where he has used them.
 
 ## Programming and data
 
-- Python — his main language. Used at Samsung (overlay-correction app, photoresist-thickness prediction, metrology automation, CNN defect classifier), in the switchable-barrier finite-volume simulation, in STEM Research Finder's data pipelines, and in SolarIQ.
+- Python — his main language. Used at Samsung (overlay-correction app, spin-coater setup app, metrology automation, CNN defect classifier), in the switchable-barrier finite-volume simulation, in STEM Research Finder's data pipelines, and in SolarIQ.
 - Python libraries: NumPy, Pandas, SciPy, scikit-learn, PyTorch, TensorFlow.
 - Data engineering: web scraping/crawling (Playwright, BeautifulSoup), data extraction, normalization and deduplication, engineering workflow automation.
 - Backend: FastAPI, SQLAlchemy (STEM Research Finder).
@@ -18,7 +18,7 @@ Only skills listed on his portfolio or resume, with where he has used them.
 ## Machine learning and AI
 
 - Built and deployed a PyTorch convolutional neural network at Samsung that classifies spinner-tool defects from FFT-derived image heatmaps, with 84% accuracy, reviewing 1,000+ images per day (CNN-based image classification with FFT-derived image features).
-- Built a predictive model at Samsung relating spin-coater settings to photoresist thickness and recommending spin-speed setpoints (about 15% less test-wafer qualification time).
+- Built a Python app at Samsung that helps engineers choose spin-coater settings for a target photoresist thickness (about 15% less test-wafer qualification time). Note: this is a helper tool, not a predictive model.
 - Built Sustainapath, an AI-driven process-optimization platform.
 - Built resume-based faculty matching and outreach drafting into STEM Research Finder.
 

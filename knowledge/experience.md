@@ -18,12 +18,12 @@
 - Impact: replaced the Excel-macro workflow with a standardized, faster method; saved about 250 engineering hours per year.
 - Not public: the exact correction equations and coefficients, data schema and validation details are internal.
 
-### 2. Photoresist thickness prediction and spin-coater optimization
+### 2. Spin-coater setup app for photoresist thickness
 - Problem: photoresist must be coated at a precise thickness, which depends on spin speed, dispense conditions, material properties and process conditions. Qualifying spin-coater settings meant running test wafers and adjusting equipment by trial and error, costing engineering time and tool capacity.
-- What he built: a predictive modeling application using historical process data to relate spin-coater parameters (spin-speed setpoints and dispense parameters) to resulting photoresist thickness.
-- What it does: predicts film thickness for a given set of conditions before any physical change, and works backward from a target thickness to recommend the spin-speed setpoint needed — moving qualification from trial and error toward data-driven optimization. Predictions supported keeping thickness within a 10 Å (1 nm) SPC control window.
+- What he built: a Python app that helps engineers choose spin-coater settings (spin speed and dispense parameters) for a target photoresist thickness. It is an engineering helper tool, not a predictive/ML model.
+- What it does: cuts down the trial-and-error of qualifying spin-coater settings, supporting thickness control within a 10 Å (1 nm) SPC window.
 - Impact: about a 15% reduction in test-wafer qualification time, with fewer manual adjustments and more consistent thickness.
-- Not public: the model type, input features and validation results.
+- Not public: the app's internal calculations and data sources.
 
 ### 3. CNN defect classification
 - Problem: spinner/track equipment produces image data that can reveal defects and abnormal processing. Technicians reviewed these images manually, which was repetitive, didn't scale, and could catch problems late.
@@ -43,7 +43,7 @@
 - Impact: about 50 engineering hours saved per week, while restoring process-specific defaults.
 
 ### What he took from it
-- Experience across semiconductor process engineering (overlay, photoresist, wafer handling, metrology sampling), production-focused software (data extraction, cleaning and validation; Streamlit apps for non-programmers) and data-driven manufacturing (predictive models and computer vision).
+- Experience across semiconductor process engineering (overlay, photoresist, wafer handling, metrology sampling), production-focused software (data extraction, cleaning and validation; Streamlit apps for non-programmers) and data-driven manufacturing (engineering helper apps and computer vision).
 - Plain-English summary: he used Python, SQL, statistics and machine learning to turn fab data into tools that automate engineers' work, tighten process control, catch defects and keep wafers moving.
 
 <!--
