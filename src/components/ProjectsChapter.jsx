@@ -1,12 +1,9 @@
-import { Suspense, lazy, useState, useMemo, useRef } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { projects, projectCategories } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SectionLabel from './effects/SectionLabel';
 import FilterPills from './FilterPills';
-
-// Same schematic diagram set as the Experience section; loaded on demand.
-const Diagram = lazy(() => import('./experience/diagrams'));
 
 export default function ProjectsChapter() {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -117,17 +114,6 @@ function TagRow({ tags, limit }) {
   );
 }
 
-function ProjectFigure({ project }) {
-  if (!project.diagram) return null;
-  return (
-    <div className="project-card__figure">
-      <Suspense fallback={<div className="dg-placeholder" />}>
-        <Diagram id={project.diagram} label={`Diagram: how ${project.title} works`} />
-      </Suspense>
-    </div>
-  );
-}
-
 const projectAnchor = (title) => `project-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 
 const isExternal = (href) => href.startsWith('http') || href.endsWith('.pdf');
@@ -144,22 +130,20 @@ function LeadProjectCard({ project }) {
         <h3 className="project-card__title" style={{ fontSize: '21px' }}>{project.title}</h3>
         <p className="project-card__body" style={{ maxWidth: '68ch' }}>{project.shortDescription}</p>
         <TagRow tags={project.tags} limit={5} />
-
-        <div className="project-actions project-actions--row">
-          {project.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={link.primary ? 'is-primary' : undefined}
-              {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-            >
-              {link.label} {CARD_LINK_ARROW}
-            </a>
-          ))}
-        </div>
       </div>
 
-      <ProjectFigure project={project} />
+      <div className="project-actions">
+        {project.links.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            className={link.primary ? 'is-primary' : undefined}
+            {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {link.label} {CARD_LINK_ARROW}
+          </a>
+        ))}
+      </div>
     </article>
   );
 }
@@ -171,7 +155,6 @@ function ProjectCard({ project }) {
 
   return (
     <Tag {...linkProps} id={projectAnchor(project.title)} className="project-card" style={{ scrollMarginTop: '80px' }}>
-      <ProjectFigure project={project} />
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
         <span className="project-card__meta">{project.type || project.category}</span>
         {project.status && <span className="project-card__meta">{project.status}</span>}

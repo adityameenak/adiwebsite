@@ -815,18 +815,6 @@
   .project-actions { min-width: 0; flex-direction: row; flex-wrap: wrap; }
 }
 
-/* Project diagrams (same schematic style as Experience) */
-.project-card__figure { background: var(--bg); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px 6px; }
-.project-card:not(.project-card--lead) .project-card__figure { margin: -6px -8px 16px; }
-.project-actions--row { flex-direction: row; flex-wrap: wrap; min-width: 0; margin-top: 20px; }
-@media (min-width: 768px) {
-  .project-card--lead { grid-template-columns: minmax(0, 1fr) minmax(0, 0.75fr); align-items: center; }
-}
-@media (max-width: 767px) {
-  .project-card--lead { grid-template-columns: 1fr; }
-  .project-card--lead .project-card__figure { order: -1; }
-}
-
 /* Theme toggle */
 .theme-toggle {
   width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;

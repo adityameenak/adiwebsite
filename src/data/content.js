@@ -206,7 +206,6 @@ export const projects = [
   {
     id: 5,
     title: "Switchable Thermal Barriers Against Battery Runaway",
-    diagram: "stack",
     description: "When one battery cell overheats, it can set off its neighbors like dominoes. The barrier between cells has two opposite jobs: let heat escape on a normal day, and block it when a cell fails. I built a simulation of a battery pack to test a barrier that works like a fuse for heat, conducting while it is cool and insulating once it gets hot.",
     shortDescription: "When one battery cell overheats it can set off its neighbors like dominoes. I simulated a battery pack to test a barrier that acts like a fuse for heat: it lets heat escape while cells are cool, then blocks it once a cell fails. It kept the pack as cool as a normal heat-spreading barrier day to day, yet stopped the chain reaction, and showed that what matters most is how well the barrier insulates once it's hot.",
     tags: ["Python", "Simulation", "Battery Safety", "Heat Transfer"],
@@ -225,7 +224,6 @@ export const projects = [
   {
     id: 3,
     title: "STEM Research Finder",
-    diagram: "finder",
     description: "Co-created and launched a multi-tenant research-discovery platform supporting university-specific deployments, indexing 5,000+ STEM faculty nationwide and attracting 3,000+ student users without paid acquisition. Python data pipelines across 50+ university web sources extract and standardize faculty research profiles, deduplicate records, and automate index updates. Resume-based faculty matching and personalized outreach drafting connect student experience with relevant research labs.",
     shortDescription: "A search engine for undergrad research. It pulls faculty profiles from university websites across the country into one place, so students can search by school, field or research topic, get matched to labs from their resume, and draft a personal outreach email, instead of trawling department pages. 5,000+ faculty indexed and 3,000+ students using it, with no paid marketing.",
     lead: true,
@@ -243,7 +241,6 @@ export const projects = [
   {
     id: 1,
     title: "Sustainapath",
-    diagram: "sustainapath",
     description: "Built an AI-driven platform that analyzes chemical and industrial workflows, identifies inefficiencies, and suggests optimized process improvements with sustainability, cost, and time considerations.",
     shortDescription: "AI-powered process optimization platform for chemical workflows, with recommendations focused on sustainability, efficiency, and cost.",
     tags: ["React", "AI", "Vercel", "Process Optimization"],
@@ -257,7 +254,6 @@ export const projects = [
   {
     id: 2,
     title: "SolarIQ",
-    diagram: "solar",
     description: "Solar energy analytics platform for tracking, forecasting, and optimizing energy production from solar installations. Built with Python and Streamlit, enabling users to monitor real-time output and identify efficiency opportunities.",
     shortDescription: "Solar analytics platform for tracking and optimizing solar energy production — live on Streamlit.",
     tags: ["Python", "Streamlit", "Analytics"],
@@ -270,7 +266,6 @@ export const projects = [
   {
     id: 4,
     title: "Substack",
-    diagram: "writing",
     description: "Long-form writing on semiconductors, sustainable energy, and emerging technologies — covering topics like advanced packaging, quantum computing, and digital twins.",
     shortDescription: "30+ long-form articles on semiconductor manufacturing, materials, and energy storage — 400+ monthly readers on Substack.",
     tags: ["Writing", "Semiconductors", "Sustainability"],
