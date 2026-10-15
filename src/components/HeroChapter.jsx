@@ -291,7 +291,7 @@ export default function HeroChapter() {
                     Focus Areas
                   </p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                    {['Semiconductors', 'Materials', 'Sustainable Energy', 'AI Tools'].map((area) => (
+                    {['Battery Safety', 'Advanced Materials', 'Semiconductors', 'Process Engineering'].map((area) => (
                       <span
                         key={area}
                         style={{
