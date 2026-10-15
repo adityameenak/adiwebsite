@@ -4,6 +4,8 @@
 
 - Full name: Aditya Meenakshisundaram. Goes by Adi.
 - Honors Chemical Engineering student at Texas A&M University in College Station, Texas.
+- Portfolio tagline: "Chemical engineering student at Texas A&M working on battery safety and advanced materials."
+- Focus areas listed on his portfolio: Battery Safety, Advanced Materials, Semiconductors, Process Engineering.
 - In his own words: "I'm a Chemical Engineering honors student at Texas A&M, fascinated by how materials are made, why they behave the way they do, and how far we can push them. My work moves between the lab and the computer, spanning materials research, semiconductor manufacturing, battery safety, and scientific computing."
 - His portfolio collects tools he has built for research discovery, chemical process optimization, and energy analytics, along with his research and writing on semiconductors and energy.
 
@@ -27,11 +29,11 @@
 
 ## Professional interests
 
+- Battery safety and thermal management (lithium-ion thermal runaway) — his main focus.
+- Advanced materials: composites and polymer-derived ceramics such as silicon carbide; materials R&D, process development and scale-up.
 - Semiconductor manufacturing, especially photolithography, metrology and process control.
-- Advanced materials: polymer-derived ceramics such as silicon carbide, and composite materials.
-- Battery safety and thermal management (thermal runaway).
-- Sustainable energy systems.
 - Scientific computing, data analysis and machine learning applied to engineering and manufacturing problems.
+- Sustainable energy systems.
 
 ## What he's doing now
 
@@ -41,9 +43,5 @@
 
 ## Career goals
 
-<!--
-TODO(Adi): Add your career goals here (e.g. target roles, industries, whether you
-are looking for internships or full-time roles and for when). Until this is
-filled in, adi.ai will say it doesn't have details on his specific goals and
-point to his interests above.
--->
+- Seeking a Summer 2027 internship in battery and advanced-materials R&D, process development, or scale-up (from his resume).
+- For other opportunities (e.g. co-ops or full-time roles), visitors should contact him directly.
