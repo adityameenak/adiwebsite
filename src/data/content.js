@@ -11,7 +11,8 @@ export const personalInfo = {
 export const about = {
   headline: "Better materials, and the tools to study them.",
   paragraphs: [
-    "I'm an honors Chemical Engineering student at Texas A&M, fascinated by how materials are made, why they behave the way they do, and how far we can push them. My work moves between the lab and the computer: battery safety and materials research, semiconductor manufacturing, and the scientific computing that ties them together.",
+    "I'm a Chemical Engineering honors student at Texas A&M, fascinated by how materials are made, why they behave the way they do, and how far we can push them. My work moves between the lab and the computer, spanning materials research, semiconductor manufacturing, battery safety, and scientific computing.",
+    "Here you'll find tools I've built for research discovery, chemical process optimization, and energy analytics, along with my research and writing on semiconductors and energy.",
   ],
   currently: [
     "Building heat-switching battery materials as a Samsung Semiconductor Research Fellow",
