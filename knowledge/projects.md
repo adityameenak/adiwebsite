@@ -2,10 +2,10 @@
 
 ## STEM Research Finder
 
-- Role: co-creator and lead developer. Live at stemresearchfinder.tech. Source code is public on GitHub (adityameenak/AggieResearchFinder).
+- Role: co-founder and lead developer. Live at stemresearchfinder.tech (formerly Aggie Research Finder). Source code is public on GitHub (adityameenak/AggieResearchFinder).
 - What it is: an AI-powered research discovery and outreach platform for students. Upload a resume, enter research interests, and get matched with faculty whose work fits where you want to go — then generate a personalized outreach email draft in one click.
-- Origin: started as the Aggie Research Finder for Texas A&M and expanded to other universities, each with its own branded subpage: Texas A&M (Aggie Research Finder), Rice (Owl Research Finder), UT Austin (Longhorn Research Finder) and UT Dallas (Comet Research Finder).
-- Scale: indexes 5,000+ STEM faculty; 3,000+ student users, grown without paid marketing.
+- Origin: started as the Aggie Research Finder for Texas A&M and expanded into a multi-tenant platform covering 8 universities, including Rice, UT Austin, MIT and Harvard, each with its own institutional branding (e.g. Aggie Research Finder for Texas A&M, Owl Research Finder for Rice, Longhorn Research Finder for UT Austin).
+- Scale: indexes 7,864 STEM faculty across 8 universities; 3,000+ student users, grown without paid marketing.
 
 **How it works**
 - Data collection: Python crawlers using Playwright and BeautifulSoup scrape faculty directory pages across 50+ university web sources. Where a school exposes a clean API (Rice's profile system has a JSON:API), it uses that instead of HTML scraping. A merge step canonicalizes department names through a shared taxonomy, merges joint-appointment duplicates into one record, and writes per-school datasets; an audit tool checks data coverage and quality per school.

@@ -224,14 +224,14 @@ export const projects = [
   {
     id: 3,
     title: "STEM Research Finder",
-    description: "Co-created and launched a multi-tenant research-discovery platform supporting university-specific deployments, indexing 5,000+ STEM faculty nationwide and attracting 3,000+ student users without paid acquisition. Python data pipelines across 50+ university web sources extract and standardize faculty research profiles, deduplicate records, and automate index updates. Resume-based faculty matching and personalized outreach drafting connect student experience with relevant research labs.",
-    shortDescription: "A search engine for undergrad research. It pulls faculty profiles from university websites across the country into one place, so students can search by school, field or research topic, get matched to labs from their resume, and draft a personal outreach email, instead of trawling department pages. 5,000+ faculty indexed and 3,000+ students using it, with no paid marketing.",
+    description: "Co-founded a research-discovery platform that matches students to faculty by research interest, and lead its development. Grew it to 3,000+ users and expanded it from Texas A&M into a multi-tenant platform indexing 7,864 STEM faculty across 8 universities, including Rice, UT Austin, MIT and Harvard, each with its own institutional branding. Python data pipelines extract and standardize faculty research profiles, deduplicate records and automate index updates; resume-based matching and personalized outreach drafting connect students with relevant labs.",
+    shortDescription: "A search engine for undergrad research that matches students to faculty by research interest. It pulls faculty profiles into one place, so students can search by school, field or research topic, get matched to labs from their resume, and draft a personal outreach email instead of trawling department pages. 7,864 faculty across 8 universities, including Rice, UT Austin, MIT and Harvard, with 3,000+ users and no paid marketing.",
     lead: true,
     links: [
       { label: "Visit the site", href: "https://stemresearchfinder.tech/", primary: true },
     ],
     tags: ["Python", "Data Pipelines", "Next.js", "React"],
-    type: "Web platform · Co-creator & lead developer",
+    type: "Web platform · Co-founder & lead developer",
     category: "web",
     featured: true,
     status: "Live",
