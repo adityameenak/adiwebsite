@@ -9,6 +9,7 @@ import StatRow from './StatRow';
 // Keep the diagrams and walkthroughs out of the home-page bundle.
 const Diagram = lazy(() => import('./experience/diagrams'));
 const ExperienceWalkthrough = lazy(() => import('./walkthrough/ExperienceWalkthrough'));
+const SamsungWalkthrough = lazy(() => import('./walkthrough/SamsungWalkthrough'));
 
 /**
  * Experience as short case studies rather than resume bullets.
@@ -88,12 +89,34 @@ function RoleHeader({ job }) {
   );
 }
 
-/** Home-page summary of one role. */
+const PLAY_ICON = (
+  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
+);
+
+/** A case's "how it works" control and the player it opens. */
+function CaseWatch({ c, className, children }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button type="button" className={className} aria-haspopup="dialog" aria-label={`Watch how it works: ${c.title}`} onClick={() => setOpen(true)}>
+        {children}
+      </button>
+      {open && (
+        <Suspense fallback={null}>
+          <SamsungWalkthrough id={c.walkthrough} onClose={() => setOpen(false)} />
+        </Suspense>
+      )}
+    </>
+  );
+}
+
+/** Home-page summary of one role: its cases each get a walkthrough, otherwise the role does. */
 function RoleCard({ job }) {
   const [open, setOpen] = useState(false);
-  const [, dates] = job.period.split(' • ');
+  const [, dates] = job.period.split(' \u2022 ');
+  const hasCases = Boolean(job.cases);
   return (
-    <article className="xp-card">
+    <article className={`xp-card${hasCases ? ' xp-card--cases' : ''}`}>
       <div className="xp-card__body">
         <p className="xp-card__org">{job.org}</p>
         <h3 className="xp-card__role">{job.role}</h3>
@@ -101,17 +124,28 @@ function RoleCard({ job }) {
         <p className="xp-card__blurb">{job.blurb}</p>
         <StatRow stats={job.stats} />
       </div>
-      <button type="button" className="wt-poster" aria-haspopup="dialog" aria-label={`Watch how it works: ${job.role}`} onClick={() => setOpen(true)}>
-        <span className="wt-poster__art" aria-hidden="true">
-          <Suspense fallback={<span className="dg-placeholder" />}>
-            <Diagram id={job.poster} label="" />
-          </Suspense>
-        </span>
-        <span className="wt-poster__cta">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
-          Watch how it works
-        </span>
-      </button>
+      {hasCases ? (
+        <ul className="xp-tiles">
+          {job.cases.map((c) => (
+            <li key={c.title}>
+              <CaseWatch c={c} className="xp-tile">
+                <span className="xp-tile__title">{c.title}</span>
+                <span className="xp-tile__result">{c.result}</span>
+                <span className="xp-tile__cta">{PLAY_ICON} How it works</span>
+              </CaseWatch>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <button type="button" className="wt-poster" aria-haspopup="dialog" aria-label={`Watch how it works: ${job.role}`} onClick={() => setOpen(true)}>
+          <span className="wt-poster__art" aria-hidden="true">
+            <Suspense fallback={<span className="dg-placeholder" />}>
+              <Diagram id={job.poster} label="" />
+            </Suspense>
+          </span>
+          <span className="wt-poster__cta">{PLAY_ICON} Watch how it works</span>
+        </button>
+      )}
       {open && (
         <Suspense fallback={null}>
           <ExperienceWalkthrough walkthrough={job.walkthrough} onClose={() => setOpen(false)} />
@@ -230,6 +264,8 @@ function CaseDetail({ c, layout = 'card' }) {
         </dl>
 
         <Explainer explainer={c.explainer} />
+
+        {c.walkthrough && <CaseWatch c={c} className="xp-tile__cta xp-tile__cta--inline">{PLAY_ICON} Watch how it works</CaseWatch>}
 
         {(c.tools?.length || c.links?.length) && (
           <div className="case__foot">
