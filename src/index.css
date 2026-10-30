@@ -1057,8 +1057,77 @@
 .wt-findings li { padding: 14px 16px; border-radius: 6px; background: var(--surface); font-size: 14.5px; line-height: 1.5; color: var(--body); }
 .wt-findings strong { margin-right: 6px; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; color: var(--accent); }
 
+.xp-card--cases { grid-template-columns: 1fr; gap: 22px; }
+.xp-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.xp-tile {
+  display: flex; flex-direction: column; gap: 6px; width: 100%; height: 100%; padding: 14px; text-align: left;
+  border-radius: 8px; background: var(--bg); border: 1px solid var(--rule); transition: border-color 130ms, transform 130ms;
+}
+.xp-tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+.xp-tile__title { font-size: 14.5px; font-weight: 600; line-height: 1.3; color: var(--ink); }
+.xp-tile__result { flex: 1; font-size: 12.5px; line-height: 1.4; color: var(--muted); }
+.xp-tile__cta { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; font-size: 13px; font-weight: 500; color: var(--accent); }
+.xp-tile__cta--inline { margin-top: 12px; }
+.xp-tile__cta--inline:hover { text-decoration: underline; }
+
+/* Samsung walkthrough scenes */
+.wt-charts, .wt-skip { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+.wt-charts__read { font-size: 13.5px; color: var(--body); }
+.wt-chart { display: block; width: 100%; }
+.wt-chart__label { font-size: 11px; fill: var(--muted); }
+.wt-chart__tick { font-size: 10px; fill: var(--muted); }
+.wt-chart__tick.is-limit { fill: var(--accent); }
+.wt-chart__center { stroke: var(--rule); }
+.wt-chart__limit { stroke: var(--accent); stroke-dasharray: 5 4; }
+.wt-chart__line { fill: none; stroke: var(--muted); stroke-width: 1.2; }
+.wt-chart__pt { fill: var(--ink); }
+.wt-chart__out { fill: var(--accent); }
+.wt-log { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.wt-log table, .wt-skip__table { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+.wt-log th, .wt-skip__table th { padding: 6px 10px; text-align: left; font-size: 12px; font-weight: 500; color: var(--muted); }
+.wt-log td, .wt-skip__table td { padding: 7px 10px; border-top: 1px solid var(--rule); color: var(--ink); }
+.wt-log__count { font-size: 13.5px; color: var(--body); }
+.wt-trace { display: grid; grid-template-columns: 84px 1fr 104px; align-items: center; gap: 12px; }
+.wt-trace__bars { display: flex; flex-direction: column; gap: 3px; }
+.wt-trace__bars span { display: block; height: 10px; border-radius: 2px; background: var(--faint); }
+.wt-trace__bars span + span { background: var(--muted); }
+.wt-trace.is-hot .wt-trace__bars span + span { background: var(--accent); }
+.wt-trace.is-hot .wt-bar__value { color: var(--accent); }
+.wt-split { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 24px; align-items: center; width: 100%; }
+.wt-wafer { display: block; width: 100%; }
+.wt-wafer__disc { fill: var(--surface); }
+.wt-wafer__site { fill: var(--faint); }
+.wt-wafer__arrow { stroke-width: 1.5; stroke-linecap: round; }
+.wt-wafer__arrow.is-raw { stroke: var(--ink); }
+.wt-wafer__arrow.is-model, .wt-wafer__arrow.is-fixed { stroke: var(--accent); }
+.wt-readout { display: flex; flex-direction: column; gap: 14px; }
+.wt-readout--center { align-items: center; text-align: center; }
+.wt-readout__big { font-size: 30px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.wt-readout__big span { display: block; font-size: 13px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+.wt-terms { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; }
+.wt-terms div { transition: opacity 200ms; }
+.wt-terms dt { font-size: 12.5px; color: var(--muted); }
+.wt-terms dd { font-size: 16px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+.wt-defects { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+.wt-defects__head, .wt-defects__row { display: grid; grid-template-columns: 84px 84px minmax(0, 1fr); gap: 14px; align-items: center; }
+.wt-defects__head { font-size: 11.5px; color: var(--muted); }
+.wt-bitmap { display: block; width: 84px; height: 84px; border-radius: 4px; background: #000; image-rendering: pixelated; transition: opacity 200ms; }
+.wt-probs { display: flex; flex-direction: column; gap: 5px; transition: opacity 200ms; }
+.wt-prob { display: grid; grid-template-columns: 96px 1fr 34px; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); }
+.wt-prob__track { height: 8px; border-radius: 2px; background: var(--surface-strong); overflow: hidden; }
+.wt-prob__track span { display: block; height: 100%; background: var(--faint); }
+.wt-prob.is-top { color: var(--ink); font-weight: 500; }
+.wt-prob.is-top .wt-prob__track span { background: var(--accent); }
+.wt-code {
+  margin: 0; min-height: 76px; padding: 12px 14px; border-radius: 6px; overflow-x: auto;
+  background: var(--surface); color: var(--ink); font-family: var(--mono); font-size: 12.5px; line-height: 1.5;
+}
+.wt-skip__table tr.is-drift td { color: var(--accent); }
+.wt-skip__table tr.is-reset td:last-child { font-weight: 600; }
+
 @media (max-width: 900px) {
   .xp-card { grid-template-columns: 1fr; gap: 20px; }
+  .xp-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 767px) {
   .xp-card { padding: 20px; }
@@ -1067,5 +1136,16 @@
   .stat-row dt { font-size: 11.5px; }
   .project-card__media { width: calc(100% + 40px); margin: -20px -20px 14px; }
   .wt-chain { grid-auto-flow: row; }
+  .wt-split { grid-template-columns: 1fr; gap: 12px; }
+  .wt-wafer { max-width: 170px; margin: 0 auto; }
+  .wt-readout { gap: 8px; }
+  .wt-readout__big { font-size: 22px; }
+  .wt-terms { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 10px; }
+  .wt-terms dd { font-size: 14px; }
+  .wt-defects__head, .wt-defects__row { grid-template-columns: 64px 64px minmax(0, 1fr); gap: 8px; }
+  .wt-bitmap { width: 64px; height: 64px; }
+  .wt-prob { grid-template-columns: 72px 1fr 28px; font-size: 10.5px; gap: 4px; }
+  .wt-trace { grid-template-columns: 58px 1fr 86px; gap: 8px; }
+  .wt-log td, .wt-skip__table td, .wt-log th, .wt-skip__table th { padding: 5px 6px; font-size: 12px; }
   .wt-chain li { min-height: 52px; }
 }

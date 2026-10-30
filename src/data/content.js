@@ -40,22 +40,11 @@ export const experience = [
     place: "Austin, TX",
     blurb: "Turned fab data into tools engineers actually use: statistics, code and machine learning for alignment, defects and throughput.",
     stats: [["300–400", "wafers/day recovered"], ["250", "engineering hours saved a year"], ["84%", "defect classifier accuracy"]],
-    poster: "track",
-    walkthrough: {
-      title: "Four problems in a chip fab",
-      subtitle: "Photolithography and metrology · Samsung Semiconductor",
-      note: "Illustrative diagrams. No Samsung data or images are shown.",
-      steps: [
-        { label: "Bottleneck", diagram: "track", result: "300–400 wafers/day recovered", text: "A lithography track was moving fewer wafers than it should. I used I-MR control charts to trace the slowdown downstream, to a degraded buffer-unit transfer mechanism." },
-        { label: "Overlay", diagram: "overlay", result: "250 engineering hours saved a year", text: "Each new layer has to land exactly on the one below. Turning overlay measurements into scanner corrections was a manual spreadsheet job, so I built a Python tool that handles 500+ measurements per lot." },
-        { label: "Defects", diagram: "cnn", result: "84% accuracy · 1,000+ images/day automated", text: "Spin-coating images were reviewed by hand. I turned them into FFT heatmaps and trained a PyTorch neural network to classify the defects." },
-        { label: "Metrology", diagram: "skip", result: "50 engineering hours saved a week", text: "Skip factors set how often a lot gets measured, and resetting them to their defaults was repetitive work. I automated it with Python and SQL." },
-      ],
-    },
     cases: [
       {
         tag: "Process control",
         title: "Track throughput bottleneck",
+        walkthrough: "track",
         problem: "A lithography track was moving fewer wafers than it should.",
         approach: "Used I-MR control charts on equipment performance to trace the slowdown downstream, to a degraded buffer-unit transfer mechanism.",
         result: "300–400 wafers/day recovered",
@@ -69,6 +58,7 @@ export const experience = [
       {
         tag: "Automation",
         title: "Overlay correction tool",
+        walkthrough: "overlay",
         problem: "Turning overlay measurements into scanner corrections was a manual, spreadsheet-driven job.",
         approach: "Built a Python tool that transforms 500+ wafer- and shot-level metrology measurements per lot into scanner alignment corrections.",
         result: "250 engineering hours saved / yr",
@@ -83,6 +73,7 @@ export const experience = [
       {
         tag: "Machine learning",
         title: "Spin-coater defect classification",
+        walkthrough: "defects",
         problem: "Process images from spin-coating equipment were reviewed by hand.",
         approach: "Converted images into FFT-derived heatmaps and trained a PyTorch convolutional neural network to classify defects.",
         result: "84% accuracy · 1,000+ images/day automated",
@@ -97,6 +88,7 @@ export const experience = [
       {
         tag: "Automation",
         title: "Metrology skip-factor resets",
+        walkthrough: "skip",
         problem: "Restoring lot-level overlay metrology skip factors to their defaults was repetitive manual work.",
         approach: "Automated the resets with Python and SQL, restoring process-specific defaults.",
         result: "50 engineering hours saved / week",
