@@ -1,27 +1,20 @@
-import { useState, useMemo, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { projects, projectCategories } from '../data/content';
+import { Suspense, lazy, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { projects } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SectionLabel from './effects/SectionLabel';
-import FilterPills from './FilterPills';
+import StatRow from './StatRow';
+
+// Walkthroughs load on first open, so their data stays out of the home-page bundle.
+const WALKTHROUGHS = {
+  battery: lazy(() => import('./walkthrough/BatteryWalkthrough')),
+  researchFinder: lazy(() => import('./walkthrough/ResearchFinderWalkthrough')),
+};
 
 export default function ProjectsChapter() {
-  const [activeFilter, setActiveFilter] = useState('all');
   const reducedMotion = useReducedMotion();
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
-
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === 'all') return projects;
-    return projects.filter((p) => p.category === activeFilter);
-  }, [activeFilter]);
-
-  const filtersWithCount = useMemo(() => {
-    return projectCategories.map((cat) => ({
-      ...cat,
-      count: cat.id === 'all' ? projects.length : projects.filter((p) => p.category === cat.id).length,
-    }));
-  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -29,70 +22,48 @@ export default function ProjectsChapter() {
   };
 
   const itemVariants = reducedMotion
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1 }, exit: { opacity: 0 } }
+    ? { hidden: { opacity: 0 }, visible: { opacity: 1 } }
     : {
         hidden: { opacity: 0, y: 24 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
-        exit: { opacity: 0, y: -12, transition: { duration: 0.2 } },
       };
 
-  const leads = filteredProjects.filter((p) => p.lead);
-  const rest = filteredProjects.filter((p) => !p.lead);
+  const leads = projects.filter((p) => p.lead);
+  const rest = projects.filter((p) => !p.lead);
 
   return (
     <section ref={sectionRef} id="projects" className="sec">
       <div className="container-wide">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: reducedMotion ? 0.2 : 0.5 }}
-          className="sec-head flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5"
+          className="sec-head"
         >
-          <div>
-            <SectionLabel>Featured Work</SectionLabel>
-            <h2 className="sec-title">Projects</h2>
-          </div>
-          <FilterPills
-            filters={filtersWithCount}
-            activeFilter={activeFilter}
-            onFilterChange={setActiveFilter}
-          />
+          <SectionLabel>Featured Work</SectionLabel>
+          <h2 className="sec-title">Projects</h2>
         </motion.div>
 
         <motion.div
-          id="projects-grid"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           className="flex flex-col gap-4"
         >
-          <AnimatePresence mode="popLayout">
-            {leads.map((project) => (
-              <motion.div key={project.id} variants={itemVariants} layout initial="hidden" animate="visible" exit="exit">
-                <LeadProjectCard project={project} />
+          {leads.map((project) => (
+            <motion.div key={project.id} variants={itemVariants}>
+              <LeadProjectCard project={project} />
+            </motion.div>
+          ))}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {rest.map((project) => (
+              <motion.div key={project.id} variants={itemVariants}>
+                <ProjectCard project={project} />
               </motion.div>
             ))}
-          </AnimatePresence>
-
-          {rest.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <AnimatePresence mode="popLayout">
-                {rest.map((project) => (
-                  <motion.div key={project.id} variants={itemVariants} layout initial="hidden" animate="visible" exit="exit">
-                    <ProjectCard project={project} />
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-            </div>
-          )}
+          </div>
         </motion.div>
-
-        {filteredProjects.length === 0 && (
-          <p style={{ textAlign: 'center', padding: '48px 0', color: 'var(--faint)', fontSize: '15px' }}>
-            No projects in this category.
-          </p>
-        )}
       </div>
     </section>
   );
@@ -118,6 +89,28 @@ const projectAnchor = (title) => `project-${title.toLowerCase().replace(/[^a-z0-
 
 const isExternal = (href) => href.startsWith('http') || href.endsWith('.pdf');
 
+function WalkthroughPoster({ id, title, image }) {
+  const [open, setOpen] = useState(false);
+  const Player = WALKTHROUGHS[id];
+
+  return (
+    <>
+      <button type="button" className="wt-poster" aria-haspopup="dialog" aria-label={`Watch how it works: ${title}`} onClick={() => setOpen(true)}>
+        <span className="wt-poster__art"><img src={image.src} alt={image.alt} loading="lazy" /></span>
+        <span className="wt-poster__cta">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
+          Watch how it works
+        </span>
+      </button>
+      {open && (
+        <Suspense fallback={null}>
+          <Player onClose={() => setOpen(false)} />
+        </Suspense>
+      )}
+    </>
+  );
+}
+
 // Full-width card: accent top rule, status dot, stacked actions.
 function LeadProjectCard({ project }) {
   return (
@@ -129,20 +122,25 @@ function LeadProjectCard({ project }) {
         </p>
         <h3 className="project-card__title" style={{ fontSize: '21px' }}>{project.title}</h3>
         <p className="project-card__body" style={{ maxWidth: '68ch' }}>{project.shortDescription}</p>
+        <StatRow stats={project.stats} />
         <TagRow tags={project.tags} limit={5} />
       </div>
 
-      <div className="project-actions">
-        {project.links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className={link.primary ? 'is-primary' : undefined}
-            {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-          >
-            {link.label} {CARD_LINK_ARROW}
-          </a>
-        ))}
+      <div className="project-card__side">
+        <WalkthroughPoster id={project.walkthrough} title={project.title} image={project.image} />
+        <div className="project-actions">
+          {project.paperImage && <img className="project-card__paper" src={project.paperImage.src} alt={project.paperImage.alt} loading="lazy" />}
+          {project.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={link.primary ? 'is-primary' : undefined}
+              {...(isExternal(link.href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              {link.label} {CARD_LINK_ARROW}
+            </a>
+          ))}
+        </div>
       </div>
     </article>
   );
@@ -155,6 +153,7 @@ function ProjectCard({ project }) {
 
   return (
     <Tag {...linkProps} id={projectAnchor(project.title)} className="project-card" style={{ scrollMarginTop: '80px' }}>
+      <img className="project-card__media" src={project.image.src} alt={project.image.alt} loading="lazy" />
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
         <span className="project-card__meta">{project.type || project.category}</span>
         {project.status && <span className="project-card__meta">{project.status}</span>}

@@ -12,7 +12,7 @@ Only skills listed on his portfolio or resume, with where he has used them.
 - MATLAB.
 - Git, Docker, Linux.
 - Streamlit — built an engineer-facing overlay-correction app at Samsung and the SolarIQ dashboard.
-- Web: React, Vite, Tailwind CSS and Next.js (STEM Research Finder, Sustainapath), Streamlit (SolarIQ); serverless deployment on Vercel.
+- Web: React, Vite and Tailwind CSS (STEM Research Finder, Sustainapath), Streamlit (SolarIQ); serverless deployment on Vercel.
 - LLM applications: resume parsing, match explanations and email drafting (STEM Research Finder); AI-assisted process analysis (Sustainapath); an MCP server exposing a dataset to AI assistants.
 
 ## Machine learning and AI

@@ -2,18 +2,18 @@
 
 ## STEM Research Finder
 
-- Role: co-founder and lead developer. Live at stemresearchfinder.tech (formerly Aggie Research Finder). Source code is public on GitHub (adityameenak/AggieResearchFinder).
+- Role: co-founder and lead developer. Live at stemresearchfinder.tech (formerly Aggie Research Finder). The source code is private, so there is no public repository to link to.
 - What it is: an AI-powered research discovery and outreach platform for students. Upload a resume, enter research interests, and get matched with faculty whose work fits where you want to go — then generate a personalized outreach email draft in one click.
-- Origin: started as the Aggie Research Finder for Texas A&M and expanded into a multi-tenant platform covering 8 universities, including Rice, UT Austin, MIT and Harvard, each with its own institutional branding (e.g. Aggie Research Finder for Texas A&M, Owl Research Finder for Rice, Longhorn Research Finder for UT Austin).
-- Scale: indexes 7,864 STEM faculty across 8 universities; 3,000+ student users, grown without paid marketing.
+- Origin: started as the Aggie Research Finder for Texas A&M and expanded into a multi-tenant platform covering 9 universities, including Rice, UT Austin, MIT and Harvard, each with its own institutional branding (e.g. Aggie Research Finder for Texas A&M, Owl Research Finder for Rice, Longhorn Research Finder for UT Austin).
+- Scale: indexes 9,088 STEM faculty across 9 universities; 3,000+ student users, grown without paid marketing.
 
 **How it works**
 - Data collection: Python crawlers using Playwright and BeautifulSoup scrape faculty directory pages across 50+ university web sources. Where a school exposes a clean API (Rice's profile system has a JSON:API), it uses that instead of HTML scraping. A merge step canonicalizes department names through a shared taxonomy, merges joint-appointment duplicates into one record, and writes per-school datasets; an audit tool checks data coverage and quality per school.
 - Search: multi-attribute search across institution, discipline/department and research area, in a single interface.
-- Matching is interest-driven: the student's stated interests are tokenized and scored by keyword overlap against each professor's research summary, name and department. The resume adds a secondary boost (35% weight) that is capped at the interest score, so a resume can reorder interest matches but never outrank them. Results are ranked and labeled Strong Fit (≥ 60% of the top score), Exploratory Fit (≥ 25%) or Adjacent Fit, with a per-professor explanation; the top 20 are returned.
+- Matching is interest-driven: the student's stated interests are tokenized and scored by keyword overlap against each professor's research summary, name and department. The resume adds a secondary boost (35% weight) that is capped at the interest score, so a resume can reorder interest matches but never outrank them. The total is then scaled by appointment type and research output, so active labs rank higher. Results are ranked and labeled Strong Fit (≥ 60% of the top score), Exploratory Fit (≥ 25%) or Adjacent Fit, with a per-professor explanation; the top 20 are returned.
 - AI features (using an LLM, Claude): structured resume parsing into a profile (coursework, skills, tools, lab techniques, experiences, inferred themes), natural-language match explanations, and personalized outreach email drafts grounded in the professor's own research and papers. Without an API key it runs in a mock mode with keyword heuristics and templates, so every feature still works.
 - MCP server: the dataset is also available to AI assistants (Claude or any MCP-compatible assistant) through a public, read-only, rate-limited MCP endpoint, with tools to list schools/departments/topics, search and match faculty, get a professor's profile with most-cited papers, and fetch an outreach-email brief. It reuses the site's own search and matching code so results match the website.
-- Tech stack: Python crawlers (Playwright, BeautifulSoup); FastAPI + SQLAlchemy backend with a multi-tenant schema (each faculty record carries a university code); Vite + React + Tailwind front end; serverless API functions on Vercel. (The portfolio also lists Next.js.)
+- Tech stack: Python crawlers (Playwright, BeautifulSoup); FastAPI + SQLAlchemy backend with a multi-tenant schema (each faculty record carries a university code); Vite + React + Tailwind front end; serverless API functions on Vercel.
 
 ## Switchable Thermal Barriers Against Battery Runaway
 

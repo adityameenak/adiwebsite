@@ -1,21 +1,24 @@
-import { Suspense, lazy, useId, useRef, useState } from 'react';
-import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { Suspense, lazy, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, useInView } from 'framer-motion';
 import { experience } from '../data/content';
 import { useReducedMotion } from '../hooks/useReducedMotion';
 import SectionLabel from './effects/SectionLabel';
 import RoleIcon from './experience/RoleIcon';
-// Diagrams only appear on /experience, so keep them out of the home-page bundle.
+import StatRow from './StatRow';
+// Keep the diagrams and walkthroughs out of the home-page bundle.
 const Diagram = lazy(() => import('./experience/diagrams'));
+const ExperienceWalkthrough = lazy(() => import('./walkthrough/ExperienceWalkthrough'));
 
 /**
  * Experience as short case studies rather than resume bullets.
  * - variant "full" (the /experience page): story + Problem → Approach → Result
  *   cards, each with a schematic diagram and a "What is …?" explainer.
- * - variant "compact" (home page): story + one clickable row per case that
- *   expands in place to show the same diagram and details.
+ * - variant "compact" (home page): one card per role with its key numbers and
+ *   a "Watch how it works" walkthrough. The detail lives on /experience.
  * Research roles (kind: "research") are one project, so instead of separate
  * cases they tell a single story: the project → how it was approached → what
- * was discovered. On the home page that story sits behind one dropdown.
+ * was discovered.
  */
 export default function ExperienceChapter({ variant = 'full' }) {
   const reducedMotion = useReducedMotion();
@@ -38,23 +41,29 @@ export default function ExperienceChapter({ variant = 'full' }) {
           <motion.div variants={fadeUp} className="sec-head">
             <SectionLabel>Career</SectionLabel>
             <h2 className="sec-title">Experience</h2>
-            {compact && <p className="sec-sub">Click any project to see what it was and how it worked.</p>}
           </motion.div>
 
-          <div className="xp-roles">
-            {experience.map((job) => (
-              <motion.article key={job.id} variants={fadeUp} className="xp-role">
-                <RoleHeader job={job} />
-                {job.kind === 'research' ? (
-                  compact ? <ResearchToggle story={job.story} reducedMotion={reducedMotion} /> : <ResearchStory story={job.story} />
-                ) : compact ? (
-                  <CaseRows cases={job.cases} reducedMotion={reducedMotion} />
-                ) : (
-                  <CaseGrid cases={job.cases} />
-                )}
-              </motion.article>
-            ))}
-          </div>
+          {compact ? (
+            <>
+              <div className="xp-cards">
+                {experience.map((job) => (
+                  <motion.div key={job.id} variants={fadeUp}><RoleCard job={job} /></motion.div>
+                ))}
+              </div>
+              <motion.p variants={fadeUp} className="xp-more">
+                <Link to="/experience">Read the full case studies <span aria-hidden="true">→</span></Link>
+              </motion.p>
+            </>
+          ) : (
+            <div className="xp-roles">
+              {experience.map((job) => (
+                <motion.article key={job.id} variants={fadeUp} className="xp-role">
+                  <RoleHeader job={job} />
+                  {job.kind === 'research' ? <ResearchStory story={job.story} /> : <CaseGrid cases={job.cases} />}
+                </motion.article>
+              ))}
+            </div>
+          )}
 
         </motion.div>
       </div>
@@ -79,49 +88,36 @@ function RoleHeader({ job }) {
   );
 }
 
-function CaseRows({ cases, reducedMotion }) {
-  const [openTitle, setOpenTitle] = useState(null);
-  const baseId = useId();
-
+/** Home-page summary of one role. */
+function RoleCard({ job }) {
+  const [open, setOpen] = useState(false);
+  const [, dates] = job.period.split(' • ');
   return (
-    <ul className="xp-rows">
-      {cases.map((c, i) => {
-        const open = openTitle === c.title;
-        const panelId = `${baseId}-case-${i}`;
-        return (
-          <li key={c.title} className={`xp-row${open ? ' is-open' : ''}`}>
-            <button
-              type="button"
-              className="xp-row__btn"
-              aria-expanded={open}
-              aria-controls={panelId}
-              onClick={() => setOpenTitle(open ? null : c.title)}
-            >
-              <span className="case__tag">{c.tag}</span>
-              <span className="xp-row__title">{c.title}</span>
-              <span className="xp-row__result">{c.result}</span>
-              <span className="xp-row__chev" aria-hidden="true">{open ? '−' : '+'}</span>
-            </button>
-            <AnimatePresence initial={false}>
-              {open && (
-                <motion.div
-                  id={panelId}
-                  className="xp-row__panel"
-                  initial={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                  animate={reducedMotion ? { opacity: 1 } : { height: 'auto', opacity: 1 }}
-                  exit={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-                  transition={{ duration: reducedMotion ? 0.1 : 0.35, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className="xp-row__inner">
-                    <CaseDetail c={c} layout="wide" />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </li>
-        );
-      })}
-    </ul>
+    <article className="xp-card">
+      <div className="xp-card__body">
+        <p className="xp-card__org">{job.org}</p>
+        <h3 className="xp-card__role">{job.role}</h3>
+        <p className="xp-card__when">{dates} · {job.place}</p>
+        <p className="xp-card__blurb">{job.blurb}</p>
+        <StatRow stats={job.stats} />
+      </div>
+      <button type="button" className="wt-poster" aria-haspopup="dialog" aria-label={`Watch how it works: ${job.role}`} onClick={() => setOpen(true)}>
+        <span className="wt-poster__art" aria-hidden="true">
+          <Suspense fallback={<span className="dg-placeholder" />}>
+            <Diagram id={job.poster} label="" />
+          </Suspense>
+        </span>
+        <span className="wt-poster__cta">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
+          Watch how it works
+        </span>
+      </button>
+      {open && (
+        <Suspense fallback={null}>
+          <ExperienceWalkthrough walkthrough={job.walkthrough} onClose={() => setOpen(false)} />
+        </Suspense>
+      )}
+    </article>
   );
 }
 
@@ -167,38 +163,6 @@ function Links({ links }) {
           {l.label} <span aria-hidden="true">↗</span>
         </a>
       ))}
-    </div>
-  );
-}
-
-/** One expandable "See the research" panel for a research role (home page). */
-function ResearchToggle({ story, reducedMotion }) {
-  const [open, setOpen] = useState(false);
-  const panelId = useId();
-  return (
-    <div className={`xp-rows xp-research${open ? ' is-open' : ''}`}>
-      <div className={`xp-row${open ? ' is-open' : ''}`}>
-        <button type="button" className="xp-row__btn xp-row__btn--research" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen(!open)}>
-          <span className="case__tag">Research</span>
-          <span className="xp-row__title">{open ? 'Hide the research' : 'See the research: the project, my approach and what I found'}</span>
-          <span />
-          <span className="xp-row__chev" aria-hidden="true">{open ? '−' : '+'}</span>
-        </button>
-        <AnimatePresence initial={false}>
-          {open && (
-            <motion.div
-              id={panelId}
-              className="xp-row__panel"
-              initial={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-              animate={reducedMotion ? { opacity: 1 } : { height: 'auto', opacity: 1 }}
-              exit={reducedMotion ? { opacity: 0 } : { height: 0, opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0.1 : 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div className="xp-row__inner"><ResearchStory story={story} /></div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
     </div>
   );
 }

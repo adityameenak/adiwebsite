@@ -56,12 +56,6 @@
       "description": "The live STEM Research Finder site"
     },
     {
-      "id": "stem-research-finder-code",
-      "label": "STEM Research Finder code",
-      "href": "https://github.com/adityameenak/AggieResearchFinder",
-      "description": "Public source code for STEM Research Finder"
-    },
-    {
       "id": "switchable-barrier",
       "label": "View battery barrier project",
       "route": "/projects",
