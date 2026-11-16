@@ -9,12 +9,12 @@
 - He has also fabricated drop-cast composites incorporating calcium carbonate microsalt crystals, indium and titanium nanowires, investigating formulations meant to transition autonomously from conduction to insulation at critical temperatures, as a step toward a sprayable protective material.
 - He characterized thermal conductivity across formulations to see how porosity and composition (indium content) influence heat transport.
 - Results so far: calculated thermal conductivity from k = αρCₚ (thermal diffusivity × density × heat capacity) across formulations with 50–70 wt% indium, using hot-plate heating and top-surface temperature measurements. Identified 65 wt% indium as the strongest-performing composition across thermal response and structural integrity.
-- The switchable-barrier simulation (below) is part of this fellowship: he built a verified 1D finite-volume model of a 5-cell battery stack and swept 361 barrier designs to find the hot-state conductance threshold (~32 W/m²·K) for suppressing propagation.
+- The switchable-barrier simulation (below) is part of this fellowship: he built a verified 1D finite-volume model of a 5-cell battery stack and swept 361 barrier designs to find the hot-state conductance threshold (~32 W/m²·K) for suppressing propagation, compared six real barrier materials, and screened 452 filled-silicone formulations to recommend one to make and test.
 - Plain-English summary: when one battery cell overheats it can set off its neighbors. He is developing a coating that passes heat normally but turns into an insulator when things get dangerously hot, acting like a fuse for heat.
 
 ## Switchable thermal barriers — simulation study (technical report)
 
-Public: technical report (PDF on his portfolio), plain-English explainer, and open-source code on GitHub (adityameenak/switchable-barrier-runaway), with automated tests. Report dated October 2026; not peer reviewed. All model parameters are illustrative order-of-magnitude placeholders, so conclusions are qualitative, not predictions for a real cell.
+Public: technical report (PDF on his portfolio), plain-English explainer, and open-source code on GitHub (adityameenak/switchable-barrier-runaway), with automated tests. Report dated November 2026; not peer reviewed. Cell and kinetic parameters are illustrative order-of-magnitude placeholders, so conclusions are qualitative, not predictions for a real cell. The barrier properties in the material comparison come from datasheets and the literature, with every assumed value flagged. The November 2026 version extends the original October report with a 2D model, a real-material comparison and a formulation study.
 
 **The question.** A barrier between battery cells has two conflicting jobs: spread heat to the cooling system in normal use, but block a failing cell's heat during runaway. A temperature-switchable barrier (conducts when cool, insulates when hot) could do both. The project asks when a switch actually delivers both benefits, and what it must achieve (hot-state conductivity, thickness, switch temperature).
 
@@ -48,9 +48,31 @@ Public: technical report (PDF on his portfolio), plain-English explainer, and op
 - Design map (361 simulations, thickness 0.5–5 mm × hot-state conductivity 0.02–1 W/m·K): outcomes are all-or-nothing (1 or 5 cells), and containment is governed by a single quantity, the hot-state conductance k_off/L, which must stay below about 32 W/m²·K (about a third of the end cooling).
 - A switch-temperature sweep found a window of roughly 38–175 °C where the switch both keeps cells cool and contains runaway.
 
-**Limitations and next steps (his own).** It's 1D with illustrative parameters, so the ends are the only heat sink. Next steps he identifies: fit the switch conductivity to measured data for a real material, use multi-step chemistry fitted to calorimetry, move to 2D with side cooling, and compare against a commercial finite-element model such as COMSOL.
+**Model extensions for real materials.** Tabulated k(T) (interpolated in log k), latent heat for phase-change and endothermic fillers, and switch dynamics (a response time, optionally one-way). A 2D version adds cell height (100 mm), a liquid cold plate underneath (h = 200 W/m²·K), natural convection on top, and anisotropic cells (0.8 W/m·K through-plane, 20 W/m·K in-plane); with the plate removed it reproduces the 1D results.
 
-**Plain-English summary.** He simulated a battery pack to test a barrier that lets heat escape while cells are cool but blocks it once a cell fails. It kept cells as cool as a normal heat-spreading barrier day to day, yet stopped the chain reaction — and showed the one number a real material would need to hit.
+**Six real barrier materials** (each run at 0.5–10 mm thickness):
+| Material | Thinnest barrier that contains runaway | Normal-use peak there |
+|---|---|---|
+| Graphene/microsphere thermal switch (Wang et al.) | 3.5 mm | 38.9 °C |
+| Silica aerogel | 2.25 mm | 79.4 °C |
+| Ceramic fibre | 4.25 mm | 66.1 °C |
+| Mica paper | 6.25 mm | 48.7 °C |
+| Paraffin/expanded-graphite PCM | never (up to 10 mm) | – |
+| Silicone gap pad | never (up to 10 mm) | – |
+- No candidate contains runaway at 2 mm. Even aerogel fails there because its conductivity triples between 200 and 600 °C; what matters is conductivity at runaway temperatures, which datasheets often report incompletely.
+- Static insulators trade thickness against normal-use temperature (28–41 K hotter for aerogel and ceramic fibre, or ~6 mm for mica). The PCM's latent heat slows propagation but a 4 mm layer stores only ~1 MJ/m² against ~15 MJ/m² released per cell.
+- The graphene switch is the best of the six and stays best in every sensitivity case (thinnest containing barrier 3.25–5 mm). Its hot-state conductance at 3.5 mm (~29 W/m²·K) sits just under the idealised threshold, so the design-map criterion carries over to a real material. Caveat: it is characterised only by published headline numbers, so measured k(T), heat capacity and cycling data are needed.
+
+**Formulation design (452 filled-silicone recipes).** Silicone matrix with fillers: CaCO₃ nano- and microparticles, Al(OH)₃ (ATH), Mg(OH)₂, boron nitride, silver nanowires, carbon nanotubes, alumina, hybrids, and expandable microspheres. Conductivity from an effective-medium (Nan) model extended for fin-limited nanowires, percolating wire networks and microsphere expansion, checked against measured silver-nanowire composites (within about 10%).
+- No static filler escapes the conflict: static formulations need at least 5.6 mm, and 8.5 mm or more to keep the normal-use peak near 44 °C, because a static filler can't tell normal use from runaway.
+- Expandable microspheres turn the composite into a one-way switch; their fraction and expansion ratio dominate everything else.
+- Nanowires raise cold-state conductivity most efficiently but are counterproductive unless expansion breaks their network.
+- Recommended formulation: silicone + 40 vol% Expancel 051 DU 40 microspheres + 20 vol% Al(OH)₃, no conductive filler (electrically insulating). Contains runaway at 2.9 mm with a 42.1 °C normal-use peak; 2.25–3.5 mm and 41.2–43.0 °C across all sensitivity cases. It's the strongest option made from commercial ingredients, second only to the lab graphene switch, and runs 37 K cooler than aerogel and 6 K cooler than mica at under half mica's thickness.
+- The key experiment it points to: the constrained expansion ratio, and whether a nanowire network survives expansion.
+
+**Limitations and next steps (his own).** The main results are 1D with illustrative cell parameters, so the ends are the only heat sink. Kinetics are lumped; venting and flames aren't modelled; several material properties are assumed or extrapolated; the formulation model is a mean-field estimate, so the pick is something to make and measure, not a validated product. Next steps he identifies: measure k(T) up to runaway temperatures (especially for the switch), fit multi-step chemistry to calorimetry, extend to 2D/3D with lateral cooling, and compare against a commercial finite-element model.
+
+**Plain-English summary.** He simulated a battery pack to test a barrier that lets heat escape while cells are cool but blocks it once a cell fails. It kept cells as cool as a normal heat-spreading barrier day to day, yet stopped the chain reaction — and showed the one number a real material would need to hit. He then checked six real materials against that target and designed a silicone recipe, made from off-the-shelf ingredients, that should hit it.
 
 ## Silicon carbide from polymer precursors (Texas A&M)
 

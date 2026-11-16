@@ -14,6 +14,6 @@
 
 ## Technical report
 
-- "Temperature-switchable thermal barriers against thermal runaway propagation: a one-dimensional finite-volume study" (October 2026). See research.md.
+- "Temperature-switchable thermal barriers against thermal runaway propagation: a one- and two-dimensional finite-volume study" (November 2026). See research.md.
 
 <!-- TODO(Adi): Add more article titles and topics (e.g. any AI-related pieces) here. -->

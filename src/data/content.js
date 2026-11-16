@@ -161,7 +161,7 @@ export const experience = [
         },
         {
           title: "Simulated it at the battery-pack scale",
-          text: "Built a verified 1D finite-volume model of a 5-cell battery stack in Python and swept 361 barrier designs to see which ones stop runaway from spreading.",
+          text: "Built a verified finite-volume model of a 5-cell battery stack in Python and swept 361 barrier designs to see which ones stop runaway from spreading. Then compared six real barrier materials using datasheet and literature properties, and screened 452 filled-silicone recipes to pick one worth making.",
           diagram: "stack",
           caption: "Five cells in a row. The first is in thermal runaway, and the switched-off barrier next to it keeps the heat from reaching the others.",
           links: [
@@ -174,6 +174,8 @@ export const experience = [
         "65 wt% indium was the strongest composition, balancing thermal response with structural integrity.",
         "In simulation, a barrier stops the chain reaction when its hot-state conductance stays below about 32 W m⁻² K⁻¹: one clear target for a real material to hit.",
         "A switching barrier kept cells as cool as an ordinary heat-spreading barrier in normal use, while still containing runaway to the first cell.",
+        "Of six real barrier materials, a published graphene/microsphere thermal switch did best: it stopped runaway at 3.5 mm while running within 1 K of an ideal conductor in normal use.",
+        "Out of 452 silicone recipes, the pick is 40 vol% expandable microspheres with 20 vol% Al(OH)₃. It stops runaway at 2.9 mm with a 42 °C normal-use peak, using only commercial ingredients.",
       ],
     },
   },
@@ -248,11 +250,11 @@ export const projects = [
   {
     id: 5,
     title: "Switchable Thermal Barriers Against Battery Runaway",
-    description: "When one battery cell overheats, it can set off its neighbors like dominoes. The barrier between cells has two opposite jobs: let heat escape on a normal day, and block it when a cell fails. I built a simulation of a battery pack to test a barrier that works like a fuse for heat, conducting while it is cool and insulating once it gets hot.",
-    shortDescription: "When one battery cell overheats, it can set off its neighbors like dominoes. I simulated a pack to test a barrier that works like a fuse for heat: it conducts while cells are cool and insulates once one fails.",
+    description: "When one battery cell overheats, it can set off its neighbors like dominoes. The barrier between cells has two opposite jobs: let heat escape on a normal day, and block it when a cell fails. I built a simulation of a battery pack to test a barrier that works like a fuse for heat, conducting while it is cool and insulating once it gets hot. Then I used it to compare six real barrier materials and screen 452 silicone recipes, ending with one formulation worth making and testing.",
+    shortDescription: "When one battery cell overheats, it can set off its neighbors like dominoes. I simulated a pack to test a barrier that works like a fuse for heat: it conducts while cells are cool and insulates once one fails. Then I compared six real materials and screened 452 silicone recipes for one worth making.",
     image: { src: "/images/projects/battery-heatmap.jpg", alt: "Heatmap from the simulation: with a conductor heat spreads to all five cells, with the switchable barrier it stays in cell 1" },
     paperImage: { src: "/images/projects/paper-first-page.jpg", alt: "First page of the technical report" },
-    stats: [["1 of 5", "cells lost with the switch"], ["38.0 °C", "peak in normal use"], ["361", "designs simulated"]],
+    stats: [["1 of 5", "cells lost with the switch"], ["361", "designs simulated"], ["452", "silicone recipes screened"]],
     tags: ["Python", "Simulation", "Battery Safety", "Heat Transfer"],
     type: "Research · Technical report",
     category: "research",
