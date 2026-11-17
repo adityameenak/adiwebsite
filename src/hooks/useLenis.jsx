@@ -1,126 +1,37 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
-import Lenis from 'lenis';
-import { useReducedMotion } from './useReducedMotion';
-
 /**
- * Lenis Smooth Scroll Context & Provider
- *
- * Provides smooth scrolling via Lenis library with:
- * - Automatic RAF loop management
- * - Reduced motion support
- * - Scroll-to utilities
- * - Framer Motion scroll sync
+ * Scrolling is native. The site used Lenis smooth scrolling, which eased every
+ * wheel tick over 1.2s and made the page feel slow, so it was removed. These
+ * exports stay so existing pages keep compiling; scrollTo uses the browser's
+ * own smooth scrolling (instant with reduced motion).
  */
-
-const LenisContext = createContext(null);
 
 export function LenisProvider({ children }) {
-  const [lenis, setLenis] = useState(null);
-  const reducedMotion = useReducedMotion();
-  const rafRef = useRef(null);
+  return children;
+}
 
-  useEffect(() => {
-    // Skip smooth scroll if user prefers reduced motion
-    if (reducedMotion) {
+export function useLenis() {
+  return null;
+}
+
+const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export function useScrollTo() {
+  const scrollTo = (target, { offset = 0 } = {}) => {
+    const behavior = reduce() ? 'auto' : 'smooth';
+    if (typeof target === 'number') {
+      window.scrollTo({ top: target + offset, behavior });
       return;
     }
-
-    // Initialize Lenis
-    const lenisInstance = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential easing
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      infinite: false,
-    });
-
-    setLenis(lenisInstance);
-    // Lets components outside this provider (e.g. adi.ai) scroll smoothly.
-    window.__lenis = lenisInstance;
-
-    // Animation frame loop
-    function raf(time) {
-      lenisInstance.raf(time);
-      rafRef.current = requestAnimationFrame(raf);
-    }
-
-    rafRef.current = requestAnimationFrame(raf);
-
-    // Cleanup
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-      lenisInstance.destroy();
-      if (window.__lenis === lenisInstance) window.__lenis = null;
-    };
-  }, [reducedMotion]);
-
-  return (
-    <LenisContext.Provider value={lenis}>
-      {children}
-    </LenisContext.Provider>
-  );
-}
-
-/**
- * Hook to access Lenis instance
- * @returns {Lenis | null} Lenis instance or null if not initialized
- */
-export function useLenis() {
-  return useContext(LenisContext);
-}
-
-/**
- * Hook for scroll-to functionality
- * @returns {{ scrollTo: Function }} Scroll utilities
- */
-export function useScrollTo() {
-  const lenis = useLenis();
-
-  const scrollTo = (target, options = {}) => {
-    const defaultOptions = {
-      offset: 0,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      immediate: false,
-      lock: false,
-      ...options,
-    };
-
-    if (lenis) {
-      lenis.scrollTo(target, defaultOptions);
-    } else {
-      // Fallback for native scroll
-      const element = typeof target === 'string'
-        ? document.querySelector(target)
-        : target;
-
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      } else if (typeof target === 'number') {
-        window.scrollTo({ top: target, behavior: 'smooth' });
-      }
-    }
+    const el = typeof target === 'string' ? document.querySelector(target) : target;
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY + offset;
+    window.scrollTo({ top, behavior });
   };
-
   return { scrollTo };
 }
 
-/**
- * Hook to stop/start Lenis (useful for modals)
- * @returns {{ stop: Function, start: Function }}
- */
 export function useLenisControl() {
-  const lenis = useLenis();
-
-  return {
-    stop: () => lenis?.stop(),
-    start: () => lenis?.start(),
-  };
+  return { stop: () => {}, start: () => {} };
 }
 
 export default LenisProvider;

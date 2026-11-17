@@ -1,18 +1,15 @@
-import { LenisProvider } from '../hooks/useLenis';
 import SparseHeader from '../components/SparseHeader';
 import EducationChapter from '../components/EducationChapter';
 import FooterContact from '../components/FooterContact';
 
 export default function EducationPage() {
   return (
-    <LenisProvider>
-      <div style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-        <SparseHeader />
-        <main>
-          <EducationChapter />
-        </main>
-        <FooterContact />
-      </div>
-    </LenisProvider>
+    <div className="site">
+      <SparseHeader />
+      <main>
+        <EducationChapter titleAs="h1" />
+      </main>
+      <FooterContact />
+    </div>
   );
 }

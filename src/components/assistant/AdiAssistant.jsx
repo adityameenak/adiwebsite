@@ -45,7 +45,6 @@ export default function AdiAssistant() {
         >
           <AdiMark size={20} className="adi-launcher__mark" />
           <span>Ask adi.ai</span>
-          <span className="adi-launcher__spark" aria-hidden="true">✦</span>
         </button>
       )}
 

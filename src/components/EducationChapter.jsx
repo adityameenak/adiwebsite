@@ -1,8 +1,5 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { education, awards } from '../data/content';
-import { useReducedMotion } from '../hooks/useReducedMotion';
-import SectionLabel from './effects/SectionLabel';
+import { education, awards, technicalSkills } from '../data/content';
+import { useReveal } from '../hooks/useReveal';
 
 const COURSEWORK = [
   'Fluid Mechanics',
@@ -17,66 +14,57 @@ const COURSEWORK = [
   'Engineering Mathematics',
 ];
 
-export default function EducationChapter() {
-  const reducedMotion = useReducedMotion();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: reducedMotion ? 0 : 0.08, delayChildren: 0.04 } },
-  };
-  const fadeUp = reducedMotion
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
-    : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } };
+export default function EducationChapter({ titleAs: Title = 'h2' }) {
+  const ref = useReveal();
+  const isPage = Title === 'h1';
 
   return (
-    <section ref={sectionRef} id="education" className="sec">
-      <div className="container-wide">
-        <motion.div variants={container} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
-          <motion.div variants={fadeUp} className="sec-head">
-            <SectionLabel>Education &amp; Honors</SectionLabel>
-            <h2 className="sec-title">Education</h2>
-          </motion.div>
+    <section ref={ref} id="education" className={`section${isPage ? ' section--page' : ''}`}>
+      <div className="frame">
+        <header className="section-head" data-reveal>
+          <Title className="section-title">Education</Title>
+          <p className="section-desc">Degree, honors and the tools I work with.</p>
+        </header>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-            {/* Degree + coursework */}
-            <motion.div variants={fadeUp} className="panel lg:col-span-7" style={{ borderLeft: '3px solid var(--accent)' }}>
-              <h3 style={{ fontSize: '18px', fontWeight: 600, color: 'var(--ink)', letterSpacing: '-0.01em' }}>
-                {education.school}
-              </h3>
-              <p style={{ fontSize: '14.5px', color: 'var(--muted)', marginTop: '4px' }}>
-                {education.degree} · {education.major}
-              </p>
-
-              <dl className="edu-facts">
-                <div><dt>GPA</dt><dd>{education.gpa}</dd></div>
-                <div><dt>Graduating</dt><dd>{education.graduationDate}</dd></div>
-                <div><dt>Location</dt><dd>{education.location}</dd></div>
-              </dl>
-
-              <p className="eyebrow" style={{ margin: '22px 0 10px' }}>Coursework</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                {COURSEWORK.map((course) => (
-                  <span key={course} className="mono-chip">{course}</span>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Honors & awards */}
-            <motion.div variants={fadeUp} id="awards" className="panel lg:col-span-5" style={{ scrollMarginTop: '80px' }}>
-              <p className="eyebrow eyebrow--accent" style={{ marginBottom: '14px' }}>Honors &amp; Awards</p>
-              <div>
-                {awards.map((award) => (
-                  <div key={award.id} className="honor">
-                    <span className="honor__name">{award.name}</span>
-                    {award.org && <span className="honor__meta">{award.org}</span>}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
+        <div className="edu">
+          <div className="edu__main" data-reveal style={{ '--i': 1 }}>
+            <h3 className="edu__school">{education.school}</h3>
+            <p className="edu__degree">{education.degree}, {education.major}</p>
+            <dl className="facts">
+              <div><dt>GPA</dt><dd>{education.gpa}</dd></div>
+              <div><dt>Graduating</dt><dd>{education.graduationDate}</dd></div>
+              <div><dt>Location</dt><dd>{education.location}</dd></div>
+            </dl>
+            <h4 className="label">Coursework</h4>
+            <ul className="tags">
+              {COURSEWORK.map((c) => <li key={c} className="tag">{c}</li>)}
+            </ul>
           </div>
-        </motion.div>
+
+          <div id="awards" className="edu__side" data-reveal style={{ '--i': 2, scrollMarginTop: '88px' }}>
+            <h3 className="label">Honors &amp; awards</h3>
+            <ul className="ledger">
+              {awards.map((award) => (
+                <li key={award.id}>
+                  <span>{award.name}</span>
+                  {award.org && <span className="ledger__meta">{award.org}</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="skills" data-reveal style={{ '--i': 3 }}>
+          <h3 className="label">Toolkit</h3>
+          <dl>
+            {technicalSkills.map((group) => (
+              <div key={group.category}>
+                <dt>{group.category}</dt>
+                <dd>{group.skills.join(' · ')}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

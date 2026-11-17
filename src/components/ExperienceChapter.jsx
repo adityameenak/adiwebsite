@@ -1,11 +1,9 @@
-import { Suspense, lazy, useRef, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
 import { experience } from '../data/content';
-import { useReducedMotion } from '../hooks/useReducedMotion';
-import SectionLabel from './effects/SectionLabel';
-import RoleIcon from './experience/RoleIcon';
+import { useReveal } from '../hooks/useReveal';
 import StatRow from './StatRow';
+import RoleIcon from './experience/RoleIcon';
 // Keep the diagrams and walkthroughs out of the home-page bundle.
 const Diagram = lazy(() => import('./experience/diagrams'));
 const ExperienceWalkthrough = lazy(() => import('./walkthrough/ExperienceWalkthrough'));
@@ -21,52 +19,44 @@ const SamsungWalkthrough = lazy(() => import('./walkthrough/SamsungWalkthrough')
  * cases they tell a single story: the project → how it was approached → what
  * was discovered.
  */
-export default function ExperienceChapter({ variant = 'full' }) {
-  const reducedMotion = useReducedMotion();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.05 });
+export default function ExperienceChapter({ variant = 'full', titleAs: Title = 'h2' }) {
+  const ref = useReveal({ threshold: 0.04 });
   const compact = variant === 'compact';
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: reducedMotion ? 0 : 0.08, delayChildren: 0.05 } },
-  };
-  const fadeUp = reducedMotion
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
-    : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } };
+  if (compact) {
+    return (
+      <section ref={ref} id="experience" className="section">
+        <div className="frame">
+          <header className="section-head" data-reveal>
+            <h2 className="section-title">Experience</h2>
+            <p className="section-desc">Fab, lab and research work, each with a short walkthrough of how it works.</p>
+            <Link to="/experience" className="section-link">Full case studies <span aria-hidden="true">→</span></Link>
+          </header>
+          <div className="xp-cards">
+            {experience.map((job, i) => (
+              <div key={job.id} data-reveal style={{ '--i': i + 1 }}><RoleCard job={job} /></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section ref={sectionRef} id="experience" className="sec sec--soft">
-      <div className="container-wide">
-        <motion.div variants={container} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
-          <motion.div variants={fadeUp} className="sec-head">
-            <SectionLabel>Career</SectionLabel>
-            <h2 className="sec-title">Experience</h2>
-          </motion.div>
-
-          {compact ? (
-            <>
-              <div className="xp-cards">
-                {experience.map((job) => (
-                  <motion.div key={job.id} variants={fadeUp}><RoleCard job={job} /></motion.div>
-                ))}
-              </div>
-              <motion.p variants={fadeUp} className="xp-more">
-                <Link to="/experience">Read the full case studies <span aria-hidden="true">→</span></Link>
-              </motion.p>
-            </>
-          ) : (
-            <div className="xp-roles">
-              {experience.map((job) => (
-                <motion.article key={job.id} variants={fadeUp} className="xp-role">
-                  <RoleHeader job={job} />
-                  {job.kind === 'research' ? <ResearchStory story={job.story} /> : <CaseGrid cases={job.cases} />}
-                </motion.article>
-              ))}
-            </div>
-          )}
-
-        </motion.div>
+    <section ref={ref} id="experience" className="section section--page">
+      <div className="frame">
+        <header className="section-head" data-reveal>
+          <Title className="section-title">Experience</Title>
+          <p className="section-desc">Case studies from the fab and the lab: the problem, the approach and the result.</p>
+        </header>
+        <div className="xp-roles">
+          {experience.map((job, i) => (
+            <article key={job.id} data-reveal style={{ '--i': Math.min(i, 2) + 1 }} className="xp-role">
+              <RoleHeader job={job} />
+              {job.kind === 'research' ? <ResearchStory story={job.story} /> : <CaseGrid cases={job.cases} />}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -78,11 +68,11 @@ function RoleHeader({ job }) {
     <header className="xp-head">
       <span className="xp-head__icon"><RoleIcon name={job.icon} /></span>
       <div className="xp-head__body">
+        <h3 className="xp-head__role">{job.role}</h3>
         <p className="xp-head__meta">
           <span>{job.company}</span>
           <span className="xp-head__dates">{dates} · {place}</span>
         </p>
-        <h3 className="xp-head__role">{job.role}</h3>
         <p className="xp-head__story">{job.summary}</p>
       </div>
     </header>
@@ -90,7 +80,7 @@ function RoleHeader({ job }) {
 }
 
 const PLAY_ICON = (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
+  <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
 );
 
 /** A case's "how it works" control and the player it opens. */
@@ -269,7 +259,7 @@ function CaseDetail({ c, layout = 'card' }) {
 
         {(c.tools?.length || c.links?.length) && (
           <div className="case__foot">
-            {c.tools?.map((tool) => <span key={tool} className="mono-chip">{tool}</span>)}
+            {c.tools?.map((tool) => <span key={tool} className="chip">{tool}</span>)}
             {c.links?.map((l) => (
               <a key={l.href} href={l.href} className="case__link" target="_blank" rel="noopener noreferrer">
                 {l.label} <span aria-hidden="true">↗</span>
