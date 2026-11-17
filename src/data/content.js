@@ -23,6 +23,15 @@ export const about = {
 
 export const experience = [
   {
+    id: 4,
+    status: "incoming",
+    role: "Cell Characterization & R&D",
+    company: "Tesla",
+    org: "Tesla",
+    period: "",
+    icon: "cell",
+  },
+  {
     id: 1,
     role: "Photolithography & Metrology Intern",
     company: "Samsung Semiconductor",

@@ -1,215 +1,100 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { personalInfo } from '../data/content';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 import { useTheme } from '../hooks/useTheme';
 import { FiSun, FiMoon } from 'react-icons/fi';
 
 const RESUME_PDF = '/resume.pdf';
 
+const NAV_LINKS = [
+  { label: 'Projects',   href: '/projects' },
+  { label: 'Experience', href: '/experience' },
+  { label: 'Education',  href: '/education' },
+  { label: 'Contact',    href: '/contact' },
+];
+
 export default function SparseHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const reducedMotion = useReducedMotion();
+  const [scrolled, setScrolled] = useState(false);
   const { theme, toggle: toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navLinks = [
-    { label: 'Projects',   href: '/projects',   isRoute: true },
-    { label: 'Experience', href: '/experience', isRoute: true },
-    { label: 'Education',  href: '/education',  isRoute: true },
-    { label: 'Contact',    href: '/contact',    isRoute: true },
-  ];
+  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
-  const handleLinkClick = (e, link) => {
-    if (link.isRoute) {
-      e.preventDefault();
-      navigate(link.href);
-      setMobileOpen(false);
-    } else {
-      setMobileOpen(false);
-    }
+  // A rule appears under the bar once the page has moved (one passive listener, no per-frame work).
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const go = (e, href) => {
+    e.preventDefault();
+    navigate(href);
+    window.scrollTo(0, 0);
   };
 
-  const isActive = (href) => location.pathname === href;
-
   return (
-    <header
-      style={{
-        background: 'var(--header-bg)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        height: '64px',
-        borderBottom: '1px solid var(--rule)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 900,
-      }}
-      className="flex items-center justify-between px-6 sm:px-10 lg:px-14"
-    >
-      {/* Wordmark */}
-      <a
-        href="/"
-        onClick={(e) => { e.preventDefault(); navigate('/'); }}
-        className="select-none"
-        style={{ fontSize: '15px', fontWeight: 600, color: 'var(--ink)', letterSpacing: 0 }}
-      >
-        Adi
-        <span style={{ color: 'var(--accent)', margin: '0 8px', fontWeight: 400 }}>·</span>
-        <span style={{ fontSize: '13px', fontWeight: 500, color: 'var(--muted)' }} className="hidden sm:inline">
-          Chemical Engineering
-        </span>
-      </a>
-
-      {/* Right cluster */}
-      <div className="flex items-center gap-4 sm:gap-6">
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6" aria-label="Primary">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link)}
-              className={`nav-link${isActive(link.href) ? ' is-active' : ''}`}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Separator */}
-        <span className="hidden md:block" style={{ width: '1px', height: '16px', background: 'var(--rule)' }} aria-hidden />
-
-        {/* Status pill */}
-        <span
-          className="hidden sm:inline-flex items-center gap-1.5"
-          style={{
-            padding: '4px 12px',
-            borderRadius: '9999px',
-            background: 'var(--surface)',
-            border: '1px solid var(--rule)',
-            fontSize: '12px',
-            fontWeight: 600,
-            color: 'var(--body)',
-          }}
-        >
-          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
-          Available
-        </span>
-
-        {/* Resume CTA */}
-        <a
-          href={RESUME_PDF}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center justify-center"
-          style={{
-            height: '36px',
-            padding: '0 16px',
-            borderRadius: '8px',
-            background: 'var(--ink)',
-            color: 'var(--on-ink)',
-            fontSize: '13px',
-            fontWeight: 600,
-            textDecoration: 'none',
-          }}
-        >
-          Resume
+    <header className={`site-header${scrolled || mobileOpen ? ' is-scrolled' : ''}`}>
+      <div className="frame site-header__inner">
+        <a href="/" onClick={(e) => go(e, '/')} className="wordmark" aria-label="Aditya Meenakshisundaram, home">
+          <span className="wordmark__mark" aria-hidden="true">AM</span>
+          <span className="wordmark__name">Aditya Meenakshisundaram</span>
         </a>
 
-        {/* Theme toggle */}
-        <button
-          type="button"
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-        >
-          {theme === 'dark' ? <FiSun size={15} /> : <FiMoon size={15} />}
-        </button>
-
-        {/* Mobile toggle */}
-        <motion.button
-          className="md:hidden p-1"
-          style={{ color: 'var(--muted)' }}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-          whileTap={reducedMotion ? {} : { scale: 0.95 }}
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileOpen
-              ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M6 18L18 6M6 6l12 12" />
-              : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M4 6h16M4 12h16M4 18h16" />
-            }
-          </svg>
-        </motion.button>
-      </div>
-
-      {/* Mobile dropdown */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -4 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.15 }}
-            className="absolute top-full left-0 right-0 z-50 px-6 py-4 space-y-1"
-            style={{
-              background: 'var(--bg)',
-              borderBottom: '1px solid var(--rule)',
-            }}
-          >
-            {navLinks.map((link) => (
+        <div className="site-header__right">
+          <nav className="site-nav" aria-label="Primary">
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={(e) => handleLinkClick(e, link)}
-                className="block py-2.5 transition-colors"
-                style={{ fontSize: '15px', fontWeight: 500, color: 'var(--body)', textDecoration: 'none' }}
+                onClick={(e) => go(e, link.href)}
+                className={`nav-link${location.pathname === link.href ? ' is-active' : ''}`}
+                aria-current={location.pathname === link.href ? 'page' : undefined}
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href={RESUME_PDF}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block py-2.5 transition-colors"
-              style={{ fontSize: '15px', fontWeight: 500, color: 'var(--body)', textDecoration: 'none' }}
-            >
-              Resume
-            </a>
-            <div style={{ borderTop: '1px solid var(--rule)', marginTop: '8px', paddingTop: '12px' }} className="space-y-2">
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="block py-1 transition-colors"
-                style={{ fontSize: '13px', color: 'var(--muted)', textDecoration: 'none' }}
-              >
-                {personalInfo.email}
-              </a>
-              <a
-                href={personalInfo.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block py-1 transition-colors"
-                style={{ fontSize: '13px', color: 'var(--muted)', textDecoration: 'none' }}
-              >
-                LinkedIn
-              </a>
-              <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block py-1 transition-colors"
-                style={{ fontSize: '13px', color: 'var(--muted)', textDecoration: 'none' }}
-              >
-                GitHub
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </nav>
+
+          <a href={RESUME_PDF} target="_blank" rel="noopener noreferrer" className="btn btn--line btn--sm header-resume">
+            Resume
+          </a>
+
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <FiSun size={15} /> : <FiMoon size={15} />}
+          </button>
+
+          <button
+            type="button"
+            className="menu-toggle"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+          >
+            {mobileOpen ? 'Close' : 'Menu'}
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <nav id="mobile-menu" className="mobile-menu" aria-label="Mobile">
+          <div className="frame">
+            {NAV_LINKS.map((link) => (
+              <a key={link.label} href={link.href} onClick={(e) => go(e, link.href)}>{link.label}</a>
+            ))}
+            <a href={RESUME_PDF} target="_blank" rel="noopener noreferrer">Resume</a>
+            <a href={`mailto:${personalInfo.email}`}>Email</a>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

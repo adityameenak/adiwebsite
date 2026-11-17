@@ -1,62 +1,34 @@
-import { motion } from 'framer-motion';
 import { personalInfo } from '../data/content';
-import { useReducedMotion } from '../hooks/useReducedMotion';
-import { FiMail, FiLinkedin, FiGithub } from 'react-icons/fi';
+
+const OUT = (
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M7 17L17 7M8 7h9v9" />
+  </svg>
+);
 
 export default function FooterContact() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer
-      style={{
-        background: 'var(--bg-soft)',
-        borderTop: '1px solid var(--rule)',
-        padding: '28px 0',
-      }}
-    >
-      <div className="container-wide">
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '12px',
-          }}
-          className="sm:flex-row sm:justify-between"
-        >
-          <p style={{ fontSize: '13px', color: 'var(--faint)', fontWeight: 400 }}>
-            &copy; {currentYear} Aditya Meenakshisundaram
-          </p>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <SocialLink href={`mailto:${personalInfo.email}`} icon={FiMail} label="Email" />
-            <SocialLink href={personalInfo.linkedin} icon={FiLinkedin} label="LinkedIn" />
-            <SocialLink href={personalInfo.github} icon={FiGithub} label="GitHub" />
+    <footer id="contact-footer" className="site-footer">
+      <div className="frame">
+        <div className="site-footer__top">
+          <div>
+            <h2 className="site-footer__title">Get in touch</h2>
+            <p className="site-footer__note">
+              Reach out for research opportunities, collaborations, or just to connect.
+            </p>
           </div>
+          <a className="site-footer__mail" href={`mailto:${personalInfo.email}`}>{personalInfo.email}</a>
+        </div>
 
-          <p style={{ fontSize: '13px', color: 'var(--faint)', fontWeight: 400 }}>
-            {personalInfo.location}
-          </p>
+        <div className="site-footer__bottom">
+          <p>&copy; {new Date().getFullYear()} Aditya Meenakshisundaram · {personalInfo.location}</p>
+          <div className="site-footer__links">
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn {OUT}</a>
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">GitHub {OUT}</a>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume {OUT}</a>
+          </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-function SocialLink({ href, icon: Icon, label }) {
-  const reducedMotion = useReducedMotion();
-  return (
-    <motion.a
-      href={href}
-      target={href.startsWith('http') ? '_blank' : undefined}
-      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      aria-label={label}
-      className="footer-social"
-      style={{ padding: '8px', display: 'flex', alignItems: 'center' }}
-      whileHover={reducedMotion ? {} : { scale: 1.1 }}
-      whileTap={reducedMotion ? {} : { scale: 0.95 }}
-    >
-      <Icon style={{ width: '16px', height: '16px' }} />
-    </motion.a>
   );
 }

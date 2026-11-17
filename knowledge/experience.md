@@ -1,5 +1,11 @@
 # Experience
 
+## Tesla — Cell Characterization & R&D (incoming)
+
+**Overview**
+- Incoming role at Tesla in cell characterization and R&D. It has not started yet: always describe it as incoming, never as current or completed.
+- No other details (dates, location, team, projects or results) have been shared. If asked, say only that he is joining Tesla in cell characterization and R&D, and suggest reaching out to him for more.
+
 ## Samsung Austin Semiconductor — Photolithography Innovation & Metrology Intern
 
 **Overview**

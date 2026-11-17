@@ -1,11 +1,9 @@
-import { Suspense, lazy, useRef, useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
 import { experience } from '../data/content';
-import { useReducedMotion } from '../hooks/useReducedMotion';
-import SectionLabel from './effects/SectionLabel';
-import RoleIcon from './experience/RoleIcon';
+import { useReveal } from '../hooks/useReveal';
 import StatRow from './StatRow';
+import RoleIcon from './experience/RoleIcon';
 // Keep the diagrams and walkthroughs out of the home-page bundle.
 const Diagram = lazy(() => import('./experience/diagrams'));
 const ExperienceWalkthrough = lazy(() => import('./walkthrough/ExperienceWalkthrough'));
@@ -21,76 +19,79 @@ const SamsungWalkthrough = lazy(() => import('./walkthrough/SamsungWalkthrough')
  * cases they tell a single story: the project → how it was approached → what
  * was discovered.
  */
-export default function ExperienceChapter({ variant = 'full' }) {
-  const reducedMotion = useReducedMotion();
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.05 });
+export default function ExperienceChapter({ variant = 'full', titleAs: Title = 'h2' }) {
+  const ref = useReveal({ threshold: 0.04 });
   const compact = variant === 'compact';
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: reducedMotion ? 0 : 0.08, delayChildren: 0.05 } },
-  };
-  const fadeUp = reducedMotion
-    ? { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.2 } } }
-    : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } } };
+  if (compact) {
+    return (
+      <section ref={ref} id="experience" className="section">
+        <div className="frame">
+          <header className="section-head" data-reveal>
+            <h2 className="section-title">Experience</h2>
+            <p className="section-desc">Fab, lab and research work, each with a short walkthrough of how it works.</p>
+            <Link to="/experience" className="section-link">Full case studies <span aria-hidden="true">→</span></Link>
+          </header>
+          <div className="xp-cards">
+            {experience.map((job, i) => (
+              <div key={job.id} data-reveal style={{ '--i': i + 1 }}><RoleCard job={job} /></div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section ref={sectionRef} id="experience" className="sec sec--soft">
-      <div className="container-wide">
-        <motion.div variants={container} initial="hidden" animate={isInView ? 'visible' : 'hidden'}>
-          <motion.div variants={fadeUp} className="sec-head">
-            <SectionLabel>Career</SectionLabel>
-            <h2 className="sec-title">Experience</h2>
-          </motion.div>
-
-          {compact ? (
-            <>
-              <div className="xp-cards">
-                {experience.map((job) => (
-                  <motion.div key={job.id} variants={fadeUp}><RoleCard job={job} /></motion.div>
-                ))}
-              </div>
-              <motion.p variants={fadeUp} className="xp-more">
-                <Link to="/experience">Read the full case studies <span aria-hidden="true">→</span></Link>
-              </motion.p>
-            </>
-          ) : (
-            <div className="xp-roles">
-              {experience.map((job) => (
-                <motion.article key={job.id} variants={fadeUp} className="xp-role">
-                  <RoleHeader job={job} />
-                  {job.kind === 'research' ? <ResearchStory story={job.story} /> : <CaseGrid cases={job.cases} />}
-                </motion.article>
-              ))}
-            </div>
-          )}
-
-        </motion.div>
+    <section ref={ref} id="experience" className="section section--page">
+      <div className="frame">
+        <header className="section-head" data-reveal>
+          <Title className="section-title">Experience</Title>
+          <p className="section-desc">Case studies from the fab and the lab: the problem, the approach and the result.</p>
+        </header>
+        <div className="xp-roles">
+          {experience.map((job, i) => (
+            <article key={job.id} data-reveal style={{ '--i': Math.min(i, 2) + 1 }} className="xp-role">
+              <RoleHeader job={job} />
+              {job.kind === 'research' && job.story ? <ResearchStory story={job.story} /> : job.cases ? <CaseGrid cases={job.cases} /> : null}
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
+/** "Austin, TX • May 2026 – Aug 2026" → place and dates; a bare value ("Incoming") is the dates. */
+function splitPeriod(period = '') {
+  const parts = period.split(' \u2022 ');
+  return parts.length > 1 ? { place: parts[0], dates: parts[1] } : { place: '', dates: parts[0] };
+}
+const joinMeta = (...parts) => parts.filter(Boolean).join(' · ');
+
+function IncomingBadge({ job }) {
+  return job.status === 'incoming' ? <span className="badge">Incoming</span> : null;
+}
+
 function RoleHeader({ job }) {
-  const [place, dates] = job.period.split(' • ');
+  const { place, dates } = splitPeriod(job.period);
   return (
     <header className="xp-head">
       <span className="xp-head__icon"><RoleIcon name={job.icon} /></span>
       <div className="xp-head__body">
+        <h3 className="xp-head__role">{job.role} <IncomingBadge job={job} /></h3>
         <p className="xp-head__meta">
           <span>{job.company}</span>
-          <span className="xp-head__dates">{dates} · {place}</span>
+          {joinMeta(dates, place) && <span className="xp-head__dates">{joinMeta(dates, place)}</span>}
         </p>
-        <h3 className="xp-head__role">{job.role}</h3>
-        <p className="xp-head__story">{job.summary}</p>
+        {job.summary && <p className="xp-head__story">{job.summary}</p>}
       </div>
     </header>
   );
 }
 
 const PLAY_ICON = (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
+  <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z" /></svg>
 );
 
 /** A case's "how it works" control and the player it opens. */
@@ -113,16 +114,17 @@ function CaseWatch({ c, className, children }) {
 /** Home-page summary of one role: its cases each get a walkthrough, otherwise the role does. */
 function RoleCard({ job }) {
   const [open, setOpen] = useState(false);
-  const [, dates] = job.period.split(' \u2022 ');
+  const { dates } = splitPeriod(job.period);
   const hasCases = Boolean(job.cases);
+  const brief = !hasCases && !job.poster;
   return (
-    <article className={`xp-card${hasCases ? ' xp-card--cases' : ''}`}>
+    <article className={`xp-card${hasCases ? ' xp-card--cases' : ''}${brief ? ' xp-card--brief' : ''}`}>
       <div className="xp-card__body">
-        <p className="xp-card__org">{job.org}</p>
+        <p className="xp-card__org">{job.org} <IncomingBadge job={job} /></p>
         <h3 className="xp-card__role">{job.role}</h3>
-        <p className="xp-card__when">{dates} · {job.place}</p>
-        <p className="xp-card__blurb">{job.blurb}</p>
-        <StatRow stats={job.stats} />
+        {joinMeta(dates, job.place) && <p className="xp-card__when">{joinMeta(dates, job.place)}</p>}
+        {job.blurb && <p className="xp-card__blurb">{job.blurb}</p>}
+        {job.stats && <StatRow stats={job.stats} />}
       </div>
       {hasCases ? (
         <ul className="xp-tiles">
@@ -136,7 +138,7 @@ function RoleCard({ job }) {
             </li>
           ))}
         </ul>
-      ) : (
+      ) : job.poster ? (
         <button type="button" className="wt-poster" aria-haspopup="dialog" aria-label={`Watch how it works: ${job.role}`} onClick={() => setOpen(true)}>
           <span className="wt-poster__art" aria-hidden="true">
             <Suspense fallback={<span className="dg-placeholder" />}>
@@ -145,8 +147,10 @@ function RoleCard({ job }) {
           </span>
           <span className="wt-poster__cta">{PLAY_ICON} Watch how it works</span>
         </button>
+      ) : (
+        <span className="xp-card__mark" aria-hidden="true"><RoleIcon name={job.icon} size={40} /></span>
       )}
-      {open && (
+      {open && job.walkthrough && (
         <Suspense fallback={null}>
           <ExperienceWalkthrough walkthrough={job.walkthrough} onClose={() => setOpen(false)} />
         </Suspense>
@@ -269,7 +273,7 @@ function CaseDetail({ c, layout = 'card' }) {
 
         {(c.tools?.length || c.links?.length) && (
           <div className="case__foot">
-            {c.tools?.map((tool) => <span key={tool} className="mono-chip">{tool}</span>)}
+            {c.tools?.map((tool) => <span key={tool} className="chip">{tool}</span>)}
             {c.links?.map((l) => (
               <a key={l.href} href={l.href} className="case__link" target="_blank" rel="noopener noreferrer">
                 {l.label} <span aria-hidden="true">↗</span>

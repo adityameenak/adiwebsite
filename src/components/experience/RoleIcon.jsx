@@ -16,6 +16,15 @@ const PATHS = {
       <path d="M19.5 12 15 20h6l-4.5 8" />
     </>
   ),
+  // Cylindrical battery cell for cell R&D.
+  cell: (
+    <>
+      <ellipse cx="18" cy="8" rx="8" ry="3" />
+      <path d="M10 8v20c0 1.7 3.6 3 8 3s8-1.3 8-3V8" />
+      <path d="M15.5 4.6v-1.6h5v1.6" />
+      <path d="M10 14c0 1.7 3.6 3 8 3s8-1.3 8-3" opacity="0.55" />
+    </>
+  ),
   // Furnace flame for pyrolysis.
   furnace: (
     <>

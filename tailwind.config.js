@@ -7,11 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Inter is the sole display and body font (Plain Black substitute per DESIGN.md)
-        display: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        heading: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        sans:    ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono:    ['"JetBrains Mono"', '"SF Mono"', 'Consolas', 'monospace'],
+        // Geist for text, Geist Mono for dates and figures
+        display: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+        heading: ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+        sans:    ['Geist', 'system-ui', '-apple-system', 'sans-serif'],
+        mono:    ['"Geist Mono"', 'ui-monospace', '"SF Mono"', 'monospace'],
       },
 
       fontSize: {

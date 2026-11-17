@@ -7,14 +7,15 @@ import ExperiencePage from './pages/ExperiencePage.jsx'
 import ProjectsPage from './pages/ProjectsPage.jsx'
 import ContactPage from './pages/ContactPage.jsx'
 import EducationPage from './pages/EducationPage.jsx'
-import SiteEffects from './components/effects/SiteEffects.jsx'
 import AdiAssistant from './components/assistant/AdiAssistant.jsx'
 import './index.css'
+
+// Section entrances only hide content once this script is running.
+document.documentElement.classList.add('js-reveal')
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <SiteEffects />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/experience" element={<ExperiencePage />} />

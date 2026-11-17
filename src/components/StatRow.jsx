@@ -3,8 +3,8 @@ export default function StatRow({ stats }) {
     <dl className="stat-row">
       {stats.map(([value, label]) => (
         <div key={label}>
-          <dd>{value}</dd>
           <dt>{label}</dt>
+          <dd>{value}</dd>
         </div>
       ))}
     </dl>
