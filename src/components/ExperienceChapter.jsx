@@ -53,7 +53,7 @@ export default function ExperienceChapter({ variant = 'full', titleAs: Title = '
           {experience.map((job, i) => (
             <article key={job.id} data-reveal style={{ '--i': Math.min(i, 2) + 1 }} className="xp-role">
               <RoleHeader job={job} />
-              {job.kind === 'research' ? <ResearchStory story={job.story} /> : <CaseGrid cases={job.cases} />}
+              {job.kind === 'research' && job.story ? <ResearchStory story={job.story} /> : job.cases ? <CaseGrid cases={job.cases} /> : null}
             </article>
           ))}
         </div>
@@ -62,18 +62,29 @@ export default function ExperienceChapter({ variant = 'full', titleAs: Title = '
   );
 }
 
+/** "Austin, TX • May 2026 – Aug 2026" → place and dates; a bare value ("Incoming") is the dates. */
+function splitPeriod(period = '') {
+  const parts = period.split(' \u2022 ');
+  return parts.length > 1 ? { place: parts[0], dates: parts[1] } : { place: '', dates: parts[0] };
+}
+const joinMeta = (...parts) => parts.filter(Boolean).join(' · ');
+
+function IncomingBadge({ job }) {
+  return job.status === 'incoming' ? <span className="badge">Incoming</span> : null;
+}
+
 function RoleHeader({ job }) {
-  const [place, dates] = job.period.split(' • ');
+  const { place, dates } = splitPeriod(job.period);
   return (
     <header className="xp-head">
       <span className="xp-head__icon"><RoleIcon name={job.icon} /></span>
       <div className="xp-head__body">
-        <h3 className="xp-head__role">{job.role}</h3>
+        <h3 className="xp-head__role">{job.role} <IncomingBadge job={job} /></h3>
         <p className="xp-head__meta">
           <span>{job.company}</span>
-          <span className="xp-head__dates">{dates} · {place}</span>
+          {joinMeta(dates, place) && <span className="xp-head__dates">{joinMeta(dates, place)}</span>}
         </p>
-        <p className="xp-head__story">{job.summary}</p>
+        {job.summary && <p className="xp-head__story">{job.summary}</p>}
       </div>
     </header>
   );
@@ -103,16 +114,17 @@ function CaseWatch({ c, className, children }) {
 /** Home-page summary of one role: its cases each get a walkthrough, otherwise the role does. */
 function RoleCard({ job }) {
   const [open, setOpen] = useState(false);
-  const [, dates] = job.period.split(' \u2022 ');
+  const { dates } = splitPeriod(job.period);
   const hasCases = Boolean(job.cases);
+  const brief = !hasCases && !job.poster;
   return (
-    <article className={`xp-card${hasCases ? ' xp-card--cases' : ''}`}>
+    <article className={`xp-card${hasCases ? ' xp-card--cases' : ''}${brief ? ' xp-card--brief' : ''}`}>
       <div className="xp-card__body">
-        <p className="xp-card__org">{job.org}</p>
+        <p className="xp-card__org">{job.org} <IncomingBadge job={job} /></p>
         <h3 className="xp-card__role">{job.role}</h3>
-        <p className="xp-card__when">{dates} · {job.place}</p>
-        <p className="xp-card__blurb">{job.blurb}</p>
-        <StatRow stats={job.stats} />
+        {joinMeta(dates, job.place) && <p className="xp-card__when">{joinMeta(dates, job.place)}</p>}
+        {job.blurb && <p className="xp-card__blurb">{job.blurb}</p>}
+        {job.stats && <StatRow stats={job.stats} />}
       </div>
       {hasCases ? (
         <ul className="xp-tiles">
@@ -126,7 +138,7 @@ function RoleCard({ job }) {
             </li>
           ))}
         </ul>
-      ) : (
+      ) : job.poster ? (
         <button type="button" className="wt-poster" aria-haspopup="dialog" aria-label={`Watch how it works: ${job.role}`} onClick={() => setOpen(true)}>
           <span className="wt-poster__art" aria-hidden="true">
             <Suspense fallback={<span className="dg-placeholder" />}>
@@ -135,8 +147,10 @@ function RoleCard({ job }) {
           </span>
           <span className="wt-poster__cta">{PLAY_ICON} Watch how it works</span>
         </button>
+      ) : (
+        <span className="xp-card__mark" aria-hidden="true"><RoleIcon name={job.icon} size={40} /></span>
       )}
-      {open && (
+      {open && job.walkthrough && (
         <Suspense fallback={null}>
           <ExperienceWalkthrough walkthrough={job.walkthrough} onClose={() => setOpen(false)} />
         </Suspense>

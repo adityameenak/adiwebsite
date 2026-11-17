@@ -52,7 +52,7 @@ export default function HeroChapter() {
             width="780"
             height="975"
             alt="Adi in a grey suit and navy tie, standing by a canal lined with trees"
-            fetchPriority="high"
+            fetchpriority="high"
             decoding="async"
           />
         </figure>

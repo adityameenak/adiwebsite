@@ -591,6 +591,17 @@
 }
 .xp-card:hover { border-color: var(--rule-strong); }
 .xp-card--cases { grid-template-columns: 1fr; gap: 24px; }
+.xp-card--brief { grid-template-columns: minmax(0, 1fr) auto; }
+.xp-card__mark {
+  display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px;
+  border: 1px solid var(--rule); border-radius: var(--radius); background: var(--bg); color: var(--accent);
+}
+.badge {
+  display: inline-flex; align-items: center; height: 20px; padding: 0 8px; margin-left: 8px; vertical-align: 2px;
+  border-radius: 999px; background: var(--accent); color: var(--on-accent);
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.02em; line-height: 1;
+}
+.xp-head__role .badge { vertical-align: 6px; }
 .xp-card__org { font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; color: var(--accent); }
 .xp-card__role { margin-top: 8px; font-family: var(--serif); font-size: 26px; font-weight: 400; line-height: 1.15; letter-spacing: -0.015em; color: var(--ink); }
 .xp-card__when { margin-top: 6px; font-size: 13.5px; color: var(--muted); }
@@ -632,10 +643,12 @@
 
 @media (max-width: 900px) {
   .xp-card { grid-template-columns: 1fr; gap: 22px; }
+  .xp-card--brief { grid-template-columns: minmax(0, 1fr) auto; }
   .xp-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   .xp-card { padding: 20px; }
+  .xp-card__mark { width: 56px; height: 56px; }
   .xp-card__role { font-size: 22px; }
   .stat-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   .stat-row dd { font-size: 20px; white-space: normal; }
