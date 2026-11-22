@@ -150,6 +150,17 @@ function RoleCard({ job }) {
       ) : (
         <span className="xp-card__mark" aria-hidden="true"><RoleIcon name={job.icon} size={40} /></span>
       )}
+      {job.researchPoster && (
+        <figure className="xp-card__poster">
+          <figcaption className="xp-card__poster-head">
+            <span className="xp-card__poster-label">Research poster</span>
+            <a href={job.researchPoster.pdf} target="_blank" rel="noopener noreferrer">Open PDF ↗</a>
+          </figcaption>
+          <a className="xp-card__poster-img" href={job.researchPoster.pdf} target="_blank" rel="noopener noreferrer" aria-label={`Open poster PDF: ${job.researchPoster.title}`}>
+            <img src={job.researchPoster.src} alt={job.researchPoster.alt} width="2000" height="1500" loading="lazy" decoding="async" />
+          </a>
+        </figure>
+      )}
       {open && job.walkthrough && (
         <Suspense fallback={null}>
           <ExperienceWalkthrough walkthrough={job.walkthrough} onClose={() => setOpen(false)} />

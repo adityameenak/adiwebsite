@@ -130,6 +130,12 @@ export const experience = [
     blurb: "Building a coating that acts like a fuse for heat, so one failing battery cell can't set off the next.",
     stats: [["65 wt%", "strongest indium composition"], ["361", "barrier designs simulated"], ["~32 W/m²·K", "hot-state limit found"]],
     poster: "switch",
+    researchPoster: {
+      src: "/images/research/thermal-runaway-poster.jpg",
+      pdf: "/papers/thermal-runaway-poster.pdf",
+      title: "Synthesis and Characterization of Ti, TiO₂, and CaCO₃ Nanowire Composites for Thermal Runaway Mitigation in Lithium-Ion Batteries",
+      alt: "Research poster: Synthesis and characterization of Ti, TiO₂ and CaCO₃ nanowire composites for thermal runaway mitigation in lithium-ion batteries, covering CaCO₃ loading, thermal conductivity, mass loss after 900 °C treatment and SEM morphology.",
+    },
     walkthrough: {
       title: "Building a fuse for heat",
       subtitle: "Thermal-switching battery composite · Research fellowship",
