@@ -53,7 +53,7 @@ export default function ExperienceChapter({ variant = 'full', titleAs: Title = '
           {experience.map((job, i) => (
             <article key={job.id} data-reveal style={{ '--i': Math.min(i, 2) + 1 }} className="xp-role">
               <RoleHeader job={job} />
-              {job.kind === 'research' && job.story ? <ResearchStory story={job.story} /> : job.cases ? <CaseGrid cases={job.cases} /> : null}
+              {job.kind === 'research' && job.story ? <ResearchStory story={job.story} poster={job.researchPoster} /> : job.cases ? <CaseGrid cases={job.cases} /> : null}
             </article>
           ))}
         </div>
@@ -150,17 +150,6 @@ function RoleCard({ job }) {
       ) : (
         <span className="xp-card__mark" aria-hidden="true"><RoleIcon name={job.icon} size={40} /></span>
       )}
-      {job.researchPoster && (
-        <figure className="xp-card__poster">
-          <figcaption className="xp-card__poster-head">
-            <span className="xp-card__poster-label">Research poster</span>
-            <a href={job.researchPoster.pdf} target="_blank" rel="noopener noreferrer">Open PDF ↗</a>
-          </figcaption>
-          <a className="xp-card__poster-img" href={job.researchPoster.pdf} target="_blank" rel="noopener noreferrer" aria-label={`Open poster PDF: ${job.researchPoster.title}`}>
-            <img src={job.researchPoster.src} alt={job.researchPoster.alt} width="2000" height="1500" loading="lazy" decoding="async" />
-          </a>
-        </figure>
-      )}
       {open && job.walkthrough && (
         <Suspense fallback={null}>
           <ExperienceWalkthrough walkthrough={job.walkthrough} onClose={() => setOpen(false)} />
@@ -217,7 +206,7 @@ function Links({ links }) {
 }
 
 /** The project → How I approached it → What I discovered. */
-function ResearchStory({ story }) {
+function ResearchStory({ story, poster }) {
   const { project, approach, findings } = story;
   return (
     <div className="rs">
@@ -255,6 +244,18 @@ function ResearchStory({ story }) {
           {findings.map((f) => <li key={f.slice(0, 32)}>{f}</li>)}
         </ul>
       </section>
+
+      {poster && (
+        <section className="rs-block rs-block--poster">
+          <div className="rs-poster__head">
+            <p className="rs-label">Research poster</p>
+            <a href={poster.pdf} target="_blank" rel="noopener noreferrer">Open PDF ↗</a>
+          </div>
+          <a className="rs-poster" href={poster.pdf} target="_blank" rel="noopener noreferrer" aria-label={`Open poster PDF: ${poster.title}`}>
+            <img src={poster.src} alt={poster.alt} width="2000" height="1500" loading="lazy" decoding="async" />
+          </a>
+        </section>
+      )}
     </div>
   );
 }

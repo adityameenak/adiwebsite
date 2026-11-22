@@ -635,16 +635,6 @@
 }
 .wt-poster:hover .wt-poster__cta { background: var(--accent); color: var(--on-accent); }
 
-/* Full-width research poster at the foot of a role card */
-.xp-card__poster { grid-column: 1 / -1; margin: 4px 0 0; padding-top: 22px; border-top: 1px solid var(--rule); }
-.xp-card__poster-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 12px; }
-.xp-card__poster-label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.02em; color: var(--muted); }
-.xp-card__poster-head a { font-size: 13px; font-weight: 500; color: var(--accent); }
-.xp-card__poster-head a:hover { text-decoration: underline; }
-.xp-card__poster-img { display: block; overflow: hidden; border: 1px solid var(--rule); border-radius: var(--radius); background: #fff; transition: border-color 160ms; }
-.xp-card__poster-img:hover { border-color: var(--accent); }
-.xp-card__poster-img img { display: block; width: 100%; height: auto; }
-
 /* Key numbers on role and project cards */
 .stat-row { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 20px; }
 .stat-row > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
@@ -837,6 +827,14 @@ a.shelf__item:hover .shelf__arrow { color: var(--accent); transform: translate(2
 .rs-step.has-figure { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); align-items: start; }
 .rs-num { display: none; }
 .rs-step__title { font-size: var(--step-body); font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+/* Same width as the findings boxes above it */
+.rs-block--poster { max-width: 78ch; font-size: 15px; }
+.rs-poster__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.rs-poster__head a { margin-bottom: 12px; font-size: 13px; font-weight: 500; color: var(--accent); }
+.rs-poster__head a:hover { text-decoration: underline; }
+.rs-poster { display: block; overflow: hidden; border: 1px solid var(--rule); border-radius: var(--radius-lg); background: #fff; transition: border-color 160ms; }
+.rs-poster:hover { border-color: var(--accent); }
+.rs-poster img { display: block; width: 100%; height: auto; }
 .rs-findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .rs-findings li {
   max-width: 78ch; font-size: 15px; padding: 14px 18px; border-radius: var(--radius);
