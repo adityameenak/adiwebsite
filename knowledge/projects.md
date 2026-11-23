@@ -37,3 +37,17 @@
 ## Substack (writing)
 
 - 30+ long-form articles on semiconductors, materials and energy, with 400+ monthly readers. See writing.md.
+
+## NFL Big Data Bowl 2027
+
+- Adi's entry to the NFL Big Data Bowl 2027 on Kaggle (University Track), titled "Draft Capital Buys Snaps. Movement Buys Pressure." Public notebook: kaggle.com/code/adityameenakshi/draft-capital-buys-snaps-movement-buys-pressure.
+- Finding 1: at every position, NFL playing time follows draft slot far more than per-snap skill, so snaps and starts record a team's investment rather than a player's ability. A draft tool should be judged on skill per snap.
+- Finding 2: for defensive linemen, how explosively a rusher re-accelerates out of lateral turns in Combine drills predicts his NFL pressure rate beyond draft slot, role and body weight (partial ρ 0.35; an overall movement score reaches 0.42). Other positions show weaker leads, and the entry says so.
+- Method: measured every change of direction inside Combine drills (8,347 turns from 508 players), shrank each trait toward the position average by its reliability (Kelley's formula), and tested traits against per-snap NFL skill with bootstrap intervals.
+- Output: a movement card for all 510 prospects (2023–25 classes) with position-specific percentiles, confidence bands, an evidence tier for every number, a pass-rush projection where the evidence supports one, and the opportunity the player's draft slot implies.
+- Tech: Python, DuckDB, pandas, matplotlib, Jupyter; Combine and game tracking data.
+
+## The Far Hash (writing, for fun)
+
+- A college football Substack Adi writes for fun, launched November 2026: thefarhash.substack.com.
+- Covers Saturday's biggest matchups, the playoff race, rankings, recruiting and the coaching carousel, with independent analysis and opinions. See writing.md.

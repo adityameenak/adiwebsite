@@ -107,6 +107,25 @@
       "description": "His Substack publication"
     },
     {
+      "id": "nfl-big-data-bowl",
+      "label": "View NFL Big Data Bowl entry",
+      "route": "/projects",
+      "section": "project-nfl-big-data-bowl-2027",
+      "description": "Project card for his NFL Big Data Bowl 2027 entry"
+    },
+    {
+      "id": "nfl-big-data-bowl-notebook",
+      "label": "Open the Kaggle notebook",
+      "href": "https://www.kaggle.com/code/adityameenakshi/draft-capital-buys-snaps-movement-buys-pressure",
+      "description": "His public Big Data Bowl 2027 notebook on Kaggle"
+    },
+    {
+      "id": "far-hash",
+      "label": "Read The Far Hash",
+      "href": "https://thefarhash.substack.com/",
+      "description": "His college football Substack"
+    },
+    {
       "id": "resume",
       "label": "Download resume",
       "href": "/resume.pdf",
